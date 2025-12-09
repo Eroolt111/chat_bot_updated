@@ -1,0 +1,131 @@
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:38:24.384848",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:39:25.788927",
+  "execution_time_seconds": 27.55,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр олголттой зээлийн мэдээлэл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT      acnt_code,      acnt_name,      customer_name,      cur_code,      adv_date,      original_adv_amount,      adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127   - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК   - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК   - Валют: ам.доллар   - Олгосон огноо: 2012-10-05   - Олгосон дүн: 100,000,000 ам.доллар   - Олголтын дүн төгрөгөөр: 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:40:20.235549",
+  "execution_time_seconds": 20.77,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр олголттой зээлийн мэдээлэл Assistant:   [Current Question] Нээлттэй зээлийн үлдэгдэл хэд вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' AND principal IS NOT NULL )  SELECT     cur_code,     SUM(principal) AS total_outstanding_principal FROM latest_open_loans WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкинд нээлттэй байгаа зээлийн үлдэгдлийн мэдээллийг хүргэж байна:  - Валют: юань     Үлдэгдэл зээл: 401,122,622.5  - Валют: евро     Үлдэгдэл зээл: 9,999,999.96  - Валют: иен     Үлдэгдэл зээл: 1,940,093,068.55  - Валют: төгрөг     Үлдэгдэл зээл: 1,136,148,761,376.85  - Валют: ам.доллар     Үлдэгдэл зээл: 76,198,311.58  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:41:33.236749",
+  "execution_time_seconds": 25.05,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр олголттой зээлийн мэдээлэл Assistant:  User: Нээлттэй зээлийн үлдэгдэл хэд вэ? Assistant:   [Current Question] Пирамид ордын зээлийн данснуудыг харуул ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     status,     adv_date,     principal,     project_name FROM dbm.loan_balance_detail WHERE customer_name = 'ПИРАМИД-ОРД ХХК' ORDER BY adv_date DESC NULLS LAST, acnt_code ASC;",
+  "result_count": 500,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн зээлийн данснуудын мэдээллийг хүргэж байна:  - Дансны код: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Валют: төгрөг - Төлөв: O - Олгосон огноо: 2018-06-19 - Үлдэгдэл зээл: 2,000,000,000 - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  (Дээрх мэдээлэл нь нийт 500 дансны эхний нэгийг жишээ болгон харуулж байна.)   Хэрэв тодорхой дансны талаар дэлгэрэнгүй мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:48:14.550449",
+  "execution_time_seconds": 15.88,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр олголттой зээлийн мэдээлэл Assistant:  User: Нээлттэй зээлийн үлдэгдэл хэд вэ? Assistant:  User: Пирамид ордын зээлийн данснуудыг харуул ? Assistant:   [Current Question] хамгийн эхний зээлдэгчийн нэрийг харуулаад өг",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     adv_date FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL ORDER BY adv_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн мэдээллийг хүргэж байна:  - Нэр: МИАТ ТӨХК - Олгосон огноо: 2012-06-21"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T13:49:26.941517",
+  "execution_time_seconds": 30.44,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр олголттой зээлийн мэдээлэл Assistant:  User: Нээлттэй зээлийн үлдэгдэл хэд вэ? Assistant:  User: Пирамид ордын зээлийн данснуудыг харуул ? Assistant:  User: хамгийн эхний зээлдэгчийн нэрийг харуулаад өг Assistant:   [Current Question] одоо энэ зээлдэгчийн идэвхитэй зээл байгаа юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     status,     txn_date FROM dbm.loan_balance_detail WHERE     customer_name =: borrower_name     AND status = 'O'     AND txn_date = (         SELECT MAX(txn_date)         FROM dbm.loan_balance_detail t2         WHERE t2.acnt_code = dbm.loan_balance_detail.acnt_code     ) ORDER BY txn_date DESC;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) DPY-4010: a bind variable replacement value for placeholder \":BORROWER_NAME\" was not provided [SQL: SELECT acnt_code, acnt_name, customer_name, cur_code, adv_date, adv_amount, status, txn_date FROM dbm.loan_balance_detail WHERE customer_name =: borrower_name AND status = 'O' AND txn_date = ( SELECT MAX(txn_date) FROM dbm.loan_balance_detail t2 WHERE t2.acnt_code = dbm.loan_balance_detail.acnt_code ) ORDER BY txn_date DESC] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "121f6abb",
+  "timestamp": "2025-11-05T14:33:06.553484",
+  "execution_time_seconds": 28.96,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Пирамид ордын зээлийн данснуудыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн зээлийн данснуудыг хүргэж байна:  1. - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 10,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  2. - Дансны код: 3600002715 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 0 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  3. - Дансны код: 3600004191 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 1,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  4. - Дансны код: 3600004223 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  5. - Дансны код: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ"
+}
+--------------------------------------------------------------------------------
+

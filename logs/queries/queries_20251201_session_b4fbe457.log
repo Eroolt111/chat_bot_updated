@@ -1,0 +1,36 @@
+{
+  "session_id": "b4fbe457",
+  "timestamp": "2025-12-01T10:41:53.852308",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b4fbe457",
+  "timestamp": "2025-12-01T10:42:24.997028",
+  "execution_time_seconds": 22.48,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Нийт зээлийн үлдэгдлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкинд бүртгэлтэй нийт зээлийн үлдэгдлийг валютын төрлөөр харуулав:  1. Ам.доллар: 76,198,311.58   2. Төгрөг: 1,136,148,761,376.85   3. Евро: 9,999,999.96   4. Юань: 401,122,622.5   5. Иен: 1,940,093,068.55"
+}
+--------------------------------------------------------------------------------
+

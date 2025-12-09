@@ -1,0 +1,71 @@
+{
+  "session_id": "d7d9e6a9",
+  "timestamp": "2025-11-10T10:29:01.150356",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d7d9e6a9",
+  "timestamp": "2025-11-10T10:30:22.298379",
+  "execution_time_seconds": 26.4,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр олголттой зээлийн мэдээлэл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT      acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127   - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК   - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК   - Валют: ам.доллар   - Олгосон огноо: 2012-10-05   - Олгосон дүн: 100,000,000 ам.доллар   - Олголтын дүн төгрөгөөр: 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d7d9e6a9",
+  "timestamp": "2025-11-10T11:19:32.699245",
+  "execution_time_seconds": 17.53,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "энэ зээл идэвхитэй байгаа юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH highest_loan AS (     SELECT acnt_code     FROM (         SELECT acnt_code, adv_amount, rate,                ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn         FROM dbm.loan_balance_detail         WHERE adv_amount IS NOT NULL           AND rate IS NOT NULL     )     WHERE rn = 1     ORDER BY adv_amount * rate DESC     FETCH FIRST 1 ROW ONLY ), latest_snapshot AS (     SELECT *     FROM (         SELECT t.*,                ROW_NUMBER() OVER (PARTITION BY t.acnt_code ORDER BY t.txn_date DESC) AS rn         FROM dbm.loan_balance_detail t         WHERE t.acnt_code = (SELECT acnt_code FROM highest_loan)     )     WHERE rn = 1 ) SELECT status, txn_date FROM latest_snapshot;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр дүнтэй зээлийн идэвхитэй байдлын мэдээллийг шалгалаа. Гэвч зээлийн төлөв тодорхойгүй байна. Гүйлгээний огноо: 2017-01-24. Хэрэв нэмэлт мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d7d9e6a9",
+  "timestamp": "2025-11-10T12:20:08.545556",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+

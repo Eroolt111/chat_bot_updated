@@ -1,0 +1,545 @@
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:42:32.843569",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:42:45.969768",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Only one root is supported.",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:50:52.467413",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хш",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'input'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:50:58.516275",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:51:00.184678",
+  "execution_time_seconds": 0.01,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'input'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:53:40.234329",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:54:29.696680",
+  "execution_time_seconds": 35.27,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;",
+  "result_count": 4,
+  "final_answer": "Таны хүсэлтийн дагуу дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг хүргэж байна. Бүх зээлүүд нь \"ИЗИНИС-ЭЙРВЭЙЗ ХХК\", \"ИЗИНИС-ЭЙР ВЭЙЗ\" компанитай холбоотой бөгөөд валют нь төгрөг байна:  1. - Дансны код: 3600006418 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Төлөх огноо: 2025-11-19 - Төлөх дүн: 19,924,892.71 төгрөг - Хүүгийн дүн: 14,233,640.52 төгрөг - Теоретик үлдэгдэл: 946,009,622.37  2. - Дансны код: 3600006476 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Төлөх огноо: 2025-11-19 - Төлөх дүн: 118,188,572.8 төгрөг - Хүүгийн дүн: 84,429,747.43 төгрөг - Теоретик үлдэгдэл: 5,611,449,395.26  3. - Дансны код: 3600006725 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Төлөх огноо: 2025-11-19 - Төлөх дүн: 74,202,955.71 төгрөг - Хүүгийн дүн: 53,007,974.12 төгрөг - Теоретик үлдэгдэл: 3,523,065,902.72  4. - Дансны код: 3600006435 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Төлөх огноо: 2025-11-19 - Төлөх дүн: 195,998,092.83 төгрөг - Хүүгийн дүн: 140,014,123.88 төгрөг - Теоретик үлдэгдэл: 9,305,750,576.27  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T09:58:53.771943",
+  "execution_time_seconds": 53.65,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  [Current Question] Изинис эйрвизын зээлийн үлдэгдэл болон дараагийн төлөлтийг харуулна уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ИЗИНИС-ЭЙР ВЭЙЗ' ),  active_loans AS (     SELECT *     FROM latest_loans     WHERE rn = 1 ),  max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE         status = 'O'         AND acnt_code IN (SELECT acnt_code FROM active_loans)     GROUP BY acnt_code ),  next_payments AS (     SELECT         t.acnt_code,         t.schd_date,         t.amount,         t.int_amount,         t.cur_code,         t.nrs_version,         ROW_NUMBER()             OVER (PARTITION BY t.acnt_code ORDER BY t.schd_date ASC)             AS rn     FROM dbm.bcom_nrs_detail t     INNER JOIN max_versions mv         ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         AND t.schd_date > SYSDATE )  SELECT     a.acnt_code,     a.acnt_name,     a.customer_name,     a.principal,     a.cur_code,     a.txn_date,     n.schd_date AS next_payment_date,     n.amount AS next_principal_payment,     n.int_amount AS next_interest_payment FROM active_loans a LEFT JOIN next_payments n     ON a.acnt_code = n.acnt_code AND n.rn = 1;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтээр \"ИЗИНИС-ЭЙР ВЭЙЗ\" компанийн зээлийн үлдэгдэл болон дараагийн төлөлтийн мэдээллийг хүргэж байна:  1. - Дансны код: 3600006417 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Үлдэгдэл зээл: 0 төгрөг - Төгрөгөөр - Сүүлд шинэчлэгдсэн огноо: 2025-09-12 - Дараагийн төлөлтийн огноо: Мэдээлэл байхгүй - Дараагийн үндсэн төлөлт: Мэдээлэл байхгүй - Дараагийн хүүгийн төлөлт: Мэдээлэл байхгүй  2. - Дансны код: 3600006418 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Үлдэгдэл зээл: 1,118,203,984.07 төгрөг - Төгрөгөөр - Сүүлд шинэчлэгдсэн огноо: 2025-09-12 - Дараагийн төлөлтийн огноо: 2025-11-19 - Дараагийн үндсэн төлөлт: 19,924,892.71 төгрөг - Дараагийн хүүгийн төлөлт: 14,233,640.52 төгрөг  3. - Дансны код: 3600006435 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Үлдэгдэл зээл: 10,999,599,922.76 төгрөг - Төгрөгөөр - Сүүлд шинэчлэгдсэн огноо: 2025-09-12 - Дараагийн төлөлтийн огноо: 2025-11-19 - Дараагийн үндсэн төлөлт: 195,998,092.83 төгрөг - Дараагийн хүүгийн төлөлт: 140,014,123.88 төгрөг  4. - Дансны код: 3600006476 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Үлдэгдэл зээл: 6,632,855,440.16 төгрөг - Төгрөгөөр - Сүүлд шинэчлэгдсэн огноо: 2025-09-12 - Дараагийн төлөлтийн огноо: 2025-11-19 - Дараагийн үндсэн төлөлт: 118,188,572.8 төгрөг - Дараагийн хүүгийн төлөлт: 84,429,747.43 төгрөг  5. - Дансны код: 3600006725 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Үлдэгдэл зээл: 4,164,340,653.01 төгрөг - Төгрөгөөр - Сүүлд шинэчлэгдсэн огноо: 2025-09-12 - Дараагийн төлөлтийн огноо: 2025-11-19 - Дараагийн үндсэн төлөлт: 74,202,955.71 төгрөг - Дараагийн хүүгийн төлөлт: 53,007,974.12 төгрөг  Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол баяртайгаар туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:02:11.127099",
+  "execution_time_seconds": 31.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  Turn 2:   Question: Изинис эйрвизын зээлийн үлдэгдэл болон дараагийн төлөлтийг харуулна уу   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ИЗИНИС-ЭЙР ВЭЙЗ' ),  active_loans AS (     SELECT *     FROM latest_loans     WHERE rn = 1 ),  max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nr...  [Current Question] Пирамид ордын зээлийн данснуудыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн Хөгжлийн Банктай холбогдох зээлийн дансны мэдээллийг хүргэж байна:  1. - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Статус: O - Үлдэгдэл дүн: 10,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  2. - Дансны код: 3600002715 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Статус: O - Үлдэгдэл дүн: 0 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  3. - Дансны код: 3600004191 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Статус: O - Үлдэгдэл дүн: 1,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  4. - Дансны код: 3600004223 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Статус: O - Үлдэгдэл дүн: 2,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  5. - Дансны код: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Статус: O - Үлдэгдэл дүн: 2,000,000,000 төгрөг - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:03:07.012702",
+  "execution_time_seconds": 21.69,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Изинис эйрвизын зээлийн үлдэгдэл болон дараагийн төлөлтийг харуулна уу   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ИЗИНИС-ЭЙР ВЭЙЗ' ),  active_loans AS (     SELECT *     FROM latest_loans     WHERE rn = 1 ),  max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nr...  Turn 2:   Question: Пирамид ордын зээлийн данснуудыг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;...  [Current Question] 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: Изинис эйрвизын зээлийн үлдэгдэл болон дараагийн төлөлтийг харуулна уу   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ИЗИНИС-ЭЙР ВЭЙЗ' ),  active_loans AS (     SELECT *     FROM latest_loans     WHERE rn = 1 ),  max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nr...  Turn 2:   Question: Пирамид ордын зээлийн данснуудыг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;...  [Current Question] [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны асуусан 3600004571 дансны дугаар нь \"ПИРАМИД-ОРД ХХК\" компанийн зээлийн данс юм."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:04:31.706266",
+  "execution_time_seconds": 47.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Пирамид ордын зээлийн данснуудыг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;...  Turn 2:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     customer_name,     acnt_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;...  [Current Question] энэ зээлийн үлдэгдэл хэд байна?",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: Пирамид ордын зээлийн данснуудыг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;...  Turn 2:   Question: [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     customer_name,     acnt_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;...  [Current Question] энэ зээлийн үлдэгдэл хэд байна?",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH previous_loan AS (     SELECT acnt_code     FROM (         SELECT             acnt_code,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE             customer_name = 'ПИРАМИД-ОРД ХХК'             AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)             AND status = 'O'     )     WHERE rn = 1 ),  latest_snapshot AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND acnt_code IN (SELECT acnt_code FROM previous_loan)         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     txn_date FROM latest_snapshot WHERE rn = 1;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн зээлийн үлдэгдлүүдийг хүргэж байна:  1. - Дансны дугаар: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Үлдэгдэл зээл: 10,000,000,000 төгрөг - Огноо: 2025-09-12  2. - Дансны дугаар: 3600002715 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Үлдэгдэл зээл: 0 төгрөг - Огноо: 2025-09-12  3. - Дансны дугаар: 3600004191 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Үлдэгдэл зээл: 1,000,000,000 төгрөг - Огноо: 2025-09-12  4. - Дансны дугаар: 3600004223 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Огноо: 2025-09-12  5. - Дансны дугаар: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Огноо: 2025-09-12  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:08:14.233442",
+  "execution_time_seconds": 33.12,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     customer_name,     acnt_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;...  Turn 2:   Question: энэ зээлийн үлдэгдэл хэд байна?   SQL Pattern: WITH previous_loan AS (     SELECT acnt_code     FROM (         SELECT             acnt_code,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE             customer_name = 'ПИРАМИД-ОРД ХХК'             AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)             AND status = 'O'     )     WHERE rn = 1 ),  latest_snapshot AS (     SELECT         acnt_c...  [Current Question] зээл төлөлттэй холбоотой мэдээлэл: Чи надаа ойрын 30 хоногт төлөгдөх ёстой бүх зээлүүдийг харуул",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     customer_name,     acnt_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;...  Turn 2:   Question: энэ зээлийн үлдэгдэл хэд байна?   SQL Pattern: WITH previous_loan AS (     SELECT acnt_code     FROM (         SELECT             acnt_code,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE             customer_name = 'ПИРАМИД-ОРД ХХК'             AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)             AND status = 'O'     )     WHERE rn = 1 ),  latest_snapshot AS (     SELECT         acnt_c...  [Current Question] зээл төлөлттэй холбоотой мэдээлэл: Чи надаа ойрын 30 хоногт төлөгдөх ёстой бүх зээлүүдийг харуул",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal_bill,         int_rcv_bill,         due_princ_date,         due_int_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     principal_bill,     int_rcv_bill,     due_princ_date,     due_int_date,     txn_date FROM latest_loans WHERE     rn = 1     AND (         (             due_princ_date >= TRUNC(SYSDATE)             AND due_princ_date < TRUNC(SYSDATE) + 30         )         OR         (due_int_date >= TRUNC(SYSDATE) AND due_int_date < TRUNC(SYSDATE) + 30)     ) ORDER BY     LEAST(         COALESCE(due_princ_date, TO_DATE('9999-12-31', 'YYYY-MM-DD')),         COALESCE(due_int_date, TO_DATE('9999-12-31', 'YYYY-MM-DD'))     ) ASC,     acnt_code;",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, ойрын 30 хоногт төлөгдөх ёстой зээлтэй холбоотой мэдээлэл таны хүссэн нөхцлөөр олдсонгүй. Та өөр асуулт байвал баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:09:13.862938",
+  "execution_time_seconds": 27.08,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: энэ зээлийн үлдэгдэл хэд байна?   SQL Pattern: WITH previous_loan AS (     SELECT acnt_code     FROM (         SELECT             acnt_code,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE             customer_name = 'ПИРАМИД-ОРД ХХК'             AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)             AND status = 'O'     )     WHERE rn = 1 ),  latest_snapshot AS (     SELECT         acnt_c...  Turn 2:   Question: зээл төлөлттэй холбоотой мэдээлэл: Чи надаа ойрын 30 хоногт төлөгдөх ёстой бүх зээлүүдийг харуул   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal_bill,         int_rcv_bill,         due_princ_date,         due_int_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_c...  [Current Question] Ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal_bill,         int_rcv_bill,         due_princ_date,         due_int_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     principal_bill,     int_rcv_bill,     due_princ_date,     due_int_date,     txn_date FROM latest_loans WHERE     rn = 1     AND (         (             due_princ_date >= TRUNC(SYSDATE)             AND due_princ_date < TRUNC(SYSDATE) + 30         )         OR         (due_int_date >= TRUNC(SYSDATE) AND due_int_date < TRUNC(SYSDATE) + 30)     ) ORDER BY     COALESCE(due_princ_date, due_int_date),     acnt_code;",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл олдсонгүй. Хэрэв өөр асуулт байвал баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:09:50.771913",
+  "execution_time_seconds": 29.23,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: зээл төлөлттэй холбоотой мэдээлэл: Чи надаа ойрын 30 хоногт төлөгдөх ёстой бүх зээлүүдийг харуул   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal_bill,         int_rcv_bill,         due_princ_date,         due_int_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_c...  Turn 2:   Question: Ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл?   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal_bill,         int_rcv_bill,         due_princ_date,         due_int_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_c...  [Current Question] Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;",
+  "result_count": 4,
+  "final_answer": "Таны хүсэлтийн дагуу дараа долоо хоногт төлөгдөх ёстой \"ИЗИНИС ЭЙРВЭЙЗ ХХК\" компанийн зээлийн төлөлтийн мэдээллийг хүргэж байна:  1. - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Валют: төгрөг - Төлөх дүн: 19,924,892.71 - Хүүгийн дүн: 14,233,640.52 - Төлөв: O - Төлөлтийн огноо: 2025-11-19  2. - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Валют: төгрөг - Төлөх дүн: 118,188,572.8 - Хүүгийн дүн: 84,429,747.43 - Төлөв: O - Төлөлтийн огноо: 2025-11-19  3. - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Валют: төгрөг - Төлөх дүн: 74,202,955.71 - Хүүгийн дүн: 53,007,974.12 - Төлөв: O - Төлөлтийн огноо: 2025-11-19  4. - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Валют: төгрөг - Төлөх дүн: 195,998,092.83 - Хүүгийн дүн: 140,014,123.88 - Төлөв: O - Төлөлтийн огноо: 2025-11-19  Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:58:45.121953",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T10:59:21.456426",
+  "execution_time_seconds": 34.66,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;",
+  "result_count": 4,
+  "final_answer": "Таны хүссэн дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг хүргэж байна:  1. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Валют: төгрөг - Дансны код: 3600006418 - Нэр төрлийн хувилбар: 4 - Төлөх огноо: 2025-11-19 - Төлөх үндсэн дүн: 19,924,892.71 - Төлөх хүүгийн дүн: 14,233,640.52 - Нийт үлдэгдэл: 946,009,622.37  2. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Валют: төгрөг - Дансны код: 3600006476 - Нэр төрлийн хувилбар: 2 - Төлөх огноо: 2025-11-19 - Төлөх үндсэн дүн: 118,188,572.8 - Төлөх хүүгийн дүн: 84,429,747.43 - Нийт үлдэгдэл: 5,611,449,395.26  3. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Валют: төгрөг - Дансны код: 3600006725 - Нэр төрлийн хувилбар: 2 - Төлөх огноо: 2025-11-19 - Төлөх үндсэн дүн: 74,202,955.71 - Төлөх хүүгийн дүн: 53,007,974.12 - Нийт үлдэгдэл: 3,523,065,902.72  4. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Валют: төгрөг - Дансны код: 3600006435 - Нэр төрлийн хувилбар: 2 - Төлөх огноо: 2025-11-19 - Төлөх үндсэн дүн: 195,998,092.83 - Төлөх хүүгийн дүн: 140,014,123.88 - Нийт үлдэгдэл: 9,305,750,576.27  Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:00:04.649610",
+  "execution_time_seconds": 24.25,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  [Current Question] 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  [Current Question] [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH mv AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code ),  next_week_accounts AS (     -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно     SELECT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN mv         ON             t.acnt_code = mv.acnt_code             AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7         AND t.schd_date < TRUNC(SYSDATE, 'D') + 14 ),  latest_snapshot AS (     -- Олдсон acnt_code бүрийн хамгийн сүүлийн snapshot-ыг авна     SELECT         lbd.acnt_code,         lbd.customer_name,         lbd.acnt_name,         lbd.cur_code,         lbd.txn_date,         ROW_NUMBER()             OVER (PARTITION BY lbd.acnt_code ORDER BY lbd.txn_date DESC)             AS rn     FROM dbm.loan_balance_detail lbd     INNER JOIN next_week_accounts nwa ON lbd.acnt_code = nwa.acnt_code )  SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM latest_snapshot WHERE rn = 1;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00928: missing SELECT keyword Help: https://docs.oracle.com/error-help/db/ora-00928/ [SQL: WITH mv AS ( SELECT acnt_code, MAX(nrs_version) AS latest_nrs_version FROM dbm.bcom_nrs_detail WHERE status = 'O' GROUP BY acnt_code ), next_week_accounts AS ( -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно SELECT t.acnt_code FROM dbm.bcom_nrs_detail t INNER JOIN mv ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7 AND t.schd_date < TRUNC(SYSDATE, 'D') + 14 ), latest_snapshot AS ( -- Олдсон acnt_code бүрийн хамгийн сүүлийн snapshot-ыг авна SELECT lbd.acnt_code, lbd.customer_name, lbd.acnt_name, lbd.cur_code, lbd.txn_date, ROW_NUMBER() OVER (PARTITION BY lbd.acnt_code ORDER BY lbd.txn_date DESC) AS rn FROM dbm.loan_balance_detail lbd INNER JOIN next_week_accounts nwa ON lbd.acnt_code = nwa.acnt_code ) SELECT acnt_code, customer_name, acnt_name, cur_code, txn_date FROM latest_snapshot WHERE rn = 1] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:01:21.326597",
+  "execution_time_seconds": 22.08,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  Turn 2:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: WITH mv AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code ),  next_week_accounts AS (     -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно     SELECT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN mv         ON             t.acnt_code = mv.acnt_code             AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         A...  [Current Question] 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: Дараа долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14;...  Turn 2:   Question: [ACNT_CODE_2] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: WITH mv AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code ),  next_week_accounts AS (     -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно     SELECT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN mv         ON             t.acnt_code = mv.acnt_code             AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         A...  [Current Question] [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?",
+  "pii_items_masked": 2,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY     txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүссэн \"3600004571\" дансны дугаар нь \"ПИРАМИД-ОРД ХХК\" компанитай холбогддог.   Дансны нэр: ПИРАМИД-ОРД ХХК   Валют: төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:02:41.649814",
+  "execution_time_seconds": 46.11,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: WITH mv AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code ),  next_week_accounts AS (     -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно     SELECT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN mv         ON             t.acnt_code = mv.acnt_code             AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         A...  Turn 2:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY     txn_date DESC FETCH FIRST 1 ROW ONLY;...  [Current Question] чи надаа ойрны 30 хоногт төлөгдөх ёстой зээлүүдийг харуул",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: [ACNT_CODE_2] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: WITH mv AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code ),  next_week_accounts AS (     -- Өмнөх асуултын логик: дараа долоо хоногт төлөгдөх зээлийн дансны дугааруудыг олно     SELECT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN mv         ON             t.acnt_code = mv.acnt_code             AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         A...  Turn 2:   Question: [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY     txn_date DESC FETCH FIRST 1 ROW ONLY;...  [Current Question] чи надаа ойрны 30 хоногт төлөгдөх ёстой зээлүүдийг харуул",
+  "pii_items_masked": 2,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= SYSDATE     AND t.schd_date < SYSDATE + 30 ORDER BY t.schd_date ASC, t.acnt_code ASC;",
+  "result_count": 9,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 30 хоногт төлөгдөх ёстой Хөгжлийн Банкинд бүртгэлтэй зээлүүдийн мэдээллийг хүргэж байна:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Үндсэн төлбөр: 19,924,892.71 төгрөг      Хүүгийн төлбөр: 14,233,640.52 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Үндсэн төлбөр: 195,998,092.83 төгрөг      Хүүгийн төлбөр: 140,014,123.88 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Үндсэн төлбөр: 118,188,572.8 төгрөг      Хүүгийн төлбөр: 84,429,747.43 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Үндсэн төлбөр: 74,202,955.71 төгрөг      Хүүгийн төлбөр: 53,007,974.12 төгрөг  5. Харилцагч: ДЦС-4 ТӨХК      Дансны нэр: ДЦС-4 ТӨХК      Төлөх огноо: 2025-11-25      Үндсэн төлбөр: 0 төгрөг      Хүүгийн төлбөр: 2,931,847,205.83 төгрөг  6. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Үндсэн төлбөр: 30,148,034.41 иен      Хүүгийн төлбөр: 2,104,580.59 иен  7. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Үндсэн төлбөр: 6,457,708 иен      Хүүгийн төлбөр: 450,801.1 иен  8. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Үндсэн төлбөр: 464,771.33 иен      Хүүгийн төлбөр: 32,444.86 иен  9. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Үндсэн төлбөр: 100,000,000 төгрөг      Хүүгийн төлбөр: 12,884,602.74 төгрөг  Хэрэв дэлгэрэнгүй мэдээлэл хэрэгтэй бол нэмэлтээр асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:03:29.315174",
+  "execution_time_seconds": 25.24,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: 3600004571 гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY     txn_date DESC FETCH FIRST 1 ROW ONLY;...  Turn 2:   Question: чи надаа ойрны 30 хоногт төлөгдөх ёстой зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.statu...  [Current Question] Нийт зээлийн үлдэгдлийг харуул",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: [ACNT_CODE_1] гэж ямар зээлдэгчийн дансны дугаар вэ?   SQL Pattern: SELECT     acnt_code,     customer_name,     acnt_name,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     acnt_code = '[ACNT_CODE_1]'     AND txn_date IS NOT NULL ORDER BY     txn_date DESC FETCH FIRST 1 ROW ONLY;...  Turn 2:   Question: чи надаа ойрны 30 хоногт төлөгдөх ёстой зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.statu...  [Current Question] Нийт зээлийн үлдэгдлийг харуул",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM     latest_balances WHERE     rn = 1 GROUP BY     cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол улсын Хөгжлийн Банкны нийт зээлийн үлдэгдлийг валютын төрлөөр харуулав:  1. Ам.доллар: 76,198,311.58   2. Төгрөг: 1,136,148,761,376.85   3. Евро: 9,999,999.96   4. Юань: 401,122,622.5   5. Иен: 1,940,093,068.55"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:07:22.619330",
+  "execution_time_seconds": 25.17,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: чи надаа ойрны 30 хоногт төлөгдөх ёстой зээлүүдийг харуул   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.statu...  Turn 2:   Question: Нийт зээлийн үлдэгдлийг харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM     latest_balances WHERE     rn = 1 GROUP BY     cur_code;...  [Current Question] Нээлттэй зээлийн үлдэгдлийг ввалют тус бүрээр эрёдлийн сэнгаар цэвэршүүлж харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         customer_name,         principal,         impairment_per,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal * (1 - COALESCE(impairment_per, 0) / 100))         AS net_principal_balance FROM     latest_open_loans WHERE     rn = 1 GROUP BY     cur_code ORDER BY     cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкны нээлттэй зээлийн үлдэгдлийг валют тус бүрээр эрсдэлийн сэнгээр цэвэршүүлсэн байдлаар хүргэж байна:  1. Юань: 398,515,325.45375  2. Евро: 9,854,999.96058  3. Иен: 1,254,743,035.246167  4. Төгрөг: 650,718,288,521.866708  5. Ам.доллар: 30,762,115.674932   Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T11:09:52.689408",
+  "execution_time_seconds": 32.27,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Нийт зээлийн үлдэгдлийг харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM     latest_balances WHERE     rn = 1 GROUP BY     cur_code;...  Turn 2:   Question: Нээлттэй зээлийн үлдэгдлийг ввалют тус бүрээр эрёдлийн сэнгаар цэвэршүүлж харуул   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         customer_name,         principal,         impairment_per,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal * (1 - COALESCE(impairment_per, 0) / 100))         AS net_principal_balance FROM     latest_open_loans WHERE     rn = 1 GROUP BY     cur_code ORDE...  [Current Question] 3600004571 зээлийн үлдэгдэл болон дараачийн төлөлтийн хуваарийг харуул",
+  "masked_query": "[Previous Conversation Metadata] Turn 1:   Question: Нийт зээлийн үлдэгдлийг харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM     latest_balances WHERE     rn = 1 GROUP BY     cur_code;...  Turn 2:   Question: Нээлттэй зээлийн үлдэгдлийг ввалют тус бүрээр эрёдлийн сэнгаар цэвэршүүлж харуул   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         customer_name,         principal,         impairment_per,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM         dbm.loan_balance_detail     WHERE         status = 'O' )  SELECT     cur_code,     SUM(principal * (1 - COALESCE(impairment_per, 0) / 100))         AS net_principal_balance FROM     latest_open_loans WHERE     rn = 1 GROUP BY     cur_code ORDE...  [Current Question] [ACNT_CODE_1] зээлийн үлдэгдэл болон дараачийн төлөлтийн хуваарийг харуул",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_snapshot AS (     SELECT *     FROM dbm.loan_balance_detail     WHERE acnt_code = '[ACNT_CODE_1]'     ORDER BY txn_date DESC     FETCH FIRST 1 ROW ONLY ),  max_version AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE acnt_code = '[ACNT_CODE_1]' AND status = 'O'     GROUP BY acnt_code ),  next_payment AS (     SELECT t.*     FROM dbm.bcom_nrs_detail t     INNER JOIN         max_version mv         ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version     WHERE t.schd_date > SYSDATE AND t.status = 'O'     ORDER BY t.schd_date ASC     FETCH FIRST 1 ROW ONLY )  SELECT     ls.*,     np.schd_date AS next_payment_date,     np.amount AS next_principal_amount,     np.int_amount AS next_interest_amount FROM latest_snapshot ls LEFT JOIN next_payment np ON ls.acnt_code = np.acnt_code;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"3600004571\" дугаартай зээлийн үлдэгдэл болон дараачийн төлөлтийн хуваарийг танилцуулж байна:  - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК   - Төслийн нэр: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ   - Валют: төгрөг   - Үлдэгдэл үндсэн зээл: 2,000,000,000   - Зээлийн валютын ханш: 1   - Зээлийн эхлэх огноо: 2018-06-19   - Зээлийн дуусах огноо: 2021-11-17   - Дараагийн төлөлтийн огноо: мэдээлэл байхгүй   - Дараагийн үндсэн төлөлтийн хэмжээ: мэдээлэл байхгүй   - Дараагийн хүүгийн төлөлтийн хэмжээ: мэдээлэл байхгүй  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол мэдэгдэнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T12:22:17.169416",
+  "execution_time_seconds": 51.78,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= SYSDATE     AND t.schd_date < SYSDATE + 30;",
+  "result_count": 9,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээллийг хүргэж байна:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Данс код: 3600006418      Төлөх огноо: 2025-11-19      Төлөх дүн: 19,924,892.71      Хүүгийн дүн: 14,233,640.52      Нийт үлдэгдэл: 946,009,622.37  2. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Данс код: 3600004065      Төлөх огноо: 2025-12-01      Төлөх дүн: 6,457,708      Хүүгийн дүн: 450,801.1      Нийт үлдэгдэл: 19,373,124.03  3. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Данс код: 3600002340      Төлөх огноо: 2025-12-01      Төлөх дүн: 30,148,034.41      Хүүгийн дүн: 2,104,580.59      Нийт үлдэгдэл: 90,444,103.14  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Данс код: 3600006476      Төлөх огноо: 2025-11-19      Төлөх дүн: 118,188,572.8      Хүүгийн дүн: 84,429,747.43      Нийт үлдэгдэл: 5,611,449,395.26  5. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: төгрөг      Данс код: 3600006690      Төлөх огноо: 2025-12-01      Төлөх дүн: 100,000,000      Хүүгийн дүн: 12,884,602.74      Нийт үлдэгдэл: 300,000,000  6. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Данс код: 3600004570      Төлөх огноо: 2025-12-01      Төлөх дүн: 464,771.33      Хүүгийн дүн: 32,444.86      Нийт үлдэгдэл: 1,394,314.06  7. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Данс код: 3600006725      Төлөх огноо: 2025-11-19      Төлөх дүн: 74,202,955.71      Хүүгийн дүн: 53,007,974.12      Нийт үлдэгдэл: 3,523,065,902.72  8. Харилцагч: ДЦС-4 ТӨХК      Дансны нэр: ДЦС-4 ТӨХК      Валют: төгрөг      Данс код: MN780036003600008686      Төлөх огноо: 2025-11-25      Төлөх дүн: 0      Хүүгийн дүн: 2,931,847,205.83      Нийт үлдэгдэл: 224,740,471,716.74  9. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Данс код: 3600006435      Төлөх огноо: 2025-11-19      Төлөх дүн: 195,998,092.83      Хүүгийн дүн: 140,014,123.88      Нийт үлдэгдэл: 9,305,750,576.27  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:44:46.832333",
+  "execution_time_seconds": 59.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл?   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= SYSDATE     AND t.schd_date < SYSDATE + 30;...  [Current Question] хуллү",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.acnt_name,     t.customer_name,     t.cur_code,     t.schd_date,     t.amount,     t.int_amount,     t.theor_bal,     t.status,     t.nrs_version FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= SYSDATE     AND t.schd_date < SYSDATE + 30 ORDER BY t.schd_date ASC, t.acnt_code ASC;",
+  "result_count": 9,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээллийг хүргэж байна:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Төлөх хугацаа: 2025-11-19      Төлөх дүн: 19,924,892.71      Хүүгийн дүн: 14,233,640.52      Үлдэгдэл зээл: 946,009,622.37    2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Төлөх хугацаа: 2025-11-19      Төлөх дүн: 195,998,092.83      Хүүгийн дүн: 140,014,123.88      Үлдэгдэл зээл: 9,305,750,576.27    3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Төлөх хугацаа: 2025-11-19      Төлөх дүн: 118,188,572.8      Хүүгийн дүн: 84,429,747.43      Үлдэгдэл зээл: 5,611,449,395.26    4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Валют: төгрөг      Төлөх хугацаа: 2025-11-19      Төлөх дүн: 74,202,955.71      Хүүгийн дүн: 53,007,974.12      Үлдэгдэл зээл: 3,523,065,902.72    5. Харилцагч: ДЦС-4 ТӨХК      Дансны нэр: ДЦС-4 ТӨХК      Валют: төгрөг      Төлөх хугацаа: 2025-11-25      Төлөх дүн: 0      Хүүгийн дүн: 2,931,847,205.83      Үлдэгдэл зээл: 224,740,471,716.74    6. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Төлөх хугацаа: 2025-12-01      Төлөх дүн: 30,148,034.41      Хүүгийн дүн: 2,104,580.59      Үлдэгдэл зээл: 90,444,103.14    7. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Төлөх хугацаа: 2025-12-01      Төлөх дүн: 6,457,708      Хүүгийн дүн: 450,801.1      Үлдэгдэл зээл: 19,373,124.03    8. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: иен      Төлөх хугацаа: 2025-12-01      Төлөх дүн: 464,771.33      Хүүгийн дүн: 32,444.86      Үлдэгдэл зээл: 1,394,314.06    9. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Валют: төгрөг      Төлөх хугацаа: 2025-12-01      Төлөх дүн: 100,000,000      Хүүгийн дүн: 12,884,602.74      Үлдэгдэл зээл: 300,000,000    Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:45:04.832277",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:45:13.025899",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:45:15.916509",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:45:19.397596",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн байна уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f4d1761f",
+  "timestamp": "2025-11-11T13:47:01.218184",
+  "execution_time_seconds": 16.16,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Ойрын 30 хоногт төлөгдөх ёстой зээлийн мэдээлэл?   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= SYSDATE     AND t.schd_date < SYSDATE + 30;...  Turn 2:   Question: хуллү   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.acnt_name,     t.customer_name,     t.cur_code,     t.schd_date,     t.amount,     t.int_amount,     t.theor_bal,     t.status,     t.nrs_version FROM dbm.bcom_nrs_detail t INNER JOIN max_versions mv     ON         t.acnt_code = mv.acnt_code         AND t.nrs_version = mv.latest_nrs_version ...  [Current Question] Чи хэн бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "-- No SQL query is needed for this meta question about the assistant's identity.;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00900: invalid SQL statement Help: https://docs.oracle.com/error-help/db/ora-00900/ [SQL: -- No SQL query is needed for this meta question about the assistant's identity.] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултанд хариулах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+

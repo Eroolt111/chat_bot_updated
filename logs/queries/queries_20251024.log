@@ -1,0 +1,278 @@
+{
+  "timestamp": "2025-10-24T17:50:34.706585",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайн уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-24T17:50:45.004619",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайн уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-24T17:51:38.137121",
+  "execution_time_seconds": 34.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр зээлтэй 5 данс?",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.loan_balance_detail",
+    "dbm.bcom_nrs_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "customer_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "888 - 2,0 ДЭЭШ-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МАХ ХӨТӨЛБӨР-ГОЛОМТ-ТАЙЖ ГРУПП ХХК",
+      "customer_name": "ГОЛОМТ БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНГОЛ МАХ ЭКСПО ХХК",
+      "customer_name": "МОНГОЛ МАХ ЭКСПО ХХК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НЬЮ ХАППИ ХХК",
+      "customer_name": "НЬЮ ХАППИ ХХК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ШАНХ МАЙНИНГ ХХК",
+      "customer_name": "ШАНХ МАЙНИНГ",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "АСЕМ-150 УБХБ",
+      "customer_name": "УЛААНБААТАР ХОТЫН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "АСЕМ-150 ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МАХ ХӨТӨЛБӨР-ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ШАНХ МАЙНИНГ ХХК",
+      "customer_name": "ШАНХ МАЙНИНГ",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАХ ХӨТӨЛБӨР-ГОЛОМТ-ТАЙЖ ГРУПП ХХК",
+      "customer_name": "ГОЛОМТ БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНГОЛ МАХ ЭКСПО ХХК",
+      "customer_name": "МОНГОЛ МАХ ЭКСПО ХХК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888 - 2,0 ДЭЭШ-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "customer_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "АСЕМ-150 УБХБ",
+      "customer_name": "УЛААНБААТАР ХОТЫН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "АСЕМ-150 ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАХ ХӨТӨЛБӨР-ХААН БАНК",
+      "customer_name": "ХААН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "НЬЮ ХАППИ ХХК",
+      "customer_name": "НЬЮ ХАППИ ХХК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАХ ХӨТӨЛБӨР-ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     txn_date FROM latest_accounts WHERE rn = 1 ORDER BY principal DESC FETCH FIRST 5 ROWS ONLY;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкны хамгийн өндөр зээлтэй 5 дансны мэдээллийг хүргэж байна:  1. Дансны код: MN780036003600008686    - Дансны нэр: ДЦС-4 ТӨХК    - Харилцагчийн нэр: ДЦС-4 ТӨХК    - Үлдэгдэл зээлийн дүн: 253,309,397,578.54 MNT    - Огноо: 2025-09-12  2. Дансны код: MN400036003600008497    - Дансны нэр: ЭРЭЛ ХХК    - Харилцагчийн нэр: ЭРЭЛ ХХК    - Үлдэгдэл зээлийн дүн: 109,327,707,274.98 MNT    - Огноо: 2025-09-12  3. Дансны код: MN120036003600008613    - Дансны нэр: БЭРЭН ГРУПП ХХК    - Харилцагчийн нэр: БЭРЭН ГРУПП ХХК    - Үлдэгдэл зээлийн дүн: 88,322,594,178.03 MNT    - Огноо: 2025-09-12  4. Дансны код: 3600006133    - Дансны нэр: МОННИС МАЙНИНГ ХХК    - Харилцагчийн нэр: МОННИС МАЙНИНГ ХХК    - Үлдэгдэл зээлийн дүн: 67,463,373,885.46 MNT    - Огноо: 2025-09-12  5. Дансны код: MN030036003600007805    - Дансны нэр: НВЦ ХХК    - Харилцагчийн нэр: НВЦ ХХК    - Үлдэгдэл зээлийн дүн: 59,840,550,000 MNT    - Огноо: 2025-09-12  Танд илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-24T17:58:03.022233",
+  "execution_time_seconds": 38.16,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр зээлтэй 5 дасыг харуул, Ингэхдээ өөр өөр валютыг rate ээр нь үржүүлж бүгдийг нэг зүйл рүү хөрвүүлээд харьцуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "888 - 2,0 ДЭЭШ-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ USD - ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "888- 2,0 ДЭЭШ-ТӨРИЙН БАНК",
+      "customer_name": "ТӨРИЙН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "888-2,0 ДЭЭШ-ҮХО БАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЖДҮ-ХАС БАНК 2-ООС ДООШ",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР 2018- ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "888-2,0-С ДЭЭШ-ХААН БАНК",
+      "customer_name": "ХААН БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР- ХАС БАНК - 2017",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "АРЬС ШИР- ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЖДҮ-ЧИНГИС ХААН БАНК 2-ООС ДООШ",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ USD - ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888 - 2,0 ДЭЭШ-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888-2,0 ДЭЭШ-ҮХО БАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖДҮ-ХАС БАНК 2-ООС ДООШ",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888- 2,0 ДЭЭШ-ТӨРИЙН БАНК",
+      "customer_name": "ТӨРИЙН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "АРЬС ШИР-ҮХОБ",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР 2018- ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ-ҮХОБАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖДҮ 70 ТЭРБУМ-ҮХОБАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖДҮ 70 ТЭРБУМ-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_acnt AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         rate,         txn_date,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE principal IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     rate,     (principal * rate) AS principal_in_mnt FROM latest_per_acnt WHERE     rn = 1     AND status = 'O' ORDER BY principal_in_mnt DESC FETCH FIRST 5 ROWS ONLY;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол Улсын Хөгжлийн Банкны хамгийн өндөр зээлтэй 5 дансны мэдээллийг, өөр өөр валютыг ханшаар нь нэгж төгрөгт хөрвүүлэн харьцуулсан байдлаар хүргэж байна:  1. Дансны нэр: ДЦС-4 ТӨХК    - Харилцагч: ДЦС-4 ТӨХК    - Зээлийн үлдэгдэл: 253,309,397,578.54 MNT    - Ханш: 1    - Төгрөгт хөрвүүлсэн дүн: 253,309,397,578.54 төгрөг  2. Дансны нэр: ХӨТӨЛ ХХК    - Харилцагч: ХӨТӨЛ ХХК    - Зээлийн үлдэгдэл: 61,212,460.58 USD    - Ханш: 3,593.61    - Төгрөгт хөрвүүлсэн дүн: 219,973,710,464.8938 төгрөг  3. Дансны нэр: ЭРЭЛ ХХК    - Харилцагч: ЭРЭЛ ХХК    - Зээлийн үлдэгдэл: 109,327,707,274.98 MNT    - Ханш: 1    - Төгрөгт хөрвүүлсэн дүн: 109,327,707,274.98 төгрөг  4. Дансны нэр: БЭРЭН ГРУПП ХХК    - Харилцагч: БЭРЭН ГРУПП ХХК    - Зээлийн үлдэгдэл: 88,322,594,178.03 MNT    - Ханш: 1    - Төгрөгт хөрвүүлсэн дүн: 88,322,594,178.03 төгрөг  5. Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Зээлийн үлдэгдэл: 146,644,843.89 CNY    - Ханш: 504.54    - Төгрөгт хөрвүүлсэн дүн: 73,988,189,536.2606 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+

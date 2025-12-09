@@ -1,0 +1,386 @@
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T10:46:16.103872",
+  "execution_time_seconds": 3.01,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд Development Bank of Mongolia (DBM)-ийн туслах болж туслахад таатай байна. Та банкны үйлчилгээ, өгөгдлийн анализ, эсвэл SQL өгөгдлийн сангийн талаар асуух зүйл байвал тодорхой асуугаарай. Танд хэрхэн туслах вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T15:45:40.768546",
+  "execution_time_seconds": 14.53,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хөгжлийн банкны хэвийн ангилалтай зээлүүд хэд вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(DISTINCT acnt_code) AS normal_loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND class_name = 'ХЭВИЙН'     AND customer_name = 'Хөгжлийн банк'     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL;",
+  "result_count": 1,
+  "final_answer": "Хөгжлийн банкны хэвийн ангилалтай зээлийн тоо: 0 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T15:54:05.700568",
+  "execution_time_seconds": 20.12,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хөгжлийн банкны хэвийн ангилалтай зээлүүд хэд вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(*) AS normal_loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND class_name = 'ХЭВИЙН';",
+  "result_count": 1,
+  "final_answer": "Хөгжлийн банкны хэвийн ангилалтай зээлийн тоо: 122 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T16:02:18.822372",
+  "execution_time_seconds": 35.96,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] The user inquired about the count of normal classified loans from the Development Bank, and a SQL query was provided to count these loans based on the latest transaction date, active status, and normal classification. [Current Question] хамгийн өндөр олголттой зээдийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     (adv_amount * rate) AS adv_amount_in_mnt FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND adv_amount > 0     AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY     adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой зээлийн мэдээлэл:  - Дансны дугаар: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T16:08:43.321190",
+  "execution_time_seconds": 19.8,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр олголттой зээдийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     (adv_amount * rate) AS adv_amount_in_mnt FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND adv_amount > 0     AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY     adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой зээлийн мэдээлэл:  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Олгосон дүн (төгрөгөөр): 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T16:11:17.091052",
+  "execution_time_seconds": 36.81,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User asked for information about the highest grant amount related to 'зээдийн'. [Current Question] Гүрбазрын хариуцаж байгаа зээлүүдийг харуулдаа",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     account_manager_name,     cur_code,     principal,     adv_amount,     adv_date,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND (         UPPER(account_manager_name) LIKE '%ГҮРБАЗАР%'         OR UPPER(account_manager_name) LIKE '%GURBAZAR%'     ) ORDER BY adv_date DESC NULLS LAST;",
+  "result_count": 1,
+  "final_answer": "Гүрбазрын хариуцаж байгаа зээлүүдийн мэдээлэл:  - Дансны дугаар: 3600001198 - Дансны нэр: КЬЮ ЭС СИ ХХК - Харилцагчийн нэр: КЬЮ ЭС СИ ХХК - Зээлийн менежер: ГҮРБАЗАР.Д - Валют: ам.доллар - Үндсэн зээлийн үлдэгдэл: 0 - Олгосон дүн: 71,300,000 ам.доллар - Олгосон огноо: 2014-12-03 - Төлөв: O - Гүйлгээний огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T16:36:28.006583",
+  "execution_time_seconds": 1.61,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "2018 оны хөлбөмбөгийн аварга баг хэн бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна.  Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:09:21.155780",
+  "execution_time_seconds": 19.77,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Гүрбазрын хариуцаж байгаа зээлүүдийг харуулдаа",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     account_manager_name,     cur_code,     principal,     adv_amount,     adv_date,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(account_manager_name) LIKE '%ГҮРБАЗР%' ORDER BY adv_date DESC NULLS LAST;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:10:33.863592",
+  "execution_time_seconds": 18.16,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User requested to display loans managed by Gurbazr. [Current Question] Зээл байхгүй гэсэн үг үү?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     adv_amount,     cur_code,     principal,     status FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(account_manager_name) LIKE '%GURBAZR%'     AND adv_date IS NOT NULL     AND adv_amount > 0     AND principal > 0     AND status = 'O'     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:32:21.415727",
+  "execution_time_seconds": 15.76,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Гүрбазрын хариуцаж байгаа зээлүүдийг харуулдаа",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     account_manager_name,     cur_code,     principal,     adv_amount,     adv_date,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(account_manager_name) LIKE '%ГҮРБАЗАР%' ORDER BY adv_date DESC NULLS LAST;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:35:56.637888",
+  "execution_time_seconds": 1.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Маргааш цаг агаар ямар байхын",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна.  Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:37:21.224163",
+  "execution_time_seconds": 19.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User asked to show loans managed by Гүрбазрын. [Current Question] сайна уу? хамгийн өндөр олголттой хэвийн ангилалтай зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     adv_amount,     cur_code,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND adv_amount > 0     AND class_name = 'ХЭВИЙН'     AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой хэвийн ангилалтай зээлийн мэдээлэл:  - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Олгосон дүн (төгрөгөөр): 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:38:21.952875",
+  "execution_time_seconds": 39.17,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User requested to display loans managed by Гүрбазрын, followed by a request to show the highest approved loans with a normal classification. [Current Question] энэ зээл нээлттэй байгаа юу?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH target_loan AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         class_name IN ('ХЭВИЙН', 'NORMAL')         AND adv_amount > 0         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL     ORDER BY (adv_amount * rate) DESC     FETCH FIRST 1 ROW ONLY )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = (SELECT acnt_code FROM target_loan)     AND txn_date = (         SELECT MAX(txn_date) FROM dbm.loan_balance_detail         WHERE acnt_code = (SELECT acnt_code FROM target_loan)     )     AND status = 'O'     AND principal > 0;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:55:18.054601",
+  "execution_time_seconds": 23.66,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайна уу? хамгийн өндөр олголттой хэвийн ангилалтай зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     adv_amount,     cur_code,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(class_name) = 'ХЭВИЙН'     AND adv_amount > 0     AND acnt_name IS NOT NULL     AND customer_name IS NOT NULL ORDER BY     adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой хэвийн ангилалтай зээлийн мэдээлэл:  - Дансны дугаар: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Зээлийн ангилал: ХЭВИЙН - Олгосон дүн (төгрөгөөр): 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T17:56:12.404589",
+  "execution_time_seconds": 22.09,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User asked to show loans with the highest disbursement that are in normal classification.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     adv_amount,     cur_code,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(class_name) = 'ХЭВИЙН'     AND adv_amount > 0     AND acnt_name IS NOT NULL     AND customer_name IS NOT NULL ORDER BY     adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] энэ зээл нээлттэй байгаа юу?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH target_loan AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND UPPER(class_name) = 'ХЭВИЙН'         AND adv_amount > 0         AND acnt_name IS NOT NULL         AND customer_name IS NOT NULL     ORDER BY (adv_amount * rate) DESC     FETCH FIRST 1 ROW ONLY )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = (SELECT acnt_code FROM target_loan)     AND txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail);",
+  "result_count": 1,
+  "final_answer": "Таны сонирхсон зээл (ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК) дараах байдлаар байна:  - Дансны дугаар: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Үлдэгдэл үндсэн зээл: 0 ам.доллар - Зээлийн төлөв: C - Огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T18:10:15.048747",
+  "execution_time_seconds": 22.34,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайна уу? хамгийн өндөр олголттой хэвийн ангилалтай зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND class_name = 'ХЭВИЙН'     AND adv_amount > 0     AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой хэвийн ангилалтай зээлийн мэдээлэл:  - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Ангилал: ХЭВИЙН - Олгосон дүн (төгрөгөөр): 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T18:10:43.657436",
+  "execution_time_seconds": 21.63,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] User asked to display loans with the highest disbursement amounts that are classified as 'normal'.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND class_name = 'ХЭВИЙН'     AND adv_amount > 0     AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] энэ зээл нээлттэй байгаа юу?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH target_loan AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND class_name = 'ХЭВИЙН'         AND adv_amount > 0         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     ORDER BY (adv_amount * rate) DESC     FETCH FIRST 1 ROW ONLY )  SELECT     l.acnt_code,     l.acnt_name,     l.customer_name,     l.cur_code,     l.adv_date,     l.adv_amount,     l.class_name,     l.status,     l.txn_date FROM dbm.loan_balance_detail l WHERE     l.acnt_code = (SELECT acnt_code FROM target_loan)     AND l.txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail);",
+  "result_count": 1,
+  "final_answer": "Таны сонирхсон зээл нь дараах байдалтай байна:  - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Зээлийн ангилал: ХЭВИЙН - Зээлийн төлөв: C - Мэдээлэл шинэчлэгдсэн огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T18:16:48.524728",
+  "execution_time_seconds": 29.41,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайна уу? хамгийн өндөр олголттой хэвийн ангилалтай зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(class_name) = 'ХЭВИЙН'     AND adv_amount > 0     AND acnt_name IS NOT NULL     AND customer_name IS NOT NULL ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр олголттой хэвийн ангилалтай зээлийн мэдээлэл:  - Дансны дугаар: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Ангилал: ХЭВИЙН - Олгосон дүн (төгрөгөөр): 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3037e909",
+  "timestamp": "2025-12-09T18:18:01.590180",
+  "execution_time_seconds": 24.83,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр олголттой хэвийн ангилалтай зээлийг харуулах хүсэлт гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     class_name,     (adv_amount * rate) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(class_name) = 'ХЭВИЙН'     AND adv_amount > 0     AND acnt_name IS NOT NULL     AND customer_name IS NOT NULL ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] энэ зээл нээлттэй байгаа юу?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH target_loan AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND UPPER(class_name) = 'ХЭВИЙН'         AND adv_amount > 0         AND acnt_name IS NOT NULL         AND customer_name IS NOT NULL     ORDER BY (adv_amount * rate) DESC     FETCH FIRST 1 ROW ONLY )  SELECT     l.acnt_code,     l.acnt_name,     l.customer_name,     l.cur_code,     l.adv_date,     l.adv_amount,     l.class_name,     l.status,     l.txn_date,     CASE WHEN l.status = 'O' THEN 'Нээлттэй' ELSE 'Хаалттай' END         AS loan_open_status FROM dbm.loan_balance_detail l WHERE     l.acnt_code = (SELECT acnt_code FROM target_loan)     AND l.txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail);",
+  "result_count": 1,
+  "final_answer": "\"ЭРДЭНЭС ТАВАНТОЛГОЙ\" ХК-ийн \"ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК\" нэртэй зээл нь одоогоор Хаалттай байна."
+}
+--------------------------------------------------------------------------------
+

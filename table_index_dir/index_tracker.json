@@ -1,0 +1,18 @@
+{
+  "dbm.loan_balance_detail": {
+    "last_count": 1145,
+    "last_update": "2025-09-30T16:30:49.958435"
+  },
+  "dbm.bcom_nrs_detail": {
+    "last_count": 480,
+    "last_update": "2025-09-30T16:30:51.035608"
+  },
+  "dbm.loan_balance_detail_names": {
+    "last_count": 297,
+    "last_update": "2025-10-28T11:00:25.209784"
+  },
+  "dbm.bcom_nrs_detail_names": {
+    "last_count": 214,
+    "last_update": "2025-10-28T11:00:48.649021"
+  }
+}

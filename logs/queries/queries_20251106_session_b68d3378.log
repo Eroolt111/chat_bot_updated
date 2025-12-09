@@ -1,0 +1,279 @@
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:03:29.693055",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:04:04.262412",
+  "execution_time_seconds": 24.64,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн эхний зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_code,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL ORDER BY adv_date ASC, txn_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МИАТ ТӨХК   - Дансны код: 3600000043   - Олгосон огноо: 2012-06-21   - Олгосон дүн: 0 ам.доллар"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:05:29.770995",
+  "execution_time_seconds": 31.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: ХАС БАНК, ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН, ХААНЫ ХАРГУЙ, ХАМТЫН ЭХ БУЛАГ ХХК, ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН     - Columns: customer_name, acnt_code, adv_date, adv_amount, cur_code     - Row Count: 1  [Current Question] одоо энэ зээл идэвхтэй байгаа юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH earliest_loan AS (     SELECT         acnt_code,         adv_date,         ROW_NUMBER() OVER (ORDER BY adv_date ASC) AS rn     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL )  SELECT     acnt_code,     customer_name,     status,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = (         SELECT acnt_code FROM earliest_loan         WHERE rn = 1     ) ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгч \"МИАТ ТӨХК\"-ийн зээлийн идэвхтэй байдлын мэдээллийг хүргэж байна:  - Дансны код: 3600000043 - Харилцагчийн нэр: МИАТ ТӨХК - Статус: C - Гүйлгээний огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:26:31.471510",
+  "execution_time_seconds": 13.86,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хш",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "-- No valid query can be generated from the input \"хш\". Please provide a clear question.;",
+  "execution_error": "'Config' object has no attribute 'ENTITY_NAME_COLUMNS'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:26:37.054191",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:27:01.592975",
+  "execution_time_seconds": 16.73,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн эхний зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     adv_date,     acnt_code,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL ORDER BY adv_date ASC, txn_date ASC FETCH FIRST 1 ROW ONLY;",
+  "execution_error": "'Config' object has no attribute 'ENTITY_NAME_COLUMNS'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:29:24.165472",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:29:57.219190",
+  "execution_time_seconds": 22.23,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн эхний зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH earliest_date AS (     SELECT MIN(adv_date) AS min_adv_date     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL ),  earliest_loans AS (     SELECT acnt_code     FROM dbm.loan_balance_detail t     INNER JOIN earliest_date ed ON t.adv_date = ed.min_adv_date     GROUP BY acnt_code ),  latest_snapshots AS (     SELECT         t.*,         ROW_NUMBER()             OVER (PARTITION BY t.acnt_code ORDER BY t.txn_date DESC)             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN earliest_loans el ON t.acnt_code = el.acnt_code )  SELECT     customer_name,     acnt_code,     acnt_name,     adv_date,     txn_date,     cur_code,     adv_amount,     principal,     rate,     status FROM latest_snapshots WHERE rn = 1 ORDER BY customer_name, acnt_code;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МИАТ ТӨХК   - Дансны код: 3600000043   - Дансны нэр: МИАТ ХК   - Олгосон огноо: 2012-06-21   - Гүйлгээний огноо: 2025-09-12   - Валют: ам.доллар   - Олгосон дүн: 5,341,500   - Үлдэгдэл зээл: 0   - Валютын ханш: 3,593.61   - Төлөв: C"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:31:00.508337",
+  "execution_time_seconds": 28.29,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD'     - Columns: customer_name, acnt_code, acnt_name, adv_date, txn_date, cur_code, adv_amount, principal, rate, status     - Row Count: 1  [Current Question] энэ зээлдэгчийн бүх зээлийн данснуудыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loan_snapshots AS (     SELECT         t.*,         ROW_NUMBER()             OVER (PARTITION BY t.acnt_code ORDER BY t.txn_date DESC)             AS rn     FROM dbm.loan_balance_detail t     WHERE t.customer_name = 'МИАТ ТӨХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     status,     txn_date FROM latest_loan_snapshots WHERE rn = 1 ORDER BY acnt_code;",
+  "result_count": 6,
+  "final_answer": "Таны хүсэлтийн дагуу \"МИАТ ТӨХК\" компанийн бүх зээлийн дансны мэдээллийг хүргэж байна:  1. - Дансны код: 3600000043 - Дансны нэр: МИАТ ХК - Үлдэгдэл зээл: 0 ам.доллар - Төлөв: C - Гүйлгээний огноо: 2025-09-12  2. - Дансны код: 3600000241 - Дансны нэр: МИАТ ТӨХК - Үлдэгдэл зээл: 0 ам.доллар - Төлөв: C - Гүйлгээний огноо: 2025-09-12  3. - Дансны код: 3600000653 - Дансны нэр: МИАТ - Үлдэгдэл зээл: 0 ам.доллар - Төлөв: C - Гүйлгээний огноо: 2025-09-12  4. - Дансны код: 3600001175 - Дансны нэр: МИАТ ТӨХК-НЭМЭЛТ ЗЭЭЛ - Үлдэгдэл зээл: 0 ам.доллар - Төлөв: C - Гүйлгээний огноо: 2025-09-12  5. - Дансны код: 3600001312 - Дансны нэр: МИАТ ТӨХК-ИЙН ГАДААД ЗЭЭЛИЙН ТӨЛБӨР - Үлдэгдэл зээл: 0 ам.доллар - Төлөв: C - Гүйлгээний огноо: 2025-09-12  6. - Дансны код: 3600002296 - Дансны нэр: МИАТ ТӨХК - Үлдэгдэл зээл: 0 иен - Төлөв: C - Гүйлгээний огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:32:50.626699",
+  "execution_time_seconds": 31.47,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD'     - Columns: customer_name, acnt_code, acnt_name, adv_date, txn_date, cur_code, adv_amount, principal, rate, status     - Row Count: 1  Turn 2:   User: энэ зээлдэгчийн бүх зээлийн данснуудыг харуул   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD', acnt_name='МИАТ', acnt_name='МИАТ ТӨХК-НЭМЭЛТ ЗЭЭЛ', acnt_name='МИАТ ТӨХК-ИЙН ГАДААД ЗЭЭЛИЙН ТӨЛБӨР'     - Columns: acnt_code, acnt_name, customer_name, principal, cur_code, status, txn_date     - Row Count: 6  [Current Question] хамгийн өндөр олголттой зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS rate,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE customer_name = 'МИАТ ТӨХК'       AND adv_amount IS NOT NULL     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT      acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"МИАТ ТӨХК\" компанийн хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000241 - Дансны нэр: МИАТ ТӨХК - Харилцагчийн нэр: МИАТ ТӨХК - Валют: ам.доллар - Олгосон огноо: 2013-05-07 - Олгосон дүн: 78,550,000 - Олголтын дүн төгрөгөөр: 282,278,065,500"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:34:14.363763",
+  "execution_time_seconds": 44.06,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD'     - Columns: customer_name, acnt_code, acnt_name, adv_date, txn_date, cur_code, adv_amount, principal, rate, status     - Row Count: 1  Turn 2:   User: энэ зээлдэгчийн бүх зээлийн данснуудыг харуул   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD', acnt_name='МИАТ', acnt_name='МИАТ ТӨХК-НЭМЭЛТ ЗЭЭЛ', acnt_name='МИАТ ТӨХК-ИЙН ГАДААД ЗЭЭЛИЙН ТӨЛБӨР'     - Columns: acnt_code, acnt_name, customer_name, principal, cur_code, status, txn_date     - Row Count: 6  Turn 3:   User: хамгийн өндөр олголттой зээл?   Answer Metadata:     - Entities: acnt_name='МИАТ ТӨХК', cur_code='USD'     - Columns: acnt_code, acnt_name, customer_name, cur_code, adv_date, original_adv_amount, adv_amount_in_mnt     - Row Count: 1  [Current Question] хөгжлийн банкны хамгийн өндөр олголттой зээл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND adv_amount > 0       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code ) SELECT      acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол улсын Хөгжлийн Банкны хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 - Олголтын дүн төгрөгөөр: 359,361,000,000"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T10:35:44.609187",
+  "execution_time_seconds": 35.12,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: энэ зээлдэгчийн бүх зээлийн данснуудыг харуул   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD', acnt_name='МИАТ', acnt_name='МИАТ ТӨХК-НЭМЭЛТ ЗЭЭЛ', acnt_name='МИАТ ТӨХК-ИЙН ГАДААД ЗЭЭЛИЙН ТӨЛБӨР'     - Columns: acnt_code, acnt_name, customer_name, principal, cur_code, status, txn_date     - Row Count: 6  Turn 2:   User: хамгийн өндөр олголттой зээл?   Answer Metadata:     - Entities: acnt_name='МИАТ ТӨХК', cur_code='USD'     - Columns: acnt_code, acnt_name, customer_name, cur_code, adv_date, original_adv_amount, adv_amount_in_mnt     - Row Count: 1  Turn 3:   User: хөгжлийн банкны хамгийн өндөр олголттой зээл   Answer Metadata:     - Entities: acnt_name='ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК', customer_name='ЭРДЭНЭС ТАВАНТОЛГОЙ ХК', cur_code='USD'     - Columns: acnt_code, acnt_name, customer_name, cur_code, adv_date, original_adv_amount, adv_amount_in_mnt     - Row Count: 1  [Current Question] энэ зээл одоо идэвхтэй байгаа юу? үлдэгдэл нь хэд байгаа вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_loan AS (     SELECT         acnt_code,         acnt_name,         customer_name,         adv_amount,         rate,         principal,         cur_code,         status,         txn_date,         adv_amount * rate AS adv_amount_in_mnt,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         customer_name = 'МИАТ ТӨХК'         AND status = 'O'         AND adv_amount IS NOT NULL ),  highest_adv_loan AS (     SELECT         acnt_code,         acnt_name,         customer_name,         adv_amount,         rate,         adv_amount_in_mnt,         principal,         cur_code,         txn_date     FROM latest_per_loan     WHERE rn = 1     ORDER BY adv_amount_in_mnt DESC     FETCH FIRST 1 ROWS ONLY )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     txn_date,     principal * rate AS principal_in_mnt FROM highest_adv_loan;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00904: \"STATUS\": invalid identifier Help: https://docs.oracle.com/error-help/db/ora-00904/ [SQL: WITH latest_per_loan AS ( SELECT acnt_code, acnt_name, customer_name, adv_amount, rate, principal, cur_code, status, txn_date, adv_amount * rate AS adv_amount_in_mnt, ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn FROM dbm.loan_balance_detail WHERE customer_name = 'МИАТ ТӨХК' AND status = 'O' AND adv_amount IS NOT NULL ), highest_adv_loan AS ( SELECT acnt_code, acnt_name, customer_name, adv_amount, rate, adv_amount_in_mnt, principal, cur_code, txn_date FROM latest_per_loan WHERE rn = 1 ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROWS ONLY ) SELECT acnt_code, acnt_name, customer_name, status, principal, cur_code, txn_date, principal * rate AS principal_in_mnt FROM highest_adv_loan] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T11:16:50.019329",
+  "execution_time_seconds": 21.89,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн эхний зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_code,     acnt_name,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL ORDER BY adv_date ASC, txn_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МИАТ ТӨХК   - Дансны код: 3600000043   - Дансны нэр: МИАТ ХК   - Олгосон огноо: 2012-06-21   - Олгосон дүн: 0 ам.доллар"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T11:20:58.260266",
+  "execution_time_seconds": 18.06,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD'     - Columns: customer_name, acnt_code, acnt_name, adv_date, adv_amount, cur_code     - Row Count: 1  [Current Question] энэ зээл одоо идэвхтэй байгаа юу? үлдэгдэл нь хэд байгаа вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     customer_name,     acnt_name,     status,     principal,     cur_code,     txn_date FROM (     SELECT         acnt_code,         customer_name,         acnt_name,         status,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         -- acnt_code from previous turn's earliest loan for МИАТ ТӨХК         acnt_code = 'MN270050003600012356'         AND status = 'O' ) WHERE rn = 1;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00936: missing expression Help: https://docs.oracle.com/error-help/db/ora-00936/ [SQL: SELECT acnt_code, customer_name, acnt_name, status, principal, cur_code, txn_date FROM ( SELECT acnt_code, customer_name, acnt_name, status, principal, cur_code, txn_date, ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn FROM dbm.loan_balance_detail WHERE -- acnt_code from previous turn's earliest loan for МИАТ ТӨХК acnt_code = 'MN270050003600012356' AND status = 'O' ) WHERE rn = 1] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b68d3378",
+  "timestamp": "2025-11-06T11:22:27.387106",
+  "execution_time_seconds": 22.77,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   User: хамгийн эхний зээлдэгчийн мэдээлэл?   Answer Metadata:     - Entities: acnt_name='МИАТ ХК', customer_name='МИАТ ТӨХК', cur_code='USD'     - Columns: customer_name, acnt_code, acnt_name, adv_date, adv_amount, cur_code     - Row Count: 1  Turn 2:   User: энэ зээл одоо идэвхтэй байгаа юу? үлдэгдэл нь хэд байгаа вэ?   Answer Metadata:     - Columns: error     - Row Count: 1  [Current Question] энэ зээл одоо идэвхтэй байгаа юу? үлдэгдэл нь хэд байгаа вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_code,     acnt_name,     status,     principal,     cur_code,     txn_date FROM dbm.loan_balance_detail WHERE     acnt_code = (         SELECT acnt_code         FROM dbm.loan_balance_detail         WHERE             customer_name = 'МИАТ ТӨХК'             AND acnt_name = 'МИАТ ХК'             AND cur_code = 'USD'         ORDER BY adv_date ASC, txn_date ASC         FETCH FIRST 1 ROW ONLY     ) ORDER BY txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"МИАТ ТӨХК\" компанийн \"МИАТ ХК\" нэртэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000043 - Дансны нэр: МИАТ ХК - Статус: C - Үлдэгдэл зээл: 0 ам.доллар - Гүйлгээний огноо: 2025-09-12  Энэхүү зээл одоо идэвхтэй эсэхийг статусын мэдээллээс харж болно."
+}
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBM Assistant</title>
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="chat-container">
+        <!-- Sidebar (optional - can be hidden) -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-university"></i>
+                </div>
+                <button class="sidebar-close-btn" id="sidebarCloseBtn">
+                    <i class="fas fa-xmark"></i>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <button class="new-chat-btn" id="newChatBtn">
+                    <i class="fas fa-plus"></i>
+                    <span>New chat</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Chat Area -->
+        <div class="main-chat">
+            <!-- Header -->
+            <div class="chat-header">
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="chat-title">DBM Assistant</h1>
+                </div>
+                <div class="header-right">
+                    <div class="connection-indicator">
+                        <span class="status-dot" id="statusDot"></span>
+                        <span class="status-text" id="statusText">Connected</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-center-wrapper">
+                    <div class="welcome-screen">
+                        <div class="welcome-icon">
+                            <img src="/static/images/14.png" alt="DBM Logo">
+                        </div>
+                        <!-- <h2>Монгол Улсын Хөгжлийн Банк</h2> -->
+                    </div>
+                    
+                    <!-- ✅ MOVED INPUT INSIDE WRAPPER -->
+                    <div class="input-container centered" id="inputContainer">
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="messageInput" 
+                                class="message-input" 
+                                placeholder="Энд бичнэ үү..." 
+                                rows="1"
+                            ></textarea>
+                            <button id="sendButton" class="send-button" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+            
+            <!-- Footer Text - Always at Bottom -->
+            <div class="input-footer">
+                <span class="footer-text">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Хиймэл оюун ухаан алдаа гаргаж болно.
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div class="toast" id="errorToast" style="display: none;">
+        <div class="toast-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorMessage">An error occurred</span>
+        </div>
+        <button class="toast-close" onclick="document.getElementById('errorToast').style.display='none'">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>

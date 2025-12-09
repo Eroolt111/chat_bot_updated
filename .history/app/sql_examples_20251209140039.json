@@ -1,0 +1,202 @@
+[
+  {
+    "user_question": "Хамгийн эхний зээлдэгчийн нэр болон огноог харуулна уу.",
+    "sql_query": "SELECT customer_name, adv_date, adv_amount, cur_code FROM DBM.LOAN_BALANCE_DETAIL WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL ORDER BY adv_date ASC FETCH FIRST 1 ROW ONLY",
+    "notes": "Historical query - no status filter needed. First borrower ever."
+  },
+  {
+    "user_question": "Хамгийн сүүлийн зээлдэгчийн нэр болон огноог харуулна уу.",
+    "sql_query": "SELECT customer_name, adv_date, adv_amount, cur_code FROM DBM.LOAN_BALANCE_DETAIL WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL ORDER BY adv_date DESC FETCH FIRST 1 ROW ONLY",
+    "notes": "Latest borrower by disbursement date. No status filter - shows most recent regardless of current status."
+  },
+  {
+    "user_question": "123456789 дугаартай зээлийн дансны мэдээллийг харуулна уу.",
+    "sql_query": "SELECT * FROM DBM.LOAN_BALANCE_DETAIL WHERE acnt_code = '123456789' AND txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL)",
+    "notes": "Single account lookup - use global snapshot pattern."
+  },
+  {
+    "user_question": "Хамгийн сүүлийн хоёр зээлийн дансны мэдээллийг харуулна уу?",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, adv_date, adv_amount, cur_code, principal, status FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND adv_date IS NOT NULL AND adv_amount > 0 ORDER BY adv_date DESC FETCH FIRST 2 ROWS ONLY",
+    "notes": "Latest 2 accounts by disbursement - use global snapshot, then order."
+  },
+  {
+    "user_question": "Хамгийн сүүлийн хоёр зээлдэгчийн мэдээллийг харуулна уу?",
+    "sql_query": "SELECT customer_name, adv_date, adv_amount, cur_code, principal, status FROM (SELECT customer_name, adv_date, adv_amount, cur_code, principal, status, ROW_NUMBER() OVER (PARTITION BY customer_name ORDER BY adv_date DESC) as rn FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND customer_name IS NOT NULL AND adv_date IS NOT NULL AND adv_amount > 0) t WHERE rn = 1 ORDER BY adv_date DESC FETCH FIRST 2 ROWS ONLY",
+    "notes": "Latest 2 CUSTOMERS (not accounts!) - need ROW_NUMBER to dedupe by customer_name, then limit."
+  },
+  { 
+    "user_question": "90 хоногоос дээш хугацаа хэтэрсэн үндсэн зээлийн өртэй бөгөөд эргэлзээтэй ангилалтай байгаа бүх зээлийн дансыг гаргаж өг.",
+    "sql_query": "SELECT acnt_code, customer_name, class_name, due_princ_days, principal, cur_code, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND principal > 0 AND UPPER(class_name) LIKE '%ЭРГЭЛЗЭЭТЭЙ%' AND NVL(due_princ_days, 0) > 90 ORDER BY due_princ_days DESC",
+    "notes": "Current state query - use global snapshot with status='O'. Looking for CURRENTLY overdue loans."
+  },
+  {
+    "user_question": "123456789 дансны зээлийн үлдэгдлийн мэдээллийг харуулна уу?",
+    "sql_query": "SELECT acnt_code, customer_name, principal, cur_code, status, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE acnt_code = '123456789' AND txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL)",
+    "notes": "Single account balance lookup - global snapshot."
+  },
+  {
+    "user_question": "Сүүлийн 12 сарын хугацаанд шинээр олгосон зээлийн тоог мэдээлэлтэй нь хамт гаргаж өг",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, adv_date, adv_amount, cur_code, COUNT(*) OVER () AS total_new_loans FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND adv_date >= ADD_MONTHS(TRUNC(SYSDATE, 'MM'), -12) AND adv_date IS NOT NULL AND adv_amount > 0 ORDER BY adv_date DESC",
+    "notes": "New loans in last 12 months - global snapshot, filter by adv_date range."
+  },
+  {
+    "user_question": "Ойрын 30 хоногт төлөх ёстой хамгийн их дүнтэй төлбөрийг олж өг",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.acnt_code, t.customer_name, t.schd_date, t.amount, t.int_amount, (t.amount + t.int_amount) AS total_payment, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 30 ORDER BY (t.amount + t.int_amount) DESC FETCH FIRST 1 ROW ONLY",
+    "notes": "Payment schedule query - always filter by latest nrs_version per account."
+  },
+  {
+    "user_question": "Төлбөрийн хуваарийн дагуу дараа долоо хоногт төлөгдөх зээлийн мэдээлэл",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.acnt_code, t.customer_name, t.schd_date, t.amount, t.int_amount, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE, 'IW') + 7 AND t.schd_date < TRUNC(SYSDATE, 'IW') + 14 ORDER BY t.schd_date ASC",
+    "notes": "Next week's payments - IW truncates to Monday of current week."
+  },
+  {
+    "user_question": "Ирэх долоо хоногт төлөгдөх зээлийн мэдээлэл",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.acnt_code, t.customer_name, t.schd_date, t.amount, t.int_amount, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE, 'IW') + 7 AND t.schd_date < TRUNC(SYSDATE, 'IW') + 14 ORDER BY t.schd_date ASC",
+    "notes": "Same as above - next week means Monday to Sunday of next week."
+  },
+  {
+    "user_question": "Ойрын долоо хоногт төлөгдөх зээлийн мэдээлэл",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.acnt_code, t.customer_name, t.schd_date, t.amount, t.int_amount, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE) AND t.schd_date < TRUNC(SYSDATE) + 7 ORDER BY t.schd_date ASC",
+    "notes": "Next 7 days from today."
+  },
+  {
+    "user_question": "Энэ долоо хоногт төлөгдөх зээлийн мэдээлэл",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.acnt_code, t.customer_name, t.schd_date, t.amount, t.int_amount, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE, 'IW') AND t.schd_date < TRUNC(SYSDATE, 'IW') + 7 ORDER BY t.schd_date ASC",
+    "notes": "This week = Monday to Sunday of current week."
+  },
+  {
+    "user_question": "Ирэх 12 сарын хугацаанд төлөх ёстой нийт дүнг зээлдэгчийн нэрээр харуулна уу.",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.customer_name, t.cur_code, SUM(t.amount + t.int_amount) AS total_due FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE) AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE), 12) GROUP BY t.customer_name, t.cur_code ORDER BY total_due DESC",
+    "notes": "Aggregate by customer and currency - must GROUP BY cur_code for correct totals."
+  },
+  {
+    "user_question": "ТАВАН БОГД ХХК-ийн зээлийн төлбөрийн хуваарийг харуул",
+    "sql_query": "WITH target_loans AS (SELECT DISTINCT acnt_code FROM DBM.LOAN_BALANCE_DETAIL WHERE customer_name = 'ТАВАН БОГД ХХК' AND txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O'), latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL WHERE acnt_code IN (SELECT acnt_code FROM target_loans) GROUP BY acnt_code) SELECT t.acnt_code, t.schd_date, t.amount, t.int_amount, t.theor_bal, t.cur_code FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE) ORDER BY t.schd_date ASC",
+    "notes": "Customer schedule - first get active accounts from global snapshot, then fetch schedules."
+  },
+  {
+    "user_question": "MNT валютаар олгосон зээлүүдийн ойрын 90 хоногийн төлбөрийн нийт хүүний дүнг тооцоол",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL WHERE cur_code = 'MNT' GROUP BY acnt_code) SELECT SUM(t.int_amount) AS total_interest_due FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.cur_code = 'MNT' AND t.schd_date >= TRUNC(SYSDATE) AND t.schd_date < TRUNC(SYSDATE) + 90",
+    "notes": "MNT only - filter by cur_code in both CTE and main query."
+  },
+  {
+    "user_question": "Ирэх 6 сарын хугацаанд төлөх ёстой нийт зээлийн үндсэн дүнг гаргаж өг",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.cur_code, SUM(t.amount) AS total_principal_due FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE) AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE), 6) GROUP BY t.cur_code ORDER BY t.cur_code",
+    "notes": "GROUP BY cur_code - can't sum different currencies."
+  },
+  {
+    "user_question": "Ирэх 6 сарын хугацаанд төлөх ёстой нийт зээлийн хүүний төлбөрийн дүнг гаргаж өг",
+    "sql_query": "WITH latest_version_cte AS (SELECT acnt_code, MAX(nrs_version) AS max_ver FROM DBM.BCOM_NRS_DETAIL GROUP BY acnt_code) SELECT t.cur_code, SUM(t.int_amount) AS total_interest_due FROM DBM.BCOM_NRS_DETAIL t JOIN latest_version_cte lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TRUNC(SYSDATE) AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE), 6) GROUP BY t.cur_code ORDER BY t.cur_code",
+    "notes": "Same as above but for interest."
+  },
+  {
+    "user_question": "3600008989 дасны дугаартай зээлийн мэдээлэл болон дараагийн төлөлтийн хуваарийг харуул",
+    "sql_query": "WITH latest_snapshot AS (SELECT * FROM DBM.LOAN_BALANCE_DETAIL WHERE acnt_code = '3600008989' AND txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL)), current_version AS (SELECT MAX(nrs_version) AS latest_nrs_version FROM DBM.BCOM_NRS_DETAIL WHERE acnt_code = '3600008989'), next_payment AS (SELECT t.schd_date, t.amount, t.int_amount FROM DBM.BCOM_NRS_DETAIL t WHERE t.acnt_code = '3600008989' AND t.nrs_version = (SELECT latest_nrs_version FROM current_version) AND t.status = 'O' AND t.schd_date > SYSDATE ORDER BY t.schd_date ASC FETCH FIRST 1 ROW ONLY) SELECT ls.acnt_code, ls.customer_name, ls.principal, ls.cur_code, ls.status, np.schd_date AS next_payment_date, np.amount AS next_principal_amount, np.int_amount AS next_interest_amount FROM latest_snapshot ls LEFT JOIN next_payment np ON 1=1",
+    "notes": "Combined query pattern - account info + next payment in one query."
+  },
+  {
+    "user_question": "Нээлттэй зээлийн үлдэгдэлүүдийг эрсдэлийн сангаар цэвэршүүлээд харуул",
+    "sql_query": "SELECT acnt_code, customer_name, principal, impairment_per, cur_code, principal * (1 - NVL(impairment_per, 0) / 100) AS net_principal, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND principal > 0 ORDER BY net_principal DESC",
+    "notes": "Current open loans with net principal calculation - global snapshot with status='O'."
+  },
+  {
+    "user_question": "Нийт хэдэн хэвийн зээл байна вэ?",
+    "sql_query": "SELECT COUNT(*) AS normal_loan_count FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND class_name = 'ХЭВИЙН'",
+    "notes": "Simple count - global snapshot with status='O' and class filter."
+  },
+  {
+    "user_question": "Чанаргүй зээлийн үлдэгдлийг харуул",
+    "sql_query": "SELECT acnt_code, customer_name, acnt_name, principal, cur_code, class_name, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(class_name) IN ('ХЭВИЙН БУС', 'ЭРГЭЛЗЭЭТЭЙ', 'МУУ') ORDER BY principal DESC",
+    "notes": "Non-performing loans - current state with classification filter."
+  },
+  {
+    "user_question": "Нийт чанаргүй зээлийн үлдэгдлийг харуул",
+    "sql_query": "SELECT cur_code, SUM(principal) AS total_nonperforming_principal FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(class_name) IN ('ХЭВИЙН БУС', 'ЭРГЭЛЗЭЭТЭЙ', 'МУУ') GROUP BY cur_code ORDER BY cur_code",
+    "notes": "Aggregated NPL by currency."
+  },
+  {
+    "user_question": "Болор шүрийн нээлттэй дансны хугацаа хэтрэлтийг жил сар өдрөөр илэрхийлвэл, бас ангилал?",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, due_princ_days, class_name, CASE WHEN due_princ_days > 0 THEN TRUNC(due_princ_days / 365) ELSE 0 END AS overdue_years, CASE WHEN due_princ_days > 0 THEN TRUNC(MOD(due_princ_days, 365) / 30) ELSE 0 END AS overdue_months, CASE WHEN due_princ_days > 0 THEN MOD(MOD(due_princ_days, 365), 30) ELSE 0 END AS overdue_days FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(customer_name) LIKE '%БОЛОР ШҮР%'",
+    "notes": "Customer lookup with overdue calculation - global snapshot."
+  },
+  {
+    "user_question": "Болор шүрийн нээлттэй зээлийг хэзээ олгосон, хэн хариуцдаг вэ?",
+    "sql_query": "SELECT acnt_code, customer_name, adv_date, adv_amount, cur_code, account_manager_name FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(customer_name) LIKE '%БОЛОР ШҮР%' AND adv_date IS NOT NULL ORDER BY adv_date DESC",
+    "notes": "Customer's open loans with manager info."
+  },
+  {
+    "user_question": "Нээлттэй зээлийн үлдэгдэл валют тус бүрээр",
+    "sql_query": "SELECT cur_code, SUM(principal) AS total_outstanding_principal, COUNT(*) AS loan_count FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND principal > 0 GROUP BY cur_code ORDER BY cur_code",
+    "notes": "Total balance by currency - global snapshot aggregation."
+  },
+  {
+    "user_question": "Евро-гийн нээлттэй зээлүүд?",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, principal, cur_code, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND cur_code = 'EUR' AND status = 'O' AND principal > 0 ORDER BY principal DESC",
+    "notes": "EUR loans - simple filter on global snapshot."
+  },
+  {
+    "user_question": "Идэвхтэй зээлтэй зээлдэгчдийн тоо?",
+    "sql_query": "SELECT COUNT(DISTINCT customer_name) AS active_borrower_count FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND customer_name IS NOT NULL",
+    "notes": "Distinct customer count - global snapshot."
+  },
+  {
+    "user_question": "Үлдэгдэлтэй зээлийн дансны тоо",
+    "sql_query": "SELECT COUNT(*) AS num_loan_accounts_with_balance FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND principal > 0",
+    "notes": "Account count with positive balance - no status filter as question asks about balance, not status."
+  },
+  {
+    "user_question": "Цэцэнс-ийн идэвхтэй зээлүүд",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, principal, cur_code, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(customer_name) LIKE '%ЦЭЦЭНС%'",
+    "notes": "Customer's active loans - global snapshot with status filter."
+  },
+  {
+    "user_question": "Цэцэнс-ийн бүх зээлийн гол мэдээллүүдийг хүснэгтээр гаргъя",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, principal, cur_code, class_name, status, adv_date, adv_amount, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND UPPER(customer_name) LIKE '%ЦЭЦЭНС%' ORDER BY status, adv_date DESC",
+    "notes": "ALL loans (active and closed) - no status filter since 'бүх' means all."
+  },
+  {
+    "user_question": "Гүрбазарын хариуцдаг зээлүүд",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, account_manager_name, cur_code, principal, adv_amount, adv_date, status, txn_date FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(account_manager_name) LIKE '%ГҮРБАЗАР%' ORDER BY adv_date DESC NULLS LAST",
+    "notes": "Manager's active loans - global snapshot with manager filter."
+  },
+  {
+    "user_question": "Мөнхцэцгийн хариуцдаг идэвхтэй зээлийн тоо",
+    "sql_query": "SELECT account_manager_name, COUNT(*) AS active_loan_count FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND UPPER(account_manager_name) LIKE '%МӨНХЦЭЦЭГ%' GROUP BY account_manager_name",
+    "notes": "Manager's loan count - global snapshot aggregation."
+  },
+  {
+    "user_question": "Дулааны цахилгаан станцын зээлүүд бүгд төгрөгөөр өгсөн үү?",
+    "sql_query": "SELECT cur_code, COUNT(*) AS loan_count FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND (UPPER(customer_name) LIKE '%ДУЛААНЫ ЦАХИЛГААН СТАНЦ%' OR UPPER(acnt_name) LIKE '%ДУЛААНЫ ЦАХИЛГААН СТАНЦ%') GROUP BY cur_code",
+    "notes": "Currency distribution check - shows if all loans are MNT or not."
+  },
+  {
+    "user_question": "Нийт зээлийн үлдэгдэл хэд вэ?",
+    "sql_query": "SELECT cur_code, SUM(principal) AS total_principal_balance FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' GROUP BY cur_code ORDER BY cur_code",
+    "notes": "Total balance by currency - current state only (status='O')."
+  },
+  {
+    "user_question": "Хамгийн өндөр зээлтэй 5 зээлдэгчийг харуул",
+    "sql_query": "WITH customer_totals AS (SELECT cust_code, customer_name, SUM(principal * rate) AS total_balance_in_mnt FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND principal > 0 AND customer_name IS NOT NULL GROUP BY cust_code, customer_name) SELECT cust_code, customer_name, total_balance_in_mnt FROM customer_totals ORDER BY total_balance_in_mnt DESC FETCH FIRST 5 ROWS ONLY",
+    "notes": "Top 5 customers by balance - convert to MNT for cross-currency comparison."
+  },
+  {
+    "user_question": "Хамгийн өндөр зээлтэй 5 зээлийн дансыг харуул",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, cur_code, principal, (principal * rate) AS balance_in_mnt FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND status = 'O' AND principal > 0 ORDER BY balance_in_mnt DESC FETCH FIRST 5 ROWS ONLY",
+    "notes": "Top 5 accounts by balance - convert to MNT for ranking."
+  },
+  {
+    "user_question": "Хамгийн өндөр олголт хийсэн 5 зээлийн дансыг харуул",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, cur_code, adv_date, adv_amount, (adv_amount * rate) AS adv_amount_in_mnt FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND adv_amount > 0 AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ORDER BY adv_amount_in_mnt DESC FETCH FIRST 5 ROWS ONLY",
+    "notes": "Top 5 by disbursement - historical measure, no status filter. Uses MNT conversion for ranking."
+  },
+  {
+    "user_question": "Хамгийн өндөр олголттой 5 зээлдэгчийг харуул",
+    "sql_query": "WITH customer_totals AS (SELECT cust_code, customer_name, SUM(adv_amount * rate) AS total_adv_in_mnt FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND adv_amount > 0 AND customer_name IS NOT NULL GROUP BY cust_code, customer_name) SELECT cust_code, customer_name, total_adv_in_mnt FROM customer_totals ORDER BY total_adv_in_mnt DESC FETCH FIRST 5 ROWS ONLY",
+    "notes": "Top 5 customers by total disbursement - aggregate per customer, convert to MNT."
+  },
+  {
+    "user_question": "Пирамид ордын данснуудыг харуул",
+    "sql_query": "SELECT acnt_code, acnt_name, customer_name, status, principal, cur_code, project_name FROM DBM.LOAN_BALANCE_DETAIL WHERE txn_date = (SELECT MAX(txn_date) FROM DBM.LOAN_BALANCE_DETAIL) AND customer_name = 'ПИРАМИД-ОРД ХХК' ORDER BY status, acnt_code",
+    "notes": "Customer's all accounts - global snapshot, show all (active and closed)."
+  }
+]

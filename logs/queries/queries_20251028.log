@@ -1,0 +1,1510 @@
+{
+  "timestamp": "2025-10-28T11:39:38.627498",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "пирамид ордын дансны дугаарыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "name 'memory' is not defined",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T11:43:34.498079",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Пирамид ордын дансны дугаарийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Output dict must have exactly one key.",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T11:56:58.997935",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T11:57:18.604436",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Пирамид ордын дансны дугаар хэдэв?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Output dict must have exactly one key.",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T12:01:01.714505",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T12:01:15.787157",
+  "execution_time_seconds": 3.02,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "пирамид ордын дансны дугаарыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'context_str'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T12:18:19.859234",
+  "execution_time_seconds": 2.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "пирамид ордын дансны дугаарыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'context_str'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T12:23:12.767747",
+  "execution_time_seconds": 2.85,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "пирамид ордын дансны дугаарыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'context'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T13:52:56.427271",
+  "execution_time_seconds": 2.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Сайна ууу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'context_str'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T13:53:11.760375",
+  "execution_time_seconds": 2.75,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "Пирамид ордын дансны дугаар?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "'context_str'",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T13:55:25.806718",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T13:58:37.986124",
+  "execution_time_seconds": 24.02,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Пирамид ордын дансны дугаар",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "project_name": "БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "Чойбалсангийн дулааны цахилгаан станцын хүчин чадлыг 50 МВт-аар өргөгөх",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНДУЛААН ТРЕЙД",
+      "customer_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "project_name": "ЗҮҮНШАНД, УЛААНШИВЭРТИЙН АМНЫ АЛТНЫ ШОРООН ОРДЫГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ USD - ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "project_name": "ҮЙЛДВЭРЛЭЛИЙН ЧИГЛЭЛИЙН ЭКСПОРТЫГ ДЭМЖИХ, ИМПОРТЫГ ОРЛОХ БҮТЭЭГДЭХҮҮН ҮЙЛДВЭРЛЭЛИЙГ ДЭМЖИХ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "customer_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "project_name": "ЗҮҮНШАНД, УЛААНШИВЭРТИЙН АМНЫ АЛТНЫ ШОРООН ОРДЫГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СОНГОУЛД ХХК",
+      "customer_name": "СОНГОУЛД ХХК",
+      "project_name": "АЛТ 2 ХӨТӨЛБӨР-ЭРЭЭНИЙ АЛТНЫ ҮНДСЭН ОРД",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "project_name": "БУЯНТ-УХАА-2 ОРОН СУУЦНЫ ХОРООЛОЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "КЬЮ ЭС СИ ХХК",
+      "customer_name": "КЬЮ ЭС СИ ХХК",
+      "project_name": "ТӨМӨРТЭЙ ОРДООС ХАНДГАЙТ ӨРТӨӨ ХҮРТЭЛХ ТӨМӨР ЗАМ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ШАРЫН ГОЛ",
+      "customer_name": "ШАРЫН ГОЛ ХК",
+      "project_name": "БУЯНТЫН ХӨНДИЙН АДАГ АЛТНЫ ШОРООН ОРД",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "cur_code": "CNY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ГАН ХҮДЭР ОРД ХХК",
+      "customer_name": "ГАН ХҮДЭР ОРД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "Промон Трейд ХХК",
+      "customer_name": "ПРОМОН ТРЕЙД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ГАН ХҮДЭР ОРД ХХК",
+      "customer_name": "ГАН ХҮДЭР ОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК",
+      "customer_name": "ЭРДЭНЭС ТАВАНТОЛГОЙ ХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНПОЛИМЕТ ХХК",
+      "customer_name": "МОНПОЛИМЕТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT DISTINCT     acnt_code,     acnt_name,     customer_name FROM dbm.loan_balance_detail WHERE acnt_name = 'ПИРАМИД-ОРД ХХК' AND status = 'O';",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн дансны дугааруудыг хүргэж байна:  1. 3600004191 2. 3600002715 3. 3600004571 4. 3600002539 5. 3600004223  Хөгжлийн Банк танд баярлалаа. Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоорой."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:00:00.852913",
+  "execution_time_seconds": 29.93,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "эдгээр данснуудад олгогдсон хэмжээ хэд вэ?",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "НООЛУУР-ХААН БАНК",
+      "customer_name": "ХААН БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР-УЛААНБААТАР ХОТЫН БАНК",
+      "customer_name": "УЛААНБААТАР ХОТЫН БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ГОВЬ ХК",
+      "customer_name": "ГОВЬ ХК",
+      "project_name": "Ноолуурын салбарыг дэмжих хөнгөлөлттэй нөхцөлтэй зээл (Ковид 19)",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР-ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР-КАПИТАЛ БАНК",
+      "customer_name": "КАПИТАЛ БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР - ХААН БАНК - 2017",
+      "customer_name": "ХААН БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР-ХАС БАНК",
+      "customer_name": "ХАС БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР - ГОЛОМТ БАНК",
+      "customer_name": "ГОЛОМТ БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "project_name": "ЖИЖИГ, ДУНД ҮЙЛДВЭРЛЭЛИЙГ ДЭМЖИХ ЗАМААР АЖЛЫН БАЙР НЭМЭГДҮҮЛЭХЭД ЧИГЛЭСЭН ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР - ГОЛОМТ БАНК - 2017",
+      "customer_name": "ГОЛОМТ БАНК",
+      "project_name": "НООЛУУРЫН САЛБАРТ ЭРГЭЛТИЙН ХӨРӨНГИЙН ЗОРИУЛАЛТТАЙ ОЛГОЖ БУЙ ДАМЖУУЛАН ЗЭЭЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ-ҮХОБАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖДҮХСАН- 888 ТӨСӨЛ-2014",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888-2,0 ДЭЭШ-ҮХО БАНК",
+      "customer_name": "ҮНДЭСНИЙ ХӨРӨНГӨ ОРУУЛАЛТЫН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888-2,0-С ДЭЭШ-ХААН БАНК",
+      "customer_name": "ХААН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888-2,0 ДЭЭШ-УЛААНБААТАР ХОТЫН БАНК",
+      "customer_name": "УЛААНБААТАР ХОТЫН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888 хөтөлбөр-Голомт банк-Энхийн шүүдэр ХХК",
+      "customer_name": "ГОЛОМТ БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "НООЛУУР 2020 - ТӨРИЙН БАНК",
+      "customer_name": "ТӨРИЙН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "888-2,0-ДЭЭШ-ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МИАТ ТӨХК-ИЙН ГАДААД ЗЭЭЛИЙН ТӨЛБӨР",
+      "customer_name": "МИАТ ТӨХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH selected_accounts AS (     SELECT         acnt_name,         customer_name     FROM (         SELECT DISTINCT             acnt_name,             customer_name         FROM dbm.loan_balance_detail         WHERE acnt_name IN (             'НООЛУУР-ХААН БАНК ',             'НООЛУУР-УЛААНБААТАР ХОТЫН БАНК',             'ГОВЬ ХК',             'НООЛУУР-ХУДАЛДАА ХӨГЖЛИЙН БАНК',             'НООЛУУР-КАПИТАЛ БАНК',             'НООЛУУР - ХААН БАНК - 2017',             'НООЛУУР-ХАС БАНК',             'НООЛУУР - ГОЛОМТ БАНК',             'ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН',             'НООЛУУР - ГОЛОМТ БАНК - 2017'         )     ) ),  latest_disbursements AS (     SELECT         t.acnt_name,         t.customer_name,         t.adv_amount,         t.cur_code,         t.adv_date,         ROW_NUMBER()             OVER (                 PARTITION BY t.acnt_name, t.customer_name                 ORDER BY t.adv_date DESC, t.txn_date DESC             )             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN selected_accounts sa         ON t.acnt_name = sa.acnt_name AND t.customer_name = sa.customer_name     WHERE         t.adv_date IS NOT NULL         AND t.status = 'O' )  SELECT     acnt_name,     customer_name,     adv_amount,     cur_code,     adv_date FROM latest_disbursements WHERE rn = 1 ORDER BY adv_date DESC, acnt_name ASC;",
+  "result_count": 0,
+  "final_answer": "Таны хүсэлтийн дагуу дээрх дансуудад олгогдсон хэмжээний мэдээлэл олдсонгүй. Та шалган дахин асууж болно."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:27:52.044106",
+  "execution_time_seconds": 19.54,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Пирамид ордын дансны дугаар",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "project_name": "БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "Чойбалсангийн дулааны цахилгаан станцын хүчин чадлыг 50 МВт-аар өргөгөх",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНДУЛААН ТРЕЙД",
+      "customer_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "project_name": "ЗҮҮНШАНД, УЛААНШИВЭРТИЙН АМНЫ АЛТНЫ ШОРООН ОРДЫГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "300 ТЭРБУМ USD - ХХБ",
+      "customer_name": "ХУДАЛДАА ХӨГЖЛИЙН БАНК",
+      "project_name": "ҮЙЛДВЭРЛЭЛИЙН ЧИГЛЭЛИЙН ЭКСПОРТЫГ ДЭМЖИХ, ИМПОРТЫГ ОРЛОХ БҮТЭЭГДЭХҮҮН ҮЙЛДВЭРЛЭЛИЙГ ДЭМЖИХ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "customer_name": "МОНДУЛААН ТРЕЙД ХХК",
+      "project_name": "ЗҮҮНШАНД, УЛААНШИВЭРТИЙН АМНЫ АЛТНЫ ШОРООН ОРДЫГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СОНГОУЛД ХХК",
+      "customer_name": "СОНГОУЛД ХХК",
+      "project_name": "АЛТ 2 ХӨТӨЛБӨР-ЭРЭЭНИЙ АЛТНЫ ҮНДСЭН ОРД",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "project_name": "БУЯНТ-УХАА-2 ОРОН СУУЦНЫ ХОРООЛОЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "КЬЮ ЭС СИ ХХК",
+      "customer_name": "КЬЮ ЭС СИ ХХК",
+      "project_name": "ТӨМӨРТЭЙ ОРДООС ХАНДГАЙТ ӨРТӨӨ ХҮРТЭЛХ ТӨМӨР ЗАМ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ШАРЫН ГОЛ",
+      "customer_name": "ШАРЫН ГОЛ ХК",
+      "project_name": "БУЯНТЫН ХӨНДИЙН АДАГ АЛТНЫ ШОРООН ОРД",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "cur_code": "CNY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ГАН ХҮДЭР ОРД ХХК",
+      "customer_name": "ГАН ХҮДЭР ОРД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "Промон Трейд ХХК",
+      "customer_name": "ПРОМОН ТРЕЙД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ГАН ХҮДЭР ОРД ХХК",
+      "customer_name": "ГАН ХҮДЭР ОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК",
+      "customer_name": "ЭРДЭНЭС ТАВАНТОЛГОЙ ХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНПОЛИМЕТ ХХК",
+      "customer_name": "МОНПОЛИМЕТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT DISTINCT     acnt_code,     acnt_name FROM dbm.loan_balance_detail WHERE customer_name = 'ПИРАМИД-ОРД ХХК';",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн дансны дугааруудыг хүргэж байна:  1. Дансны дугаар: 3600004223 2. Дансны дугаар: 3600002539 3. Дансны дугаар: 3600004191 4. Дансны дугаар: 3600004571 5. Дансны дугаар: 3600002715  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:29:39.936782",
+  "execution_time_seconds": 29.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Пирамид ордын дансны дугаар Assistant: Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн дансны дугааруудыг хүргэж байна:  1. Дансны дугаар: 3600004223 2. Дансны дугаар: 3600002539 3. Дансны дугаар: 3600004191 4. Дансны дугаар: 3600004571 5. Дансны дугаар: 3600002715  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу.  [Current Question] эдгээр данснуудыг олгосон дүнг гарга",
+  "masked_query": "[Previous Conversation] User: Пирамид ордын дансны дугаар Assistant: Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн дансны дугааруудыг хүргэж байна:  1. Дансны дугаар: [ACNT_CODE_5] 2. Дансны дугаар: [ACNT_CODE_4] 3. Дансны дугаар: [ACNT_CODE_3] 4. Дансны дугаар: [ACNT_CODE_2] 5. Дансны дугаар: [ACNT_CODE_1]  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу.  [Current Question] эдгээр данснуудыг олгосон дүнг гарга",
+  "pii_items_masked": 5,
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "project_name": "БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "project_name": "ЭКСПОРТОД ЧИГЛЭСЭН ГУРИЛ, ГУРИЛАН БҮТЭЭГДЭХҮҮНИЙ ҮЙЛДВЭР",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "project_name": "ЭКСПОРТОД ЧИГЛЭСЭН ГУРИЛ, ГУРИЛАН БҮТЭЭГДЭХҮҮНИЙ ҮЙЛДВЭР",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА ИСТЕРН",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "project_name": "ЭКСПОРТОД ЧИГЛЭСЭН ГУРИЛ, ГУРИЛАН БҮТЭЭГДЭХҮҮНИЙ ҮЙЛДВЭР",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "Промон Трейд ХХК",
+      "customer_name": "ПРОМОН ТРЕЙД ХХК",
+      "project_name": "МАЛЫН ГАРАЛТАЙ ОРГАНИК ПРОТЕЙНЫ ҮЙЛДВЭРИЙН ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "customer_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "project_name": "ШИРЭН-ОВОО ТӨМРИЙН ХҮДРИЙН ОРДЫГ ИЛ УУРХАЙН АРГААР АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "project_name": "ЭКСПОРТОД ЧИГЛЭСЭН ГУРИЛ, ГУРИЛАН БҮТЭЭГДЭХҮҮНИЙ ҮЙЛДВЭР",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ГАЗ-ИМПОРТ ХХК",
+      "customer_name": "ГАЗ-ИМПОРТ ХХК",
+      "project_name": "ХАЯГДАЛ БАТЕРЕЙГ ДАХИН БОЛОВСРУУЛАХ ҮЙЛДВЭРИЙН ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ГАЗ-ИМПОРТ ХХК",
+      "customer_name": "ГАЗ-ИМПОРТ ХХК",
+      "project_name": "ХАЯГДАЛ БАТЕРЕЙГ ДАХИН БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "project_name": "БУЯНТ-УХАА-2 ОРОН СУУЦНЫ ХОРООЛОЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ПИРАМИД-ОРД ХХК",
+      "customer_name": "ПИРАМИД-ОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "Промон Трейд ХХК",
+      "customer_name": "ПРОМОН ТРЕЙД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "customer_name": "ЭНСАДА-ИСТЕРН ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНПОЛИМЕТ ХХК",
+      "customer_name": "МОНПОЛИМЕТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНГОЛ ДРАЙ МИЛК ХХК",
+      "customer_name": "МОНГОЛ ДРАЙ МИЛК ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ГАН ХҮДЭР ОРД ХХК",
+      "customer_name": "ГАН ХҮДЭР ОРД ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "СТРОЙ-ИНВЕСТ ХХК",
+      "customer_name": "СТРОЙ-ИНВЕСТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "Промон Трейд ХХК",
+      "customer_name": "ПРОМОН ТРЕЙД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH pyramid_accounts AS (     SELECT DISTINCT acnt_code     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' AND status = 'O' ),  latest_disbursement AS (     SELECT         t.acnt_code,         t.acnt_name,         t.customer_name,         t.adv_amount,         t.cur_code,         t.adv_date,         ROW_NUMBER()             OVER (                 PARTITION BY t.acnt_code                 ORDER BY t.adv_date DESC, t.txn_date DESC             )             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN pyramid_accounts pa ON t.acnt_code = pa.acnt_code     WHERE t.adv_amount IS NOT NULL AND t.status = 'O' )  SELECT     acnt_code,     acnt_name,     customer_name,     adv_amount,     cur_code,     adv_date FROM latest_disbursement WHERE rn = 1 ORDER BY adv_date DESC;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн данс бүрээр олгосон хамгийн сүүлийн зээлийн дүнг дараах байдлаар хүргэж байна:  1. Дансны дугаар: 3600004571    - Олгосон дүн: 2,000,000,000 MNT    - Олгосон огноо: 2018-06-19  2. Дансны дугаар: 3600004223    - Олгосон дүн: 2,000,000,000 MNT    - Олгосон огноо: 2018-05-25  3. Дансны дугаар: 3600004191    - Олгосон дүн: 1,000,000,000 MNT    - Олгосон огноо: 2018-05-03  4. Дансны дугаар: 3600002715    - Олгосон дүн: 0 MNT    - Олгосон огноо: 2018-01-18  5. Дансны дугаар: 3600002539    - Олгосон дүн: 10,000,000,000 MNT    - Олгосон огноо: 2017-11-17  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:52:22.313371",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайна уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:53:01.024033",
+  "execution_time_seconds": 28.29,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Цэцэнсийн зээлийн дансуудыг харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "EUR",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "project_name": "ЭКСПОРТЫН НААМАЛ ДҮНЗ, ЕВРО СТАНДАРТЫН МОДОН БАРИЛГА ҮЙЛДВЭРЛЭХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "project_name": "МАХ БЭЛТГЭЛИЙН КЛАСТЕРИЙН ХҮЧИН ЧАДЛЫГ НЭМЭГДҮҮЛЭХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "customer_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "project_name": "ШИРЭН-ОВОО ТӨМРИЙН ХҮДРИЙН ОРДЫГ ИЛ УУРХАЙН АРГААР АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "customer_name": "ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК",
+      "project_name": "Чойбалсангийн дулааны цахилгаан станцын хүчин чадлыг 50 МВт-аар өргөгөх",
+      "cur_code": "CNY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "project_name": "ХӨХ ЦАВЫН ЦЕМЕНТ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "EUR",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТАВАНТОЛГОЙН ЦАХИЛГААН СТАНЦ ТӨСӨЛ 1",
+      "customer_name": "ЭРЧИМ ХҮЧНИЙ ЯАМ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК",
+      "customer_name": "ДЦС-4 ТӨХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЗОРЧИГЧ ТЭЭВЭР ГУРАВ ОНӨААТҮГ",
+      "customer_name": "ЗОРЧИГЧ ТЭЭВЭР ГУРАВ",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         principal,         cur_code,         class_name,         status,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE UPPER(customer_name) = UPPER('ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК') )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     class_name,     status,     txn_date FROM latest_loans WHERE rn = 1 ORDER BY txn_date DESC;",
+  "result_count": 8,
+  "final_answer": "Таны хүсэлтийн дагуу \"ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК\"-ийн зээлийн дансны мэдээллийг хүргэж байна:  1.   - Дансны дугаар: 3600004180 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 0 төгрөг - Зээлийн ангилал: ХЭВИЙН - Төлөв: D - Огноо: 2025-09-12  2.   - Дансны дугаар: 3600004183 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 5,333,333.34 EUR - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  3.   - Дансны дугаар: 3600004185 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 0 EUR - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  4.   - Дансны дугаар: 3600005280 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 677,937,113.59 JPY - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  5.   - Дансны дугаар: 3600004485 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 4,666,666.62 EUR - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  6.   - Дансны дугаар: 3600004486 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 44,595,406.77 JPY - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  7.   - Дансны дугаар: 3600005275 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 0 ам.доллар - Зээлийн ангилал: ХЭВИЙН - Төлөв: C - Огноо: 2025-09-12  8.   - Дансны дугаар: 3600004190 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Үлдэгдэл дүн: 0 JPY - Зээлийн ангилал: ХЭВИЙН - Төлөв: O - Огноо: 2025-09-12  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:54:31.333225",
+  "execution_time_seconds": 25.22,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Цэцэнсийн зээлийн дансуудыг харуул Assistant:   [Current Question] Энэ данснуудаас хамгийн анх зээл олгосон данс нь аль вэ?",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "EUR",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "project_name": "МАХ БЭЛТГЭЛИЙН КЛАСТЕРИЙН ХҮЧИН ЧАДЛЫГ НЭМЭГДҮҮЛЭХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "customer_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "project_name": "ШИРЭН-ОВОО ТӨМРИЙН ХҮДРИЙН ОРДЫГ ИЛ УУРХАЙН АРГААР АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "project_name": "ЭКСПОРТЫН НААМАЛ ДҮНЗ, ЕВРО СТАНДАРТЫН МОДОН БАРИЛГА ҮЙЛДВЭРЛЭХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "project_name": "ХӨХ ЦАВЫН ЦЕМЕНТ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНГЕМА ХХК",
+      "customer_name": "МОНГЕМА ХХК",
+      "project_name": "МУУР НОХОЙН ТЭЖЭЭЛ БОЛОВСРУУЛАХ ҮЙЛДВЭРИЙН ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НВЦ ХХК",
+      "customer_name": "НВЦ ХХК",
+      "project_name": "ХӨДӨӨ АХ АХУЙ, ШУВУУНЫ ГАРАЛТАЙ БҮТЭЭГДЭХҮҮН ҮЙЛДВЭРЛЭЛИЙН ЦОГЦ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "EUR",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "customer_name": "ХАМТЫН ЭХ БУЛАГ ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ШАРЫН ГОЛ ХК",
+      "customer_name": "ШАРЫН ГОЛ ХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНПЕЛЛЕТС ХХК",
+      "customer_name": "МОНПЕЛЛЕТС ХХК",
+      "cur_code": "EUR",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНГЕМА ХХК",
+      "customer_name": "МОНГЕМА ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE     customer_name = 'ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК'     AND adv_date IS NOT NULL ORDER BY adv_date ASC, txn_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК\"-ийн хамгийн анх зээл олгосон дансны мэдээллийг хүргэж байна:  - Дансны дугаар: 3600004183 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Харилцагчийн нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Зээл олгосон огноо: 2018-05-02 - Зээл олгосон дүн: 16,000,000 евро  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоорой."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T14:56:09.504359",
+  "execution_time_seconds": 32.36,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Цэцэнсийн зээлийн дансуудыг харуул Assistant:  User: Энэ данснуудаас хамгийн анх зээл олгосон данс нь аль вэ? Assistant:   [Current Question] Хамгийн их зээлийн олголттой 3 зээлдэгчийг харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "extracted_names": [
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "EUR",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "project_name": "БӨӨРӨЛЖҮҮТИЙН НҮҮРСНИЙ УУРХАЙГ АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "project_name": "МАХ БЭЛТГЭЛИЙН КЛАСТЕРИЙН ХҮЧИН ЧАДЛЫГ НЭМЭГДҮҮЛЭХ ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "project_name": "ЖИЖИГ, ДУНД ҮЙЛДВЭРЛЭЛИЙГ ДЭМЖИХ ЗАМААР АЖЛЫН БАЙР НЭМЭГДҮҮЛЭХЭД ЧИГЛЭСЭН ТӨСӨЛ",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "НВЦ ХХК",
+      "customer_name": "НВЦ ХХК",
+      "project_name": "ХӨДӨӨ АХ АХУЙ, ШУВУУНЫ ГАРАЛТАЙ БҮТЭЭГДЭХҮҮН ҮЙЛДВЭРЛЭЛИЙН ЦОГЦ ТӨСӨЛ",
+      "cur_code": "USD",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "customer_name": "ЗЭСТ-ӨНДӨР ХХК",
+      "project_name": "ШИРЭН-ОВОО ТӨМРИЙН ХҮДРИЙН ОРДЫГ ИЛ УУРХАЙН АРГААР АШИГЛАХ ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЭРДЭНЭС МОНГОЛ ХХК",
+      "customer_name": "ЭРДЭНЭС МОНГОЛ ХХК",
+      "project_name": "Иргэдийн тэтгэвэр барьцаалсан зээлийг төрөөс нэг удаах төлөх тухай хуулийн дагуу Эрдэнэс бонд гаргах",
+      "cur_code": "MNT",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "МОНГЕМА ХХК",
+      "customer_name": "МОНГЕМА ХХК",
+      "project_name": "МУУР НОХОЙН ТЭЖЭЭЛ БОЛОВСРУУЛАХ ҮЙЛДВЭРИЙН ТӨСӨЛ",
+      "cur_code": "JPY",
+      "_table": "dbm.loan_balance_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "EUR",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "customer_name": "ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК",
+      "cur_code": "JPY",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МОНПЕЛЛЕТС ХХК",
+      "customer_name": "МОНПЕЛЛЕТС ХХК",
+      "cur_code": "EUR",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК",
+      "customer_name": "ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ",
+      "customer_name": "ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "customer_name": "ЖИЖИГ ДУНД ҮЙЛДВЭРИЙГ ХӨГЖҮҮЛЭХ САН",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "customer_name": "СЭЛЭНГИЙН ГЕРЕФОРД ХХК",
+      "cur_code": "MNT",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "КЬЮ ЭС СИ ХХК",
+      "customer_name": "КЬЮ ЭС СИ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "МАК ЦЕМЕНТ ХХК",
+      "customer_name": "МАК ЦЕМЕНТ ХХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    },
+    {
+      "acnt_name": "ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК",
+      "customer_name": "ДЦС-4 ТӨХК",
+      "cur_code": "USD",
+      "_table": "dbm.bcom_nrs_detail"
+    }
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT         acnt_code,         cust_code,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code, cust_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), customer_totals AS (     SELECT         cust_code,         customer_name,         SUM(adv_amount_in_mnt) AS total_adv_amount_in_mnt,         LISTAGG(adv_date || ': ' || original_adv_amount || ' ' || cur_code || ' (' || adv_amount_in_mnt || ' MNT)', '; ')              WITHIN GROUP (ORDER BY adv_date DESC) AS account_details     FROM latest_per_account     GROUP BY cust_code, customer_name ) SELECT     cust_code,     customer_name,     total_adv_amount_in_mnt,     account_details FROM customer_totals ORDER BY total_adv_amount_in_mnt DESC FETCH FIRST 3 ROWS ONLY;",
+  "result_count": 3,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн их зээлийн олголттой 3 зээлдэгчийн мэдээллийг хүргэж байна:  1. ЭРДЭНЭС ТАВАНТОЛГОЙ ХК    - Нийт зээлийн олголтын дүн: 898,402,500,000 төгрөг    - Дансны дэлгэрэнгүй: 31-DEC-14: 50000000 USD (179680500000 MNT); 01-FEB-13: 100000000 USD (359361000000 MNT); 05-OCT-12: 100000000 USD (359361000000 MNT)  2. ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ    - Нийт зээлийн олголтын дүн: 629,008,357,341.501 төгрөг    - Дансны дэлгэрэнгүй: 30-DEC-19: 83587839898.32 MNT (83587839898.32 MNT); 05-FEB-16: 19254778630.7 MNT (19254778630.7 MNT); 05-FEB-16: 7055255 USD (25353834920.55 MNT); 22-JUN-15: 35505413.1 USD (127592607570.291 MNT); 28-MAY-15: 50000000 USD (179680500000 MNT); 28-MAY-15: 81612379910.64 MNT (81612379910.64 MNT); 22-SEP-14: 5782100244 MNT (5782100244 MNT); 22-SEP-14: 8619713250 MNT (8619713250 MNT); 06-AUG-14: 6228771426 MNT (6228771426 MNT); 06-AUG-14: 6595831491 MNT (6595831491 MNT); 02-OCT-13: 84700000000 MNT (84700000000 MNT)  3. ДЦС-4 ТӨХК    - Нийт зээлийн олголтын дүн: 620,988,266,942.5007 төгрөг    - Дансны дэлгэрэнгүй: 30-JUN-22: 872478 EUR (3666946510.98 MNT); 11-NOV-21: 932643.24 EUR (3919815599.8284 MNT); 09-JUL-21: 2210002.5 EUR (9288441607.275 MNT); 21-JUN-21: 2210002.5 EUR (9288441607.275 MNT); 17-MAR-21: 967905.25 EUR (4068018654.2775 MNT); 30-DEC-20: 2200000 EUR (9246402000 MNT); 15-DEC-20: 2253775.47 EUR (9472415460.6177 MNT); 17-NOV-20: 5500000 EUR (23116005000 MNT); 27-OCT-20: 1039042.25 EUR (4367001062.9475 MNT); 16-OCT-20: 603275.54 EUR (2535512799.8214 MNT); 30-JUL-20: 2188630.42 EUR (9198616678.5222 MNT); 23-JUN-20: 1565307.92 EUR (6578848310.0472 MNT); 20-DEC-19: 1935810.5 EUR (8136037308.555 MNT); 18-NOV-19: 1935810.5 EUR (8136037308.555 MNT); 16-OCT-19: 1039042.25 EUR (4367001062.9475 MNT); 05-AUG-19: 16802276.4 EUR (70618455504.324 MNT); 06-JUN-19: 1662467.6 EUR (6987201700.716 MNT); 15-FEB-19: 5821986.47 EUR (24469285154.6277 MNT); 04-FEB-19: 5821986.47 EUR (24469285154.6277 MNT); 31-JAN-19: 2910992.48 EUR (12234639404.1168 MNT); 31-DEC-18: 1454659.15 EUR (6113801488.1265 MNT); 13-AUG-18: 6234253.5 EUR (26202006377.685 MNT); 24-JUL-18: 6234253.5 EUR (26202006377.685 MNT); 20-JUL-18: 260093860509.44 MNT (260093860509.44 MNT); 20-JUL-18: 3117126.75 EUR (13101003188.8425 MNT); 09-SEP-15: 9770448.41 USD (35111181110.6601 MNT)  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:31:33.554860",
+  "execution_time_seconds": 30.47,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн их олголттой зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS rate,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     original_adv_amount,     rate,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн их олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон дүн: 100,000,000 ам.доллар - Валютын ханш: 3,593.61 - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:34:35.634464",
+  "execution_time_seconds": 47.55,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн их олголттой зээлийг харуул Assistant:   [Current Question] Уг зээлийн дараа ямар зээл олгогдсон бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (   SELECT      acnt_code,     MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,     MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,     MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,     MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS rate,     MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,     MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount,     MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt   FROM dbm.loan_balance_detail   WHERE adv_amount IS NOT NULL AND adv_date IS NOT NULL   GROUP BY acnt_code   HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), largest_loan AS (   SELECT * FROM latest_disbursed   ORDER BY adv_amount_in_mnt DESC   FETCH FIRST 1 ROW ONLY ) SELECT    t.acnt_code,   t.acnt_name,   t.customer_name,   t.cur_code,   t.rate,   t.adv_date,   t.adv_amount,   t.adv_amount_in_mnt FROM latest_disbursed t JOIN largest_loan l ON 1=1 WHERE t.adv_date > l.adv_date ORDER BY t.adv_date ASC, t.acnt_code FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн их олголттой зээлийн дараа олгогдсон зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000131 - Дансны нэр: ХӨТӨЛ ХХК - Харилцагчийн нэр: ХӨТӨЛ ХХК - Валют: ам.доллар - Валютын ханш: 3,593.61 - Олгосон огноо: 2012-10-19 - Олгосон дүн: 61,265,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 220,162,516,650 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:38:04.171232",
+  "execution_time_seconds": 28.52,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн их олголттой зээлийг харуул Assistant:  User: Уг зээлийн дараа ямар зээл олгогдсон бэ? Assistant:   [Current Question] Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК'       AND adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Валютын төрөл: төгрөг - Олгосон огноо: 2017-11-17 - Олгосон дүн (эх валют): 10,000,000,000 төгрөг - Олгосон дүн (төгрөгөөр): 10,000,000,000 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:39:17.350999",
+  "execution_time_seconds": 19.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн их олголттой зээлийг харуул Assistant:  User: Уг зээлийн дараа ямар зээл олгогдсон бэ? Assistant:  User: Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул Assistant:   [Current Question] хамгийн эхний зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     cust_code,     acnt_code,     acnt_name,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE     adv_date = (         SELECT MIN(adv_date)         FROM dbm.loan_balance_detail         WHERE adv_date IS NOT NULL     ) ORDER BY adv_date ASC, acnt_code ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн мэдээллийг хүргэж байна:  - Зээлдэгчийн нэр: МИАТ ТӨХК - Харилцагчийн код: 9360000022 - Дансны код: 3600000043 - Дансны нэр: МИАТ ХК - Зээл олгосон огноо: 2012-06-21 - Олгосон дүн: 5,341,500 ам.доллар  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:40:26.536544",
+  "execution_time_seconds": 25.57,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн их олголттой зээлийг харуул Assistant:  User: Уг зээлийн дараа ямар зээл олгогдсон бэ? Assistant:  User: Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул Assistant:  User: хамгийн эхний зээлдэгчийн мэдээлэл? Assistant:   [Current Question] хамгийн богино хугацаанд олгосон зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(end_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS end_date     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND end_date IS NOT NULL     GROUP BY acnt_code ) SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     end_date,     (end_date - adv_date) AS loan_term_days FROM latest_per_account ORDER BY loan_term_days ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн богино хугацаанд олгосон зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000653 - Дансны нэр: МИАТ - Харилцагчийн нэр: МИАТ ТӨХК - Зээл олгосон огноо: 2013-12-23 - Зээл дуусах огноо: 2013-12-27 - Зээлийн хугацаа (хоногоор): 4"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:41:09.183307",
+  "execution_time_seconds": 23.35,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн их олголттой зээлийг харуул Assistant:  User: Уг зээлийн дараа ямар зээл олгогдсон бэ? Assistant:  User: Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул Assistant:  User: хамгийн эхний зээлдэгчийн мэдээлэл? Assistant:  User: хамгийн богино хугацаанд олгосон зээл? Assistant:   [Current Question] хамгийн сүүлийн зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH recent_customers AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL     GROUP BY customer_name     HAVING         MAX(             adv_date) = (             SELECT MAX(adv_date) FROM dbm.loan_balance_detail             WHERE adv_date IS NOT NULL         ) ),  latest_advances AS (     SELECT         t.customer_name,         t.adv_amount,         t.adv_date,         t.cur_code,         ROW_NUMBER()             OVER (                 PARTITION BY t.customer_name                 ORDER BY t.adv_date DESC, t.txn_date DESC             )             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN recent_customers rc ON t.customer_name = rc.customer_name     WHERE t.adv_date IS NOT NULL )  SELECT     customer_name,     adv_amount,     adv_date,     cur_code FROM latest_advances WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгчийн мэдээллийг хүргэж байна:  - Зээлдэгчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Олгосон дүн: 331,573,389 төгрөг - Олгосон огноо: 2025-08-26"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:42:11.814487",
+  "execution_time_seconds": 36.15,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Уг зээлийн дараа ямар зээл олгогдсон бэ? Assistant:  User: Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул Assistant:  User: хамгийн эхний зээлдэгчийн мэдээлэл? Assistant:  User: хамгийн богино хугацаанд олгосон зээл? Assistant:  User: хамгийн сүүлийн зээлдэгчийн мэдээлэл? Assistant:   [Current Question] Уг зээлдэгчийн хамгийн өндөр олголттой зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH last_customer AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL     ORDER BY adv_date DESC, txn_date DESC     FETCH FIRST 1 ROW ONLY ),  first_disbursement_per_account AS (     SELECT         acnt_code,         MIN(adv_date) AS first_adv_date     FROM dbm.loan_balance_detail     WHERE         customer_name = (SELECT customer_name FROM last_customer)         AND adv_date IS NOT NULL     GROUP BY acnt_code ),  account_disbursements AS (     SELECT         l.acnt_code,         l.acnt_name,         l.customer_name,         l.cur_code,         l.adv_date,         l.adv_amount     FROM dbm.loan_balance_detail l     INNER JOIN first_disbursement_per_account f         ON l.acnt_code = f.acnt_code AND l.adv_date = f.first_adv_date     WHERE l.customer_name = (SELECT customer_name FROM last_customer) )  SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount FROM account_disbursements ORDER BY adv_amount DESC, cur_code ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК\" зээлдэгчийн хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Зээлдэгчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Валют: төгрөг - Олгосон огноо: 2018-06-20 - Олгосон дүн: 14,116,400,000 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T15:43:28.733069",
+  "execution_time_seconds": 29.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Пирамид-ордын хамгийн өндөр олголттой зээлийг харуул Assistant:  User: хамгийн эхний зээлдэгчийн мэдээлэл? Assistant:  User: хамгийн богино хугацаанд олгосон зээл? Assistant:  User: хамгийн сүүлийн зээлдэгчийн мэдээлэл? Assistant:  User: Уг зээлдэгчийн хамгийн өндөр олголттой зээлийг харуул Assistant:   [Current Question] дансны дугаар нь ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_borrower AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL     ORDER BY adv_date DESC     FETCH FIRST 1 ROW ONLY ),  latest_loans_per_account AS (     SELECT         t.acnt_code,         t.customer_name,         t.adv_amount,         t.cur_code,         t.adv_date,         ROW_NUMBER()             OVER (PARTITION BY t.acnt_code ORDER BY t.txn_date DESC)             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN latest_borrower lb ON t.customer_name = lb.customer_name     WHERE t.adv_amount IS NOT NULL ),  highest_disbursed AS (     SELECT         acnt_code,         customer_name,         adv_amount,         cur_code,         adv_date     FROM latest_loans_per_account     WHERE rn = 1 )  SELECT     acnt_code,     customer_name,     adv_amount,     cur_code,     adv_date FROM highest_disbursed ORDER BY adv_amount DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгчийн хамгийн өндөр олголттой зээлийн дансны дугаарыг хүргэж байна:  - Дансны дугаар: 3600004603 - Зээлдэгчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Олгосон дүн: 14,116,400,000 төгрөг - Олгосон огноо: 2018-06-20"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T17:30:01.351686",
+  "execution_time_seconds": 22.35,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн сүүлийн зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL ORDER BY adv_date DESC, txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Зээлийн олгосон огноо: 2025-08-26 - Зээлийн дүн: 331,573,389 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T17:31:55.369607",
+  "execution_time_seconds": 24.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн сүүлийн зээлдэгчийн мэдээлэл? Assistant:   [Current Question] дансны дугаар нь ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH most_recent_borrower AS (     SELECT         customer_name,         MAX(adv_date) AS latest_adv_date     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL     GROUP BY customer_name     ORDER BY latest_adv_date DESC     FETCH FIRST 1 ROW ONLY )  SELECT     l.customer_name,     l.acnt_code FROM dbm.loan_balance_detail l INNER JOIN most_recent_borrower mrb     ON l.customer_name = mrb.customer_name AND l.adv_date = mrb.latest_adv_date ORDER BY l.txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгч болох \"МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК\"-ийн дансны дугаарыг хүргэж байна:  - Дансны дугаар: MN050036003600009224"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T17:51:53.132774",
+  "execution_time_seconds": 21.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн сүүлийн зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 10,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     adv_date,     adv_amount,     cur_code FROM dbm.loan_balance_detail WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL ORDER BY adv_date DESC, txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Зээл олгосон огноо: 2025-08-26 - Зээлийн хэмжээ: 331,573,389 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T17:54:20.517926",
+  "execution_time_seconds": 19.73,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн сүүлийн зээлдэгчийн мэдээлэл? Assistant:   [Current Question] хамгийн анхны зээлдэгчийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 10,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH first_loan_per_customer AS (     SELECT         customer_name,         MIN(adv_date) AS first_adv_date     FROM         dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND customer_name IS NOT NULL     GROUP BY         customer_name ),  first_borrower AS (     SELECT         customer_name,         first_adv_date     FROM         first_loan_per_customer     WHERE         first_adv_date         = (SELECT MIN(first_adv_date) FROM first_loan_per_customer) )  SELECT     t.customer_name,     t.acnt_code,     t.acnt_name,     t.project_name,     t.adv_date,     t.adv_amount,     t.cur_code,     t.rate,     t.approv_amount,     t.principal,     t.txn_date FROM     dbm.loan_balance_detail t INNER JOIN first_borrower fb     ON         t.customer_name = fb.customer_name         AND t.adv_date = fb.first_adv_date ORDER BY     t.adv_date ASC,     t.txn_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн анхны зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МИАТ ТӨХК - Дансны код: 3600000043 - Дансны нэр: МИАТ ХК - Төслийн нэр: БОИНГ 767 ОНГОЦ ХУДАЛДАЖ АВАХ САНХҮҮЖИЛТ - Зээлийн олгосон огноо: 2012-06-21 - Олгосон дүн: 0 ам.доллар - Валют: ам.доллар - Хүүгийн хувь: 1,334.42 - Зөвшөөрсөн дүн: 5,341,500 ам.доллар - Үлдэгдэл дүн: 0 ам.доллар - Гүйлгээний огноо: 2012-06-20  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T17:56:52.019651",
+  "execution_time_seconds": 32.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн сүүлийн зээлдэгчийн мэдээлэл? Assistant:  User: хамгийн анхны зээлдэгчийн мэдээлэл? Assistant:   [Current Question] хамгийн өндөр олголттой 2 зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 10,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS latest_rate,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 2 ROWS ONLY;",
+  "result_count": 2,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой 2 зээлийн мэдээллийг хүргэж байна:  1.   - Дансны код: 3600000176 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2013-02-01 - Олгосон дүн: 100,000,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 359,361,000,000 төгрөг  2.   - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 359,361,000,000 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-10-28T18:54:44.172298",
+  "execution_time_seconds": 37.46,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр олголттой 2 зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 2 ROWS ONLY;",
+  "result_count": 2,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой 2 зээлийн мэдээллийг хүргэж байна:  1.  - Дансны код: 3600000176 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2013-02-01 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  2.  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+

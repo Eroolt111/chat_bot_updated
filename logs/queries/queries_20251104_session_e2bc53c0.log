@@ -1,0 +1,226 @@
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:31:28.157147",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:32:29.401653",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Module input keys must have exactly one key if dest_key is not specified. Remaining keys: in module: {'input_query', 'kwargs'}",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:44:56.208661",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:45:13.715627",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Module input keys must have exactly one key if dest_key is not specified. Remaining keys: in module: {'initial_input', 'kwargs'}",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:50:59.016126",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Module input keys must have exactly one key if dest_key is not specified. Remaining keys: in module: {'kwargs', 'initial_input'}",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T15:54:17.197793",
+  "execution_time_seconds": 2.17,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "final_answer": "[{'user_question': 'Хамгийн өндөр олголттой 5 зээлдэгчийг харуул', 'sql_query': \"WITH latest_per_account AS ( SELECT acnt_code, cust_code, MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name, MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date, MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code, MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount, MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt FROM dbm.loan_balance_detail WHERE adv_amount IS NOT NULL AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) GROUP BY acnt_code, cust_code HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), customer_totals AS ( SELECT cust_code, customer_name, SUM(adv_amount_in_mnt) AS total_adv_amount_in_mnt, LISTAGG(adv_date || ': ' || original_adv_amount || ' ' || cur_code || ' (' || adv_amount_in_mnt || ' MNT)', '; ') WITHIN GROUP (ORDER BY adv_date DESC) AS account_details FROM latest_per_account GROUP BY cust_code, customer_name ) SELECT cust_code, customer_name, total_adv_amount_in_mnt, account_details FROM customer_totals ORDER BY total_adv_amount_in_mnt DESC FETCH FIRST 3 ROWS ONLY;\"}, {'user_question': 'Ирэх 12 сарын хугацаанд төлөх ёстой нийт дүнг зээлдэгчийн нэрээр харуулна уу.', 'sql_query': \"WITH max_versions AS (SELECT acnt_code, MAX(nrs_version) AS latest_nrs_version FROM dbm.bcom_nrs_detail WHERE status = 'O' GROUP BY acnt_code) SELECT t.customer_name, SUM(t.amount + t.int_amount) AS total_due FROM dbm.bcom_nrs_detail t JOIN max_versions mv ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE t.status = 'O' AND t.schd_date >= SYSDATE AND t.schd_date < ADD_MONTHS(SYSDATE, 12) GROUP BY t.customer_name ORDER BY total_due DESC;\"}, {'user_question': 'Нийт чанаргүй зээлийн үлдэгдлийг харуул', 'sql_query': \"WITH latest_per_acnt AS (SELECT acnt_code, cur_code, principal, class_name, status, ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn FROM dbm.loan_balance_detail) SELECT cur_code, SUM(principal) AS total_nonperforming_principal FROM latest_per_acnt WHERE rn = 1 AND status = 'O' AND (UPPER(class_name) IN (UPPER('ХЭВИЙН БУС'), UPPER('ЭРГЭЛЗЭЭТЭЙ'), UPPER('МУУ'))) GROUP BY cur_code ORDER BY cur_code;\"}, {'user_question': 'Идэвхтэй зээлтэй зээлдэгчдийн тоо?', 'sql_query': \"WITH latest_status AS (SELECT acnt_code, customer_name, status, ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn FROM dbm.loan_balance_detail WHERE customer_name IS NOT NULL) SELECT COUNT(DISTINCT customer_name) AS active_borrower_count FROM latest_status WHERE rn = 1 AND status = 'O';\"}, {'user_question': 'Хамгийн сүүлийн хоёр зээлдэгчийн мэдээллийг харуулна уу?', 'sql_query': 'WITH recent_customers AS ( SELECT customer_name FROM DBM.LOAN_BALANCE_DETAIL WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL GROUP BY customer_name ORDER BY MAX(adv_date) DESC FETCH FIRST 2 ROWS ONLY ), latest_advances AS ( SELECT t.customer_name, t.adv_amount, t.adv_date, ROW_NUMBER() OVER(PARTITION BY t.customer_name ORDER BY t.adv_date DESC, t.txn_date DESC) as rn FROM DBM.LOAN_BALANCE_DETAIL t JOIN recent_customers rc ON t.customer_name = rc.customer_name WHERE t.adv_date IS NOT NULL ) SELECT customer_name, adv_amount, adv_date FROM latest_advances WHERE rn = 1;'}]"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T16:00:30.929031",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Only one root is supported.",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T16:20:22.251340",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "execution_error": "Only one root is supported.",
+  "final_answer": "Таны хүсэлтийн дагуу мэдээлэл авах боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T16:24:37.434537",
+  "execution_time_seconds": 24.23,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT         acnt_code,         customer_name,         principal,         rate,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' AND principal IS NOT NULL ),  latest_principal AS (     SELECT         customer_name,         principal * rate AS principal_in_mnt     FROM latest_per_account     WHERE rn = 1 )  SELECT     customer_name,     SUM(principal_in_mnt) AS total_principal_in_mnt FROM latest_principal GROUP BY customer_name ORDER BY total_principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн мэдээллийг хүргэж байна:  - Зээлдэгчийн нэр: ДЦС-4 ТӨХК   - Зээлийн үлдэгдэл (төгрөгөөр): 253,309,397,578.54"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T17:14:06.545055",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T17:14:38.384796",
+  "execution_time_seconds": 20.81,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         principal,         cur_code,         rate,         status,         principal * rate AS principal_in_mnt,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE principal IS NOT NULL )  SELECT     acnt_code,     customer_name,     principal,     cur_code,     principal_in_mnt FROM latest_per_acnt WHERE     rn = 1     AND status = 'O' ORDER BY principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн мэдээллийг хүргэж байна:  - Зээлдэгчийн нэр: ДЦС-4 ТӨХК - Дансны код: MN780036003600008686 - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T17:16:57.454897",
+  "execution_time_seconds": 21.3,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлдэгчийн нэр? Assistant:   [Current Question] ойрын 30 хоногт төлөгдөх хуваарьтай ээлүүдыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 30 ORDER BY t.schd_date ASC;",
+  "result_count": 9,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 30 хоногт төлөгдөх хуваарьтай ээлжүүдийн мэдээллийг хүргэж байна:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Төлөх огноо: 2025-11-19      Төлөх үндсэн дүн: 74,202,955.71 төгрөг      Төлөх хүүгийн дүн: 53,007,974.12 төгрөг    2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Төлөх огноо: 2025-11-19      Төлөх үндсэн дүн: 19,924,892.71 төгрөг      Төлөх хүүгийн дүн: 14,233,640.52 төгрөг    3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Төлөх огноо: 2025-11-19      Төлөх үндсэн дүн: 118,188,572.8 төгрөг      Төлөх хүүгийн дүн: 84,429,747.43 төгрөг    4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Төлөх огноо: 2025-11-19      Төлөх үндсэн дүн: 195,998,092.83 төгрөг      Төлөх хүүгийн дүн: 140,014,123.88 төгрөг    5. Харилцагч: ДЦС-4 ТӨХК      Төлөх огноо: 2025-11-25      Төлөх үндсэн дүн: 0 төгрөг      Төлөх хүүгийн дүн: 2,931,847,205.83 төгрөг    6. Харилцагч: ПРОМОН ТРЕЙД ХХК      Төлөх огноо: 2025-12-01      Төлөх үндсэн дүн: 464,771.33 иен      Төлөх хүүгийн дүн: 32,444.86 иен    7. Харилцагч: ПРОМОН ТРЕЙД ХХК      Төлөх огноо: 2025-12-01      Төлөх үндсэн дүн: 30,148,034.41 иен      Төлөх хүүгийн дүн: 2,104,580.59 иен    8. Харилцагч: ПРОМОН ТРЕЙД ХХК      Төлөх огноо: 2025-12-01      Төлөх үндсэн дүн: 6,457,708 иен      Төлөх хүүгийн дүн: 450,801.1 иен    9. Харилцагч: ПРОМОН ТРЕЙД ХХК      Төлөх огноо: 2025-12-01      Төлөх үндсэн дүн: 100,000,000 төгрөг      Төлөх хүүгийн дүн: 12,884,602.74 төгрөг    Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e2bc53c0",
+  "timestamp": "2025-11-04T18:09:07.041289",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+

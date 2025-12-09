@@ -1,0 +1,224 @@
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T11:13:53.243251",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T11:14:48.018839",
+  "execution_time_seconds": 40.7,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр олголттой 5 зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 5 ROWS ONLY;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой 5 зээлийн мэдээллийг хүргэж байна:  1.   - Зээлдэгчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 359,361,000,000 төгрөг  2.   - Зээлдэгчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2013-02-01 - Олгосон дүн: 100,000,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 359,361,000,000 төгрөг  3.   - Зээлдэгчийн нэр: МИАТ ТӨХК - Дансны нэр: МИАТ ТӨХК - Валют: ам.доллар - Олгосон огноо: 2013-05-07 - Олгосон дүн: 78,550,000 ам.доллар - Төгрөгт хөрвүүлсэн дүн: 282,278,065,500 төгрөг  4.   - Зээлдэгчийн нэр: ГОЛОМТ БАНК - Дансны нэр: ГОЛОМТ БАНК /ҮХААЯ/ - Валют: төгрөг - Олгосон огноо: 2013-08-15 - Олгосон дүн: 269,030,318,200 төгрөг - Төгрөгт хөрвүүлсэн дүн: 269,030,318,200 төгрөг  5.   - Зээлдэгчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Валют: төгрөг - Олгосон огноо: 2018-07-20 - Олгосон дүн: 260,093,860,509.44 төгрөг - Төгрөгт хөрвүүлсэн дүн: 260,093,860,509.44 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T11:21:11.647014",
+  "execution_time_seconds": 31.11,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр олголттой 5 зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 5 ROWS ONLY;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой 5 зээлийн мэдээллийг хүргэж байна:  1.   - Зээлдэгчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  2.   - Зээлдэгчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2013-02-01 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  3.   - Зээлдэгчийн нэр: МИАТ ТӨХК - Дансны нэр: МИАТ ТӨХК - Валют: ам.доллар - Олгосон огноо: 2013-05-07 - Олгосон дүн: 78,550,000 ам.доллар - Олголтын дүн (төгрөгөөр): 282,278,065,500 төгрөг  4.   - Зээлдэгчийн нэр: ГОЛОМТ БАНК - Дансны нэр: ГОЛОМТ БАНК /ҮХААЯ/ - Валют: төгрөг - Олгосон огноо: 2013-08-15 - Олгосон дүн: 269,030,318,200 төгрөг - Олголтын дүн (төгрөгөөр): 269,030,318,200 төгрөг  5.   - Зээлдэгчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Валют: төгрөг - Олгосон огноо: 2018-07-20 - Олгосон дүн: 260,093,860,509.44 төгрөг - Олголтын дүн (төгрөгөөр): 260,093,860,509.44 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T11:45:49.279455",
+  "execution_time_seconds": 48.25,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр олголттой 5 зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 5 ROWS ONLY;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой 5 зээлийн мэдээллийг хүргэж байна:  1.  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  2.  - Дансны код: 3600000176 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2013-02-01 - Олгосон дүн: 100,000,000 ам.доллар - Олголтын дүн (төгрөгөөр): 359,361,000,000 төгрөг  3.  - Дансны код: 3600000241 - Дансны нэр: МИАТ ТӨХК - Харилцагчийн нэр: МИАТ ТӨХК - Валют: ам.доллар - Олгосон огноо: 2013-05-07 - Олгосон дүн: 78,550,000 ам.доллар - Олголтын дүн (төгрөгөөр): 282,278,065,500 төгрөг  4.  - Дансны код: 3600000445 - Дансны нэр: ГОЛОМТ БАНК /ҮХААЯ/ - Харилцагчийн нэр: ГОЛОМТ БАНК - Валют: төгрөг - Олгосон огноо: 2013-08-15 - Олгосон дүн: 269,030,318,200 төгрөг - Олголтын дүн (төгрөгөөр): 269,030,318,200 төгрөг  5.  - Дансны код: MN780036003600008686 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Валют: төгрөг - Олгосон огноо: 2018-07-20 - Олгосон дүн: 260,093,860,509.44 төгрөг - Олголтын дүн (төгрөгөөр): 260,093,860,509.44 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T11:54:34.161621",
+  "execution_time_seconds": 31.54,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр олголттой 5 зээлийг харуул   SQL Pattern: WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (D...  [Current Question] Хамгийн сүүлд зээл авсан 3 хэрэглэгчийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH recent_customers AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND customer_name IS NOT NULL     GROUP BY customer_name     ORDER BY MAX(adv_date) DESC     FETCH FIRST 3 ROWS ONLY ),  latest_advances AS (     SELECT         t.customer_name,         t.adv_amount,         t.adv_date,         ROW_NUMBER()             OVER (                 PARTITION BY t.customer_name                 ORDER BY t.adv_date DESC, t.txn_date DESC             )             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN recent_customers rc ON t.customer_name = rc.customer_name     WHERE         t.adv_date IS NOT NULL         AND (t.acnt_name IS NOT NULL OR t.customer_name IS NOT NULL) )  SELECT     customer_name,     adv_amount,     adv_date FROM latest_advances WHERE rn = 1;",
+  "result_count": 3,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлд зээл авсан 3 хэрэглэгчийн мэдээллийг хүргэж байна:  1. ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Олгосон дүн: 44,525,712.75    - Олгосон огноо: 2024-10-22  2. ДЦС-4 ТӨХК    - Олгосон дүн: 872,478    - Олгосон огноо: 2022-06-30  3. МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК    - Олгосон дүн: 331,573,389    - Олгосон огноо: 2025-08-26"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T14:55:24.940366",
+  "execution_time_seconds": 3.28,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд хэрхэн туслах вэ? Хэрвээ та өгөгдөл, SQL эсвэл банкны мэдээллийн шинжилгээтэй холбоотой асуулттай бол асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T14:56:08.268356",
+  "execution_time_seconds": 25.88,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн сүүлд зээл авсан  хэрэглэгчийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         cust_code,         customer_name,         acnt_code,         acnt_name,         adv_date,         adv_amount,         cur_code,         ROW_NUMBER() OVER (ORDER BY adv_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) )  SELECT     cust_code,     customer_name,     acnt_code,     acnt_name,     adv_date,     adv_amount,     cur_code FROM latest_loans WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлд зээл авсан хэрэглэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Зээл олгосон огноо: 2025-08-26 - Олгосон дүн: 0 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T14:58:56.252211",
+  "execution_time_seconds": 2.52,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Чи хэн юм бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, энэ асуулт Хөгжлийн Банкны мэдээллийн системтэй холбоогүй байна.  Зээл, данс, харилцагчийн мэдээлэл гэх мэт банкны өгөгдөлтэй холбоотой асуултад хариулах боломжтой.  Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T15:01:02.990948",
+  "execution_time_seconds": 30.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] The user requested to display the most recent loan taken by a customer. The conversation involved constructing a SQL query using a common table expression to identify the latest loan per customer. [Current Question] 3600002576 дансны харилцагчын нэр?",
+  "masked_query": "[Chat History Summary] The user requested to display the most recent loan taken by a customer. The conversation involved constructing a SQL query using a common table expression to identify the latest loan per customer. [Current Question] [ACNT_CODE_1] дансны харилцагчын нэр?",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_snapshot AS (     SELECT         customer_name,         acnt_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE acnt_code = '[ACNT_CODE_1]' )  SELECT     customer_name,     acnt_code FROM latest_snapshot WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"3600002576\" дансны харилцагчийн нэрийг хүргэж байна:  - Харилцагчийн нэр: МОНГОЛ ДРАЙ МИЛК ХХК"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T18:42:55.403998",
+  "execution_time_seconds": 71.5,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] The user asked to display the most recent loan borrower and then inquired about the customer name associated with account number 3600002576. Both queries involved using SQL with common table expressions (CTEs) to retrieve the relevant information. [Current Question] Ирэх долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "masked_query": "[Chat History Summary] The user asked to display the most recent loan borrower and then inquired about the customer name associated with account number [ACNT_CODE_1]. Both queries involved using SQL with common table expressions (CTEs) to retrieve the relevant information. [Current Question] Ирэх долоо хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "pii_items_masked": 1,
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'D') + 7     AND t.schd_date < TRUNC(SYSDATE, 'D') + 14 ORDER BY t.schd_date ASC;",
+  "result_count": 4,
+  "final_answer": "Таны хүсэлтийн дагуу ирэх долоо хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг хүргэж байна:  1. Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006418      Төлбөрийн огноо: 2025-12-19      Үндсэн төлбөр: 20,668,176.83 төгрөг      Хүүгийн төлбөр: 13,490,356.4 төгрөг  2. Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006435      Төлбөрийн огноо: 2025-12-19      Үндсэн төлбөр: 203,309,663.97 төгрөг      Хүүгийн төлбөр: 132,702,552.74 төгрөг  3. Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006725      Төлбөрийн огноо: 2025-12-19      Үндсэн төлбөр: 76,971,044.84 төгрөг      Хүүгийн төлбөр: 50,239,885 төгрөг  4. Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006476      Төлбөрийн огноо: 2025-12-19      Үндсэн төлбөр: 122,597,514.47 төгрөг      Хүүгийн төлбөр: 80,020,805.76 төгрөг  Нэмэлт мэдээлэл хэрэгтэй бол дахин холбогдоно уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T18:44:16.538989",
+  "execution_time_seconds": 45.3,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] The conversation involved querying a database to find the most recent loan borrower, retrieving the customer name for a specific account number, and displaying loans scheduled to be repaid in the upcoming week. [Current Question] Бүгд нэг харилцагчийн зээлүүд юм уу тэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH current_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  next_week_loans AS (     SELECT DISTINCT t.acnt_code     FROM dbm.bcom_nrs_detail t     INNER JOIN current_versions cv         ON t.acnt_code = cv.acnt_code AND t.nrs_version = cv.latest_nrs_version     WHERE         t.status = 'O'         AND t.schd_date >= TRUNC(SYSDATE)         AND t.schd_date < TRUNC(SYSDATE) + 7 ),  latest_per_acnt AS (     SELECT         l.acnt_code,         l.cust_code,         l.customer_name,         ROW_NUMBER()             OVER (PARTITION BY l.acnt_code ORDER BY l.txn_date DESC)             AS rn     FROM dbm.loan_balance_detail l     WHERE l.acnt_code IN (SELECT acnt_code FROM next_week_loans) )  SELECT     COUNT(DISTINCT customer_name) AS distinct_customer_count,     LISTAGG(DISTINCT customer_name, ', ') WITHIN GROUP (         ORDER BY customer_name     ) AS customer_names FROM latest_per_acnt WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны асуултад баярлалаа. Ирэх долоо хоногт төлөгдөх зээлүүдийн харилцагчийн тоо дараах байна:  - Харилцагчийн тоо: 0  Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол мэдэгдээрэй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "98b9ba43",
+  "timestamp": "2025-12-08T19:46:36.063514",
+  "execution_time_seconds": 40.82,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] The conversation involved querying a database for information about a specific account number's customer name, identifying loans scheduled for repayment next week, and confirming whether all loans belong to a single customer. [Current Question] Хамгийн эхний зээлдэгчийн нэрийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     adv_date FROM dbm.loan_balance_detail WHERE     adv_date IS NOT NULL     AND customer_name IS NOT NULL ORDER BY adv_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн эхний зээлдэгчийн нэрийг хүргэж байна:  - Зээлдэгчийн нэр: МИАТ ТӨХК - Зээлийн олгосон огноо: 2012-06-21"
+}
+--------------------------------------------------------------------------------
+

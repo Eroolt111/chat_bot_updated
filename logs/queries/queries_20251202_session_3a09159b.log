@@ -1,0 +1,19 @@
+{
+  "session_id": "3a09159b",
+  "timestamp": "2025-12-02T14:48:06.997691",
+  "execution_time_seconds": 25.75,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "11/9/2024 байдлаар нийт хэдэн зээлийн харилцагч байсан бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_snapshots AS (     SELECT         acnt_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         txn_date <= DATE '2024-11-09'         AND customer_name IS NOT NULL )  SELECT COUNT(DISTINCT customer_name) AS customer_count_as_of_2024_11_09 FROM latest_snapshots WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу 2024 оны 11-р сарын 9-ний байдлаар нийт зээлийн харилцагчдын тоо нь 90 байна."
+}
+--------------------------------------------------------------------------------
+

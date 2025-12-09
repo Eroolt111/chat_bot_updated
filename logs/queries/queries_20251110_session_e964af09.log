@@ -1,0 +1,484 @@
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T10:29:09.583392",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T10:30:23.492456",
+  "execution_time_seconds": 30.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_snapshot AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         rate,         status,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal IS NOT NULL         AND rate IS NOT NULL )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     status,     txn_date,     principal * rate AS principal_in_mnt FROM latest_snapshot WHERE rn = 1 ORDER BY principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Харилцагчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг - Валют: төгрөг - Төлөв: O - Гүйлгээний огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T10:57:03.567516",
+  "execution_time_seconds": 30.13,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл   SQL Pattern: WITH latest_snapshot AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         rate,         status,         txn_date,         ROW_NUMBE...  [Current Question] Энэ зээлдэгчийн бүх зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE status = 'O' AND principal IS NOT NULL AND rate IS NOT NULL     )     WHERE rn = 1     ORDER BY principal * rate DESC     FETCH FIRST 1 ROW ONLY ),  borrower_loans AS (     SELECT t.*     FROM (         SELECT             acnt_code,             acnt_name,             customer_name,             cust_code,             principal,             cur_code,             rate,             status,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE status = 'O'     ) t     INNER JOIN highest_loan hl ON t.cust_code = hl.cust_code     WHERE t.rn = 1 )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     rate,     status,     txn_date FROM borrower_loans ORDER BY principal * rate DESC;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй \"ДЦС-4 ТӨХК\" компанийн зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг - Валютын ханш: 1 - Төлөв: O - Огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T10:57:55.779588",
+  "execution_time_seconds": 33.14,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл   SQL Pattern: WITH latest_snapshot AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         rate,         status,         txn_date,         ROW_NUMBE...  Turn 2:   Question: Энэ зээлдэгчийн бүх зээлийг харуул   SQL Pattern: WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_...  [Current Question] БҮх зээлийг нь харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_NUMBER() OVER (ORDER BY principal * rate DESC) AS rn         FROM (             SELECT                 acnt_code,                 cust_code,                 principal,                 rate,                 ROW_NUMBER()                     OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                     AS rn2             FROM dbm.loan_balance_detail             WHERE status = 'O' AND principal IS NOT NULL AND rate IS NOT NULL         )         WHERE rn2 = 1     )     WHERE rn = 1 ),  all_loans_of_borrower AS (     SELECT t.*     FROM (         SELECT             acnt_code,             cust_code,             customer_name,             acnt_name,             principal,             cur_code,             rate,             status,             txn_date,             ROW_NUMBER()                 OVER (PARTITION BY acnt_code ORDER BY txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail         WHERE cust_code = (SELECT cust_code FROM highest_loan)     ) t     WHERE t.rn = 1 )  SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     rate,     status,     txn_date FROM all_loans_of_borrower ORDER BY principal * rate DESC;",
+  "result_count": 33,
+  "final_answer": "Таны хүсэлтийн дагуу \"ДЦС-4 ТӨХК\" компанийн бүх зээлийн мэдээллийг хүргэж байна:  1. - Дансны код: MN780036003600008686 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг - Валют: төгрөг - Валютын ханш: 1 - Төлөв: O - Огноо: 2025-09-12  2. - Дансны код: 3600004715 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 0 евро - Валютын ханш: 4,202.91 - Төлөв: C - Огноо: 2025-09-12  3. - Дансны код: 3600004730 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 0 евро - Валютын ханш: 4,202.91 - Төлөв: C - Огноо: 2025-09-12  4. - Дансны код: 3600004774 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 0 евро - Валютын ханш: 4,202.91 - Төлөв: C - Огноо: 2025-09-12  5. - Дансны код: 3600005550 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 0 евро - Валютын ханш: 4,202.91 - Төлөв: C - Огноо: 2025-09-12  (Мөн бусад зээлийн мэдээлэл ижил форматаар үргэлжилж байна.)  Хэрэв тодорхой зээлийн талаар дэлгэрэнгүй мэдээлэл авахыг хүсвэл хэлнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T10:59:08.961739",
+  "execution_time_seconds": 31.07,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Энэ зээлдэгчийн бүх зээлийг харуул   SQL Pattern: WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_...  Turn 2:   Question: БҮх зээлийг нь харуул   SQL Pattern: WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_...  [Current Question] ХӨгжлийн банкны хамгинй богино хугацаанд олгосон зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(end_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS end_date,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(status) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS status     FROM dbm.loan_balance_detail     WHERE status = 'O'       AND adv_date IS NOT NULL       AND end_date IS NOT NULL     GROUP BY acnt_code ), term_lengths AS (     SELECT         acnt_code,         acnt_name,         customer_name,         adv_date,         end_date,         cur_code,         status,         (end_date - adv_date) AS loan_term_days     FROM latest_per_account ), min_term AS (     SELECT MIN(loan_term_days) AS shortest_term     FROM term_lengths ) SELECT     acnt_code,     acnt_name,     customer_name,     adv_date,     end_date,     cur_code,     status,     loan_term_days FROM term_lengths WHERE loan_term_days = (SELECT shortest_term FROM min_term) ORDER BY loan_term_days ASC, acnt_code;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол улсын Хөгжлийн Банкнаас хамгийн богино хугацаанд олгосон зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600005299 - Дансны нэр: МОНДУЛААН ТРЕЙД ХХК - Зээлдэгч: МОНДУЛААН ТРЕЙД ХХК - Олгосон огноо: 2018-12-28 - Дуусах огноо: 2019-12-03 - Валют: төгрөг - Статус: O - Зээлийн хугацаа (өдөр): 340"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:01:31.157551",
+  "execution_time_seconds": 30.01,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: БҮх зээлийг нь харуул   SQL Pattern: WITH highest_loan AS (     SELECT         acnt_code,         cust_code     FROM (         SELECT             acnt_code,             cust_code,             principal,             rate,             ROW_...  Turn 2:   Question: ХӨгжлийн банкны хамгинй богино хугацаанд олгосон зээл?   SQL Pattern: WITH latest_per_account AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_d...  [Current Question] Пирамид-ордын зээлүүдийн дансыг бүгдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM latest_accounts WHERE rn = 1 ORDER BY acnt_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн зээлийн дансны мэдээллийг хүргэж байна:  1. - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 10,000,000,000 төгрөг - Төлбөрийн төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  2. - Дансны код: 3600002715 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 0 төгрөг - Төлбөрийн төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  3. - Дансны код: 3600004191 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 1,000,000,000 төгрөг - Төлбөрийн төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  4. - Дансны код: 3600004223 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Төлбөрийн төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  5. - Дансны код: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төлөв: O - Үлдэгдэл зээл: 2,000,000,000 төгрөг - Төлбөрийн төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:02:20.790781",
+  "execution_time_seconds": 25.59,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: ХӨгжлийн банкны хамгинй богино хугацаанд олгосон зээл?   SQL Pattern: WITH latest_per_account AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_d...  Turn 2:   Question: Пирамид-ордын зээлүүдийн дансыг бүгдийг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (...  [Current Question] Эдгээр зээлүүдээс хамгийн өндөр олголттойг нь гарга",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH piramid_latest AS (     SELECT         acnt_code,         acnt_name,         customer_name,         cur_code,         adv_date,         adv_amount,         rate,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         customer_name = 'ПИРАМИД-ОРД ХХК'         AND adv_amount IS NOT NULL ),  piramid_latest_filtered AS (     SELECT         acnt_code,         acnt_name,         customer_name,         cur_code,         adv_date,         adv_amount,         rate,         txn_date     FROM piramid_latest     WHERE         rn = 1         AND adv_amount > 0 )  SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     adv_amount,     txn_date,     adv_amount * rate AS adv_amount_in_mnt FROM piramid_latest_filtered ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК - Валют: төгрөг - Олгосон огноо: 2017-11-17 - Олгосон дүн: 10,000,000,000 - Гүйлгээний огноо: 2025-09-12 - Олголтын дүн төгрөгөөр: 10,000,000,000"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:03:29.494580",
+  "execution_time_seconds": 18.36,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Пирамид-ордын зээлүүдийн дансыг бүгдийг харуул   SQL Pattern: WITH latest_accounts AS (     SELECT         acnt_code,         acnt_name,         customer_name,         status,         principal,         cur_code,         project_name,         ROW_NUMBER() OVER (...  Turn 2:   Question: Эдгээр зээлүүдээс хамгийн өндөр олголттойг нь гарга   SQL Pattern: WITH piramid_latest AS (     SELECT         acnt_code,         acnt_name,         customer_name,         cur_code,         adv_date,         adv_amount,         rate,         txn_date,         ROW_NUM...  [Current Question] Хөгжлийн банканд нийт хэдэн зээл байгаа вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_loan AS (     SELECT         acnt_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE acnt_code IS NOT NULL )  SELECT COUNT(*) AS total_loan_count FROM latest_per_loan WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Хөгжлийн банканд нийт 1,145 зээл байгаа болно."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:05:09.691161",
+  "execution_time_seconds": 29.73,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Эдгээр зээлүүдээс хамгийн өндөр олголттойг нь гарга   SQL Pattern: WITH piramid_latest AS (     SELECT         acnt_code,         acnt_name,         customer_name,         cur_code,         adv_date,         adv_amount,         rate,         txn_date,         ROW_NUM...  Turn 2:   Question: Хөгжлийн банканд нийт хэдэн зээл байгаа вэ?   SQL Pattern: WITH latest_per_loan AS (     SELECT         acnt_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE acnt_code IS NOT NULL...  [Current Question] нээлттэй юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount,         MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS rate     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), highest_loan AS (     SELECT acnt_code     FROM latest_disbursed     ORDER BY adv_amount * rate DESC     FETCH FIRST 1 ROW ONLY ), latest_snapshot AS (     SELECT *     FROM (         SELECT t.*,                ROW_NUMBER() OVER (PARTITION BY t.acnt_code ORDER BY t.txn_date DESC) AS rn         FROM dbm.loan_balance_detail t         JOIN highest_loan hl ON t.acnt_code = hl.acnt_code     )     WHERE rn = 1 ) SELECT acnt_code, acnt_name, customer_name, cur_code, adv_date, adv_amount, status, txn_date FROM latest_snapshot;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банктай холбогдох хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 - Төлөв: C - Гүйлгээний огноо: 2025-09-12  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:06:20.244201",
+  "execution_time_seconds": 21.37,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хөгжлийн банканд нийт хэдэн зээл байгаа вэ?   SQL Pattern: WITH latest_per_loan AS (     SELECT         acnt_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE acnt_code IS NOT NULL...  Turn 2:   Question: нээлттэй юу?   SQL Pattern: WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_dat...  [Current Question] хөгжлийн банкны нээлттэй зээлүүдийн тоо?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_loan AS (     SELECT         acnt_code,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE acnt_code IS NOT NULL )  SELECT COUNT(*) AS open_loan_count FROM latest_per_loan WHERE     rn = 1     AND status = 'O';",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол Улсын Хөгжлийн Банкны нээлттэй зээлүүдийн тоо нь 185 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:40:17.802041",
+  "execution_time_seconds": 31.42,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр олголттой зээлийн мэдээлэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127   - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК   - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК   - Валют: ам.доллар   - Олголтын өдөр: 2012-10-05   - Олгосон дүн: 100,000,000 ам.доллар   - Олголтын дүн төгрөгөөр: 359,361,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:44:32.330359",
+  "execution_time_seconds": 32.89,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр олголттой зээлийн мэдээлэл?   SQL Pattern: WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (D...  [Current Question] Энэ зээл одоо идэвхитэй байгаа юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT         acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), top_loan AS (     SELECT acnt_code     FROM latest_disbursed     ORDER BY adv_amount_in_mnt DESC     FETCH FIRST 1 ROW ONLY ) SELECT     lbd.acnt_code,     lbd.acnt_name,     lbd.customer_name,     lbd.cur_code,     lbd.adv_date,     lbd.adv_amount,     lbd.adv_amount * lbd.rate AS adv_amount_in_mnt,     lbd.status,     lbd.txn_date FROM dbm.loan_balance_detail lbd JOIN top_loan tl ON lbd.acnt_code = tl.acnt_code WHERE (lbd.acnt_name IS NOT NULL OR lbd.customer_name IS NOT NULL) ORDER BY lbd.txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой зээлийн одоогийн идэвхитэй байдлын мэдээллийг хүргэж байна:  - Дансны код: 3600000127   - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК   - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК   - Валют: ам.доллар   - Олгосон огноо: 2012-10-05   - Олгосон дүн: 100,000,000   - Олголтын дүн төгрөгөөр: 359,361,000,000   - Статус: C   - Гүйлгээний огноо: 2025-09-12    Энэ мэдээллээр зээл одоогоор идэвхитэй байгаа эсэхийг статус талбараас харна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T11:55:33.275958",
+  "execution_time_seconds": 30.03,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE principal IS NOT NULL )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date FROM latest_per_acnt WHERE rn = 1 ORDER BY principal DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686   - Харилцагчийн нэр: ДЦС-4 ТӨХК   - Дансны нэр: ДЦС-4 ТӨХК   - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг   - Огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:07:50.893328",
+  "execution_time_seconds": 29.13,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийг харуул   SQL Pattern: WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE principal IS NOT NULL )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date FROM latest_per_acnt WHERE rn = 1 ORDER BY principal DESC FETCH FIRST 1 ROW ONLY;...  [Current Question] Энэ зээл идэвхитэй байгаа юу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal IS NOT NULL         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ),  highest_principal_loan AS (     SELECT acnt_code     FROM latest_per_acnt     WHERE rn = 1     ORDER BY principal DESC     FETCH FIRST 1 ROW ONLY ),  latest_status AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal IS NOT NULL         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)         AND acnt_code = (SELECT acnt_code FROM highest_principal_loan) )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date,     status FROM latest_status WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй \"ДЦС-4 ТӨХК\" компанийн зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Харилцагчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Үлдэгдэл дүн: 253,309,397,578.54 төгрөг - Валют: төгрөг - Гүйлгээний огноо: 2025-09-12 - Зээлийн төлөв: O"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:09:46.970013",
+  "execution_time_seconds": 25.09,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хамгийн өндөр зээлийн үлдэгдэлтэй зээлийг харуул   SQL Pattern: WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE principal IS NOT NULL )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date FROM latest_per_acnt WHERE rn = 1 ORDER BY principal DESC FETCH FIRST 1 ROW ONLY;...  Turn 2:   Question: Энэ зээл идэвхитэй байгаа юу?   SQL Pattern: WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal IS NOT NULL         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ),  highest_principal_loan AS (     SELECT acnt_code     FROM latest_per_acnt     WHERE rn = 1     ORDER BY principal DESC     FE...  [Current Question] ХӨгжлийн банкны нийт зээлийн үлдэгдлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Монгол улсын Хөгжлийн Банкны нийт зээлийн үлдэгдлийг валютын ангиллаар хүргэж байна:  1. Юань: 401,122,622.5 2. Евро: 9,999,999.96 3. Иен: 1,940,093,068.55 4. Төгрөг: 1,136,148,761,376.85 5. Ам.доллар: 76,198,311.58"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:10:52.031782",
+  "execution_time_seconds": 24.82,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Энэ зээл идэвхитэй байгаа юу?   SQL Pattern: WITH latest_per_acnt AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal IS NOT NULL         AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL) ),  highest_principal_loan AS (     SELECT acnt_code     FROM latest_per_acnt     WHERE rn = 1     ORDER BY principal DESC     FE...  Turn 2:   Question: ХӨгжлийн банкны нийт зээлийн үлдэгдлийг харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;...  [Current Question] Бүгдийг нь төгрөг рүү шилжүүлж харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         rate,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT SUM(principal * rate) AS total_principal_balance_mnt FROM latest_balances WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкны нийт зээлийн үлдэгдлийг төгрөгөөр шилжүүлэн тооцсон дүнг хүргэж байна:  - Нийт үлдэгдэл зээл (төгрөгөөр): 1,701,647,950,791.7654 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:14:57.378466",
+  "execution_time_seconds": 21.97,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: ХӨгжлийн банкны нийт зээлийн үлдэгдлийг харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;...  Turn 2:   Question: Бүгдийг нь төгрөг рүү шилжүүлж харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         rate,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT SUM(principal * rate) AS total_principal_balance_mnt FROM latest_balances WHERE rn = 1;...  [Current Question] Хөтөл ын зээлийн үлдэгдэл хэд байна?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ХӨТӨЛ ХХК\" компанийн зээлийн үлдэгдлийг хүргэж байна:  - Валют: ам.доллар   - Үлдэгдэл зээл: 61,212,460.58 ам.доллар"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:18:36.226602",
+  "execution_time_seconds": 18.91,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Бүгдийг нь төгрөг рүү шилжүүлж харуул   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         rate,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT SUM(principal * rate) AS total_principal_balance_mnt FROM latest_balances WHERE rn = 1;...  Turn 2:   Question: Хөтөл ын зээлийн үлдэгдэл хэд байна?   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;...  [Current Question] хөтөл нийт хэдэн зээлтэй байна?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT COUNT(*) AS total_active_loans FROM latest_loans WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ХӨТӨЛ ХХК\" компанийн нийт идэвхтэй зээлийн тоо нь 1 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:26:52.253759",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:26:59.620829",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T12:27:06.888079",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T14:17:46.130330",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T14:18:52.885803",
+  "execution_time_seconds": 47.49,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Хөтөл ын зээлийн үлдэгдэл хэд байна?   SQL Pattern: WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;...  Turn 2:   Question: хөтөл нийт хэдэн зээлтэй байна?   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT COUNT(*) AS total_active_loans FROM latest_loans WHERE rn = 1;...  [Current Question] Нээлттэй зээлүүдээс хамгийн ойрын хугацаанд төлөгдөх зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND due_princ_date = (         SELECT MIN(due_princ_date)         FROM latest_open_loans         WHERE rn = 1     );",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкинд нээлттэй зээлүүдээс хамгийн ойрын хугацаанд төлөгдөх зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN400036003600008497 - Дансны нэр: ЭРЭЛ ХХК - Харилцагч: ЭРЭЛ ХХК - Төлөгдөх хугацаа: 2016-07-05 - Валют: төгрөг - Үлдэгдэл зээл: 109,327,707,274.98"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T14:20:43.479616",
+  "execution_time_seconds": 27.24,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: хөтөл нийт хэдэн зээлтэй байна?   SQL Pattern: WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND customer_name = 'ХӨТӨЛ ХХК' )  SELECT COUNT(*) AS total_active_loans FROM latest_loans WHERE rn = 1;...  Turn 2:   Question: Нээлттэй зээлүүдээс хамгийн ойрын хугацаанд төлөгдөх зээл?   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND d...  [Current Question] Ойрын хугацаанд төлөгдөх хуваарьтай зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND due_princ_date IS NOT NULL ORDER BY due_princ_date ASC;",
+  "result_count": 136,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банктай харилцдаг зээлдэгчдийн ойрын хугацаанд төлөгдөх хуваарьтай зээлийн мэдээллийг хүргэж байна:  1. Харилцагч: ЭРЭЛ ХХК      Дансны нэр: ЭРЭЛ ХХК      Төлөх хугацаа: 2016-07-05      Мөнгөн дүн: 109,327,707,274.98 төгрөг    2. Харилцагч: ХӨТӨЛ ХХК      Дансны нэр: ХӨТӨЛ ХХК      Төлөх хугацаа: 2017-07-19      Мөнгөн дүн: 61,212,460.58 ам.доллар    3. Харилцагч: БОЛОР ШҮР ХХК      Дансны нэр: БОЛОР ШҮР ХХК      Төлөх хугацаа: 2017-10-25      Мөнгөн дүн: 1,178,992,776.64 төгрөг    4. Харилцагч: КЬЮ ЭС СИ ХХК      Дансны нэр: КЬЮ ЭС СИ ХХК      Төлөх хугацаа: 2018-06-03      Мөнгөн дүн: 53,206,368.08 ам.доллар    5. Харилцагч: СОНГОУЛД ХХК      Дансны нэр: СОНГОУЛД ХХК      Төлөх хугацаа: 2018-06-10      Мөнгөн дүн: 17,329,757,402.45 төгрөг    Тус мэдээлэл нь ойрын хугацаанд төлөгдөх зээлүүдийн эхний хэсэг бөгөөд нийт зээлүүд төлөх хугацааны дарааллаар жагсаасан болно. Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол хэлнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T14:21:17.932453",
+  "execution_time_seconds": 20.98,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Нээлттэй зээлүүдээс хамгийн ойрын хугацаанд төлөгдөх зээл?   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND d...  Turn 2:   Question: Ойрын хугацаанд төлөгдөх хуваарьтай зээл?   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND d...  [Current Question] Ирэх долоо хоногт төлөгдөх хуваарьтай зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND due_princ_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 7 ORDER BY due_princ_date ASC, acnt_code ASC;",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, ирэх долоо хоногт төлөгдөх хуваарьтай нээлттэй зээл олдсонгүй. Танд туслах өөр асуулт байвал хэлнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e964af09",
+  "timestamp": "2025-11-10T14:22:34.356585",
+  "execution_time_seconds": 24.63,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Ойрын хугацаанд төлөгдөх хуваарьтай зээл?   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND d...  Turn 2:   Question: Ирэх долоо хоногт төлөгдөх хуваарьтай зээл?   SQL Pattern: WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND d...  [Current Question] Ойрын долоо хоногт төлөгдөх зээлийн мэдээлэл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         due_princ_date,         cur_code,         principal,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         status = 'O'         AND due_princ_date IS NOT NULL )  SELECT     acnt_code,     acnt_name,     customer_name,     due_princ_date,     cur_code,     principal FROM latest_open_loans WHERE     rn = 1     AND due_princ_date >= TRUNC(SYSDATE)     AND due_princ_date < TRUNC(SYSDATE) + 7 ORDER BY due_princ_date, acnt_code;",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, ойрын долоо хоногт төлөгдөх зээлийн мэдээлэл таны өгсөн шалгуурт нийцсэнээр олдсонгүй. Та өөр асуулт байвал баяртайгаар хариулахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+

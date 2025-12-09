@@ -1,0 +1,18 @@
+{
+  "original_table_name": "dbm.bcom_nrs_detail",
+  "table_name": "zeeliin_tuluvluguu_delgerengui",
+  "table_summary": "Зээл бүрийн ирээдүйн төлбөрийн хуваарь, төлөв, онолын үлдэгдлийг хадгалсан дэлгэрэнгүй хүснэгт. loan_balance_detail хүснэгттэй 'acnt_code'-оор холбогдоно. (Detailed schedule view for each loan showing future payment dates, principal and interest amounts, theoretical post-payment balances, and links back to loan_balance_detail via acnt_code. This view contains the future repayment schedule details.)",
+  "column_descriptions": {
+    "acnt_code": "Зээлийн дансны дугаар (Loan Account Code). The unique identifier for a specific loan account. This is the primary key for joining loan-related data. Sample values: '3600123456', 'MN270050003600012356'.",
+    "nrs_version": "Төлөвлөгөөний хувилбарын дугаар (Schedule Version). The version number of the payment schedule. A single loan account ('acnt_code') can have multiple schedules. **To get the current, valid schedule, you MUST filter for the maximum 'nrs_version' for each 'acnt_code'.** Sample values: 1, 2, 3, 4, 5, 6, 7.",
+    "cur_code": "Валют (Currency). The currency code for all monetary values in this row (e.g., MNT, USD). All amount columns are in this currency. Sample values: MNT, USD, EUR, JPY, CNY. If you search amount columns, you must also filter by this currency.",
+    "schd_date": "Төлбөр хийхээр товлосон огноо (Scheduled Payment Date). The date the payment is scheduled to occur. Sample values: '2025-01-31', '2025-02-28'.",
+    "amount": "Төлөх үндсэн дүн (Scheduled Principal Amount). The scheduled principal payment amount. The currency is determined by 'cur_code'. Sample values: 150000000.0, 52000000.0, 0.",
+    "int_amount": "Төлөх хүүний дүн (Scheduled Interest Amount). The scheduled interest payment amount. The currency is determined by 'cur_code'. Sample values: 3500000.0, 1250000.0, 0.",
+    "theor_bal": "Төлбөрийн дараах онолын үлдэгдэл (Theoretical Balance After Payment). The calculated remaining principal balance after the scheduled payment. Sample values: 275000000.0, 124500000.0, 0.",
+    "acnt_name": "Дансны нэр (Account Name). The descriptive name of the account, often the customer's name. Can be the same across different 'acnt_code' values if they are for different projects. Sample values: 'ТАВАН БОГД ХХК', 'ХҮЧ СПОРТ ХОРОО ХХК', 'БИЗНЕС ПЛАН ХХК'.",
+    "customer_name": "Зээлдэгчийн нэр (Customer Name). The full name of the customer/borrower. Sample values: 'ТАВАН БОГД ХХК', 'ДАРХАН БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК'.",
+    "status": "Зээлийн дансны төлөв (Loan Account Status). The current status of the loan account (O: Open, C: Closed, D: Deleted/Cancelled). Sample values: 'O', 'C', 'D'.",
+    "field_value": "Нэмэлт тайлбар / тэмдэглэл (Additional Field Value). A free-text field for additional notes or project details related to the payment line. Sample values: 'ХОВД ЭКО ЦЕМЕНТ ТӨСӨЛ', 'ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ'."
+  }
+}

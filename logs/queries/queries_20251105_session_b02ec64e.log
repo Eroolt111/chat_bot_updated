@@ -1,0 +1,149 @@
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:38:31.605227",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:39:24.769419",
+  "execution_time_seconds": 26.54,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_open_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         principal,         cur_code,         txn_date,         status,         principal * rate AS principal_in_mnt,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' AND principal IS NOT NULL AND rate IS NOT NULL )  SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date,     status,     principal_in_mnt FROM latest_open_loans WHERE rn = 1 ORDER BY principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Харилцагчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг - Гүйлгээний огноо: 2025-09-12 - Төлөв: O - Үлдэгдэл төгрөгөөр: 253,309,397,578.54 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:40:24.572534",
+  "execution_time_seconds": 25.14,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл Assistant:   [Current Question] ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_amount,     t.int_amount AS interest_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date < TRUNC(SYSDATE) + 20 ORDER BY t.schd_date ASC;",
+  "result_count": 4,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 20 хоногт төлөгдөх хуваарьтай зээлийн мэдээллийг хүргэж байна:  1. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Төлөх огноо: 2025-11-19 - Үлдэгдэл үндсэн төлбөр: 19,924,892.71 төгрөг - Хүүгийн төлбөр: 14,233,640.52 төгрөг - Валют: төгрөг  2. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Төлөх огноо: 2025-11-19 - Үлдэгдэл үндсэн төлбөр: 195,998,092.83 төгрөг - Хүүгийн төлбөр: 140,014,123.88 төгрөг - Валют: төгрөг  3. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Төлөх огноо: 2025-11-19 - Үлдэгдэл үндсэн төлбөр: 74,202,955.71 төгрөг - Хүүгийн төлбөр: 53,007,974.12 төгрөг - Валют: төгрөг  4. - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Төлөх огноо: 2025-11-19 - Үлдэгдэл үндсэн төлбөр: 118,188,572.8 төгрөг - Хүүгийн төлбөр: 84,429,747.43 төгрөг - Валют: төгрөг  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:41:35.900196",
+  "execution_time_seconds": 27.73,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл Assistant:  User: ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул Assistant:   [Current Question] цэцэнс майнингын дараачийн төлөлтийн хуваарь?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE         status = 'O'         AND UPPER(customer_name) = UPPER('ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК')     GROUP BY acnt_code ),  next_payments AS (     SELECT         t.acnt_code,         t.acnt_name,         t.customer_name,         t.schd_date,         t.amount,         t.int_amount,         t.cur_code     FROM dbm.bcom_nrs_detail t     INNER JOIN         max_versions mv         ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version     WHERE         t.status = 'O'         AND t.schd_date > SYSDATE         AND UPPER(t.customer_name) = UPPER('ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК')     ORDER BY t.schd_date ASC     FETCH FIRST 1 ROW ONLY )  SELECT * FROM next_payments;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу \"ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК\" компанийн дараагийн төлөлтийн хуваарийг хүргэж байна:  - Дансны код: 3600004485 - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - Төлөлтийн огноо: 2026-02-02 - Төлөх дүн: 933,333.33 евро - Хүүгийн дүн: 56,248.55 евро"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:45:49.950883",
+  "execution_time_seconds": 27.89,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл Assistant:  User: ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул Assistant:  User: цэцэнс майнингын дараачийн төлөлтийн хуваарь? Assistant:   [Current Question] хамгийн сүүлийн зээлдэгчийн зээлийг эрсдлийн сангаар цэвэршүүлж харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_borrower AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE customer_name IS NOT NULL AND adv_date IS NOT NULL     GROUP BY customer_name     ORDER BY MAX(adv_date) DESC     FETCH FIRST 1 ROW ONLY ),  latest_loans AS (     SELECT         acnt_code,         customer_name,         cur_code,         txn_date,         principal,         impairment_per,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail t     INNER JOIN latest_borrower lb ON t.customer_name = lb.customer_name     WHERE t.principal IS NOT NULL AND t.impairment_per IS NOT NULL )  SELECT     acnt_code,     customer_name,     cur_code,     txn_date,     principal,     impairment_per,     principal * (1 - impairment_per / 100) AS principal_after_impairment FROM latest_loans WHERE rn = 1 ORDER BY txn_date DESC;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00918: column ambiguously defined Help: https://docs.oracle.com/error-help/db/ora-00918/ [SQL: WITH latest_borrower AS ( SELECT customer_name FROM dbm.loan_balance_detail WHERE customer_name IS NOT NULL AND adv_date IS NOT NULL GROUP BY customer_name ORDER BY MAX(adv_date) DESC FETCH FIRST 1 ROW ONLY ), latest_loans AS ( SELECT acnt_code, customer_name, cur_code, txn_date, principal, impairment_per, ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn FROM dbm.loan_balance_detail t INNER JOIN latest_borrower lb ON t.customer_name = lb.customer_name WHERE t.principal IS NOT NULL AND t.impairment_per IS NOT NULL ) SELECT acnt_code, customer_name, cur_code, txn_date, principal, impairment_per, principal * (1 - impairment_per / 100) AS principal_after_impairment FROM latest_loans WHERE rn = 1 ORDER BY txn_date DESC] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна. Асуултаа өөрөөр асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T13:47:30.663984",
+  "execution_time_seconds": 21.04,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл Assistant:  User: ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул Assistant:  User: цэцэнс майнингын дараачийн төлөлтийн хуваарь? Assistant:  User: хамгийн сүүлийн зээлдэгчийн зээлийг эрсдлийн сангаар цэвэршүүлж харуул Assistant:   [Current Question] хамгийн сүүлийн зээлдэгчийн мэдээллийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH recent_customers AS (     SELECT customer_name     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL AND customer_name IS NOT NULL     GROUP BY customer_name     ORDER BY MAX(adv_date) DESC     FETCH FIRST 1 ROWS ONLY ),  latest_advances AS (     SELECT         t.customer_name,         t.acnt_code,         t.acnt_name,         t.adv_date,         t.adv_amount,         t.cur_code,         ROW_NUMBER()             OVER (                 PARTITION BY t.customer_name                 ORDER BY t.adv_date DESC, t.txn_date DESC             )             AS rn     FROM dbm.loan_balance_detail t     INNER JOIN recent_customers rc ON t.customer_name = rc.customer_name     WHERE t.adv_date IS NOT NULL )  SELECT     customer_name,     acnt_code,     acnt_name,     adv_date,     adv_amount,     cur_code FROM latest_advances WHERE rn = 1;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлийн зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК   - Дансны код: MN050036003600009224   - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК   - Олгосон огноо: 2025-08-26   - Зээлийн дүн: 331,573,389 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T14:05:00.016872",
+  "execution_time_seconds": 49.83,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр зээлийн үлдэгдэлтэй зээлийн мэдээлэл Assistant:  User: ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул Assistant:  User: цэцэнс майнингын дараачийн төлөлтийн хуваарь? Assistant:  User: хамгийн сүүлийн зээлдэгчийн зээлийг эрсдлийн сангаар цэвэршүүлж харуул Assistant:  User: хамгийн сүүлийн зээлдэгчийн мэдээллийг харуул Assistant:   [Current Question] Пирамид ордын бүх зээлийн дансыг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     cur_code,     principal,     status,     adv_date,     project_name FROM dbm.loan_balance_detail WHERE customer_name = 'ПИРАМИД-ОРД ХХК' ORDER BY adv_date DESC NULLS LAST, acnt_code ASC;",
+  "result_count": 500,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\" компанийн бүх зээлийн дансны мэдээллийг хүргэж байна:  - Дансны код: 3600004571     Дансны нэр: ПИРАМИД-ОРД ХХК     Харилцагчийн нэр: ПИРАМИД-ОРД ХХК     Валют: төгрөг     Үлдэгдэл зээл: 2,000,000,000     Төлөв: O     Олгосон огноо: 2018-06-19     Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  - Дансны код: 3600004571     Дансны нэр: ПИРАМИД-ОРД ХХК     Харилцагчийн нэр: ПИРАМИД-ОРД ХХК     Валют: төгрөг     Үлдэгдэл зээл: 2,000,000,000     Төлөв: O     Олгосон огноо: 2018-06-19     Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  - Дансны код: 3600004571     Дансны нэр: ПИРАМИД-ОРД ХХК     Харилцагчийн нэр: ПИРАМИД-ОРД ХХК     Валют: төгрөг     Үлдэгдэл зээл: 2,000,000,000     Төлөв: O     Олгосон огноо: 2018-06-19     Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  - Дансны код: 3600004571     Дансны нэр: ПИРАМИД-ОРД ХХК     Харилцагчийн нэр: ПИРАМИД-ОРД ХХК     Валют: төгрөг     Үлдэгдэл зээл: 2,000,000,000     Төлөв: O     Олгосон огноо: 2018-06-19     Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  - Дансны код: 3600004571     Дансны нэр: ПИРАМИД-ОРД ХХК     Харилцагчийн нэр: ПИРАМИД-ОРД ХХК     Валют: төгрөг     Үлдэгдэл зээл: 2,000,000,000     Төлөв: O     Олгосон огноо: 2018-06-19     Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  (Дээрх маягаар нийт зээлийн дансуудын мэдээлэл байна.)    Хэрэв тодорхой дансны мэдээлэл хэрэгтэй бол нэмэлтээр асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b02ec64e",
+  "timestamp": "2025-11-05T14:10:58.078230",
+  "execution_time_seconds": 34.09,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: ойрын 20 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул Assistant:  User: цэцэнс майнингын дараачийн төлөлтийн хуваарь? Assistant:  User: хамгийн сүүлийн зээлдэгчийн зээлийг эрсдлийн сангаар цэвэршүүлж харуул Assistant:  User: хамгийн сүүлийн зээлдэгчийн мэдээллийг харуул Assistant:  User: Пирамид ордын бүх зээлийн дансыг харуул Assistant:   [Current Question] Пирамид ордын мэдээллийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_piramid_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         project_name,         cur_code,         principal,         status,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE customer_name = 'ПИРАМИД-ОРД ХХК' )  SELECT     acnt_code,     acnt_name,     customer_name,     project_name,     cur_code,     principal,     status,     txn_date FROM latest_piramid_loans WHERE rn = 1 ORDER BY txn_date DESC;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу \"ПИРАМИД-ОРД ХХК\"-ийн зээлийн мэдээллийг хүргэж байна:  1. - Дансны код: 3600002539 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ - Валют: төгрөг - Үлдэгдэл зээл: 10,000,000,000 - Төлөв: O - Гүйлгээний огноо: 2025-09-12  2. - Дансны код: 3600002715 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ - Валют: төгрөг - Үлдэгдэл зээл: 0 - Төлөв: O - Гүйлгээний огноо: 2025-09-12  3. - Дансны код: 3600004571 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ - Валют: төгрөг - Үлдэгдэл зээл: 2,000,000,000 - Төлөв: O - Гүйлгээний огноо: 2025-09-12  4. - Дансны код: 3600004223 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ - Валют: төгрөг - Үлдэгдэл зээл: 2,000,000,000 - Төлөв: O - Гүйлгээний огноо: 2025-09-12  5. - Дансны код: 3600004191 - Дансны нэр: ПИРАМИД-ОРД ХХК - Харилцагч: ПИРАМИД-ОРД ХХК - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ - Валют: төгрөг - Үлдэгдэл зээл: 1,000,000,000 - Төлөв: O - Гүйлгээний огноо: 2025-09-12  Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар тусална."
+}
+--------------------------------------------------------------------------------

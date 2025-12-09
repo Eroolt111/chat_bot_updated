@@ -1,0 +1,72 @@
+{
+  "session_id": "e99279ad",
+  "timestamp": "2025-11-11T13:47:45.110663",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e99279ad",
+  "timestamp": "2025-11-11T13:48:20.035398",
+  "execution_time_seconds": 23.13,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Өнөөдөр төлөх хуваарьтай зээл байна уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date = TRUNC(SYSDATE);",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, өнөөдөр төлөх хуваарьтай зээл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e99279ad",
+  "timestamp": "2025-11-11T13:49:56.197575",
+  "execution_time_seconds": 48.52,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation Metadata] Turn 1:   Question: Өнөөдөр төлөх хуваарьтай зээл байна уу?   SQL Pattern: WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT t.* FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date = TRUNC(SYSDATE);...  [Current Question] Гүрбазрын хариуцдаг зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         acnt_name,         customer_name,         account_manager_name,         cur_code,         principal,         adv_amount,         adv_date,         txn_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         UPPER(account_manager_name) LIKE UPPER('%ГҮРБАЗАР%')         AND status = 'O' )  SELECT     acnt_code,     acnt_name,     customer_name,     account_manager_name,     cur_code,     principal,     adv_amount,     adv_date,     txn_date FROM latest_loans WHERE rn = 1 ORDER BY adv_date DESC NULLS LAST, txn_date DESC;",
+  "result_count": 21,
+  "final_answer": "Таны хүсэлтийн дагуу Гүрбазрын хариуцдаг зээлийн мэдээллийг хүргэж байна:  1. - Дансны код: 3600006576 - Дансны нэр: ЭНСАДА-ИСТЕРН ХХК - Харилцагч: ЭНСАДА-ИСТЕРН ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 26,856,932,250 - Олгосон дүн: 26,856,932,250 - Олгосон огноо: 2019-12-30 - Гүйлгээний огноо: 2021-04-04  2. - Дансны код: 3600006476 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 6,632,855,440.16 - Олгосон дүн: 6,632,855,440.16 - Олгосон огноо: 2019-11-25 - Гүйлгээний огноо: 2021-12-19  3. - Дансны код: MN390036003600008418 - Дансны нэр: АЧЛАЛ ТРЕЙД ХХК - Харилцагч: АЧЛАЛ ТРЕЙД ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 40,900,000,000 - Олгосон дүн: 66,913,136,664.02 - Олгосон огноо: 2019-09-07 - Гүйлгээний огноо: 2025-02-17  4. - Дансны код: 3600006189 - Дансны нэр: ИНЖИР ХХК - Харилцагч: ИНЖИР ХХК - Менежер: ГҮРБАЗАР.Д - Валют: ам.доллар - Үлдэгдэл зээл: 0 - Олгосон дүн: 0 - Олгосон огноо: 2019-08-20 - Гүйлгээний огноо: 2021-12-25  5. - Дансны код: 3600006188 - Дансны нэр: ИНЖИР ХХК - Харилцагч: ИНЖИР ХХК - Менежер: ГҮРБАЗАР.Д - Валют: ам.доллар - Үлдэгдэл зээл: 169,600 - Олгосон дүн: 169,600 - Олгосон огноо: 2019-08-20 - Гүйлгээний огноо: 2021-03-25  6. - Дансны код: 3600006078 - Дансны нэр: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Харилцагч: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 2,891,251,109.7 - Олгосон дүн: 4,070,000,000 - Олгосон огноо: 2019-07-31 - Гүйлгээний огноо: 2022-07-27  7. - Дансны код: 3600005523 - Дансны нэр: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Харилцагч: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 11,271,599,877.11 - Олгосон дүн: 11,930,000,000 - Олгосон огноо: 2019-04-02 - Гүйлгээний огноо: 2022-07-27  8. - Дансны код: 3600005524 - Дансны нэр: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Харилцагч: ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 0 - Олгосон дүн: 0 - Олгосон огноо: 2019-04-02 - Гүйлгээний огноо: 2020-06-10  9. - Дансны код: 3600005299 - Дансны нэр: МОНДУЛААН ТРЕЙД ХХК - Харилцагч: МОНДУЛААН ТРЕЙД ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 0 - Олгосон дүн: 0 - Олгосон огноо: 2018-12-28 - Гүйлгээний огноо: 2020-06-10  10. - Дансны код: 3600005297 - Дансны нэр: МОНДУЛААН ТРЕЙД ХХК - Харилцагч: МОНДУЛААН ТРЕЙД ХХК - Менежер: ГҮРБАЗАР.Д - Валют: төгрөг - Үлдэгдэл зээл: 13,744,500,000 - Олгосон дүн: 15,000,000,000 - Олгосон огноо: 2018-10-22 - Гүйлгээний огноо: 2022-07-27  (Тус бүрийн бусад зээлийн мэдээлэл шаардлагатай бол нэмэлтээр лавлана уу.)"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e99279ad",
+  "timestamp": "2025-11-11T17:16:25.277964",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+

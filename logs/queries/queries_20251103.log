@@ -1,0 +1,862 @@
+{
+  "timestamp": "2025-11-03T09:33:02.334328",
+  "execution_time_seconds": 26.1,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "нийт зээлийн үлдэгдлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкинд байгаа нийт зээлийн үлдэгдлийг валютын төрлөөр харуулав:  1. Юань: 401,122,622.5 2. Евро: 9,999,999.96 3. Иен: 1,940,093,068.55 4. Төгрөг: 1,136,148,761,376.85 5. Ам.доллар: 76,198,311.58"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:08:33.740582",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:08:41.046702",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:39:13.541989",
+  "execution_time_seconds": 31.15,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр зээлийн дүнтэй зээл харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_acnt AS (     SELECT *     FROM (         SELECT             lbd.*,             ROW_NUMBER()                 OVER (PARTITION BY lbd.acnt_code ORDER BY lbd.txn_date DESC)                 AS rn         FROM dbm.loan_balance_detail lbd         WHERE             lbd.approv_amount IS NOT NULL             AND lbd.rate IS NOT NULL     )     WHERE rn = 1 )  SELECT     acnt_code,     customer_name,     acnt_name,     approv_amount,     cur_code,     status,     txn_date,     approv_amount * rate AS approv_amount_in_mnt FROM latest_per_acnt ORDER BY approv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр зээлийн дүнтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000253 - Олгосон дүн: 200,000,000 ам.доллар - Гүйлгээний огноо: 2017-01-24 - Олгосон дүн төгрөгөөр: 497,578,000,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:44:30.198320",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:48:49.175089",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:49:03.786511",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:52:00.254777",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:54:04.981812",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:54:34.941542",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:54:46.837880",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:56:28.904084",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:58:36.021050",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T10:59:03.957302",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайна уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:00:10.955730",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:01:14.668884",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:04:29.788827",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "HI",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:04:38.460368",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:08:02.346978",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:08:06.154821",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:08:16.403427",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:10:14.018542",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:16:08.931505",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:17:18.535991",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:17:28.019056",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:17:31.987590",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:17:40.705557",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:17:56.637772",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:19:10.051544",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:20:20.104402",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:22:41.739146",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:23:06.819814",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:27:19.756200",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:27:55.642755",
+  "execution_time_seconds": 23.98,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр дүнтэй зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT         acnt_code,         customer_name,         adv_amount,         cur_code,         rate,         txn_date,         adv_amount * rate AS adv_amount_in_mnt,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL )  SELECT     acnt_code,     customer_name,     adv_amount,     cur_code,     adv_amount_in_mnt FROM latest_per_account WHERE rn = 1 ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр дүнтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000253 - Харилцагчийн нэр: Мэдээлэл олдсонгүй - Зээлийн үлдэгдэл: 197,278,016.04 ам.доллар - Төгрөгөөр тооцсон дүн: 490,806,003,325.7556 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:29:44.891515",
+  "execution_time_seconds": 20.07,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:   [Current Question] хамгийн өндөр дүнтэй зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT acnt_code,            MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,            MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,            MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,            MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS principal,            MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS rate,            MAX(principal * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS principal_in_mnt     FROM dbm.loan_balance_detail     WHERE status = 'O'     GROUP BY acnt_code     HAVING MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT acnt_code, acnt_name, customer_name, cur_code, principal, principal_in_mnt FROM latest_per_account ORDER BY principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр дүнтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Валют: төгрөг - Үлдэгдэл зээл: 253,309,397,578.54 - Төгрөгт шилжүүлсэн дүн: 253,309,397,578.54"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:31:21.533315",
+  "execution_time_seconds": 20.71,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:  User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:   [Current Question] хамгийн их зээлийн үлдэгдэлтэй зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_principal,         MAX(principal * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS principal_in_mnt     FROM dbm.loan_balance_detail     WHERE status = 'O'     GROUP BY acnt_code     HAVING MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT      acnt_code,      acnt_name,      customer_name,      cur_code,      original_principal,      principal_in_mnt FROM latest_per_account ORDER BY principal_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн их зээлийн үлдэгдэлтэй зээлийн мэдээллийг хүргэж байна:  - Дансны код: MN780036003600008686 - Дансны нэр: ДЦС-4 ТӨХК - Харилцагчийн нэр: ДЦС-4 ТӨХК - Валют: төгрөг - Үлдэгдэл зээл: 253,309,397,578.54 төгрөг (орчуулагдсан төгрөгөөр: 253,309,397,578.54)"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:32:36.766551",
+  "execution_time_seconds": 24.85,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:  User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:  User: хамгийн их зээлийн үлдэгдэлтэй зээл? Assistant:   [Current Question] хамгийн өндөр олголттой зээлийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_disbursed AS (     SELECT          acnt_code,         MAX(acnt_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS acnt_name,         MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(adv_date) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_date,         MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS original_adv_amount,         MAX(adv_amount * rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS adv_amount_in_mnt     FROM dbm.loan_balance_detail     WHERE adv_amount IS NOT NULL       AND (acnt_name IS NOT NULL OR customer_name IS NOT NULL)     GROUP BY acnt_code     HAVING MAX(adv_amount) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ) SELECT      acnt_code,     acnt_name,     customer_name,     cur_code,     adv_date,     original_adv_amount,     adv_amount_in_mnt FROM latest_disbursed ORDER BY adv_amount_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олголттой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127 - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК - Валют: ам.доллар - Олгосон огноо: 2012-10-05 - Олгосон дүн: 100,000,000 - Олголтын дүн төгрөгөөр: 359,361,000,000"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:33:44.845108",
+  "execution_time_seconds": 18.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:  User: хамгийн өндөр дүнтэй зээлийг харуул Assistant:  User: хамгийн их зээлийн үлдэгдэлтэй зээл? Assistant:  User: хамгийн өндөр олголттой зээлийг харуул Assistant:   [Current Question] Дараа долоо хоногт төлөгдөх зээлийн хуваарь?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 7 ORDER BY t.schd_date ASC;",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, дараа долоо хоногт төлөгдөх зээлийн хуваарь таны хайсан нөхцлөөр олдсонгүй. Та өөр асуулт байвал баяртайгаар хариулахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T11:50:44.717480",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:02:42.709148",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:06:01.509666",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:11:41.433205",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:14:21.790095",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:18:30.073885",
+  "execution_time_seconds": 0.0,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд ямар мэдээлэл хэрэгтэй байна вэ?"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:20:23.364058",
+  "execution_time_seconds": 30.38,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "ойрын 30 хоногт төлөгдөх хуваарьтай зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code,     t.status,     t.nrs_version FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date < TRUNC(SYSDATE) + 30 ORDER BY t.schd_date ASC, t.acnt_code ASC;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн өндөр олготой зээлийн мэдээллийг хүргэж байна:  - Дансны код: 3600000127   - Дансны нэр: ЭРДЭНЭС ТАВАН ТОЛГОЙ ХК   - Харилцагчийн нэр: ЭРДЭНЭС ТАВАНТОЛГОЙ ХК   - Валют: ам.доллар   - Олгосон огноо: 2012-10-05   - Олгосон дүн: 100,000,000   - Олгосон дүн төгрөгөөр: 359,361,000,000"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:20:31.243781",
+  "execution_time_seconds": 38.25,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "ойрын 30 хоногт төлөгдөх хуваарьтай зээл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH max_versions AS (     SELECT         acnt_code,         MAX(nrs_version) AS latest_nrs_version     FROM dbm.bcom_nrs_detail     WHERE status = 'O'     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code,     t.status,     t.nrs_version FROM dbm.bcom_nrs_detail t INNER JOIN     max_versions mv     ON t.acnt_code = mv.acnt_code AND t.nrs_version = mv.latest_nrs_version WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date < TRUNC(SYSDATE) + 30 ORDER BY t.schd_date ASC, t.acnt_code ASC;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу ойрын 30 хоногт төлөгдөх хуваарьтай зээлийн мэдээллийг хүргэж байна:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Төлөх дүн: 19,924,892.71 төгрөг      Хүүгийн дүн: 14,233,640.52 төгрөг    2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Төлөх дүн: 195,998,092.83 төгрөг      Хүүгийн дүн: 140,014,123.88 төгрөг    3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Төлөх дүн: 118,188,572.8 төгрөг      Хүүгийн дүн: 84,429,747.43 төгрөг    4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-11-19      Төлөх дүн: 74,202,955.71 төгрөг      Хүүгийн дүн: 53,007,974.12 төгрөг    5. Харилцагч: ДЦС-4 ТӨХК      Дансны нэр: ДЦС-4 ТӨХК      Төлөх огноо: 2025-11-25      Төлөх дүн: 0 төгрөг      Хүүгийн дүн: 2,931,847,205.83 төгрөг    6. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Төлөх дүн: 30,148,034.41 иен      Хүүгийн дүн: 2,104,580.59 иен    7. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Төлөх дүн: 6,457,708 иен      Хүүгийн дүн: 450,801.1 иен    8. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Төлөх дүн: 464,771.33 иен      Хүүгийн дүн: 32,444.86 иен    9. Харилцагч: ПРОМОН ТРЕЙД ХХК      Дансны нэр: Промон Трейд ХХК      Төлөх огноо: 2025-12-01      Төлөх дүн: 100,000,000 төгрөг      Хүүгийн дүн: 12,884,602.74 төгрөг    Хэрэв нэмэлт мэдээлэл хэрэгтэй бол баяртайгаар туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:24:30.600290",
+  "execution_time_seconds": 17.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Хамгийн өндөр олготтой зээл? Assistant:  User: ойрын 30 хоногт төлөгдөх хуваарьтай зээл? Assistant:   [Current Question] Нийт зээлийн үлдэгдэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн богино хугацаанд зээл олгосон байгууллагын мэдээллийг хүргэж байна:  - Байгууллагын нэр: МИАТ ТӨХК   - Харилцагчийн код: 9360000022   - Олгосон огноо: 2012-06-21"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:24:32.369279",
+  "execution_time_seconds": 19.31,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Хамгийн өндөр олготтой зээл? Assistant:  User: ойрын 30 хоногт төлөгдөх хуваарьтай зээл? Assistant:   [Current Question] Нийт зээлийн үлдэгдэл?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_balances AS (     SELECT         acnt_code,         principal,         cur_code,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE status = 'O' )  SELECT     cur_code,     SUM(principal) AS total_principal_balance FROM latest_balances WHERE rn = 1 GROUP BY cur_code ORDER BY cur_code;",
+  "result_count": 5,
+  "final_answer": "Таны хүсэлтийн дагуу Хөгжлийн Банкинд байгаа нийт зээлийн үлдэгдлийг валютын төрлөөр харуулав:  - Юань: 401,122,622.5 - Евро: 9,999,999.96 - Иен: 1,940,093,068.55 - Төгрөг: 1,136,148,761,376.85 - Ам.доллар: 76,198,311.58"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T12:25:06.476528",
+  "execution_time_seconds": 25.68,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Хамгийн өндөр олготтой зээл? Assistant:  User: ойрын 30 хоногт төлөгдөх хуваарьтай зээл? Assistant:  User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:  User: Нийт зээлийн үлдэгдэл? Assistant:   [Current Question] хэзээ хаагдсан бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     end_date FROM dbm.loan_balance_detail WHERE status = 'C' ORDER BY end_date DESC NULLS LAST;",
+  "result_count": 500,
+  "final_answer": "Таны хүсэлтийн дагуу \"ВЕСТЕРН ХОЛД\" байгууллагын зээлүүд хаагдсан огноонуудыг хүргэж байна:  - Дансны код: 3600006339 - Дансны нэр: ВЕСТЕРН ХОЛД ХХК - Харилцагчийн нэр: ВЕСТЕРН ХОЛД - Хаагдсан огноо: 2030-09-23  - Дансны код: 3600006529 - Дансны нэр: ВЕСТЕРН ХОЛД ХХК - Харилцагчийн нэр: ВЕСТЕРН ХОЛД - Хаагдсан огноо: 2030-09-23  - Дансны код: 3600006321 - Дансны нэр: ВЕСТЕРН ХОЛД ХХК - Харилцагчийн нэр: ВЕСТЕРН ХОЛД - Хаагдсан огноо: 2030-09-23  ... (мөн бусад зээлүүдийн мэдээлэл ижил бүтэцтэй үргэлжилнэ)  Хэрэв тодорхой нэг зээлийн хаагдсан огноо хэрэгтэй бол нэмэлт мэдээлэл өгнө үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T13:43:16.052591",
+  "execution_time_seconds": 47.91,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Хамгийн өндөр олготтой зээл? Assistant:  User: ойрын 30 хоногт төлөгдөх хуваарьтай зээл? Assistant:  User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:  User: Нийт зээлийн үлдэгдэл? Assistant:  User: хэзээ хаагдсан бэ? Assistant:   [Current Question] Хамгийн богино хугацаанд зээл олгосон байгууллаг?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH earliest_loan AS (     SELECT         cust_code,         customer_name,         MIN(adv_date) AS earliest_adv_date     FROM dbm.loan_balance_detail     WHERE adv_date IS NOT NULL     GROUP BY cust_code, customer_name ),  earliest_loan_details AS (     SELECT         lbd.acnt_code,         lbd.cust_code,         lbd.customer_name,         lbd.cur_code,         lbd.adv_date     FROM dbm.loan_balance_detail lbd     INNER JOIN         earliest_loan el         ON lbd.cust_code = el.cust_code AND lbd.adv_date = el.earliest_adv_date     WHERE lbd.adv_date IS NOT NULL )  SELECT     cust_code,     customer_name,     adv_date,     cur_code FROM earliest_loan_details ORDER BY adv_date ASC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн богино хугацаанд зээл олгосон байгууллага нь \"МИАТ ТӨХК\" байна.  - Харилцагчийн код: 9360000022 - Зээл олгосон огноо: 2012-06-21 - Валют: ам.доллар"
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T13:44:23.566228",
+  "execution_time_seconds": 41.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: ойрын 30 хоногт төлөгдөх хуваарьтай зээл? Assistant:  User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:  User: Нийт зээлийн үлдэгдэл? Assistant:  User: хэзээ хаагдсан бэ? Assistant:  User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:   [Current Question] хэзээ хаагдсан хэд хоногын хугацаатай олгосон бэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     customer_name,     adv_date,     end_date,     TRUNC(end_date - adv_date) AS duration_days FROM dbm.loan_balance_detail WHERE     adv_date IS NOT NULL     AND end_date IS NOT NULL ORDER BY end_date DESC;",
+  "result_count": 500,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн сүүлд хаагдсан зээл болон түүний хугацааны мэдээллийг хүргэж байна:  - Харилцагчийн нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК   - Зээл олгосон огноо: 2024-05-09   - Зээл хаагдсан огноо: 2031-10-28   - Зээлийн хугацаа: 2,728 хоног  Хэрэв илүү дэлгэрэнгүй мэдээлэл хэрэгтэй бол дахин асуугаарай."
+}
+--------------------------------------------------------------------------------
+
+{
+  "timestamp": "2025-11-03T13:45:38.120274",
+  "execution_time_seconds": 21.95,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Previous Conversation] User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:  User: Нийт зээлийн үлдэгдэл? Assistant:  User: хэзээ хаагдсан бэ? Assistant:  User: Хамгийн богино хугацаанд зээл олгосон байгууллаг? Assistant:  User: хэзээ хаагдсан хэд хоногын хугацаатай олгосон бэ? Assistant:   [Current Question] хамгийн их зээлийн үлдэгдэлтэй зээлдэгчийг харуул",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_per_account AS (     SELECT          acnt_code,          cust_code,          MAX(customer_name) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS customer_name,         MAX(cur_code) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS cur_code,         MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS latest_principal,         MAX(rate) KEEP (DENSE_RANK LAST ORDER BY txn_date) AS latest_rate     FROM dbm.loan_balance_detail     WHERE status = 'O'     GROUP BY acnt_code, cust_code     HAVING MAX(principal) KEEP (DENSE_RANK LAST ORDER BY txn_date) > 0 ), customer_totals AS (     SELECT          cust_code,          customer_name,          SUM(latest_principal * latest_rate) AS total_balance_in_mnt,         LISTAGG(cur_code || ': ' || TO_CHAR(latest_principal, '9999999990.00'), '; ') WITHIN GROUP (ORDER BY cur_code) AS original_amounts_by_currency     FROM latest_per_account     GROUP BY cust_code, customer_name ) SELECT cust_code, customer_name, total_balance_in_mnt, original_amounts_by_currency FROM customer_totals ORDER BY total_balance_in_mnt DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Таны хүсэлтийн дагуу хамгийн их зээлийн үлдэгдэлтэй зээлдэгчийн мэдээллийг хүргэж байна:  - Харилцагчийн код: 9360000029 - Нэр: ДЦС-4 ТӨХК - Нийт зээлийн үлдэгдэл (төгрөгөөр): 253,309,397,578.54 - Валютын үлдэгдлүүд: MNT: ##############"
+}
+--------------------------------------------------------------------------------
+
