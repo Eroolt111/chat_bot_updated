@@ -1,0 +1,244 @@
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:23:39.174031",
+  "execution_time_seconds": 2.78,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд Монгол Улсын Хөгжлийн Банк болон банкны өгөгдлийн сан, өгөгдөл боловсруулахтай холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:30:07.722053",
+  "execution_time_seconds": 44.6,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хэпийн ангилалтай зээлүүдийг гарга",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     customer_name,     acnt_name,     class_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND class_name = 'ХЭВИЙН' ORDER BY principal DESC;",
+  "result_count": 92,
+  "final_answer": "Хэвийн ангилалтай зээлүүдийн мэдээлэл:  1. ДЦС-4 ТӨХК    - Дансны нэр: ДЦС-4 ТӨХК    - Үлдэгдэл: 253,309,397,578.54 төгрөг  2. МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК    - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК    - Үлдэгдэл: 14,116,400,000 төгрөг  3. МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК    - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК    - Үлдэгдэл: 13,998,571,264 төгрөг  ...  57. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Үлдэгдэл: 677,937,113.59 иен  80. ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Үлдэгдэл: 146,644,843.89 юань  89. ЭРЧИМ ХҮЧНИЙ ЯАМ    - Дансны нэр: ТАВАНТОЛГОЙН ЦАХИЛГААН СТАНЦ ТӨСӨЛ 1    - Үлдэгдэл: 14,816,251 ам.доллар  91. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Үлдэгдэл: 5,333,333.34 евро  Бусад хэвийн ангилалтай зээлүүдийн дэлгэрэнгүй мэдээллийг авахыг хүсвэл тодорхой харилцагчийн нэр эсвэл дансны дугаараар лавлана уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:32:17.929509",
+  "execution_time_seconds": 53.53,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Хэпийн ангилалтай зээлүүдийг хайж байна.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     customer_name,     acnt_name,     class_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND class_name = 'ХЭВИЙН' ORDER BY principal DESC; ```  [Current Question] Зээлдэгчдээр нь харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH filtered_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         class_name,         principal,         cur_code,         status,         txn_date     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND status = 'O'         AND principal > 0         AND class_name = 'ХЭВИЙН' )  SELECT     customer_name,     cur_code,     SUM(principal) AS total_principal,     COUNT(*) AS loan_count FROM filtered_loans GROUP BY customer_name, cur_code ORDER BY total_principal DESC;",
+  "result_count": 6,
+  "final_answer": "Хэвийн ангилалтай зээлийн дүнг зээлдэгчээр нь харуулбал:  - ДЦС-4 ТӨХК: 253,309,397,578.54 төгрөг, нийт 1 зээлтэй - МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК: 180,973,211,671.32 төгрөг, нийт 80 зээлтэй - ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК: 722,532,520.36 иен, нийт 2 зээлтэй - ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК: 401,122,622.5 юань, нийт 6 зээлтэй - ЭРЧИМ ХҮЧНИЙ ЯАМ: 14,816,251 ам.доллар, нийт 1 зээлтэй - ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК: 9,999,999.96 евро, нийт 2 зээлтэй"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:34:33.856029",
+  "execution_time_seconds": 25.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч ХЭВИЙН ангилалтай зээлүүдийг хамгийн сүүлийн хугацааны мэдээллээс авч, зээлдэгчээр нь бүлэглэн харуулах хүсэлт гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH filtered_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         class_name,         principal,         cur_code,         status,         txn_date     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND status = 'O'         AND principal > 0         AND class_name = 'ХЭВИЙН' )  SELECT     customer_name,     cur_code,     SUM(principal) AS total_principal,     COUNT(*) AS loan_count FROM filtered_loans GROUP BY customer_name, cur_code ORDER BY total_principal DESC; ```  [Current Question] Цэцэнсийн зээлүүдийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     class_name,     status,     adv_date,     adv_amount,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND (         UPPER(customer_name) LIKE '%ЦЭЦЭНС%'         OR UPPER(acnt_name) LIKE '%ЦЭЦЭНС%'     ) ORDER BY status ASC, adv_date DESC;",
+  "result_count": 8,
+  "final_answer": "Цэцэнс Майнинг энд Энержи ХХК-ийн зээлийн мэдээлэл:  1. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 0 ам.доллар    - Зээлийн ангилал: ХЭВИЙН    - Статус: C    - Зээл олгосон дүн: 0    - Огноо: 2025-09-12  2. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 0 төгрөг    - Зээлийн ангилал: ХЭВИЙН    - Статус: D    - Зээл олгосон дүн: 0    - Огноо: 2025-09-12  3. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 677,937,113.59 иен    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 2,063,891,273.53    - Зээл олгосон огноо: 2018-10-02    - Огноо: 2025-09-12  4. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 0 иен    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 0    - Зээл олгосон огноо: 2018-06-28    - Огноо: 2025-09-12  5. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 4,666,666.62 евро    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 14,000,000    - Зээл олгосон огноо: 2018-06-21    - Огноо: 2025-09-12  6. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 44,595,406.77 иен    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 135,764,909.12    - Зээл олгосон огноо: 2018-06-21    - Огноо: 2025-09-12  7. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 5,333,333.34 евро    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 16,000,000    - Зээл олгосон огноо: 2018-05-02    - Огноо: 2025-09-12  8. Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Зээлийн үлдэгдэл: 0 евро    - Зээлийн ангилал: ХЭВИЙН    - Статус: O    - Зээл олгосон дүн: 0    - Зээл олгосон огноо: 2018-05-02    - Огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:36:40.626666",
+  "execution_time_seconds": 17.61,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч 'ХЭВИЙН' ангилалтай зээлүүдийг хамгийн сүүлийн хугацааны мэдээллээс авч, зээлдэгчээр нь бүлэглэн харуулах хүсэлт гаргасан. Дараа нь 'Цэцэнсийн' зээлүүдийг харуулахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     class_name,     status,     adv_date,     adv_amount,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND (         UPPER(customer_name) LIKE '%ЦЭЦЭНС%'         OR UPPER(acnt_name) LIKE '%ЦЭЦЭНС%'     ) ORDER BY status ASC, adv_date DESC; ```  [Current Question] ямар ангиллын зээл хамгийн их байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail) GROUP BY class_name ORDER BY loan_count DESC;",
+  "result_count": 5,
+  "final_answer": "Хамгийн олон зээлтэй ангилал дараах байдалтай байна:  1. ХЭВИЙН — 427 зээл 2. АНХААРАЛ ХАНДУУЛАХ — 72 зээл 3. МУУ — 48 зээл 4. ЭРГЭЛЗЭЭТЭЙ — 30 зээл 5. ХЭВИЙН БУС — 26 зээл"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:38:14.453004",
+  "execution_time_seconds": 13.98,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч 'ХЭВИЙН' ангилалтай зээлүүдийг хамгийн сүүлийн хугацааны мэдээллээс авч, зээлдэгчээр нь бүлэглэн харуулахыг хүссэн. Дараа нь 'Цэцэнсийн' нэртэй зээлүүдийг хайж, харуулсан. Эцэст нь ямар ангиллын зээл хамгийн их байгааг тодруулах хүсэлт гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail) GROUP BY class_name ORDER BY loan_count DESC; ```  [Current Question] ямар ангиллын зээл хамгийн их байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail) GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн олон тоотой зээлийн ангилал нь ХЭВИЙН бөгөөд нийт 427 зээл байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:54:22.598479",
+  "execution_time_seconds": 19.59,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн сүүлийн хугацааны 'ХЭВИЙН' ангилалтай зээлүүдийг зээлдэгчээр нь бүлэглэн харуулахыг хүссэн. Дараа нь 'Цэцэнсийн' нэртэй зээлүүдийг хайж харуулсан. Эцэст нь ямар ангиллын зээл хамгийн их байгааг тоолсон.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail) GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] Нээлттэй зээлүүдээс шүүнэ үү",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O' GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн олон нээлттэй зээлтэй ангилал:   - Ангилал: ХЭВИЙН   - Зээлийн тоо: 122"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:55:27.857023",
+  "execution_time_seconds": 28.16,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн сүүлийн хугацааны мэдээллээс 'ХЭВИЙН' ангилалтай зээлүүдийг зээлдэгчээр нь бүлэглэн харуулахыг хүссэн. Дараа нь 'Цэцэнсийн' нэртэй зээлүүдийг хайж харуулсан. Эцэст нь ямар ангиллын зээл хамгийн их байгааг тоолсон бөгөөд хамгийн их ангиллыг нэг мөрөөр харуулах хүсэлт гаргасан. Сүүлд нээлттэй зээлүүдийг шүүхийг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O' GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] нээлттэй мөн үлдэгдэлтэй зээл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY principal DESC;",
+  "result_count": 153,
+  "final_answer": "Нээлттэй бөгөөд үлдэгдэлтэй зээлийн мэдээлэл:  1. ДЦС-4 ТӨХК – Зээлийн данс: ДЦС-4 ТӨХК, Үлдэгдэл: 253,309,397,578.54 төгрөг 2. ЭРЭЛ ХХК – Зээлийн данс: ЭРЭЛ ХХК, Үлдэгдэл: 109,327,707,274.98 төгрөг 3. БЭРЭН ГРУПП ХХК – Зээлийн данс: БЭРЭН ГРУПП ХХК, Үлдэгдэл: 88,322,594,178.03 төгрөг 4. МОННИС МАЙНИНГ ХХК – Зээлийн данс: МОННИС МАЙНИНГ ХХК, Үлдэгдэл: 67,463,373,885.46 төгрөг 5. НВЦ ХХК – Зээлийн данс: НВЦ ХХК, Үлдэгдэл: 59,840,550,000 төгрөг 6. МОНГОЛ ДРАЙ МИЛК ХХК – Зээлийн данс: МОНГОЛ ДРАЙ МИЛК ХХК, Үлдэгдэл: 47,902,858,743.09 төгрөг 7. АЧЛАЛ ТРЕЙД ХХК – Зээлийн данс: АЧЛАЛ ТРЕЙД ХХК, Үлдэгдэл: 40,900,000,000 төгрөг 8. ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ – Зээлийн данс: ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ, Үлдэгдэл: 35,783,435,878.49 төгрөг 9. МОННИС МАЙНИНГ ХХК – Зээлийн данс: МОННИС МАЙНИНГ ХХК, Үлдэгдэл: 26,874,248,987.01 төгрөг 10. ЭНСАДА-ИСТЕРН ХХК – Зээлийн данс: ЭНСАДА-ИСТЕРН ХХК, Үлдэгдэл: 26,856,932,250 төгрөг ...   (Нийт 153 зээл байна. Бүх зээлийн дэлгэрэнгүй мэдээллийг хүсвэл тодорхой харилцагч эсвэл зээлийн дансаар лавлана уу.)  Зээлийн валютууд: - MNT: төгрөг - USD: ам.доллар - EUR: евро - JPY: иен - CNY: юань  Жич: Үлдэгдэл дүн болон бусад мэдээлэл нь тухайн зээлийн хамгийн сүүлийн өдрийн байдлаар байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:57:03.129714",
+  "execution_time_seconds": 15.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн сүүлийн хугацааны мэдээллээс 'ХЭВИЙН' ангилалтай зээлүүдийг зээлдэгчээр бүлэглэн харуулахыг хүссэн. Дараа нь 'Цэцэнсийн' нэртэй зээлүүдийг хайж, зээл ангиллын тоо хэмжээг тодруулсан. Эцэст нь нээлттэй болон үлдэгдэлтэй зээлүүдийг шүүж, хамгийн их ангиллыг нэг мөрөөр харуулахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     txn_date FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY principal DESC; ```  [Current Question] Нийт хэдэн хэвийн зээл байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(*) AS normal_loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND class_name = 'ХЭВИЙН';",
+  "result_count": 1,
+  "final_answer": "Нийт хэвийн зээлийн тоо: 92 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T13:58:10.901653",
+  "execution_time_seconds": 17.96,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн сүүлийн хугацааны мэдээллээс 'ХЭВИЙН' ангилалтай зээлүүдийг зээлдэгчээр бүлэглэн харуулах, 'Цэцэнсийн' нэртэй зээлүүдийг хайж тоолох, нээлттэй болон үлдэгдэлтэй зээлүүдийг шүүх, хамгийн их ангиллын зээлийг нэг мөрөөр харуулах, мөн нийт хэдэн хэвийн зээл байгааг тоолох хүсэлтүүд гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT COUNT(*) AS normal_loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND class_name = 'ХЭВИЙН'; ```  [Current Question] ямар ангиллын зээл хамгийн их байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     class_name,     COUNT(*) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн олон тоогоор бүртгэгдсэн зээлийн ангилал нь ХЭВИЙН бөгөөд нийт 92 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T14:01:04.329542",
+  "execution_time_seconds": 20.33,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн сүүлийн хугацааны мэдээллээс 'ХЭВИЙН' ангилалтай зээлүүдийг зээлдэгчээр бүлэглэн харуулах, 'Цэцэнсийн' нэртэй зээлүүдийг хайж тоолох, нээлттэй болон үлдэгдэлтэй зээлүүдийг шүүх, хамгийн их ангиллын зээлийг нэг мөрөөр харуулах, мөн нийт хэдэн хэвийн зээл байгааг тоолох хүсэлтүүд гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     class_name,     COUNT(*) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] ямар ангиллын зээл хамгийн олон байна?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     class_name,     COUNT(*) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 GROUP BY class_name ORDER BY loan_count DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн олон тоотой зээлийн ангилал нь ХЭВИЙН бөгөөд нийт 92 зээл байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "1a53837d",
+  "timestamp": "2025-12-11T14:09:58.455023",
+  "execution_time_seconds": 1.57,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны банкны үйлчилгээ, өгөгдлийн сан, эсвэл өгөгдлийн шинжилгээтэй холбоотой асуулт байвал асуугаарай. Би танд тодорхой, мэргэжлийн хариулт өгөхөд бэлэн байна."
+}
+--------------------------------------------------------------------------------
+

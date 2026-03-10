@@ -1,0 +1,29 @@
+{
+  "original_table_name": "dbm.borrowing_balance_detail",
+  "table_name": "zeelej_avaltiin_uldegdel",
+  "table_summary": "Банкны татан төвлөрүүлсэн эх үүсвэр буюу зээлсэн мөнгөний өдрийн дэлгэрэнгүй мэдээллийг агуулсан харагдац. Энэ нь бусад банк, олон улсын байгууллага, засгийн газраас авсан зээл, татан төвлөрүүлсэн хөрөнгийг хамарна. Хүүний зардал, хугацаа, төлөв зэрэг мэдээллийг агуулна. (A comprehensive view providing daily snapshots of borrowings by the bank. This includes loans from other banks, international organizations, government funding, etc. Contains interest expense, maturity dates, and status. Use this for borrowing/funding related queries.)",
+  "column_descriptions": {
+    "module": "Модуль (Module). The system module that generated this record. Identifies which business area the borrowing belongs to. Sample values: 'BORROWING', 'FUNDING'.",
+    "acnt_code": "Дансны дугаар (Account Code). The unique identifier for the borrowing account. This is the primary key for joining borrowing-related data. Sample values: 3600012356, MN270050003600012356.",
+    "acnt_name": "Дансны нэр (Account Name). The descriptive name of the borrowing, often the lender's name or deal name. Sample values: 'АХБ ЗЭЭЛ', 'ДЭЛХИЙН БАНК ЗЭЭЛ', 'JICA ХӨТӨЛБӨР'.",
+    "cust_code": "Харилцагчийн код (Customer Code). The unique identifier for the lender (bank or institution providing the funds). Sample values: 9360055555, 9360099999.",
+    "cust_name": "Харилцагчийн нэр (Customer Name). The name of the lender institution. Sample values: 'АЗИЙН ХӨГЖЛИЙН БАНК', 'ДЭЛХИЙН БАНК', 'JICA'.",
+    "cur_code": "Валют (Currency). The currency code for all monetary values in this row (e.g., MNT, USD). All amount columns are in this currency. Sample values: MNT, USD, EUR, JPY. **Always SELECT with monetary values. GROUP BY for aggregations.**",
+    "principal": "Үндсэн дүн (Principal). The remaining principal balance of the borrowing (outstanding debt) as of 'txn_date'. The currency is determined by 'cur_code'. Sample values: 50000000000.0, 1000000000.0.",
+    "prod_code": "Бүтээгдэхүүний код (Product Code). The code identifying the type of borrowing product. Sample values: 'SOFT_LOAN', 'SYNDICATED', 'BILATERAL'.",
+    "prod_name": "Бүтээгдэхүүний нэр (Product Name). The descriptive name of the borrowing product. Sample values: 'Хөнгөлөлттэй зээл', 'Синдикат зээл', 'Хоёр талт зээл'.",
+    "type_name": "Төрлийн нэр (Type Name). The classification type of the borrowing. Sample values: 'Урт хугацаат', 'Богино хугацаат', 'Хөнгөлөлттэй'.",
+    "int_rate": "Хүүгийн хувь (Interest Rate). The annual interest rate percentage for the borrowing. Sample values: 2.5, 5.0, 8.0.",
+    "int_exp": "Хүүгийн зардал (Interest Expense). Interest expense that has accrued in the reporting period. The currency is determined by 'cur_code'. Sample values: 125000000.0, 50000000.0.",
+    "int_pay": "Хүүний хуримтлагдсан өглөг (Accrued Interest Payable). Interest that has accrued but not yet paid. The currency is determined by 'cur_code'. Sample values: 83333333.33, 0.",
+    "int_pay_bill": "Хүүний өр (Interest Payable Billed). Interest that has been billed and is due to be paid. The currency is determined by 'cur_code'. Sample values: 50000000.0, 0.",
+    "paid_int": "Төлсөн хүү (Interest Paid). Interest that has been paid to the lender. The currency is determined by 'cur_code'. Sample values: 250000000.0, 0.",
+    "paid_princ": "Төлсөн үндсэн дүн (Principal Paid). Principal amount that has been repaid. The currency is determined by 'cur_code'. Sample values: 5000000000.0, 0.",
+    "txn_date": "Гүйлгээний огноо (Transaction Date). The snapshot date for the borrowing's balance and status. **This is the most important column for time-based queries. To find the latest state of a borrowing, order by this column descending or filter by MAX(txn_date).** Sample values: '2025-01-15', '2025-02-01'.",
+    "value_date": "Валютлах өдөр (Value Date). The date from which interest calculation begins. Sample values: '2020-01-01', '2022-06-15'.",
+    "maturity_date": "Дуусах огноо (Maturity Date). The date when the borrowing must be fully repaid. Sample values: '2030-12-31', '2028-06-30'.",
+    "term_len": "Хугацаа (Term Length). The duration of the borrowing contract in months or years. Sample values: 120, 60, 360.",
+    "rate": "Ханш (Exchange Rate). The exchange rate for the currency on the 'txn_date'. Use for converting to MNT. Sample values: 1.0 (for MNT), 3450.0 (for USD), 25.0 (for JPY).",
+    "status": "Төлөв (Status). The current status of the borrowing account. Sample values: 'O' (Open/Active), 'C' (Closed), 'N' (New), 'D' (Deleted/Cancelled)."
+  }
+}

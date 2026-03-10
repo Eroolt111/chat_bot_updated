@@ -11,11 +11,11 @@ class Config:
     """Configuration class"""
     
     # ─── Database Configuration ────────────────────────────────────────────────
-    DB_HOST: str = os.getenv("DB_HOST", "192.168.10.220")
+    DB_HOST: str = os.getenv("DB_HOST", "")
     DB_PORT: str = os.getenv("DB_PORT", "1522")
-    DB_NAME: str = os.getenv("DB_NAME", "ORCL")
-    DB_USER: str = os.getenv("DB_USER", "dbm")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD","testdbm2025")
+    DB_NAME: str = os.getenv("DB_NAME", "")
+    DB_USER: str = os.getenv("DB_USER", "")
+    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
 
     @property 
     def DATABASE_URL(self) -> str:
@@ -24,7 +24,7 @@ class Config:
             f"@{self.DB_HOST}:{self.DB_PORT}/?service_name={self.DB_NAME}"
         )
     
-    
+     
     # ─── LLM BACKEND SELECTION ────────────────────────────────────────────────    
     # "ollama" or "openai"
     LLM_BACKEND: str = os.getenv("LLM_BACKEND", "ollama").lower() 
@@ -51,7 +51,7 @@ class Config:
     GEMINI_REQUEST_TIMEOUT: float = float(os.getenv("GEMINI_REQUEST_TIMEOUT", "300.0"))
     # ─── Application Configuration ───────────────────────────────────────────
     DEBUG: bool = os.getenv("DEBUG", "False").lower() in ("true", "1", "yes")
-    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO") 
     
     # ─── Storage Configuration ───────────────────────────────────────────────
     TABLE_INFO_DIR: str = os.getenv("TABLE_INFO_DIR", "PostgreSQL_TableInfo")
@@ -62,7 +62,7 @@ class Config:
     API_PORT: int = int(os.getenv("API_PORT", "8000"))
     
     # ─── Query Pipeline Limits ──────────────────────────────────────────────
-    MAX_TABLE_RETRIEVAL: int = int(os.getenv("MAX_TABLE_RETRIEVAL", "3"))
+    MAX_TABLE_RETRIEVAL: int = int(os.getenv("MAX_TABLE_RETRIEVAL", "5"))
     MAX_ROW_RETRIEVAL: int = int(os.getenv("MAX_ROW_RETRIEVAL", "10"))
     MAX_ROWS_PER_TABLE: int = int(os.getenv("MAX_ROWS_PER_TABLE", "500"))
     TWO_STAGE_RETRIEVAL: bool = os.getenv("TWO_STAGE_RETRIEVAL", "False").lower() in ("true", "1", "yes")
@@ -76,7 +76,7 @@ class Config:
     TEST_MODE: bool = os.getenv("TEST_MODE", "True").lower() in ("true", "1", "yes")
     
     # Tables to use in test mode (comma separated)
-    TEST_TABLES: List[str] = os.getenv("TEST_TABLES", "DBM.LOAN_BALANCE").split(",")
+    TEST_TABLES: List[str] = os.getenv("TEST_TABLES", "DBM.LOAN_BALANCE_DETAIL,DBM.BCOM_NRS_DETAIL,DBM.LOAN_TXN,DBM.SECURITY_BALANCE_DETAIL,DBM.PLACEMENT_BALANCE_DETAIL,DBM.BORROWING_BALANCE_DETAIL").split(",")
     
     # Row limit for test mode
     TEST_ROW_LIMIT: int = int(os.getenv("TEST_ROW_LIMIT", "15"))
@@ -86,8 +86,17 @@ class Config:
     # Table-specific unique filtering rules
     # Format: "table_name:column1,column2;other_table:column3"
     UNIQUE_FILTER_RULES: str = os.getenv(
-        "UNIQUE_FILTER_RULES", 
-        "DBM.LOAN_BALANCE:acnt_code;DBM.TRANSACTIONS:acnt_code;DBM.DAILY_BALANCE:acnt_code"
+        "UNIQUE_FILTER_RULES",
+        "DBM.LOAN_BALANCE_DETAIL:acnt_code; " \
+        "DBM.SECURITY_BALANCE_DETAIL:security_code; " \
+        "DBM.PLACEMENT_BALANCE_DETAIL:acnt_code; " \
+        "DBM.BORROWING_BALANCE_DETAIL:acnt_code; " \
+        "DBM.BAC_BALANCE_DETAIL:acnt_code; " \
+        "DBM.CASA_BALANCE:acnt_code; " \
+        "DBM.FX_DEAL_DETAIL:deal_code; " \
+        "DBM.FX_SWAP_BALANCE_DETAIL:deal_code; " \
+        "DBM.COLL_BALANCE_DETAIL:acnt_code; " \
+        "DBM.GL_BALANCE_DETAIL:gl_acnt_code; " \
     )
 
     # Default unique columns to try if no specific rule is defined
@@ -97,9 +106,11 @@ class Config:
     ).split(",")
     
     ENABLE_NAME_INDEX: bool = os.getenv("ENABLE_NAME_INDEX", "True").lower() in ("true", "1", "yes")
-    NAME_COLUMNS: List[str] = ["acnt_name", "customer_name", "name", "project_name", "cur_code"]
+    # cur_code excluded — it's not a name, and including it causes duplicate entries per currency
+    NAME_COLUMNS: List[str] = ["acnt_name", "customer_name", "name", "project_name", "gl_code_name", "gl_acnt_name"]
     NAME_INDEX_DIR: str = os.getenv("NAME_INDEX_DIR", "name_index_dir")
-    MAX_NAMES_PER_TABLE: int = int(os.getenv("MAX_NAMES_PER_TABLE", "500"))
+    # Increased from 500 to 5000 to ensure all unique customer names are indexed
+    MAX_NAMES_PER_TABLE: int = int(os.getenv("MAX_NAMES_PER_TABLE", "5000"))
     # Maximum number of unique rows to index per table (prevents excessive memory usage)
     MAX_UNIQUE_ROWS_PER_TABLE: int = int(os.getenv("MAX_UNIQUE_ROWS_PER_TABLE", "1000"))
 
@@ -116,7 +127,7 @@ class Config:
     QUERY_ANALYZER_ENABLED: bool = os.getenv("QUERY_ANALYZER_ENABLED", "True").lower() in ("true", "1", "yes")
     COMPLEX_QUERY_SELF_CORRECTION: bool = os.getenv("COMPLEX_QUERY_SELF_CORRECTION", "True").lower() in ("true", "1", "yes")
     ALWAYS_REVIEW_SQL: bool = os.getenv("ALWAYS_REVIEW_SQL", "True").lower() in ("true", "1", "yes")
-    
+
     # ─── NEW ARCHITECTURE: Triage & Retry Configuration ─────────────────────
     TRIAGE_ENABLED: bool = os.getenv("TRIAGE_ENABLED", "True").lower() in ("true", "1", "yes")
     MAX_SQL_RETRY_ATTEMPTS: int = int(os.getenv("MAX_SQL_RETRY_ATTEMPTS", "2"))
@@ -124,7 +135,6 @@ class Config:
     HISTORY_SUMMARIZATION_ENABLED: bool = os.getenv("HISTORY_SUMMARIZATION_ENABLED", "True").lower() in ("true", "1", "yes")
     MAX_HISTORY_TURNS: int = int(os.getenv("MAX_HISTORY_TURNS", "3"))
     # In __init__:
-    # Already cleaning lists—good.
     def __init__(self):
         # ensure these directories exist
         Path(self.TABLE_INFO_DIR).mkdir(exist_ok=True)
@@ -171,8 +181,12 @@ class Config:
     
     def validate(self) -> bool:
         """Validate critical configuration values"""
+        if not self.DB_HOST:
+            raise ValueError("DB_HOST must be set in .env")
+        if not self.DB_USER:
+            raise ValueError("DB_USER must be set in .env")
         if not self.DB_PASSWORD:
-            raise ValueError("DB_PASSWORD must be set in environment variables")
+            raise ValueError("DB_PASSWORD must be set in .env")
         if self.LLM_BACKEND not in ("ollama", "openai"):
             raise ValueError("LLM_BACKEND must be either 'ollama' or 'openai'")
         if self.LLM_BACKEND == "openai" and not self.OPENAI_API_KEY:

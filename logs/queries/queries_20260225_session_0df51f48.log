@@ -1,0 +1,60 @@
+{
+  "session_id": "0df51f48",
+  "timestamp": "2026-02-25T11:04:03.705970",
+  "execution_time_seconds": 26.87,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хөгжлийн банкны ашиг ажиллагааны үзүүлэлт?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.gl_balance_detail"
+  ],
+  "names_extracted_count": 50,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     gl_code,     gl_code_name,     cur_code,     SUM(balance) AS total_balance,     SUM(balance_ba) AS total_balance_mnt,     COUNT(*) AS acnt_count FROM     dbm.gl_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.gl_balance_detail)     AND status = 1 GROUP BY     gl_code, gl_code_name, cur_code ORDER BY     gl_code,     SUM(balance_ba) DESC;",
+  "result_count": 218,
+  "final_answer": "Хөгжлийн банкны ашиг ажиллагааны үзүүлэлтүүд:  1. Монголбанканд байршуулсан харилцах (12101000) — Валют: евро      - Үлдэгдэл: 0 евро      - Төгрөгт хөрвүүлсэн дүн: 0 төгрөг      - Дансны тоо: 1  2. Монголбанканд байршуулсан харилцах (12101000) — Валют: юань      - Үлдэгдэл: 0 юань      - Төгрөгт хөрвүүлсэн дүн: 0 төгрөг      - Дансны тоо: 1  3. Монголбанканд байршуулсан харилцах (12101000) — Валют: ам.доллар      - Үлдэгдэл: 0 ам.доллар      - Төгрөгт хөрвүүлсэн дүн: 0 төгрөг      - Дансны тоо: 1  4. Монголбанканд байршуулсан харилцах (12101000) — Валют: төгрөг      - Үлдэгдэл: 0 төгрөг      - Төгрөгт хөрвүүлсэн дүн: 0 төгрөг      - Дансны тоо: 1  5. Монголбанканд байршуулсан харилцах (12101000) — Валют: иен      - Үлдэгдэл: 0 иен      - Төгрөгт хөрвүүлсэн дүн: 0 төгрөг      - Дансны тоо: 1  ...  (Үлдсэн үзүүлэлтүүдийг хүсвэл дэлгэрэнгүй жагсааж өгөх боломжтой.)"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "0df51f48",
+  "timestamp": "2026-02-25T11:06:10.594601",
+  "execution_time_seconds": 24.93,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хөгжлийн банкны ашиг ажиллагааны үзүүлэлтийн талаарх мэдээллийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     gl_code,     gl_code_name,     cur_code,     SUM(balance) AS total_balance,     SUM(balance_ba) AS total_balance_mnt,     COUNT(*) AS acnt_count FROM     dbm.gl_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.gl_balance_detail)     AND status = 1 GROUP BY     gl_code, gl_code_name, cur_code ORDER BY     gl_code,     SUM(balance_ba) DESC; ```  [Current Question] Хөгжлийн банкны 2024 оны нийт ашиг хэд байсан бэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.gl_balance_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH profit_loss AS (     SELECT         gl_code_name,         cur_code,         SUM(balance) AS total_balance,         SUM(balance_ba) AS total_balance_mnt     FROM         dbm.gl_balance_detail     WHERE         txn_date = (             SELECT MAX(txn_date)             FROM dbm.gl_balance_detail             WHERE EXTRACT(YEAR FROM txn_date) = 2024         )         AND status = 1         AND gl_code_name IN ('ОРЛОГО', 'ЗАРДАЛ')     GROUP BY         gl_code_name, cur_code ),  pl_expense AS (     SELECT         cur_code,         total_balance_mnt     FROM profit_loss     WHERE gl_code_name = 'ЗАРДАЛ' )  SELECT     '2024 оны нийт ашиг' AS description,     pl_income.cur_code,     COALESCE(pl_income.total_balance_mnt, 0)     - COALESCE(pl_expense.total_balance_mnt, 0) AS profit_mnt FROM     (         SELECT             cur_code,             total_balance_mnt         FROM profit_loss         WHERE gl_code_name = 'ОРЛОГО'     ) pl_income FULL OUTER JOIN     pl_expense     ON pl_income.cur_code = pl_expense.cur_code ORDER BY     profit_mnt DESC;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "0df51f48",
+  "timestamp": "2026-02-25T11:14:30.057566",
+  "execution_time_seconds": 18.05,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хөгжлийн банкны ашиг ажиллагааны үзүүлэлтийн талаарх мэдээллийг лавлаж, 2024 оны нийт ашиг хэд байсныг асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH profit_loss AS (     SELECT         gl_code_name,         cur_code,         SUM(balance) AS total_balance,         SUM(balance_ba) AS total_balance_mnt     FROM         dbm.gl_balance_detail     WHERE         txn_date = (             SELECT MAX(txn_date)             FROM dbm.gl_balance_detail             WHERE EXTRACT(YEAR FROM txn_date) = 2024         )         AND status = 1         AND gl_code_name IN ('ОРЛОГО', 'ЗАРДАЛ')     GROUP BY         gl_code_name, cur_code ),  pl_expense AS (     SELECT         cur_code,         total_balance_mnt     FROM profit_loss     WHERE gl_code_name = 'ЗАРДАЛ' )  SELECT     '2024 оны нийт ашиг' AS description,     pl_income.cur_code,     COALESCE(pl_income.total_balance_mnt, 0)     - COALESCE(pl_expense.total_balance_mnt, 0) AS profit_mnt FROM     (         SELECT             cur_code,             total_balance_mnt         FROM profit_loss         WHERE gl_code_name = 'ОРЛОГО'     ) pl_income FULL OUTER JOIN     pl_expense     ON pl_income.cur_code = pl_expense.cur_code ORDER BY     profit_mnt DESC; ```  [Current Question] хамгийн сүүлд олгосон зээл?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     customer_name,     acnt_code,     acnt_name,     adv_date,     adv_amount,     cur_code FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND adv_date IS NOT NULL     AND adv_amount > 0 ORDER BY     adv_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн сүүлд олгосон зээлийн мэдээлэл:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Дансны дугаар: MN490036003600009402 - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Олгосон огноо: 2025-12-25 - Олгосон дүн: 2,132,738,074 төгрөг"
+}
+--------------------------------------------------------------------------------
+

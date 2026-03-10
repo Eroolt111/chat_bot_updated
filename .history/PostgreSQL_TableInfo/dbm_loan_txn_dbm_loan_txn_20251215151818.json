@@ -1,0 +1,39 @@
+{
+  "original_table_name": "dbm.loan_txn",
+  "table_name": "dbm_loan_txn",
+  "table_summary": "This table records individual loan transaction entries, including transaction identifiers, account codes, transaction dates, amounts, currencies, and exchange rates for each loan-related movement.",
+  "column_descriptions": [
+    {
+      "column_name": "txn_jrno",
+      "description": "Numeric value serving as the primary journal number for the transaction. Used to group or uniquely identify a set of related transaction items."
+    },
+    {
+      "column_name": "txn_jritem_no",
+      "description": "Numeric value representing the item number within the journal entry. Uniquely identifies each transaction line within a journal (txn_jrno)."
+    },
+    {
+      "column_name": "txn_date",
+      "description": "Date value indicating when the transaction occurred. Essential for filtering and chronological analysis of loan transactions."
+    },
+    {
+      "column_name": "acnt_code",
+      "description": "Text (up to 20 characters) representing the account code associated with the transaction. This is typically a unique identifier for a loan account or customer account involved in the transaction."
+    },
+    {
+      "column_name": "cur_code",
+      "description": "Three-character text code indicating the currency of the transaction (e.g., 'MNT' for Mongolian Tugrik, 'USD' for US Dollar, 'EUR' for Euro, etc.). This determines the currency context for the txn_amount column."
+    },
+    {
+      "column_name": "txn_amount",
+      "description": "Numeric value representing the amount of the transaction. The currency for this amount is specified by the cur_code column (e.g., if cur_code is 'USD', txn_amount is in US Dollars)."
+    },
+    {
+      "column_name": "currate",
+      "description": "Numeric value representing the exchange rate applicable to the transaction. This is typically the rate between the transaction currency (cur_code) and a base currency (often MNT or USD), used for reporting or conversion purposes."
+    },
+    {
+      "column_name": "txn_code",
+      "description": "Text (up to 9 characters) representing the transaction type or code. This categorizes the nature of the transaction (e.g., disbursement, repayment, fee) for business or accounting purposes."
+    }
+  ]
+}

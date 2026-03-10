@@ -1,0 +1,195 @@
+{
+  "original_table_name": "dbm.fx_swap_balance_detail",
+  "table_name": "dbm_fx_swap_balance_detail",
+  "table_summary": "Detailed records of foreign exchange (FX) swap transactions, including deal identifiers, customer and product information, transaction dates, currencies, rates, amounts, interest, revaluation, and profit/loss details for each swap leg.",
+  "column_descriptions": [
+    {
+      "column_name": "txn_date",
+      "description": "Date (YYYY-MM-DD) when the transaction record was created or updated. Used for filtering and tracking transaction history."
+    },
+    {
+      "column_name": "deal_code",
+      "description": "Text code uniquely identifying the FX swap deal. Used to group or reference all records related to a specific deal."
+    },
+    {
+      "column_name": "swap_code",
+      "description": "Text code uniquely identifying the swap leg or component within a deal. Distinguishes different legs or parts of a swap."
+    },
+    {
+      "column_name": "acnt_code",
+      "description": "Text code representing the primary account involved in the swap. Used for account-level reporting and reconciliation."
+    },
+    {
+      "column_name": "swap_acnt_code",
+      "description": "Text code for the counterparty or swap account involved in the transaction. Used to track the other side of the swap."
+    },
+    {
+      "column_name": "cust_code",
+      "description": "Text code uniquely identifying the customer involved in the swap transaction."
+    },
+    {
+      "column_name": "customer_name",
+      "description": "Full name of the customer (text, possibly in Mongolian script) participating in the swap."
+    },
+    {
+      "column_name": "prod_code",
+      "description": "Text code for the financial product associated with the swap (e.g., product type or series)."
+    },
+    {
+      "column_name": "prod_name",
+      "description": "Descriptive name of the product involved in the swap (text, possibly in Mongolian)."
+    },
+    {
+      "column_name": "prod_type",
+      "description": "Text label indicating the type or category of the product (e.g., swap, forward, etc.)."
+    },
+    {
+      "column_name": "description",
+      "description": "Text field providing additional details or notes about the swap transaction."
+    },
+    {
+      "column_name": "dealer_id",
+      "description": "Numeric identifier for the dealer or staff member who handled the swap transaction."
+    },
+    {
+      "column_name": "dealer_name",
+      "description": "Full name of the dealer or staff member responsible for the transaction (text, possibly in Mongolian)."
+    },
+    {
+      "column_name": "deal_status",
+      "description": "Text label indicating the current status of the deal (e.g., active, closed, pending)."
+    },
+    {
+      "column_name": "buy_sell",
+      "description": "Single-character code indicating whether the leg is a 'buy' (B) or 'sell' (S) side of the swap."
+    },
+    {
+      "column_name": "buy_cur_code",
+      "description": "Text code for the currency being bought in this leg of the swap (e.g., 'USD', 'MNT', 'JPY'). Determines the currency for all 'buy' amount columns."
+    },
+    {
+      "column_name": "sell_cur_code",
+      "description": "Text code for the currency being sold in this leg of the swap. Determines the currency for all 'sell' amount columns."
+    },
+    {
+      "column_name": "buy_rate",
+      "description": "Numeric value representing the exchange rate applied to the currency being bought. The rate is quoted in terms of the buy currency."
+    },
+    {
+      "column_name": "sell_rate",
+      "description": "Numeric value representing the exchange rate applied to the currency being sold. The rate is quoted in terms of the sell currency."
+    },
+    {
+      "column_name": "deal_date",
+      "description": "Date (YYYY-MM-DD) when the swap deal was agreed or executed."
+    },
+    {
+      "column_name": "buy_date",
+      "description": "Date (YYYY-MM-DD) when the buy leg of the swap is settled or effective."
+    },
+    {
+      "column_name": "sell_date",
+      "description": "Date (YYYY-MM-DD) when the sell leg of the swap is settled or effective."
+    },
+    {
+      "column_name": "sell_amount",
+      "description": "Numeric value representing the amount of currency being sold in this leg of the swap. The currency is specified by the 'sell_cur_code' column."
+    },
+    {
+      "column_name": "buy_amount",
+      "description": "Numeric value representing the amount of currency being bought in this leg of the swap. The currency is specified by the 'buy_cur_code' column."
+    },
+    {
+      "column_name": "deal_rate",
+      "description": "Numeric value indicating the agreed exchange rate for the swap deal as a whole."
+    },
+    {
+      "column_name": "market_rate",
+      "description": "Numeric value representing the prevailing market exchange rate at the time of the deal."
+    },
+    {
+      "column_name": "margin",
+      "description": "Numeric value representing the margin (profit or buffer) in the swap deal, typically in the base or reporting currency."
+    },
+    {
+      "column_name": "profit_loss",
+      "description": "Numeric value representing the profit or loss realized from the swap transaction, typically in the base or reporting currency."
+    },
+    {
+      "column_name": "swap_give_int_rate",
+      "description": "Numeric value indicating the interest rate applied to the currency given (lent) in the swap."
+    },
+    {
+      "column_name": "swap_take_int_rate",
+      "description": "Numeric value indicating the interest rate applied to the currency taken (borrowed) in the swap."
+    },
+    {
+      "column_name": "buy_amount_bal",
+      "description": "Numeric value representing the outstanding balance of the bought currency. The currency is specified by 'buy_cur_code'."
+    },
+    {
+      "column_name": "sell_amount_bal",
+      "description": "Numeric value representing the outstanding balance of the sold currency. The currency is specified by 'sell_cur_code'."
+    },
+    {
+      "column_name": "give_int_bal",
+      "description": "Numeric value representing the balance of interest to be paid on the currency given (lent). Currency context depends on the swap leg."
+    },
+    {
+      "column_name": "take_int_bal",
+      "description": "Numeric value representing the balance of interest to be received on the currency taken (borrowed). Currency context depends on the swap leg."
+    },
+    {
+      "column_name": "int_rcv",
+      "description": "Numeric value for the interest amount received. The currency is typically determined by the swap leg context."
+    },
+    {
+      "column_name": "int_pay",
+      "description": "Numeric value for the interest amount paid. The currency is typically determined by the swap leg context."
+    },
+    {
+      "column_name": "int_rcv_bill",
+      "description": "Numeric value for the billed (invoiced) interest to be received. Currency context as above."
+    },
+    {
+      "column_name": "int_pay_bill",
+      "description": "Numeric value for the billed (invoiced) interest to be paid. Currency context as above."
+    },
+    {
+      "column_name": "reval_asset",
+      "description": "Numeric value representing the revaluation adjustment for assets due to currency fluctuations. Currency is typically the reporting currency."
+    },
+    {
+      "column_name": "reval_liability",
+      "description": "Numeric value representing the revaluation adjustment for liabilities due to currency fluctuations. Currency is typically the reporting currency."
+    },
+    {
+      "column_name": "reval_inc",
+      "description": "Numeric value representing the income from revaluation adjustments. Currency is typically the reporting currency."
+    },
+    {
+      "column_name": "reval_exp",
+      "description": "Numeric value representing the expense from revaluation adjustments. Currency is typically the reporting currency."
+    },
+    {
+      "column_name": "buy_amount_off",
+      "description": "Numeric value representing the off-balance (possibly settled or closed) amount of the bought currency. Currency is specified by 'buy_cur_code'."
+    },
+    {
+      "column_name": "sell_amount_off",
+      "description": "Numeric value representing the off-balance (possibly settled or closed) amount of the sold currency. Currency is specified by 'sell_cur_code'."
+    },
+    {
+      "column_name": "leg_number",
+      "description": "Numeric value indicating the leg number or sequence within the swap deal. Used to distinguish multiple legs in complex swaps."
+    },
+    {
+      "column_name": "days_to_maturity",
+      "description": "Numeric value representing the number of days remaining until the swap matures or is settled."
+    },
+    {
+      "column_name": "last_reval_date",
+      "description": "Date (YYYY-MM-DD) when the last revaluation of the swap position was performed."
+    }
+  ]
+}

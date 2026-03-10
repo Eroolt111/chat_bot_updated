@@ -1,0 +1,71 @@
+{
+  "session_id": "b7bce95a",
+  "timestamp": "2026-03-09T09:43:19.441742",
+  "execution_time_seconds": 3.17,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд хэрхэн туслах вэ? Хэрэв та банкны мэдээллийн сан, өгөгдлийн шинжилгээ эсвэл Монгол Улсын Хөгжлийн Банкны үйл ажиллагаатай холбоотой асуулт байвал асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b7bce95a",
+  "timestamp": "2026-03-09T09:43:28.221205",
+  "execution_time_seconds": 2.4,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд хэрхэн туслах вэ? Хөгжлийн банкны мэдээллийн сан, өгөгдлийн анализ, эсвэл банкны үйл ажиллагаатай холбоотой асуулт байвал тодорхой хариулт өгөхөд бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b7bce95a",
+  "timestamp": "2026-03-09T09:44:50.173116",
+  "execution_time_seconds": 6.08,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "энэ долоо хоногт эргэн төлөгдөх хуваарьтай зээлүүд",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     loan_id,     customer_id,     repayment_due_date,     repayment_amount,     cur_code FROM     loans WHERE     repayment_due_date BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE, 'IW') + 6 ORDER BY     repayment_due_date;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00942: table or view does not exist Help: https://docs.oracle.com/error-help/db/ora-00942/ [SQL: SELECT loan_id, customer_id, repayment_due_date, repayment_amount, cur_code FROM loans WHERE repayment_due_date BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE, 'IW') + 6 ORDER BY repayment_due_date] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "b7bce95a",
+  "timestamp": "2026-03-09T10:03:33.890560",
+  "execution_time_seconds": 26.35,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн өндөр хүүтэй зээлийн мэдээлэл?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH b2 AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_nrs_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  latest_nrs AS (     SELECT b1.*     FROM         dbm.bcom_nrs_detail b1     INNER JOIN b2         ON b1.acnt_code = b2.acnt_code AND b1.nrs_version = b2.max_nrs_version )  SELECT     acnt_code,     acnt_name,     customer_name,     int_amount,     amount,     theor_bal,     cur_code FROM latest_nrs WHERE     status = 'O'     AND theor_bal > 0     AND int_amount > 0 ORDER BY int_amount DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр хүүтэй зээлийн мэдээлэл:  - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Хүүгийн дүн: 7,541,079,501.42 төгрөг - Олгосон дүн: 0 төгрөг - Үлдэгдэл: 14,116,400,000 төгрөг"
+}
+--------------------------------------------------------------------------------
+

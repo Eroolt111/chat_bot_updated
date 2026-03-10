@@ -1,0 +1,109 @@
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:10:32.818880",
+  "execution_time_seconds": 1.67,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хш",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:10:53.273637",
+  "execution_time_seconds": 2.09,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "юу байна даа?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:12:24.678911",
+  "execution_time_seconds": 13.71,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хэвийн зээлийн ангилалтай хэрэглэгчдийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT DISTINCT     customer_name,     class_name FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL ORDER BY customer_name;",
+  "result_count": 5,
+  "final_answer": "Хэвийн зээлийн ангилалтай хэрэглэгчид:  - ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК - ДЦС-4 ТӨХК - МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - ЭРЧИМ ХҮЧНИЙ ЯАМ"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:13:02.373685",
+  "execution_time_seconds": 1.24,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хаха",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:13:59.355263",
+  "execution_time_seconds": 16.02,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгчдийн зээлийн ангиллын талаар мэдээлэл авах хүсэлт гаргасан. Тухайлбал, хэвийн зээлийн ангилалтай хэрэглэгчдийг харуулах SQL асуулга бичсэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT DISTINCT     customer_name,     class_name FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL ORDER BY customer_name; ```  [Current Question] SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)  GROUP BY class_name ORDER BY loan_count DESC; --- --- DEBUG: Cleaned SQL for execution: SELECT class_name, COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail) GROUP BY class_name ORDER BY loan_count DESC",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     class_name,     COUNT(acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 GROUP BY class_name ORDER BY loan_count DESC;",
+  "result_count": 5,
+  "final_answer": "Зээлийн ангиллаар зээлийн тоо дараах байдалтай байна:  - ХЭВИЙН: 92 зээл - МУУ: 20 зээл - ЭРГЭЛЗЭЭТЭЙ: 17 зээл - АНХААРАЛ ХАНДУУЛАХ: 14 зээл - ХЭВИЙН БУС: 10 зээл"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3a9a07c3",
+  "timestamp": "2025-12-11T14:58:25.504966",
+  "execution_time_seconds": 2.11,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi girl",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Би Монгол Улсын Хөгжлийн Банкны туслах. Та банкны мэдээлэл, өгөгдлийн сан, эсвэл санхүүгийн шинжилгээтэй холбоотой асуулт байвал туслахад бэлэн байна. Та ямар мэдээлэл авахыг хүсэж байна вэ?"
+}
+--------------------------------------------------------------------------------
+

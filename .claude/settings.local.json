@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\\\Eroolt\\\\Chatbot\\\\chatbot_with_masking_updated\")",
+      "Bash(dir \"C:\\\\Eroolt\\\\Chatbot\\\\chatbot_with_masking_updated\\\\app\")",
+      "Bash(dir \"C:\\\\Eroolt\\\\Chatbot\\\\chatbot_with_masking_updated\\\\app\\\\templates\")",
+      "Bash(dir \"C:\\\\Eroolt\\\\Chatbot\\\\chatbot_with_masking_updated\\\\app\\\\static\")",
+      "Bash(dir:*)"
+    ]
+  }
+}

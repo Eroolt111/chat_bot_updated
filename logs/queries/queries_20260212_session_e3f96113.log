@@ -1,0 +1,242 @@
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T15:59:49.662262",
+  "execution_time_seconds": 67.03,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Swap хэлцлийн жагсаалт. ОДоо идэвхитэй байгаа",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.fx_deal_detail",
+    "dbm.fx_swap_balance_detail"
+  ],
+  "names_extracted_count": 17,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     deal_code,     swap_code,     customer_name,     buy_sell,     buy_amount,     buy_cur_code,     sell_amount,     sell_cur_code,     deal_rate,     swap_give_int,     swap_take_int,     leg_number FROM dbm.fx_deal_detail WHERE     is_swap = 1     AND deal_status NOT IN ('C', 'D') ORDER BY deal_date DESC;",
+  "result_count": 3,
+  "final_answer": "Одоогоор идэвхитэй байгаа Swap хэлцлийн жагсаалт:  1.  - Хэлцлийн дугаар: SWFR25090200011 - Swap код: SWAP25090200002 - Харилцагч: МОНГОЛ БАНК - Худалдан/Зарах: S - Худалдан авах дүн: 50,000,000 USD - Зарах дүн: 179,662,000,000 MNT - Валютын ханш: 3,593.24 - Өгсөн хүү: 12 - Авсан хүү: 4.16044 - Leg дугаар: 2  2.  - Хэлцлийн дугаар: SWFR24061000003 - Swap код: SWAP24061000001 - Харилцагч: МОНГОЛ БАНК - Худалдан/Зарах: S - Худалдан авах дүн: 56,500,000 USD - Зарах дүн: 191,068,875,000 MNT - Валютын ханш: 3,381.75 - Өгсөн хүү: 14 - Авсан хүү: 7.30232 - Leg дугаар: 2  3.  - Хэлцлийн дугаар: SWSP22110700004 - Swap код: SWAP22110700002 - Харилцагч: МОНГОЛ БАНК - Худалдан/Зарах: B - Худалдан авах дүн: 1,104,051,000,000 MNT - Зарах дүн: 325,000,000 USD - Валютын ханш: 3,397.08 - Өгсөн хүү:  - Авсан хүү: 8.35722 - Leg дугаар: 1"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:00:53.091180",
+  "execution_time_seconds": 29.67,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн одоогоор идэвхитэй байгаа жагсаалтыг авах хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     deal_code,     swap_code,     customer_name,     buy_sell,     buy_amount,     buy_cur_code,     sell_amount,     sell_cur_code,     deal_rate,     swap_give_int,     swap_take_int,     leg_number FROM dbm.fx_deal_detail WHERE     is_swap = 1     AND deal_status NOT IN ('C', 'D') ORDER BY deal_date DESC; ```  [Current Question] хэлцлүүдийн ашиг, алдагдлыг тооцоолж харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.fx_deal_detail"
+  ],
+  "names_extracted_count": 30,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     buy_cur_code AS cur_code,     SUM(profit_loss) AS total_profit_loss,     COUNT(DISTINCT deal_code) AS deal_count FROM dbm.fx_deal_detail WHERE     is_swap = 1     AND deal_status NOT IN ('C', 'D') GROUP BY buy_cur_code ORDER BY total_profit_loss DESC;",
+  "result_count": 2,
+  "final_answer": "Swap хэлцлүүдийн ашиг, алдагдлын нэгтгэсэн мэдээлэл:  - Валют: ам.доллар   - Нийт ашиг/алдагдал: 12,049,785,000   - Хэлцлийн тоо: 2  - Валют: төгрөг   - Нийт ашиг/алдагдал: 0   - Хэлцлийн тоо: 1"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:04:13.786855",
+  "execution_time_seconds": 147.54,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн одоогоор идэвхитэй байгаа жагсаалтыг хүссэн бөгөөд дараа нь эдгээр хэлцлүүдийн ашиг, алдагдлыг тооцох хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     buy_cur_code AS cur_code,     SUM(profit_loss) AS total_profit_loss,     COUNT(DISTINCT deal_code) AS deal_count FROM dbm.fx_deal_detail WHERE     is_swap = 1     AND deal_status NOT IN ('C', 'D') GROUP BY buy_cur_code ORDER BY total_profit_loss DESC; ```  [Current Question] Барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцалж хүснэгтээр харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.loan_balance_detail",
+    "dbm.coll_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         adv_amount,         cur_code     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND adv_amount > 0 ),  latest_collateral AS (     SELECT         acnt_code AS coll_acnt_code,         name AS collateral_name,         cust_name,         limit_amt,         cur_code AS coll_cur_code,         loan_acnts     FROM dbm.coll_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.coll_balance_detail)         AND status = 'O'         AND limit_amt > 0         AND loan_acnts IS NOT NULL )  SELECT     l.acnt_code AS loan_acnt_code,     l.customer_name,     l.acnt_name AS loan_name,     l.adv_amount,     l.cur_code AS loan_cur_code,     c.coll_acnt_code AS collateral_acnt_code,     c.collateral_name,     c.cust_name AS collateral_owner,     c.limit_amt AS collateral_limit_amt,     c.coll_cur_code AS collateral_cur_code,     ROUND(c.limit_amt / l.adv_amount, 2) AS collateral_to_loan_ratio FROM latest_loans l INNER JOIN latest_collateral c     ON ',' || c.loan_acnts || ',' LIKE '%,' || l.acnt_code || ',%' WHERE c.limit_amt >= l.adv_amount * 0.5 ORDER BY collateral_to_loan_ratio DESC, l.adv_amount DESC;",
+  "result_count": 347,
+  "final_answer": "Барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их байгаа зээл болон барьцааны багцын мэдээллийг хүснэгтээр харуулж байна.  | Зээлийн дансны дугаар | Харилцагчийн нэр | Зээлийн нэр | Олгосон дүн | Валют | Барьцааны дансны дугаар | Барьцааны нэр | Барьцаа эзэмшигч | Барьцааны дээд хэмжээ | Валют | Барьцаа/Зээлийн харьцаа | |-----------------------|------------------|-------------|-------------|-------|-------------------------|---------------|-------------------|------------------------|-------|-------------------------| | 3600004715 | ДЦС-4 ТӨХК | ДЦС-4 ТӨХК | 3,117,126.75 | EUR | 3600004720 | БАГЦ БАРЬЦАА ХӨРӨНГӨ - ДЦС-4 ТӨХК | ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК | 344,769,134,301 | MNT | 110,604.79 | | 3600004715 | ДЦС-4 ТӨХК | ДЦС-4 ТӨХК | 3,117,126.75 | EUR | 3600006122 | ИРЭЭДҮЙД БИЙ БОЛОХ ХӨРӨНГӨ - ДАНСНЫ ОРЛОГО | ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК | 219,850,459,288 | MNT | 70,529.84 | | 3600002473 | ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ | ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК | 9,822,171.87 | USD | MN220036003600008239 | БАГЦ БАРЬЦАА ХӨРӨНГӨ - ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК | ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ ТӨХХК | 157,764,790,610 | MNT | 16,062.11 | | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |  Нийт [MASKED_ROW_COUNT] багц мэдээлэл байна. Дэлгэрэнгүй жагсаалтыг хүсвэл тодорхой дансны дугаар эсвэл харилцагчийн нэрээр лавлана уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:08:24.160403",
+  "execution_time_seconds": 51.68,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн одоогоор идэвхитэй байгаа жагсаалтыг авч, дараа нь эдгээр хэлцлүүдийн ашиг, алдагдлыг тооцож харуулах хүсэлт тавьсан. Түүнчлэн барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцлан хүснэгтээр харуулах SQL асуулга хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_loans AS (     SELECT         acnt_code,         customer_name,         acnt_name,         adv_amount,         cur_code     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND adv_amount > 0 ),  latest_collateral AS (     SELECT         acnt_code AS coll_acnt_code,         name AS collateral_name,         cust_name,         limit_amt,         cur_code AS coll_cur_code,         loan_acnts     FROM dbm.coll_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.coll_balance_detail)         AND status = 'O'         AND limit_amt > 0         AND loan_acnts IS NOT NULL )  SELECT     l.acnt_code AS loan_acnt_code,     l.customer_name,     l.acnt_name AS loan_name,     l.adv_amount,     l.cur_code AS loan_cur_code,     c.coll_acnt_code AS collateral_acnt_code,     c.collateral_name,     c.cust_name AS collateral_owner,     c.limit_amt AS collateral_limit_amt,     c.coll_cur_code AS collateral_cur_code,     ROUND(c.limit_amt / l.adv_amount, 2) AS collateral_to_loan_ratio FROM latest_loans l INNER JOIN latest_collateral c     ON ',' || c.loan_acnts || ',' LIKE '%,' || l.acnt_code || ',%' WHERE c.limit_amt >= l.adv_amount * 0.5 ORDER BY collateral_to_loan_ratio DESC, l.adv_amount DESC; ```  [Current Question] Банкны зохистой харьцааны үзүүлэлт гарга",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.loan_balance_detail",
+    "dbm.coll_balance_detail"
+  ],
+  "names_extracted_count": 30,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH total_loan AS (     SELECT SUM(adv_amount * rate) AS total_loan_mnt     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND adv_amount > 0 ),  r AS (     SELECT         cur_code,         MAX(rate) AS rate     FROM dbm.loan_balance_detail     WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     GROUP BY cur_code ),  total_collateral AS (     SELECT SUM(limit_amt * rate) AS total_collateral_mnt     FROM dbm.coll_balance_detail c     INNER JOIN r ON c.cur_code = r.cur_code     WHERE         c.txn_date = (SELECT MAX(txn_date) FROM dbm.coll_balance_detail)         AND c.status = 'O'         AND c.limit_amt > 0 )  SELECT     t1.total_loan_mnt,     t2.total_collateral_mnt,     ROUND(t2.total_collateral_mnt / t1.total_loan_mnt, 2)         AS collateral_to_loan_ratio FROM total_loan t1, total_collateral t2;",
+  "result_count": 1,
+  "final_answer": "Банкны зохистой харьцааны үзүүлэлт:  - Нийт зээлийн дүн: 8,146,190,942,152.2335 төгрөг - Нийт барьцаа хөрөнгийн дүн: 4,129,831,868,263.81 төгрөг - Барьцаа хөрөнгө/Зээлийн харьцаа: 0.51"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:12:16.048241",
+  "execution_time_seconds": 29.38,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн одоогоор идэвхитэй байгаа жагсаалтыг авч, эдгээр хэлцлүүдийн ашиг, алдагдлыг тооцож харуулах хүсэлт тавьсан. Мөн барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцлан хүснэгтээр харуулах SQL асуулга хүссэн. Сүүлд банкны зохистой харьцааны үзүүлэлт гаргах хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH total_loan AS (     SELECT SUM(adv_amount * rate) AS total_loan_mnt     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND adv_amount > 0 ),  r AS (     SELECT         cur_code,         MAX(rate) AS rate     FROM dbm.loan_balance_detail     WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     GROUP BY cur_code ),  total_collateral AS (     SELECT SUM(limit_amt * rate) AS total_collateral_mnt     FROM dbm.coll_balance_detail c     INNER JOIN r ON c.cur_code = r.cur_code     WHERE         c.txn_date = (SELECT MAX(txn_date) FROM dbm.coll_balance_detail)         AND c.status = 'O'         AND c.limit_amt > 0 )  SELECT     t1.total_loan_mnt,     t2.total_collateral_mnt,     ROUND(t2.total_collateral_mnt / t1.total_loan_mnt, 2)         AS collateral_to_loan_ratio FROM total_loan t1, total_collateral t2; ```  [Current Question] 2026 онд нийт төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулж гарга",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.security_balance_detail",
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH bond_payment_2026 AS (     SELECT         cur_code,         SUM(net_amount) AS total_bond_payment,         SUM(net_amount * rate) AS total_bond_payment_mnt     FROM dbm.security_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.security_balance_detail)         AND prod_type = 'ISSUER_PORTFOLIO'         AND buy_sell = 'S'         AND status = 'O'         AND end_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND end_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  loan_interest_income_2026 AS (     SELECT         cur_code,         SUM(txn_amount) AS total_interest_income,         SUM(txn_amount * currate) AS total_interest_income_mnt     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_INT'         AND txn_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND txn_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  SELECT     b.total_bond_payment,     b.total_bond_payment_mnt,     l.total_interest_income,     l.total_interest_income_mnt,     COALESCE(b.cur_code, l.cur_code) AS cur_code FROM bond_payment_2026 b FULL OUTER JOIN loan_interest_income_2026 l     ON b.cur_code = l.cur_code ORDER BY     (COALESCE(b.total_bond_payment_mnt, 0) + COALESCE(l.total_interest_income_mnt, 0)) DESC;",
+  "result_count": 1,
+  "final_answer": "2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогын харьцуулалт:  - Валют: ам.доллар - Бондын нийт төлөлт: 146,700,000 ам.доллар - Бондын нийт төлөлт (төгрөгөөр): 521,784,027,000 төгрөг - Зээлийн хүүгийн орлого: мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:15:17.612386",
+  "execution_time_seconds": 36.12,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн идэвхитэй жагсаалтыг авч, эдгээр хэлцлүүдийн ашиг, алдагдлыг тооцохыг хүссэн. Мөн барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцлан хүснэгтээр харуулах SQL асуулга, банкны зохистой харьцааны үзүүлэлт гаргах хүсэлтүүд тавьсан. Сүүлд 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулан гаргах хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH bond_payment_2026 AS (     SELECT         cur_code,         SUM(net_amount) AS total_bond_payment,         SUM(net_amount * rate) AS total_bond_payment_mnt     FROM dbm.security_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.security_balance_detail)         AND prod_type = 'ISSUER_PORTFOLIO'         AND buy_sell = 'S'         AND status = 'O'         AND end_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND end_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  loan_interest_income_2026 AS (     SELECT         cur_code,         SUM(txn_amount) AS total_interest_income,         SUM(txn_amount * currate) AS total_interest_income_mnt     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_INT'         AND txn_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND txn_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  SELECT     b.total_bond_payment,     b.total_bond_payment_mnt,     l.total_interest_income,     l.total_interest_income_mnt,     COALESCE(b.cur_code, l.cur_code) AS cur_code FROM bond_payment_2026 b FULL OUTER JOIN loan_interest_income_2026 l     ON b.cur_code = l.cur_code ORDER BY     (COALESCE(b.total_bond_payment_mnt, 0) + COALESCE(l.total_interest_income_mnt, 0)) DESC; ```  [Current Question] Банкны 2026 онд олох хүүгийн орлого болон төлөлт хийгдэх эх үүсвэр бондын зардлыг харьцуулж харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.security_balance_detail",
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 30,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH bond_payment_2026 AS (     SELECT         cur_code,         SUM(net_amount) AS total_bond_payment,         SUM(net_amount * rate) AS total_bond_payment_mnt     FROM dbm.security_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.security_balance_detail)         AND prod_type = 'ISSUER_PORTFOLIO'         AND buy_sell = 'S'         AND status = 'O'         AND end_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND end_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  loan_interest_income_2026 AS (     SELECT         cur_code,         SUM(txn_amount) AS total_interest_income,         SUM(txn_amount * currate) AS total_interest_income_mnt     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_INT'         AND txn_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND txn_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  SELECT     b.total_bond_payment,     b.total_bond_payment_mnt,     l.total_interest_income,     l.total_interest_income_mnt,     COALESCE(b.cur_code, l.cur_code) AS cur_code FROM bond_payment_2026 b FULL OUTER JOIN loan_interest_income_2026 l     ON b.cur_code = l.cur_code ORDER BY     (COALESCE(b.total_bond_payment_mnt, 0) + COALESCE(l.total_interest_income_mnt, 0)) DESC;",
+  "result_count": 1,
+  "final_answer": "2026 онд банкнаас төлөгдөх бондын зардал болон олох хүүгийн орлогын харьцуулалт:  - Валют: ам.доллар     - Бондын нийт төлбөр: 146,700,000 ам.доллар     - Төгрөгт хөрвүүлсэн дүн: 521,784,027,000 төгрөг     - Хүүгийн орлого: мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:16:49.323000",
+  "execution_time_seconds": 20.18,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн идэвхитэй жагсаалтыг авч, эдгээр хэлцлүүдийн ашиг, алдагдлыг тооцох, барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцлан хүснэгтээр харуулах SQL асуулга, банкны зохистой харьцааны үзүүлэлт гаргах, мөн 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулан гаргах хүсэлтүүд тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH bond_payment_2026 AS (     SELECT         cur_code,         SUM(net_amount) AS total_bond_payment,         SUM(net_amount * rate) AS total_bond_payment_mnt     FROM dbm.security_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.security_balance_detail)         AND prod_type = 'ISSUER_PORTFOLIO'         AND buy_sell = 'S'         AND status = 'O'         AND end_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND end_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  loan_interest_income_2026 AS (     SELECT         cur_code,         SUM(txn_amount) AS total_interest_income,         SUM(txn_amount * currate) AS total_interest_income_mnt     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_INT'         AND txn_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND txn_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  SELECT     b.total_bond_payment,     b.total_bond_payment_mnt,     l.total_interest_income,     l.total_interest_income_mnt,     COALESCE(b.cur_code, l.cur_code) AS cur_code FROM bond_payment_2026 b FULL OUTER JOIN loan_interest_income_2026 l     ON b.cur_code = l.cur_code ORDER BY     (COALESCE(b.total_bond_payment_mnt, 0) + COALESCE(l.total_interest_income_mnt, 0)) DESC; ```  [Current Question] 2026 онд олох хүүгийн орлогыг bcom_nrs дээрээс зээлийн хүүгийн төлбөрийн хувиараас тооцоолж болохгүй байна уу",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.int_amount) AS total_interest_scheduled FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')     AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY t.cur_code ORDER BY t.cur_code;",
+  "result_count": 4,
+  "final_answer": "2026 онд хуваарилагдсан зээлийн хүүгийн орлогын дүн (валютаар):  - юань: 26,972,427.92 - евро: 198,267.4 - иен: 15,139,219.04 - төгрөг: 189,237,049,081.27"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:18:44.560712",
+  "execution_time_seconds": 72.68,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн идэвхитэй жагсаалтыг авч ашиг, алдагдлыг тооцох, барьцаа хөрөнгө нь зээлийн олголтын 50 хувиас их зээл болон барьцааг багцлах, банкны зохистой харьцааны үзүүлэлт гаргах, 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулах, мөн 2026 оны хүүгийн орлогыг bcom_nrs дээрээс зээлийн хүүгийн төлбөрийн хувиараас тооцох талаар SQL асуулга хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.int_amount) AS total_interest_scheduled FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')     AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY t.cur_code ORDER BY t.cur_code; ```  [Current Question] одоо банкны нийт 2026 оны мөнгөний урсгалыг тооцоол",
+  "tables_count": 5,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.security_balance_detail",
+    "dbm.fx_deal_detail",
+    "dbm.fx_swap_balance_detail",
+    "dbm.coll_balance_detail"
+  ],
+  "names_extracted_count": 30,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH -- 1. Latest loan schedule version per account latest_nrs_ver AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  -- 2. Loan principal and interest inflows scheduled for 2026 loan_cashflow_2026 AS (     SELECT         'LOAN_PRINCIPAL_INFLOW' AS flow_type,         t.cur_code,         SUM(t.amount) AS total_amount,         SUM(t.amount * t.rate) AS total_amount_mnt     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_nrs_ver lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY t.cur_code     UNION ALL     SELECT         'LOAN_INTEREST_INFLOW' AS flow_type,         t.cur_code,         SUM(t.int_amount) AS total_amount,         SUM(t.int_amount * t.rate) AS total_amount_mnt     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_nrs_ver lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY t.cur_code ),  -- 3. Interest income from placements in 2026 (accrued and billed) placement_interest_2026 AS (     SELECT         'PLACEMENT_INTEREST_INFLOW' AS flow_type,         cur_code,         SUM(int_rcv + int_rcv_bill) AS total_amount,         SUM((int_rcv + int_rcv_bill) * rate) AS total_amount_mnt     FROM dbm.placement_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  -- 4. Borrowing principal and interest outflows in 2026 (accrued and billed) borrowing_cashflow_2026 AS (     SELECT         'BORROWING_PRINCIPAL_OUTFLOW' AS flow_type,         cur_code,         SUM(principal) AS total_amount,         SUM(principal * rate) AS total_amount_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code     UNION ALL     SELECT         'BORROWING_INTEREST_OUTFLOW' AS flow_type,         cur_code,         SUM(int_exp + int_pay + int_pay_bill) AS total_amount,         SUM((int_exp + int_pay + int_pay_bill) * rate) AS total_amount_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  -- Final union of all cash flows SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM loan_cashflow_2026 UNION ALL SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM placement_interest_2026 UNION ALL SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM borrowing_cashflow_2026 ORDER BY flow_type, cur_code;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00903: invalid table name Help: https://docs.oracle.com/error-help/db/ora-00903/ [SQL: WITH -- 1. Latest loan schedule version per account latest_nrs_ver AS ( SELECT acnt_code, MAX(nrs_version) AS max_ver FROM dbm.bcom_nrs_detail GROUP BY acnt_code ), -- 2. Loan principal and interest inflows scheduled for 2026 loan_cashflow_2026 AS ( SELECT 'LOAN_PRINCIPAL_INFLOW' AS flow_type, t.cur_code, SUM(t.amount) AS total_amount, SUM(t.amount * t.rate) AS total_amount_mnt FROM dbm.bcom_nrs_detail t INNER JOIN latest_nrs_ver lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY') AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY t.cur_code UNION ALL SELECT 'LOAN_INTEREST_INFLOW' AS flow_type, t.cur_code, SUM(t.int_amount) AS total_amount, SUM(t.int_amount * t.rate) AS total_amount_mnt FROM dbm.bcom_nrs_detail t INNER JOIN latest_nrs_ver lv ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE t.status = 'O' AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY') AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY t.cur_code ), -- 3. Interest income from placements in 2026 (accrued and billed) placement_interest_2026 AS ( SELECT 'PLACEMENT_INTEREST_INFLOW' AS flow_type, cur_code, SUM(int_rcv + int_rcv_bill) AS total_amount, SUM((int_rcv + int_rcv_bill) * rate) AS total_amount_mnt FROM dbm.placement_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail) AND status = 'O' AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY') AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY cur_code ), -- 4. Borrowing principal and interest outflows in 2026 (accrued and billed) borrowing_cashflow_2026 AS ( SELECT 'BORROWING_PRINCIPAL_OUTFLOW' AS flow_type, cur_code, SUM(principal) AS total_amount, SUM(principal * rate) AS total_amount_mnt FROM dbm.borrowing_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail) AND status = 'O' AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY') AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY cur_code UNION ALL SELECT 'BORROWING_INTEREST_OUTFLOW' AS flow_type, cur_code, SUM(int_exp + int_pay + int_pay_bill) AS total_amount, SUM((int_exp + int_pay + int_pay_bill) * rate) AS total_amount_mnt FROM dbm.borrowing_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail) AND status = 'O' AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY') AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY') GROUP BY cur_code ) -- Final union of all cash flows SELECT flow_type, cur_code, total_amount, total_amount_mnt FROM loan_cashflow_2026 UNION ALL SELECT flow_type, cur_code, total_amount, total_amount_mnt FROM placement_interest_2026 UNION ALL SELECT flow_type, cur_code, total_amount, total_amount_mnt FROM borrowing_cashflow_2026 ORDER BY flow_type, cur_code] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:20:28.277718",
+  "execution_time_seconds": 67.38,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн ашиг алдагдлыг тооцох, барьцаа хөрөнгө, зээлийн мэдээллийг багцлах, банкны зохистой харьцааны үзүүлэлт гаргах, мөн 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулах, мөн 2026 оны хүүгийн орлогыг bcom_nrs дээрээс тооцох талаар SQL асуулга хүссэн. Эцэст нь банкны 2026 оны нийт мөнгөний урсгалыг тооцох хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH -- 1. Latest loan schedule version per account latest_nrs_ver AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  -- 2. Loan principal and interest inflows scheduled for 2026 loan_cashflow_2026 AS (     SELECT         'LOAN_PRINCIPAL_INFLOW' AS flow_type,         t.cur_code,         SUM(t.amount) AS total_amount,         SUM(t.amount * t.rate) AS total_amount_mnt     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_nrs_ver lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY t.cur_code     UNION ALL     SELECT         'LOAN_INTEREST_INFLOW' AS flow_type,         t.cur_code,         SUM(t.int_amount) AS total_amount,         SUM(t.int_amount * t.rate) AS total_amount_mnt     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_nrs_ver lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND t.schd_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY t.cur_code ),  -- 3. Interest income from placements in 2026 (accrued and billed) placement_interest_2026 AS (     SELECT         'PLACEMENT_INTEREST_INFLOW' AS flow_type,         cur_code,         SUM(int_rcv + int_rcv_bill) AS total_amount,         SUM((int_rcv + int_rcv_bill) * rate) AS total_amount_mnt     FROM dbm.placement_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code ),  -- 4. Borrowing principal and interest outflows in 2026 (accrued and billed) borrowing_cashflow_2026 AS (     SELECT         'BORROWING_PRINCIPAL_OUTFLOW' AS flow_type,         cur_code,         SUM(principal) AS total_amount,         SUM(principal * rate) AS total_amount_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code     UNION ALL     SELECT         'BORROWING_INTEREST_OUTFLOW' AS flow_type,         cur_code,         SUM(int_exp + int_pay + int_pay_bill) AS total_amount,         SUM((int_exp + int_pay + int_pay_bill) * rate) AS total_amount_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'         AND maturity_date >= TO_DATE('01-01-2026', 'DD-MM-YYYY')         AND maturity_date < TO_DATE('01-01-2027', 'DD-MM-YYYY')     GROUP BY cur_code )  -- Final union of all cash flows SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM loan_cashflow_2026 UNION ALL SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM placement_interest_2026 UNION ALL SELECT     flow_type,     cur_code,     total_amount,     total_amount_mnt FROM borrowing_cashflow_2026 ORDER BY flow_type, cur_code; ```  [Current Question] он тус бүрээр банкны хуримтлагдсан ашиг алдагдлыг харуул",
+  "tables_count": 3,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.placement_balance_detail",
+    "dbm.borrowing_balance_detail"
+  ],
+  "names_extracted_count": 30,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH -- 1. Yearly interest income from placements (accrued + billed) placement_interest_yearly AS (     SELECT         cur_code,         TO_CHAR(maturity_date, 'YYYY') AS year,         SUM(COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0))             AS total_interest_income,         SUM(             (COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0))             * COALESCE(rate, 1)         ) AS total_interest_income_mnt     FROM dbm.placement_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail)         AND status = 'O'     GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code ),  -- 2. Yearly interest expense from borrowings (accrued + billed) borrowing_interest_yearly AS (     SELECT         cur_code,         TO_CHAR(maturity_date, 'YYYY') AS year,         SUM(             COALESCE(int_exp, 0)             + COALESCE(int_pay, 0)             + COALESCE(int_pay_bill, 0)         ) AS total_interest_expense,         SUM(             (                 COALESCE(int_exp, 0)                 + COALESCE(int_pay, 0)                 + COALESCE(int_pay_bill, 0)             )             * COALESCE(rate, 1)         ) AS total_interest_expense_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'     GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code )  -- 3. Combine and calculate profit/loss by year and currency SELECT     COALESCE(pi.year, bi.year) AS year,     COALESCE(pi.cur_code, bi.cur_code) AS cur_code,     COALESCE(pi.total_interest_income_mnt, 0) AS total_interest_income_mnt,     COALESCE(bi.total_interest_expense_mnt, 0) AS total_interest_expense_mnt,     (         COALESCE(pi.total_interest_income_mnt, 0)         - COALESCE(bi.total_interest_expense_mnt, 0)     ) AS profit_loss_mnt FROM placement_interest_yearly pi FULL OUTER JOIN borrowing_interest_yearly bi     ON pi.year = bi.year AND pi.cur_code = bi.cur_code ORDER BY year, cur_code;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00903: invalid table name Help: https://docs.oracle.com/error-help/db/ora-00903/ [SQL: WITH -- 1. Yearly interest income from placements (accrued + billed) placement_interest_yearly AS ( SELECT cur_code, TO_CHAR(maturity_date, 'YYYY') AS year, SUM(COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0)) AS total_interest_income, SUM( (COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0)) * COALESCE(rate, 1) ) AS total_interest_income_mnt FROM dbm.placement_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail) AND status = 'O' GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code ), -- 2. Yearly interest expense from borrowings (accrued + billed) borrowing_interest_yearly AS ( SELECT cur_code, TO_CHAR(maturity_date, 'YYYY') AS year, SUM( COALESCE(int_exp, 0) + COALESCE(int_pay, 0) + COALESCE(int_pay_bill, 0) ) AS total_interest_expense, SUM( ( COALESCE(int_exp, 0) + COALESCE(int_pay, 0) + COALESCE(int_pay_bill, 0) ) * COALESCE(rate, 1) ) AS total_interest_expense_mnt FROM dbm.borrowing_balance_detail WHERE txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail) AND status = 'O' GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code ) -- 3. Combine and calculate profit/loss by year and currency SELECT COALESCE(pi.year, bi.year) AS year, COALESCE(pi.cur_code, bi.cur_code) AS cur_code, COALESCE(pi.total_interest_income_mnt, 0) AS total_interest_income_mnt, COALESCE(bi.total_interest_expense_mnt, 0) AS total_interest_expense_mnt, ( COALESCE(pi.total_interest_income_mnt, 0) - COALESCE(bi.total_interest_expense_mnt, 0) ) AS profit_loss_mnt FROM placement_interest_yearly pi FULL OUTER JOIN borrowing_interest_yearly bi ON pi.year = bi.year AND pi.cur_code = bi.cur_code ORDER BY year, cur_code] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:24:37.027244",
+  "execution_time_seconds": 107.9,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн ашиг алдагдал, барьцаа хөрөнгө, зээлийн мэдээллийг багцлах, банкны зохистой харьцааны үзүүлэлт гаргах, 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулах, мөн 2026 оны хүүгийн орлогыг bcom_nrs дээрээс тооцох талаар SQL асуулга хүссэн. Эцэст нь банкны 2026 оны нийт мөнгөний урсгал болон он тус бүрийн хуримтлагдсан ашиг алдагдлыг харуулах хүсэлт тавьсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH -- 1. Yearly interest income from placements (accrued + billed) placement_interest_yearly AS (     SELECT         cur_code,         TO_CHAR(maturity_date, 'YYYY') AS year,         SUM(COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0))             AS total_interest_income,         SUM(             (COALESCE(int_rcv, 0) + COALESCE(int_rcv_bill, 0))             * COALESCE(rate, 1)         ) AS total_interest_income_mnt     FROM dbm.placement_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.placement_balance_detail)         AND status = 'O'     GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code ),  -- 2. Yearly interest expense from borrowings (accrued + billed) borrowing_interest_yearly AS (     SELECT         cur_code,         TO_CHAR(maturity_date, 'YYYY') AS year,         SUM(             COALESCE(int_exp, 0)             + COALESCE(int_pay, 0)             + COALESCE(int_pay_bill, 0)         ) AS total_interest_expense,         SUM(             (                 COALESCE(int_exp, 0)                 + COALESCE(int_pay, 0)                 + COALESCE(int_pay_bill, 0)             )             * COALESCE(rate, 1)         ) AS total_interest_expense_mnt     FROM dbm.borrowing_balance_detail     WHERE         txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)         AND status = 'O'     GROUP BY TO_CHAR(maturity_date, 'YYYY'), cur_code )  -- 3. Combine and calculate profit/loss by year and currency SELECT     COALESCE(pi.year, bi.year) AS year,     COALESCE(pi.cur_code, bi.cur_code) AS cur_code,     COALESCE(pi.total_interest_income_mnt, 0) AS total_interest_income_mnt,     COALESCE(bi.total_interest_expense_mnt, 0) AS total_interest_expense_mnt,     (         COALESCE(pi.total_interest_income_mnt, 0)         - COALESCE(bi.total_interest_expense_mnt, 0)     ) AS profit_loss_mnt FROM placement_interest_yearly pi FULL OUTER JOIN borrowing_interest_yearly bi     ON pi.year = bi.year AND pi.cur_code = bi.cur_code ORDER BY year, cur_code; ```  [Current Question] gl_balance_Detail тэйблээс тооцоол",
+  "tables_count": 8,
+  "tables_selected": [
+    "dbm.gl_balance_detail",
+    "dbm.placement_balance_detail",
+    "dbm.borrowing_balance_detail",
+    "dbm.loan_balance_detail",
+    "dbm.bcom_nrs_detail",
+    "dbm.fx_deal_detail",
+    "dbm.fx_swap_balance_detail",
+    "dbm.coll_balance_detail"
+  ],
+  "names_extracted_count": 27,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH yearly_gl_snapshot AS (     SELECT         gl_acnt_code,         gl_acnt_name,         gl_code,         gl_code_name,         cur_code,         balance,         balance_ba,         txn_date,         TO_CHAR(txn_date, 'YYYY') AS year,         ROW_NUMBER() OVER (             PARTITION BY gl_acnt_code, TO_CHAR(txn_date, 'YYYY')             ORDER BY txn_date DESC         ) AS rn     FROM dbm.gl_balance_detail     WHERE status = 1 )  SELECT     year,     gl_code,     gl_code_name,     cur_code,     SUM(balance) AS total_balance,     SUM(balance_ba) AS total_balance_mnt,     COUNT(*) AS acnt_count FROM yearly_gl_snapshot WHERE rn = 1 GROUP BY year, gl_code, gl_code_name, cur_code ORDER BY year ASC, gl_code ASC, total_balance_mnt DESC;",
+  "result_count": 500,
+  "final_answer": "GL дансны жилийн дүнгийн нэгтгэл:  1. Жил: 2011    - GL код: 11100000 (Касс дах бэлэн мөнгө)    - Валют: төгрөг    - Нийт үлдэгдэл: 262,472.13    - Төгрөгөөр нийт үлдэгдэл: 262,472.13    - Дансны тоо: 1  2. Жил: 2011    - GL код: 12101000 (Монголбанканд байршуулсан харилцах)    - Валют: төгрөг    - Нийт үлдэгдэл: 39,021,588,391.61    - Төгрөгөөр нийт үлдэгдэл: 39,021,588,391.61    - Дансны тоо: 1  3. Жил: 2011    - GL код: 12201000 (Бусад банк, санхүүгийн байгууллагад байршуулсан харилцах)    - Валют: төгрөг    - Нийт үлдэгдэл: 15,500    - Төгрөгөөр нийт үлдэгдэл: 15,500    - Дансны тоо: 1  4. Жил: 2011    - GL код: 12203002 (Бусад банк, санхүүгийн байгууллагад байршуулсан хадгаламж (3 хүртэл сарын хугацаатай) )    - Валют: төгрөг    - Нийт үлдэгдэл: 0    - Төгрөгөөр нийт үлдэгдэл: 0    - Дансны тоо: 1  5. Жил: 2011    - GL код: 13101000 (Харилцахын хүүгийн авлага)    - Валют: төгрөг    - Нийт үлдэгдэл: 0    - Төгрөгөөр нийт үлдэгдэл: 0    - Дансны тоо: 1  ...  (Жилийн болон валютын ангиллаар бүх GL дансны мэдээлэл дээрх бүтэцээр үргэлжилнэ. Валютын нэршил:   - MNT: төгрөг   - USD: ам.доллар   - EUR: евро   - JPY: иен   - CNY: юань   - GBP: GBP (англи фунт стерлинг))  Тайлбар: Дансны үлдэгдэл болон тоо хэмжээ нь тухайн жилийн хамгийн сүүлийн өдрийн байдлаар нэгтгэгдсэн болно."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e3f96113",
+  "timestamp": "2026-02-12T16:25:48.273506",
+  "execution_time_seconds": 22.02,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Swap хэлцлийн ашиг алдагдал, барьцаа хөрөнгө, зээлийн мэдээллийг багцлах, банкны зохистой харьцааны үзүүлэлт гаргах, 2026 онд төлөгдөх бондын төлөлт болон зээлийн хүүгийн орлогыг харьцуулах, мөн 2026 оны хүүгийн орлогыг bcom_nrs дээрээс тооцох талаар SQL асуулга хүссэн. Эцэст нь банкны 2026 оны нийт мөнгөний урсгал болон он тус бүрийн хуримтлагдсан ашиг алдагдлыг харуулах хүсэлт тавьсан. Сүүлд gl_balance_Detail хүснэгтээс тооцоолохыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH yearly_gl_snapshot AS (     SELECT         gl_acnt_code,         gl_acnt_name,         gl_code,         gl_code_name,         cur_code,         balance,         balance_ba,         txn_date,         TO_CHAR(txn_date, 'YYYY') AS year,         ROW_NUMBER() OVER (             PARTITION BY gl_acnt_code, TO_CHAR(txn_date, 'YYYY')             ORDER BY txn_date DESC         ) AS rn     FROM dbm.gl_balance_detail     WHERE status = 1 )  SELECT     year,     gl_code,     gl_code_name,     cur_code,     SUM(balance) AS total_balance,     SUM(balance_ba) AS total_balance_mnt,     COUNT(*) AS acnt_count FROM yearly_gl_snapshot WHERE rn = 1 GROUP BY year, gl_code, gl_code_name, cur_code ORDER BY year ASC, gl_code ASC, total_balance_mnt DESC; ```  [Current Question] gl_balance_detail тэйбл дээр тухайн жилийн ашиг алдагдал гэсэн данс байгаа түүний жил тус бүрээр харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.gl_balance_detail"
+  ],
+  "names_extracted_count": 27,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH yearly_gl_snapshot AS (     SELECT         gl_acnt_code,         gl_acnt_name,         gl_code,         gl_code_name,         cur_code,         balance,         balance_ba,         txn_date,         TO_CHAR(txn_date, 'YYYY') AS year,         ROW_NUMBER() OVER (             PARTITION BY gl_acnt_code, TO_CHAR(txn_date, 'YYYY')             ORDER BY txn_date DESC         ) AS rn     FROM dbm.gl_balance_detail     WHERE         status = 1         AND (             UPPER(gl_acnt_name) LIKE UPPER('%ТУХАЙН ЖИЛИЙН АШИГ%')             OR UPPER(gl_acnt_name) LIKE UPPER('%ТУХАЙН ЖИЛИЙН АЛДАГДАЛ%')         ) )  SELECT     year,     gl_acnt_code,     gl_acnt_name,     cur_code,     SUM(balance) AS total_balance,     SUM(balance_ba) AS total_balance_mnt FROM yearly_gl_snapshot WHERE rn = 1 GROUP BY year, gl_acnt_code, gl_acnt_name, cur_code ORDER BY year ASC, gl_acnt_code ASC;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+

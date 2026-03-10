@@ -1,0 +1,51 @@
+{
+  "session_id": "ce4a4e35",
+  "timestamp": "2025-12-23T16:28:31.727052",
+  "execution_time_seconds": 3.03,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд хэрхэн туслах вэ? Хэрэв та банкны мэдээллийн сан, өгөгдлийн шинжилгээ эсвэл Монгол Улсын Хөгжлийн Банкны үйл ажиллагаатай холбоотой асуулт байвал асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "ce4a4e35",
+  "timestamp": "2025-12-23T16:29:01.384405",
+  "execution_time_seconds": 5.45,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хөгжлийн банк хэдэн ажилтантай вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Монгол Улсын Хөгжлийн Банкны ажилтны тоо тодорхой хугацаанд өөрчлөгдөж байдаг. Хамгийн сүүлийн албан ёсны мэдээллээр, Хөгжлийн банк ойролцоогоор 150-200 орчим ажилтантай байдаг. Гэхдээ энэ тоо тухайн үеийн бүтэц, зохион байгуулалтаас хамааран өөрчлөгдөж болзошгүй тул хамгийн шинэ мэдээллийг банкны албан ёсны вэбсайт эсвэл холбогдох албанаас лавлахыг зөвлөж байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "ce4a4e35",
+  "timestamp": "2025-12-23T16:29:41.068285",
+  "execution_time_seconds": 1.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ жилийн NBA ын аварга?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+

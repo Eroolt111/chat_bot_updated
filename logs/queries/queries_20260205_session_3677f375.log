@@ -1,0 +1,40 @@
+{
+  "session_id": "3677f375",
+  "timestamp": "2026-02-05T18:04:07.622930",
+  "execution_time_seconds": 22.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "зээлж авсан эх үүсвэрын мэдээлэл идэвхитэй",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.borrowing_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     cust_name,     principal,     cur_code,     int_rate,     maturity_date,     module FROM     dbm.borrowing_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY     (principal * rate) DESC;",
+  "result_count": 4,
+  "final_answer": "Идэвхитэй зээлж авсан эх үүсвэрийн мэдээлэл:  1. Дансны нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК    - Харилцагчийн нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК    - Үндсэн дүн: 322,671,583.22 юань    - Хүүний хэмжээ: 5.1    - Дуусах огноо: 2031-10-28    - Модуль: LD  2. Дансны нэр: ТӨСЛИЙН ЗЭЭЛИЙН САНХҮҮЖИЛТ-САНГИЙН ЯАМ    - Харилцагчийн нэр: МОНГОЛ УЛСЫН САНГИЙН ЯАМ    - Үндсэн дүн: 44,104,681,400 төгрөг    - Хүүний хэмжээ: 0.75    - Дуусах огноо: 2044-12-31    - Модуль: LD  3. Дансны нэр: БОГД БАНК    - Харилцагчийн нэр: БОГД БАНК    - Үндсэн дүн: 35,850,000,000 төгрөг    - Хүүний хэмжээ: 12    - Дуусах огноо: 2026-02-06    - Модуль: MM  4. Дансны нэр: ГОЛОМТ БАНК    - Харилцагчийн нэр: ГОЛОМТ БАНК    - Үндсэн дүн: 1,000,000,000 иен    - Хүүний хэмжээ: 1    - Дуусах огноо: 2026-03-24    - Модуль: MM"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "3677f375",
+  "timestamp": "2026-02-05T18:05:01.901965",
+  "execution_time_seconds": 17.62,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлж авсан эх үүсвэрийн идэвхитэй мэдээллийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     cust_name,     principal,     cur_code,     int_rate,     maturity_date,     module FROM     dbm.borrowing_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY     (principal * rate) DESC; ```  [Current Question] Дотоодын хэдэн данс байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bac_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT COUNT(*) AS internal_account_count FROM dbm.bac_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.bac_balance_detail)     AND status = 'O';",
+  "result_count": 1,
+  "final_answer": "Дотоодын нийт 435 данс байна."
+}
+--------------------------------------------------------------------------------
+

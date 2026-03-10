@@ -1,0 +1,72 @@
+{
+  "session_id": "e9e5da74",
+  "timestamp": "2026-03-06T18:54:04.223191",
+  "execution_time_seconds": 3.12,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд Монгол Улсын Хөгжлийн Банк болон банкны өгөгдлийн сан, мэдээллийн шинжилгээтэй холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e9e5da74",
+  "timestamp": "2026-03-06T18:54:30.982900",
+  "execution_time_seconds": 5.6,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Хамгийн сүүлд зээл авсан харилцагч?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e9e5da74",
+  "timestamp": "2026-03-06T18:57:33.897393",
+  "execution_time_seconds": 3.23,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны мэдээлэл, банкны өгөгдлийн сангийн ойлголтууд, эсвэл өгөгдөл шинжилгээтэй холбоотой асуулт байвал асуугаарай. Танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "e9e5da74",
+  "timestamp": "2026-03-06T18:58:12.216862",
+  "execution_time_seconds": 22.84,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн сүүлд зээл авсан харилцагчийг харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.loan_balance_detail",
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_nrs AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_nrs_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     n.customer_name,     t.acnt_code,     n.acnt_name,     t.txn_date AS adv_date,     t.txn_amount AS adv_amount,     t.cur_code FROM dbm.loan_txn t INNER JOIN latest_nrs l     ON t.acnt_code = l.acnt_code INNER JOIN dbm.bcom_nrs_detail n     ON t.acnt_code = n.acnt_code AND l.max_nrs_version = n.nrs_version WHERE t.txn_code = 'ADV' ORDER BY t.txn_date DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн сүүлд зээл авсан харилцагчийн мэдээлэл:  - Харилцагчийн нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Дансны дугаар: MN050036003600009224 - Дансны нэр: МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - Зээл авсан огноо: 2025-08-26 - Олгосон дүн: 331,573,389 төгрөг"
+}
+--------------------------------------------------------------------------------
+

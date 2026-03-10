@@ -1,0 +1,57 @@
+{
+  "session_id": "326a0aaf",
+  "timestamp": "2026-03-10T17:05:46.440014",
+  "execution_time_seconds": 2.87,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд Монгол Улсын Хөгжлийн Банк болон банкны өгөгдлийн сан, өгөгдөл боловсруулахтай холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "326a0aaf",
+  "timestamp": "2026-03-10T17:09:42.822297",
+  "execution_time_seconds": 36.82,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "show me the loans that should be repaid till 30 days from now",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.amount > 0     AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 30 ORDER BY     t.schd_date ASC,     t.amount DESC;",
+  "result_count": 5,
+  "final_answer": "30 хоногийн дотор төлөх ёстой зээлийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 220,275,999.64 төгрөг      Хүүгийн төлбөр: 115,736,217.08 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 132,828,364.01 төгрөг      Хүүгийн төлбөр: 69,789,956.22 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 83,394,333.12 төгрөг      Хүүгийн төлбөр: 43,816,596.71 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 22,392,950.85 төгрөг      Хүүгийн төлбөр: 11,765,582.38 төгрөг  5. Харилцагч: ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК      Дансны нэр: ДЦС-4 ТӨХК      Төлөх огноо: 2026-03-25      Үндсэн төлбөр: 11,392,231,465.45 төгрөг      Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "326a0aaf",
+  "timestamp": "2026-03-10T17:17:21.479665",
+  "execution_time_seconds": 29.4,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч 30 хоногийн дотор төлөгдөх зээлийн жагсаалтыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.amount > 0     AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 30 ORDER BY     t.schd_date ASC,     t.amount DESC; ```  [Current Question] Тэгвэл ойрын 10 хоногт",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 42,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.acnt_name,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due,     t.cur_code FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.amount > 0     AND t.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 10 ORDER BY     t.schd_date ASC,     t.amount DESC;",
+  "result_count": 4,
+  "final_answer": "Ойрын 10 хоногт төлөгдөх зээлийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 220,275,999.64 төгрөг      Хүүгийн төлбөр: 115,736,217.08 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 132,828,364.01 төгрөг      Хүүгийн төлбөр: 69,789,956.22 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 83,394,333.12 төгрөг      Хүүгийн төлбөр: 43,816,596.71 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2026-03-19      Үндсэн төлбөр: 22,392,950.85 төгрөг      Хүүгийн төлбөр: 11,765,582.38 төгрөг"
+}
+--------------------------------------------------------------------------------
+

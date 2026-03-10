@@ -9,7 +9,7 @@ from datetime import datetime
 import ast
 import pandas as pd
 import decimal
-from datetime import datetime 
+from datetime import datetime, timedelta
 import sqlfluff 
 import unicodedata
 import string
@@ -18,9 +18,8 @@ import threading
 
 
 # ============================================================================
-# LLAMAINDEX IMPORTS (Updated for LlamaIndex v0.11+ with Workflows)
+# LLAMAINDEX IMPORTS (LlamaIndex v0.11+ with Workflows)
 # ============================================================================
-# CRITICAL CHANGES:
 # 1. QueryPipeline is DEPRECATED - replaced with Workflows (event-driven)
 # 2. Pydantic v2: Use 'from pydantic import BaseModel, Field' directly
 # 3. structured_predict: Replaces LLMTextCompletionProgram.from_defaults()
@@ -34,11 +33,9 @@ from llama_index.core.prompts import ChatPromptTemplate, PromptTemplate
 from llama_index.core.schema import TextNode
 from llama_index.core.storage import StorageContext
 from llama_index.core.llms import ChatResponse, ChatMessage
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 from sqlalchemy import text, schema
 from sqlalchemy.exc import SQLAlchemyError
-
-# NOTE: BaseMemory import removed - not needed for workflow-based pipeline
 
 from .example_retriever import example_retriever 
 from .config import config
@@ -51,18 +48,58 @@ from .context_builder import FastContextBuilder
 from .query_logger import query_logger
 logger = logging.getLogger(__name__)
 
+# =============================================================================
+# NES MODULE → TABLES MAPPING
+# Maps NES banking system modules to their database tables.
+# Used to supplement reranker results when analyzer needs tables outside top-K.
+# =============================================================================
+NES_MODULE_TABLES = {
+    "LOAN": ["dbm.loan_balance_detail", "dbm.bcom_nrs_detail", "dbm.loan_txn"],
+    "FX": ["dbm.fx_deal_detail", "dbm.fx_swap_balance_detail"],
+    "COLL": ["dbm.coll_balance_detail"],
+    "TREASURY": ["dbm.placement_balance_detail", "dbm.borrowing_balance_detail"],
+    "SECURITIES": ["dbm.security_balance_detail"],
+    "ACCOUNTS": ["dbm.bac_balance_detail", "dbm.casa_balance"],
+    "GL": ["dbm.gl_balance_detail"],
+}
+
+# Reverse lookup: table name → module name
+TABLE_TO_MODULE = {}
+for _module, _tables in NES_MODULE_TABLES.items():
+    for _t in _tables:
+        TABLE_TO_MODULE[_t] = _module
+
 sqlfluff_logger = logging.getLogger('sqlfluff')
 sqlfluff_logger.setLevel(logging.WARNING)
 
+class ColumnDescriptionItem(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    column_name: str = Field(..., description="Column name in the table")
+    description: str = Field(..., description="Description of the column")
+
 class TableInfo(BaseModel):
-    """Information regarding a structured table."""
+    model_config = ConfigDict(extra="forbid")
     table_name: str = Field(..., description="table name (must be underscores and NO spaces)")
     table_summary: str = Field(..., description="short, concise summary/caption of the table")
-    column_descriptions: dict = Field(..., description="dictionary of column_name: description")
+    column_descriptions: List[ColumnDescriptionItem] = Field(
+        default_factory=list,
+        description="List of column descriptions"
+    )
 
+    @field_validator("column_descriptions", mode="before")
+    @classmethod
+    def _coerce_column_descriptions(cls, v):
+        if v is None:
+            return []
+        if isinstance(v, dict):
+            return [{"column_name": k, "description": str(val)} for k, val in v.items()]
+        return v
+
+    def column_descriptions_dict(self) -> Dict[str, str]:
+        return {item.column_name: item.description for item in (self.column_descriptions or [])}
 
 # ============================================================================
-# NEW ARCHITECTURE: Pydantic Models for Triage, Schema Analysis, Validation
+# ARCHITECTURE: Pydantic Models for Triage, Schema Analysis, Validation
 # ============================================================================
 
 class TriageResult(BaseModel):
@@ -171,6 +208,7 @@ class ChatbotPipeline:
         self.chat_history: Dict[str, List[Dict]] = {}
         self.chat_history_lock = Lock()
         self._initialize()
+        self._start_session_purge_thread()
 
     def _initialize(self):
         logger.info("Initializing chatbot pipeline...")
@@ -179,8 +217,42 @@ class ChatbotPipeline:
         if config.ENABLE_NAME_INDEX:
             self._create_name_indices()
         self._create_vector_indices()
-        self._setup_query_pipeline() 
+        self._setup_query_pipeline()
         logger.info("✅ Chatbot pipeline initialized successfully")
+
+    # ── Session purge ──────────────────────────────────────────────────────────
+
+    SESSION_PURGE_AFTER_HOURS = 8      # purge sessions inactive longer than this
+    SESSION_PURGE_CHECK_INTERVAL = 3600  # check every 1 hour (seconds)
+
+    def _purge_inactive_sessions(self):
+        """Delete chat history for sessions with no activity in the last 8 hours."""
+        cutoff = datetime.now() - timedelta(hours=self.SESSION_PURGE_AFTER_HOURS)
+        with self.chat_history_lock:
+            to_delete = [
+                sid for sid, turns in self.chat_history.items()
+                if not turns or datetime.fromisoformat(turns[-1]['timestamp']) < cutoff
+            ]
+            for sid in to_delete:
+                del self.chat_history[sid]
+        if to_delete:
+            logger.info(f"--- [PURGE] Removed {len(to_delete)} inactive session(s) from memory")
+
+    def _start_session_purge_thread(self):
+        """Start a background daemon thread that periodically purges inactive sessions."""
+        def purge_loop():
+            while True:
+                time.sleep(self.SESSION_PURGE_CHECK_INTERVAL)
+                try:
+                    self._purge_inactive_sessions()
+                except Exception as e:
+                    logger.error(f"--- [PURGE] Error during session purge: {e}")
+
+        thread = threading.Thread(target=purge_loop, daemon=True, name="session-purge")
+        thread.start()
+        logger.info(f"--- [PURGE] Session purge thread started "
+                    f"(inactive after {self.SESSION_PURGE_AFTER_HOURS}h, "
+                    f"check every {self.SESSION_PURGE_CHECK_INTERVAL // 60}min)")
 
     @property
     def _stage_outputs(self) -> Dict[str, Any]:
@@ -290,7 +362,7 @@ class ChatbotPipeline:
             return 0
 
     # #############################################################################
-    # NEW HELPER FUNCTION TO SANITIZE DATA
+    # HELPER FUNCTION TO SANITIZE DATA
     # #############################################################################
     def _sanitize_row_for_indexing(self, row: Dict[str, Any]) -> Dict[str, Any]:
         """Converts special data types (Timestamp, NaT, nan) to JSON-safe formats."""
@@ -397,7 +469,7 @@ class ChatbotPipeline:
 
             rows = df.to_dict('records')
 
-            # FIX: Sanitize each row before converting it to a string for the index.
+            # Sanitize each row before converting it to a string for the index.
             # This ensures the string is always a valid, parsable dictionary.
             sanitized_rows = [self._sanitize_row_for_indexing(row) for row in rows]
             nodes = [Document(text=str(row)) for row in sanitized_rows]
@@ -485,83 +557,102 @@ class ChatbotPipeline:
         
         logger.info(f"Processing {len(table_names)} tables: {table_names}")
         
+        # ============================================================================
+        # PHASE 1: Load existing summaries first (no synthetic data needed)
+        # ============================================================================
+        tables_needing_summary = []
+
+        for table_name in table_names:
+            existing = self._get_existing_table_info(table_name)
+            if existing:
+                self.table_infos[table_name] = {
+                    'original_table_name': table_name,
+                    'table_name': existing.table_name,
+                    'table_summary': existing.table_summary,
+                    'column_descriptions': existing.column_descriptions_dict()
+                }
+                logger.info(f"✅ Loaded existing info for table: {table_name} ({existing.table_name})")
+            else:
+                tables_needing_summary.append(table_name)
+
+        if not tables_needing_summary:
+            logger.info("All tables already have summaries. Skipping synthetic data generation.")
+            return
+
+        # ============================================================================
+        # PHASE 2: Generate synthetic data ONLY for new tables
+        # ============================================================================
+        logger.info(f"Generating summaries for {len(tables_needing_summary)} new tables: {tables_needing_summary}")
+
         dfs = []
         table_info_list = []
-        
-        for table_name in table_names:
+
+        for table_name in tables_needing_summary:
             df = synthetic_data_generator.generate_synthetic_table_data(
                 table_name, num_rows=config.TEST_ROW_LIMIT if config.TEST_MODE else 1000
             )
             table_info = db_manager.get_table_info(table_name)
-            
+
             if df is not None and not df.empty and table_info:
                 dfs.append(df)
                 table_info_list.append(table_info)
             else:
                 logger.warning(f"Skipping table {table_name} due to empty synthetic data or missing info.")
-        
+
+        if not dfs:
+            logger.info("No new tables to generate summaries for.")
+            return
+
         # ============================================================================
-        # NEW LLAMAINDEX v0.11+ PATTERN: Use llm.structured_predict() instead of
-        # LLMTextCompletionProgram.from_defaults()
+        # PHASE 3: Generate summaries for new tables using LLM
         # ============================================================================
-        # Create ChatPromptTemplate for structured_predict
         table_info_prompt_str = prompt_manager.get_table_info_prompt().template
         table_info_prompt_tmpl = ChatPromptTemplate(
             message_templates=[ChatMessage.from_str(table_info_prompt_str, role="user")]
         )
         llm = llm_manager.get_llm()
-        
-        table_names_set = set()
+
+        # Collect existing table names to avoid duplicates
+        table_names_set = {info['table_name'] for info in self.table_infos.values()}
+
         for table_info, df in zip(table_info_list, dfs):
             original = table_info['table_name']
-            existing = self._get_existing_table_info(original)
-            if existing:
-                # FIX: Store as a dictionary with original_table_name as the key
-                self.table_infos[original] = {
-                    'original_table_name': original,
-                    'table_name': existing.table_name,
-                    'table_summary': existing.table_summary,
-                    'column_descriptions': existing.column_descriptions
-                }
-                logger.info(f"Loaded existing info for table: {existing.table_name}")
-            else:
-                table_structure = ", ".join(table_info['columns'])
-                sample_data = df.head(16).to_string()
-                print(sample_data)
-                attempts = 0
-                while attempts < 3:
-                    try:
-                        # NEW: Use llm.structured_predict instead of program()
-                        gen = llm.structured_predict(
-                            TableInfo,
-                            table_info_prompt_tmpl,
-                            table_name=original,
-                            table_structure=table_structure,
-                            table_data=sample_data,
-                            exclude_table_name_list=str(list(table_names_set)),
-                        )
-                        normalized_name = re.sub(r'\W+', '_', gen.table_name).lower().strip('_')
-                        if normalized_name not in table_names_set:
-                            gen.table_name = normalized_name
-                            table_names_set.add(normalized_name)
-                            break
-                        attempts += 1
-                        logger.warning(f"Duplicate table_name {gen.table_name}, retrying...")
-                    except Exception as e:
-                        logger.error(f"Error generating table summary: {e}")
-                        gen = TableInfo(
-                            table_name=re.sub(r'\W+', '_', original).lower().strip('_'),
-                            table_summary=f"Database table with {table_info['row_count']} rows",
-                            column_descriptions={}
-                        )
+            table_structure = ", ".join(table_info['columns'])
+            sample_data = df.head(16).to_string()
+            print(sample_data)
+            attempts = 0
+            while attempts < 3:
+                try:
+                    gen = llm.structured_predict(
+                        TableInfo,
+                        table_info_prompt_tmpl,
+                        table_name=original,
+                        table_structure=table_structure,
+                        table_data=sample_data,
+                        exclude_table_name_list=str(list(table_names_set)),
+                    )
+                    normalized_name = re.sub(r'\W+', '_', gen.table_name).lower().strip('_')
+                    if normalized_name not in table_names_set:
+                        gen.table_name = normalized_name
+                        table_names_set.add(normalized_name)
                         break
+                    attempts += 1
+                    logger.warning(f"Duplicate table_name {gen.table_name}, retrying...")
+                except Exception as e:
+                    logger.error(f"Error generating table summary: {e}")
+                    gen = TableInfo(
+                        table_name=re.sub(r'\W+', '_', original).lower().strip('_'),
+                        table_summary=f"Database table with {table_info['row_count']} rows",
+                        column_descriptions=[]
+                    )
+                    break
                 self._save_table_info(original, gen)
-                # FIX: Store as a dictionary with original_table_name as the key
+                # Store as a dictionary with original_table_name as the key
                 self.table_infos[original] = {
                     'original_table_name': original,
                     'table_name': gen.table_name,
                     'table_summary': gen.table_summary,
-                    'column_descriptions': gen.column_descriptions
+                    'column_descriptions': gen.column_descriptions_dict()
                 }
                 logger.info(f"Generated summary for table: {gen.table_name}")
 
@@ -578,7 +669,11 @@ class ChatbotPipeline:
             if data.get("original_table_name") != original_table_name:
                 logger.warning(f"Mismatched original_table_name in {path}: expected {original_table_name}, got {data.get('original_table_name')}. Ignoring.")
                 return None
-            data.setdefault("column_descriptions", {})
+            data.pop("original_table_name", None)
+
+            # default should be [] // TableInfo expects a list
+            data.setdefault("column_descriptions", [])
+
             return TableInfo.model_validate(data)
         except Exception as e:
             logger.error(f"Error loading table info from {path}: {e}")
@@ -707,22 +802,22 @@ class ChatbotPipeline:
         print(f"\n--- DEBUG: Extracted Explanation ---\n{explanation}\n--- END DEBUG ---\n")
         print(f"\n--- DEBUG: PARSED SQL (After Cleaning) ---\n{txt}\n--- END DEBUG ---\n")
         
-        # ========== RETURN DICT (CRITICAL!) ==========
+        # ========== RETURN DICT  ==========
         parsed =  {
             "explanation": explanation,
             "sql": txt
         }
-        self._stage_outputs['sql_parser'] = parsed  # ← ADD THIS
+        self._stage_outputs['sql_parser'] = parsed 
         return parsed
 
     def _review_and_correct_sql(
-        self, 
-        sql_result: Dict[str, str],  # ← Changed from str to Dict
-        context_str: str, 
-        masked_query_str: str, 
-        analysis: QueryAnalysis, 
+        self,
+        sql_result: Dict[str, str], 
+        context_str: str,
+        masked_query_str: str,
+        analysis: QueryAnalysis,
         retrieved_examples: List[Dict]
-    ) -> str:  # ← Still returns str (just the SQL)
+    ) -> str:  
         """
         Review SQL with access to generator's explanation.
         Returns the final SQL (corrected or original).
@@ -753,14 +848,14 @@ class ChatbotPipeline:
             review_prompt = prompt_manager.get_sql_review_prompt().format(
                 context_str=context_str,
                 masked_query_str=masked_query_str,
-                generator_explanation=current_explanation,  # ← NEW: Pass explanation
+                generator_explanation=current_explanation,  # Pass explanation
                 sql_query=current_sql,
                 examples=examples_str
             )
             
             try:
                 response = llm_manager.get_aux_llm().complete(review_prompt)
-                self._stage_outputs['sql_reviewer_raw'] = response  # ← ADD THIS
+                self._stage_outputs['sql_reviewer_raw'] = response 
                 review_text = response.text.strip()
                 
                 # Parse JSON response
@@ -790,8 +885,7 @@ class ChatbotPipeline:
                     })()
                     
                     parsed_result = self._parse_response_to_sql(mock_response)
-                    current_sql = parsed_result["sql"]
-                    # Keep old explanation since we don't have a new one
+                    current_sql = parsed_result["sql"]   
                     continue
                 
                 logger.warning("Review failed but no correction provided. Keeping current SQL.")
@@ -801,7 +895,7 @@ class ChatbotPipeline:
                 logger.error(f"Review error: {e}", exc_info=True)
                 break
         self._stage_outputs['sql_reviewer'] = current_sql
-        return current_sql  # Returns just the SQL string
+        return current_sql 
 
     
     def _lint_and_fix_sql(self, sql_query: str) -> str:
@@ -899,7 +993,7 @@ class ChatbotPipeline:
             'user_mapping': user_mapping,
             'original_query': input_query
         }
-        self._stage_outputs['user_input_processor'] = result  # ← ADD THIS
+        self._stage_outputs['user_input_processor'] = result  
         print(f"--- DEBUG: Processed input result: {result}")
         return result
 
@@ -1051,7 +1145,6 @@ class ChatbotPipeline:
         logger.info("="*80)
         logger.info(f"Main LLM (Text-to-SQL):     {llm_manager.get_llm().model}")
         logger.info(f"Auxiliary LLM (Analyzer):   {llm_manager.get_aux_llm().model}")
-        logger.info(f"Reviewer LLM:               {llm_manager.get_aux_llm().model}")
         logger.info(f"Response LLM:               {llm_manager.get_llm().model}")
         logger.info(f"Embedding Model:            {llm_manager.get_embed_model().model_name if hasattr(llm_manager.get_embed_model(), 'model_name') else 'N/A'}")
         logger.info("="*80)
@@ -1059,7 +1152,7 @@ class ChatbotPipeline:
         logger.info("✅ Query pipeline components initialized (using direct execution mode).")
 
     # ============================================================================
-    # NEW ARCHITECTURE: TRIAGE, HISTORY MANAGER, SCHEMA ANALYSIS, VALIDATION
+    # ARCHITECTURE: TRIAGE, HISTORY MANAGER, SCHEMA ANALYSIS, VALIDATION
     # ============================================================================
     
     def _triage_query(self, query: str) -> TriageResult:
@@ -1091,7 +1184,7 @@ class ChatbotPipeline:
                 reasoning="Detected greeting pattern"
             )
         
-        # Check for obvious data keywords (Mongolian banking terms)
+        # Check for obvious data keywords 
         data_keywords = ["зээл", "данс", "үлдэгдэл", "төлбөр", "харилцагч", 
                          "хамгийн", "хэмжээ", "мэдээлэл", "хуваарь", "олгосон",
                          "acnt", "loan", "balance", "customer", "payment"]
@@ -1172,7 +1265,7 @@ class ChatbotPipeline:
             # Only show SQL pattern, not full SQL
             sql = turn.get('sql', 'N/A')
             if sql and sql != 'N/A':
-                # Extract just the pattern (first line or key operations)
+                # Extract just the pattern
                 sql_pattern = sql.split('\n')[0][:200] + "..." if len(sql) > 200 else sql
                 history_parts.append(f"  SQL Pattern: {sql_pattern}")
             history_parts.append("")
@@ -1278,8 +1371,8 @@ class ChatbotPipeline:
             suggestion=""
         )
         
-        # NOTE: LLM validation with actual data was REMOVED for security.
-        # We never send database values to the LLM during validation.
+        # NOTE: LLM validation with data is removed fpr security reasons. 
+        # We never send real values to the LLM during validation.
         # The response generator handles interpretation of results.
     
     def _regenerate_sql(self, query: str, schema: str, previous_sql: str, 
@@ -1373,7 +1466,7 @@ class ChatbotPipeline:
             schema_parts.append(f"TABLE: {display_name}")
             schema_parts.append(f"SUMMARY: {table_info.get('table_summary', 'N/A')}")
 
-            # FIXED: Use helper method to parse JSON string
+            # Use helper method to parse JSON string
             # Also try to get columns with normalized table name
             required_columns = analysis.get_required_columns()
             cols_to_include = required_columns.get(table_name, [])
@@ -1397,7 +1490,7 @@ class ChatbotPipeline:
                 for col in cols_to_include:
                     desc = col_descs.get(col, "No description available.")
                     schema_parts.append(f"  - {col}: {desc}")
-            schema_parts.append("")  # Blank line between tables
+            schema_parts.append("") 
         
         minimal_schema = "\n".join(schema_parts)
         
@@ -1419,9 +1512,19 @@ class ChatbotPipeline:
             return full_context.get("context_str", "No schema available.")
 
     def _format_text2sql_prompt(self, query_str: str, schema: str, analysis: QueryAnalysis, 
-                                 retrieved_examples: List[Dict], extracted_names: List[Dict]) -> str:
+                                 retrieved_examples: List[Dict], extracted_names: List[Dict],
+                                 use_modular_prompt: bool = True) -> str:
         """
         Formats the text-to-SQL prompt, providing the analyzer's plan and explanation as a suggestion.
+        
+        Args:
+            query_str: User's query
+            schema: Database schema (minimal/pruned)
+            analysis: QueryAnalysis result from analyzer
+            retrieved_examples: Similar SQL examples
+            extracted_names: Entity names from database
+            use_modular_prompt: If True, uses new modular prompt composition based on required_tables.
+                               If False, uses legacy monolithic prompt.
         """ 
         if not retrieved_examples:
             dynamic_examples_str = "No relevant examples found."
@@ -1432,48 +1535,94 @@ class ChatbotPipeline:
         plan_str = "No plan was generated."
         explanation_str = "No explanation was generated."
         chat_history_note = ""
+        required_tables = []
+        
         if analysis:
             if analysis.sub_questions: 
                 sub_q_str = "\n".join([f"- {sq}" for sq in analysis.sub_questions])
                 plan_str = f"The suggested steps are:\n{sub_q_str}"
             if analysis.explanation:
                 explanation_str = analysis.explanation
+            # Get required tables for modular prompt
+            required_tables = analysis.required_tables if analysis.required_tables else []
         
         if analysis and analysis.needs_chat_history and analysis.chat_history_reasoning:
             chat_history_note = f"""
-            **📜 CHAT HISTORY CONTEXT:**
-            This query references previous conversation.
-            Reasoning: {analysis.chat_history_reasoning}
+**📜 CHAT HISTORY CONTEXT:**
+This query references previous conversation.
+Reasoning: {analysis.chat_history_reasoning}
 
-            **IMPORTANT:** You must re-compute the entity reference using a subquery based on the previous SQL pattern.
-            """
-        # Format entity names
+**IMPORTANT:** You must re-compute the entity reference using a subquery based on the previous SQL pattern.
+"""
+        # Format entity names - make it VERY clear these are exact matches from database
         if not extracted_names:
-            entity_names_str = "No specific entity names were retrieved."
+            entity_names_str = "No specific entity names were retrieved from database. USE UPPER() for text matching!"
         else:
-            name_texts = [", ".join([f"{k}={v}" for k, v in name_dict.items()]) for name_dict in extracted_names]
-            entity_names_str = "\n".join([f"  - {name_str}" for name_str in name_texts])
+            # Filter out internal keys and format clearly
+            name_texts = []
+            for name_dict in extracted_names:
+                # Skip internal keys like '_table'
+                filtered = {k: v for k, v in name_dict.items() if not k.startswith('_')}
+                if filtered:
+                    name_parts = [f"{k}='{v}'" for k, v in filtered.items() if v]  # Quote values
+                    if name_parts:
+                        name_texts.append(", ".join(name_parts))
+            
+            if name_texts:
+                entity_names_str = "📋 EXACT NAMES FROM DATABASE (use these exact values in SQL):\n"
+                entity_names_str += "\n".join([f"  • {name_str}" for name_str in name_texts[:10]])  # Limit to top 10
+            else:
+                entity_names_str = "No specific entity names were retrieved. USE UPPER() for text matching!"
 
-        prompt_template = prompt_manager.get_text2sql_prompt()
-        
-        final_prompt = prompt_template.format(
-            query_str=query_str,
-            schema=schema,
-            analyzer_explanation=explanation_str,
-            plan=plan_str,
-            entity_names=entity_names_str,
-            dynamic_examples=dynamic_examples_str
-        )
-        
-        if chat_history_note:
-            final_prompt = final_prompt.replace(
-                "** USER QUESTION **:",
-                f"{chat_history_note}\n** USER QUESTION **:"
+        # =====================================================================
+        # MODULAR PROMPT COMPOSITION (ARCHITECTURE)
+        # =====================================================================
+        if use_modular_prompt and required_tables:
+            logger.info(f"🧩 Using MODULAR prompt for tables: {required_tables}")
+            
+            # Add chat history note to explanation if present
+            if chat_history_note:
+                explanation_str = chat_history_note + "\n" + explanation_str
+            
+            final_prompt = prompt_manager.format_modular_prompt(
+                required_tables=required_tables,
+                query_str=query_str,
+                schema=schema,
+                dynamic_examples=dynamic_examples_str,
+                analyzer_explanation=explanation_str,
+                plan=plan_str,
+                entity_names=entity_names_str
             )
+        else:
+            # =====================================================================
+            # LEGACY MONOLITHIC PROMPT (FALLBACK)
+            # =====================================================================
+            logger.info("📜 Using LEGACY monolithic prompt (no required_tables or modular disabled)")
+            
+            prompt_template = prompt_manager.get_text2sql_prompt()
+            
+            final_prompt = prompt_template.format(
+                query_str=query_str,
+                schema=schema,
+                analyzer_explanation=explanation_str,
+                plan=plan_str,
+                entity_names=entity_names_str,
+                dynamic_examples=dynamic_examples_str
+            )
+            
+            if chat_history_note:
+                final_prompt = final_prompt.replace(
+                    "** USER QUESTION **:",
+                    f"{chat_history_note}\n** USER QUESTION **:"
+                )
 
         # Print the final prompt for debugging
         print("\n" + "="*50)
         print("--- FINAL TEXT-TO-SQL PROMPT (to be sent to MAIN LLM) ---")
+        if use_modular_prompt and required_tables:
+            print(f"[MODULAR MODE] Tables: {required_tables}")
+        else:
+            print("[LEGACY MODE] Using monolithic prompt")
         print(final_prompt)
         print("="*50 + "\n")
         
@@ -1552,7 +1701,10 @@ class ChatbotPipeline:
         self._stage_outputs['example_retriever'] = retrieved_examples
         
         # ========== STEP 3: Build table context ==========
-        context_result = self._get_table_context_and_rows_str(original_query)
+        # IMPORTANT: Use original_user_query (clean current question) for embedding/reranking,
+        # NOT the enriched query which contains chat history summaries and previous SQL.
+        # This ensures accurate semantic matching for table/name retrieval.
+        context_result = self._get_table_context_and_rows_str(original_user_query)
         context_str = context_result.get("context_str", "") if isinstance(context_result, dict) else ""
         extracted_names = context_result.get("extracted_names", []) if isinstance(context_result, dict) else []
         
@@ -1562,7 +1714,34 @@ class ChatbotPipeline:
         # ========== STEP 4: Analyze query ==========
         analysis = self._analyze_and_decompose_query(masked_query, context_str, retrieved_examples)
         self._stage_outputs['query_analyzer'] = analysis
-        
+
+        # ========== STEP 4.5: Module-aware table supplementation ==========
+        # If the analyzer requested tables that the reranker didn't provide,
+        # log it. The minimal schema builder already reads from self.table_infos
+        # (which has ALL tables), so it will still find them.
+        if analysis and analysis.required_tables:
+            reranker_tables = set()
+            if isinstance(context_result, dict):
+                # Extract table names that were in the reranker output
+                ctx_str = context_result.get("context_str", "")
+                for tname in self.table_infos:
+                    if tname.upper() in ctx_str.upper():
+                        reranker_tables.add(tname.lower())
+
+            supplemented_tables = []
+            for table in analysis.required_tables:
+                if table.lower() not in reranker_tables:
+                    supplemented_tables.append(table)
+                    # Also check if should pull in sibling tables from the same module
+                    module = TABLE_TO_MODULE.get(table.lower())
+                    if module:
+                        logger.info(f"--- [MODULE SUPPLEMENT] Table '{table}' belongs to module '{module}'")
+
+            if supplemented_tables:
+                logger.info(f"--- [MODULE SUPPLEMENT] Analyzer requested tables outside reranker candidates: {supplemented_tables}")
+            else:
+                logger.info(f"--- [MODULE SUPPLEMENT] All analyzer tables were in reranker candidates.")
+
         # ========== STEP 5: Build minimal schema ==========
         minimal_schema = self._build_minimal_schema(analysis)
         
@@ -1650,7 +1829,7 @@ class ChatbotPipeline:
         return self.context_builder.rerank_tables(
             query=query,
             candidate_tables=candidate_tables,
-            top_k=3  # or 3
+            top_k=config.MAX_TABLE_RETRIEVAL
         )
         
     def _select_relevant_columns(self, query: str, table_name: str) -> List[str]:
@@ -1685,15 +1864,72 @@ class ChatbotPipeline:
         return selected
 
 
-    def _extract_entity_name(self, query:str):
+    def _extract_entity_name(self, query: str) -> str:
+        """
+        Extract potential entity names (customer names, project names) from query.
+        
+        Strategy:
+        1. Look for capitalized words (company names are usually in CAPS)
+        2. Look for words ending with ХХК, ХК, ТББ, ЗГ (company suffixes)
+        3. Look for quoted strings
+        4. Look for consecutive capitalized words
+        5. Fallback: remove common query words and return the rest
+        """
+        import re
+        
+        # Method 1: Find quoted strings first
+        quoted = re.findall(r'["\']([^"\']+)["\']', query)
+        if quoted:
+            return ' '.join(quoted)
+        
+        # Method 2: Look for company name patterns (ХХК, ХК, ТББ etc.)
+        company_pattern = r'([А-ЯӨҮЁ][А-ЯӨҮЁа-яөүё\s\-]+(?:ХХК|ХК|ТББ|ЗГ|ННК|БМТ|ЯАМ))'
+        companies = re.findall(company_pattern, query, re.IGNORECASE)
+        if companies:
+            return ' '.join(companies)
+        
+        # Method 3: Find sequences of capitalized Mongolian words
+        # This handles names like "ЭРЧИМ ХҮЧНИЙ ЯАМ", "МИАТ ХХК", etc.
+        caps_pattern = r'([А-ЯӨҮЁ]{2,}(?:\s+[А-ЯӨҮЁ]{2,})*)'  
+        caps_matches = re.findall(caps_pattern, query)
+        if caps_matches:
+            # Return the longest match (most likely the full name)
+            return max(caps_matches, key=len)
+        
+        # Method 4: Fallback - remove common Mongolian query words
         entity_query = query
         keywords_to_remove = [
-            "төлбөр", "хуваарь", "данс", "дугаар", "үлдэгдэл", 
-        "мэдээлэл", "харуул", "гарга", "зээл", "ийн", "ны", "хуваарыг", "төлбөрийн"
+            # Question words
+            "юу", "хэн", "хэд", "хэдэн", "ямар", "яаж", "хаана", "хэзээ",
+            # Common verbs
+            "байна", "байгаа", "байсан", "болсон", "олгосон", "авсан",
+            "харуул", "харуулна", "гарга", "өг", "өгнө",
+            # Common banking terms (these are NOT entity names)
+            "зээл", "зээлийн", "данс", "дансны", "төлбөр", "төлбөрийн",
+            "үлдэгдэл", "хуваарь", "мэдээлэл", "дугаар",
+            # Suffixes
+            "ийн", "ын", "ний", "ны", "аас", "ээс", "оос", "өөс",
+            "руу", "рүү", "тай", "тэй", "той", "д", "т"
         ]
-        for keyword in keywords_to_remove:
-            entity_query = entity_query.replace(keyword, "")
-        return entity_query.strip()
+        
+        words = entity_query.split()
+        filtered_words = []
+        for word in words:
+            word_lower = word.lower()
+            # Keep if not in removal list AND has uppercase letters (likely a name)
+            if word_lower not in keywords_to_remove:
+                filtered_words.append(word)
+        
+        result = ' '.join(filtered_words).strip()
+        
+        # If result is too short or empty, try uppercase version of original
+        if len(result) < 3:
+            # Just return the original query uppercased - embedding might still match
+            return query.upper()
+        
+        # ALWAYS uppercase the result for better matching with indexed names
+        # Database names are typically stored in UPPERCASE (e.g., "ЭРЧИМ ХҮЧНИЙ ЯАМ")
+        return result.upper()
     
     def _get_table_context_and_rows_str(self, query: str) -> str:
         """
@@ -1744,7 +1980,7 @@ class ChatbotPipeline:
         selected_tables = self.select_relevant_tables(query, candidate_tables_for_reranker)
         logger.info(f"--- [CONTEXT BUILDER] Reranker selected {len(selected_tables)} final tables: {selected_tables}")
 
-        # ========== FIX: SORT TABLES ALPHABETICALLY ==========
+        # ========== SORT TABLES ALPHABETICALLY ==========
         selected_tables.sort()
         logger.info(f"--- [CONTEXT BUILDER] ✅ Tables sorted alphabetically for caching: {selected_tables}")
         # ====================================================
@@ -1838,6 +2074,7 @@ class ChatbotPipeline:
                 if name_index:
                     try:
                         entity_query = self._extract_entity_name(query)
+                        print(f" DEBUG: Entity-focused query for name retrieval: '{entity_query}'")
                         retriever = name_index.as_retriever(
                             similarity_top_k=config.MAX_ROW_RETRIEVAL
                         )

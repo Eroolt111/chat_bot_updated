@@ -1,0 +1,72 @@
+{
+  "session_id": "8f219aec",
+  "timestamp": "2025-12-11T14:09:58.546171",
+  "execution_time_seconds": 2.07,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд хэрхэн туслах вэ? Хэрвээ та банкны мэдээллийн сан, өгөгдлийн анализ эсвэл Монгол Улсын Хөгжлийн Банкны үйл ажиллагаатай холбоотой асуулт байвал тодорхой асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "8f219aec",
+  "timestamp": "2025-12-11T14:10:55.405915",
+  "execution_time_seconds": 1.48,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hghg",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "8f219aec",
+  "timestamp": "2025-12-11T14:12:28.825536",
+  "execution_time_seconds": 18.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Ирэх долоо хоногт төлөгдөа хуваарьтай зээлүүд байна уу?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'IW') + 7     AND t.schd_date < TRUNC(SYSDATE, 'IW') + 14 ORDER BY t.schd_date ASC;",
+  "result_count": 4,
+  "final_answer": "Ирэх долоо хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006418    - Төлбөрийн огноо: 2025-12-19    - Үндсэн төлбөр: 20,668,176.83 төгрөг    - Хүүгийн төлбөр: 13,490,356.4 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006435    - Төлбөрийн огноо: 2025-12-19    - Үндсэн төлбөр: 203,309,663.97 төгрөг    - Хүүгийн төлбөр: 132,702,552.74 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006725    - Төлбөрийн огноо: 2025-12-19    - Үндсэн төлбөр: 76,971,044.84 төгрөг    - Хүүгийн төлбөр: 50,239,885 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006476    - Төлбөрийн огноо: 2025-12-19    - Үндсэн төлбөр: 122,597,514.47 төгрөг    - Хүүгийн төлбөр: 80,020,805.76 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "8f219aec",
+  "timestamp": "2025-12-11T14:14:57.791816",
+  "execution_time_seconds": 1.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "зайл",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+

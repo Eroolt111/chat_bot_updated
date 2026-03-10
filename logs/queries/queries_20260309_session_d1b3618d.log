@@ -1,0 +1,182 @@
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T09:45:38.955665",
+  "execution_time_seconds": 5.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "энэ долоо хоногт эргэн төлөгдөх хуваарьтай зээлүүд",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     loan_id,     customer_id,     repayment_date,     amount,     cur_code FROM     loans WHERE     repayment_date BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE, 'IW') + 6 ORDER BY     repayment_date;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00942: table or view does not exist Help: https://docs.oracle.com/error-help/db/ora-00942/ [SQL: SELECT loan_id, customer_id, repayment_date, amount, cur_code FROM loans WHERE repayment_date BETWEEN TRUNC(SYSDATE, 'IW') AND TRUNC(SYSDATE, 'IW') + 6 ORDER BY repayment_date] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T09:55:38.645702",
+  "execution_time_seconds": 2.19,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд Монгол Улсын Хөгжлийн Банк болон банкны өгөгдлийн сан, өгөгдөл боловсруулахтай холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T09:56:20.330460",
+  "execution_time_seconds": 12.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Дараа доло хонгогт төлөгдөх хуваарьтай зээлүүд",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 7 ORDER BY d.schd_date ASC;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T09:58:51.924784",
+  "execution_time_seconds": 20.49,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч дараа доло хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 7 ORDER BY d.schd_date ASC; ```  [Current Question] ойрын 30 хоногт",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 50,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN TRUNC(SYSDATE) AND TRUNC(SYSDATE) + 30 ORDER BY d.schd_date ASC;",
+  "result_count": 5,
+  "final_answer": "Ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006418    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 22,392,950.85 төгрөг    - Хүүгийн төлбөр: 11,765,582.38 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006435    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 220,275,999.64 төгрөг    - Хүүгийн төлбөр: 115,736,217.08 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006476    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 132,828,364.01 төгрөг    - Хүүгийн төлбөр: 69,789,956.22 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006725    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 83,394,333.12 төгрөг    - Хүүгийн төлбөр: 43,816,596.71 төгрөг  5. Харилцагч: ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК    - Дансны дугаар: MN780036003600008686    - Төлбөрийн огноо: 2026-03-25    - Үндсэн төлбөр: 11,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T11:20:18.421926",
+  "execution_time_seconds": 2.95,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны өгөгдлийн сан, банкны мэдээллийн систем, эсвэл өгөгдөлд суурилсан шинжилгээтэй холбоотой асуулт байвал тодорхой асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T11:21:08.901724",
+  "execution_time_seconds": 25.7,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "энэ сард төлөгдөх ёстой зээлүүд",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'MM')     AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE, 'MM'), 1) ORDER BY t.schd_date ASC;",
+  "result_count": 9,
+  "final_answer": "Энэ сард төлөгдөх ёстой зээлүүдийн мэдээлэл:  1. ПРОМОН ТРЕЙД ХХК    - Дансны дугаар: 3600004570    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 464,771.33 иен    - Хүүгийн төлбөр: 24,066.24 иен  2. ПРОМОН ТРЕЙД ХХК    - Дансны дугаар: 3600006690    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 100,000,000 төгрөг    - Хүүгийн төлбөр: 9,557,260.27 төгрөг  3. ПРОМОН ТРЕЙД ХХК    - Дансны дугаар: 3600004065    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 6,457,708 иен    - Хүүгийн төлбөр: 334,385.43 иен  4. ПРОМОН ТРЕЙД ХХК    - Дансны дугаар: 3600002340    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 30,148,034.41 иен    - Хүүгийн төлбөр: 1,561,090 иен  5. ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006476    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 132,828,364.01 төгрөг    - Хүүгийн төлбөр: 69,789,956.22 төгрөг  6. ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006418    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 22,392,950.85 төгрөг    - Хүүгийн төлбөр: 11,765,582.38 төгрөг  7. ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006435    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 220,275,999.64 төгрөг    - Хүүгийн төлбөр: 115,736,217.08 төгрөг  8. ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006725    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 83,394,333.12 төгрөг    - Хүүгийн төлбөр: 43,816,596.71 төгрөг  9. ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК    - Дансны дугаар: MN780036003600008686    - Төлөх огноо: 2026-03-25    - Үндсэн төлбөр: 11,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T11:45:32.680254",
+  "execution_time_seconds": 2.32,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны өгөгдлийн сан, банкны мэдээлэл, эсвэл өгөгдөл шинжилгээтэй холбоотой асуулт байвал асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T11:46:26.153637",
+  "execution_time_seconds": 19.76,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Ирэх 30 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 ORDER BY d.schd_date ASC;",
+  "result_count": 5,
+  "final_answer": "Ирэх 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006418    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 22,392,950.85 төгрөг    - Хүүгийн төлбөр: 11,765,582.38 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006435    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 220,275,999.64 төгрөг    - Хүүгийн төлбөр: 115,736,217.08 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006476    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 132,828,364.01 төгрөг    - Хүүгийн төлбөр: 69,789,956.22 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006725    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 83,394,333.12 төгрөг    - Хүүгийн төлбөр: 43,816,596.71 төгрөг  5. Харилцагч: ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК    - Дансны дугаар: MN780036003600008686    - Төлбөрийн огноо: 2026-03-25    - Үндсэн төлбөр: 11,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T11:57:25.124770",
+  "execution_time_seconds": 2.1,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны мэдээллийн сан, өгөгдлийн шинжилгээ, эсвэл банкны үйл ажиллагаатай холбоотой асуулт байвал тодорхой асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-09T15:38:00.521415",
+  "execution_time_seconds": 2.15,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайн байна уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд Монгол Улсын Хөгжлийн Банк болон банкны мэдээллийн сан, өгөгдлийн шинжилгээтэй холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+

@@ -1,0 +1,57 @@
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-10T09:33:53.919656",
+  "execution_time_seconds": 37.99,
+  "llm_backend": "ollama",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайн байна уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Монгол Улсын Хөгжлийн Банк-ын болон үйлчилгээний хүрээний ажилтан байна. Хөгжлийн банк нь улсын үйл ажиллагааг хөгжүүлэх, байгалийн хөрөнгөө, хөрөнгө оруулалт, үйлчилгээний үйл ажиллагааг хөгжүүлэх зэрэг ажлуудыг хийж байна. Хэрэв танд асуулга байвал бүтээгчид болон үйлчилгээний талаарх мэдээлэл, тайлангуудыг танилцуулж болно. Таны асуулгыг бүтээгчид болон үйлчилгээний талаарх мэдээлэл, тайлангуудыг танилцуулж болно. Таны асуулгыг бүтээгчид болон үйлчилгээний талаарх мэдээлэл, тайлангуудыг танилцуулж болно."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-10T09:38:57.282172",
+  "execution_time_seconds": 79.88,
+  "llm_backend": "ollama",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date < TRUNC(SYSDATE) + 30 ORDER BY t.schd_date ASC;",
+  "result_count": 5,
+  "final_answer": "ИЗИНИС-ЭЙР ВЭЙЗ ХХК, 2026-03-19, 22,392,950.85 төгрөг, 11,765,582.38 төгрөг, төгрөг   ИЗИНИС-ЭЙР ВЭЙЗ ХХК, 2026-03-19, 132,828,364.01 төгрөг, 69,789,956.22 төгрөг, төгрөг   ИЗИНИС-ЭЙР ВЭЙЗ ХХК, 2026-03-19, 220,275,999.64 төгрөг, 115,736,217.08 төгрөг, төгрөг   ИЗИНИС-ЭЙР ВЭЙЗ ХХК, 2026-03-19, 83,394,333.12 төгрөг, 43,816,596.71 төгрөг, төгрөг   ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК, 2026-03-25, 11,392,231,465.45 төгрөг, 2,549,234,278.56 төгрөг, төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d1b3618d",
+  "timestamp": "2026-03-10T09:47:58.864210",
+  "execution_time_seconds": 18.87,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.schd_date,     t.amount,     t.int_amount,     t.cur_code FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date < TRUNC(SYSDATE) + 30 ORDER BY t.schd_date ASC;",
+  "result_count": 5,
+  "final_answer": "Ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006418    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 22,392,950.85 төгрөг    - Хүүгийн төлбөр: 11,765,582.38 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006476    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 132,828,364.01 төгрөг    - Хүүгийн төлбөр: 69,789,956.22 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006435    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 220,275,999.64 төгрөг    - Хүүгийн төлбөр: 115,736,217.08 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны дугаар: 3600006725    - Төлбөрийн огноо: 2026-03-19    - Үндсэн төлбөр: 83,394,333.12 төгрөг    - Хүүгийн төлбөр: 43,816,596.71 төгрөг  5. Харилцагч: ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК    - Дансны дугаар: MN780036003600008686    - Төлбөрийн огноо: 2026-03-25    - Үндсэн төлбөр: 11,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+

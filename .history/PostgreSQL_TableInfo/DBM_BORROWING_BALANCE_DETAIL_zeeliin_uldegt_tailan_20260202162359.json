@@ -1,0 +1,95 @@
+{
+  "original_table_name": "DBM.BORROWING_BALANCE_DETAIL",
+  "table_name": "zeeliin_uldegt_tailan",
+  "table_summary": "Detailed record of borrowing balances, including account, customer, product, principal, interest, currency, and status information for each borrowing transaction.",
+  "column_descriptions": [
+    {
+      "column_name": "module",
+      "description": "Text field (up to 10 characters) indicating the module or system source of the borrowing record. Used for categorizing or identifying the origin of the data."
+    },
+    {
+      "column_name": "acnt_code",
+      "description": "Text field (up to 20 characters) representing the unique account code for the borrowing. Used to uniquely identify each borrowing account."
+    },
+    {
+      "column_name": "acnt_name",
+      "description": "Text field (up to 200 characters) containing the descriptive name of the borrowing account. Provides a human-readable label for the account."
+    },
+    {
+      "column_name": "cust_code",
+      "description": "Text field (up to 20 characters) representing the unique customer code. Used to identify the customer associated with the borrowing."
+    },
+    {
+      "column_name": "cust_name",
+      "description": "Text field (up to 400 characters) containing the full name of the customer. Provides a descriptive label for the customer."
+    },
+    {
+      "column_name": "cur_code",
+      "description": "Text field (3 characters) indicating the currency code (e.g., 'MNT' for Mongolian Tugrik, 'USD' for US Dollar, 'EUR' for Euro, etc.) for all monetary values in the row. All numeric value columns such as 'principal', 'int_exp', etc., are denominated in this currency."
+    },
+    {
+      "column_name": "int_exp",
+      "description": "Numeric value representing the expected interest amount to be paid on the borrowing. The currency is determined by the 'cur_code' column."
+    },
+    {
+      "column_name": "int_pay",
+      "description": "Numeric value representing the interest amount that has been paid so far on the borrowing. The currency is determined by the 'cur_code' column."
+    },
+    {
+      "column_name": "int_pay_bill",
+      "description": "Numeric value representing the billed interest amount for the borrowing. The currency is determined by the 'cur_code' column."
+    },
+    {
+      "column_name": "int_rate",
+      "description": "Numeric value representing the interest rate (likely as a percentage) applied to the borrowing."
+    },
+    {
+      "column_name": "maturity_date",
+      "description": "Date field indicating the maturity date of the borrowing, i.e., when the principal and interest are due to be fully repaid."
+    },
+    {
+      "column_name": "paid_int",
+      "description": "Text field (possibly a code or reference) related to paid interest. The exact business meaning is unclear from the sample data, but it may reference a payment transaction or batch."
+    },
+    {
+      "column_name": "paid_princ",
+      "description": "Text field (possibly a code or reference) related to paid principal. The exact business meaning is unclear from the sample data, but it may reference a payment transaction or batch."
+    },
+    {
+      "column_name": "principal",
+      "description": "Numeric value representing the outstanding principal amount of the borrowing. The currency is determined by the 'cur_code' column."
+    },
+    {
+      "column_name": "prod_code",
+      "description": "Text field (up to 20 characters) representing the product code for the borrowing product. Used to identify the type of loan or borrowing product."
+    },
+    {
+      "column_name": "prod_name",
+      "description": "Text field (up to 200 characters) containing the descriptive name of the borrowing product."
+    },
+    {
+      "column_name": "type_name",
+      "description": "Text field (up to 200 characters) describing the type or category of the borrowing. Provides additional classification for the loan."
+    },
+    {
+      "column_name": "rate",
+      "description": "Numeric value, possibly representing an additional rate or fee associated with the borrowing. The exact business meaning should be clarified, but it is likely related to the terms of the loan."
+    },
+    {
+      "column_name": "term_len",
+      "description": "Numeric value indicating the length of the loan term, likely in days."
+    },
+    {
+      "column_name": "txn_date",
+      "description": "Date field representing the transaction date, i.e., when the borrowing record was created or last updated. Useful for filtering and tracking changes over time."
+    },
+    {
+      "column_name": "value_date",
+      "description": "Date field indicating the value date of the borrowing, which is the date from which interest or other calculations are effective."
+    },
+    {
+      "column_name": "status",
+      "description": "Text field (up to 2000 characters) providing the current status or remarks for the borrowing record. May include workflow status, comments, or other relevant notes."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "original_table_name": "dbm.bac_balance_detail",
+  "table_name": "dotoody_dansny_uldegdel",
+  "table_summary": "Банкны дотоодын дансны үлдэгдлийн өдрийн дэлгэрэнгүй мэдээллийг агуулсан харагдац. Энэ нь банкны өөрийн дотоод дансдын үлдэгдэл, бүтээгдэхүүний төрөл, зэрэглэл зэрэг мэдээллийг хамарна. (A comprehensive view providing daily snapshots of the bank's internal account balances. This includes balance information, product types, ratings, and account lifecycle dates. Use this for internal account balance queries.)",
+  "column_descriptions": {
+    "txn_date": "Гүйлгээний огноо (Transaction Date). The snapshot date for the account balance. **This is the most important column for time-based queries. To find the latest state, use MAX(txn_date).** Sample values: '2025-01-15', '2025-02-01'.",
+    "acnt_code": "Дансны дугаар (Account Code). The unique identifier for the internal account. This is the primary key for joining account-related data. Sample values: '1001234567', 'MN270050001001234567'.",
+    "acnt_name": "Дансны нэр (Account Name). The descriptive name of the internal account. Sample values: 'ҮНДСЭН АЖИЛЛАГСДААС АВАХ АВЛАГА', 'ХҮҮНИЙ ТУЗ-ИЙН ЦАЛИНГИЙН ЗАРДАЛ', 'ЗАРДЛЫН АЖИЛЛАГСДАД ОЛГОСОН НЭГ УДААГИЙН ЭМНЭЛЭГИЙН ҮЙЛЧИЛ'.",
+    "status": "Дансны төлөв (Account Status). The current status of the account. Sample values: 'O' (Open/Active), 'C' (Closed), 'N' (New), 'D' (Deleted).",
+    "prod_type": "Бүтээгдэхүүний төрөл (Product Type). The type/category of the account product. Sample values: 'BAC_PSSV', 'BAC_ACTV'.",
+    "prod_code": "Бүтээгдэхүүний код (Product Code). The code identifying the specific product. Sample values: '62051004', '63050101'.",
+    "prod_name": "Бүтээгдэхүүний нэр (Product Name). The descriptive name of the product. Sample values: 'Хөрөнгийн ДЕРВАТИВЫН БОДИТ ҮНЭ ЦЭНИЙН ҮНЭЛГЭЭНИЙ ТЭГШ/ЗАРДАЛ', 'ТОРГУУЛИЙН ЗАРДАЛ'.",
+    "cur_code": "Дансны валют (Currency). The currency code for the account balance. Sample values: 'MNT', 'USD', 'EUR'. **Always SELECT with monetary values. GROUP BY for aggregations.**",
+    "rate": "Валютын ханш (Exchange Rate). The exchange rate for the currency on the txn_date. Use for converting to MNT. Sample values: 1.0 (for MNT), 3450.0 (for USD).",
+    "start_date": "Эхлэх огноо (Start Date). The effective start date of the account or product period. Sample values: '2024-01-01', '2025-01-01'.",
+    "end_date": "Дуусах огноо (End Date). The effective end date of the account or product period. Sample values: '2024-12-31', '2025-12-31'.",
+    "opened_date": "Нээсэн огноо (Opened Date). The date when the account was originally opened. Sample values: '2020-05-15', '2022-01-01'.",
+    "closed_date": "Хаасан огноо (Closed Date). The date when the account was closed (NULL if still open). Sample values: NULL, '2024-06-30'.",
+    "crnt": "Одоогийн үлдэгдэл (Current Balance). The account balance as of the txn_date. The currency is determined by 'cur_code'. Sample values: 5000000000.0, -250000000.0, 0.",
+    "rating": "Зэрэглэлийн оноо (Rating Score). The numeric rating/score assigned to the account. Sample values: 0 , 1, 2, 3, 4, 5, 6.",
+    "rating_name": "Зэрэглэлийн нэр (Rating Name). The descriptive name of the rating category. Sample values: null, 'High grade', 'Upper medium grade', 'Lower medium grade', 'non in investment/highly speculative', '< B-', 'unrated'."
+  }
+}

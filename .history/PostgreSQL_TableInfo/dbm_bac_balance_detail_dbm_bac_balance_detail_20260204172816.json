@@ -1,0 +1,71 @@
+{
+  "original_table_name": "dbm.bac_balance_detail",
+  "table_name": "dbm_bac_balance_detail",
+  "table_summary": "Detailed account balance records including account, product, currency, balance, and rating information for each transaction date.",
+  "column_descriptions": [
+    {
+      "column_name": "txn_date",
+      "description": "Date value representing the transaction date for the balance record. Essential for filtering records by time and for identifying the period of the balance."
+    },
+    {
+      "column_name": "acnt_code",
+      "description": "Text (up to 20 characters) representing the unique account code or number. Used to uniquely identify an account within the system."
+    },
+    {
+      "column_name": "acnt_name",
+      "description": "Text (up to 300 characters) representing the name or description of the account. Provides a human-readable label for the account."
+    },
+    {
+      "column_name": "status",
+      "description": "Text (up to 2 characters) indicating the status of the account or record. The exact meaning depends on business rules (e.g., active, closed, suspended)."
+    },
+    {
+      "column_name": "prod_type",
+      "description": "Text (up to 20 characters) representing the type of product associated with the account (e.g., loan, deposit, etc.). Used for categorizing the account's product."
+    },
+    {
+      "column_name": "prod_code",
+      "description": "Text (up to 12 characters) representing the unique code for the product. Used to identify the specific product type or offering."
+    },
+    {
+      "column_name": "prod_name",
+      "description": "Text (up to 200 characters) representing the name of the product associated with the account. Provides a descriptive label for the product."
+    },
+    {
+      "column_name": "cur_code",
+      "description": "Text (3 characters) representing the currency code (e.g., 'MNT' for Mongolian Tugrik, 'USD' for US Dollar, 'JPY' for Japanese Yen, 'EUR' for Euro, 'CNY' for Chinese Yuan). Determines the currency for all monetary values in the record."
+    },
+    {
+      "column_name": "rate",
+      "description": "Numeric value representing a rate associated with the account or product (e.g., interest rate, exchange rate). The context depends on the product type. The currency context is given by the 'cur_code' column."
+    },
+    {
+      "column_name": "start_date",
+      "description": "Date value representing the start date of the product or account period. Used to determine the beginning of the relevant period for the record."
+    },
+    {
+      "column_name": "end_date",
+      "description": "Date value representing the end date of the product or account period. Used to determine the closing or maturity date for the product/account."
+    },
+    {
+      "column_name": "opened_date",
+      "description": "Date value representing when the account or product was opened. Important for tracking account lifecycle."
+    },
+    {
+      "column_name": "closed_date",
+      "description": "Date value representing when the account or product was closed. Used to determine if the account is currently active or has been closed."
+    },
+    {
+      "column_name": "crnt",
+      "description": "Numeric value representing the current balance or amount for the account as of the transaction date. The currency of this value is determined by the 'cur_code' column (e.g., 'MNT', 'USD')."
+    },
+    {
+      "column_name": "rating",
+      "description": "Numeric value representing a rating score for the account or customer. The scale and meaning are defined by business rules (e.g., credit score, risk rating)."
+    },
+    {
+      "column_name": "rating_name",
+      "description": "Text (up to 2000 characters) providing a descriptive label or name for the rating. Offers a human-readable interpretation of the 'rating' value."
+    }
+  ]
+}

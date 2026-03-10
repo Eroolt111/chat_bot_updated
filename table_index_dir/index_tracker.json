@@ -8,11 +8,103 @@
     "last_update": "2025-09-30T16:30:51.035608"
   },
   "dbm.loan_balance_detail_names": {
-    "last_count": 297,
-    "last_update": "2025-10-28T11:00:25.209784"
+    "last_count": 259,
+    "last_update": "2026-02-25T10:50:26.262812"
   },
   "dbm.bcom_nrs_detail_names": {
-    "last_count": 214,
-    "last_update": "2025-10-28T11:00:48.649021"
+    "last_count": 192,
+    "last_update": "2026-02-25T10:33:11.893239"
+  },
+  "dbm.loan_txn_names": {
+    "last_count": 5,
+    "last_update": "2025-12-15T14:05:02.346415"
+  },
+  "dbm.loan_txn": {
+    "last_count": 477,
+    "last_update": "2025-12-15T13:58:43.737336"
+  },
+  "dbm.security_balance_detail_names": {
+    "last_count": 1143,
+    "last_update": "2026-02-25T10:35:49.147814"
+  },
+  "dbm.security_balance_detail": {
+    "last_count": 1131,
+    "last_update": "2025-12-25T16:01:23.767372"
+  },
+  "DBM.PLACEMENT_BALANCE_DETAIL_names": {
+    "last_count": 60,
+    "last_update": "2026-02-02T16:24:16.320917"
+  },
+  "DBM.BORROWING_BALANCE_DETAIL_names": {
+    "last_count": 65,
+    "last_update": "2026-02-02T16:24:24.864687"
+  },
+  "DBM.PLACEMENT_BALANCE_DETAIL": {
+    "last_count": 503,
+    "last_update": "2026-02-02T16:24:27.148961"
+  },
+  "DBM.BORROWING_BALANCE_DETAIL": {
+    "last_count": 193,
+    "last_update": "2026-02-02T16:24:28.831826"
+  },
+  "dbm.bac_balance_detail_names": {
+    "last_count": 686,
+    "last_update": "2026-02-25T10:37:19.933947"
+  },
+  "dbm.bac_balance_detail": {
+    "last_count": 717,
+    "last_update": "2026-02-04T17:30:15.141034"
+  },
+  "DBM.CASA_BALANCE_names": {
+    "last_count": 360,
+    "last_update": "2026-02-05T11:39:48.917269"
+  },
+  "DBM.CASA_BALANCE": {
+    "last_count": 368,
+    "last_update": "2026-02-05T11:39:57.538346"
+  },
+  "dbm.fx_deal_detail_names": {
+    "last_count": 45,
+    "last_update": "2026-02-25T10:50:53.056035"
+  },
+  "dbm.fx_swap_balance_detail_names": {
+    "last_count": 2,
+    "last_update": "2026-02-25T10:50:53.492027"
+  },
+  "dbm.fx_deal_detail": {
+    "last_count": 799,
+    "last_update": "2026-02-09T11:01:07.528144"
+  },
+  "dbm.fx_swap_balance_detail": {
+    "last_count": 24,
+    "last_update": "2026-02-09T11:01:08.841995"
+  },
+  "dbm.coll_balance_detail_names": {
+    "last_count": 1338,
+    "last_update": "2026-02-25T10:41:38.714282"
+  },
+  "dbm.coll_balance_detail": {
+    "last_count": 3284,
+    "last_update": "2026-02-09T16:18:46.970265"
+  },
+  "dbm.gl_balance_detail_names": {
+    "last_count": 782,
+    "last_update": "2026-02-25T10:52:43.626179"
+  },
+  "dbm.gl_balance_detail": {
+    "last_count": 10,
+    "last_update": "2026-02-10T16:42:00.610064"
+  },
+  "dbm.casa_balance_names": {
+    "last_count": 306,
+    "last_update": "2026-02-25T10:38:00.893821"
+  },
+  "dbm.placement_balance_detail_names": {
+    "last_count": 34,
+    "last_update": "2026-02-25T10:50:37.232529"
+  },
+  "dbm.borrowing_balance_detail_names": {
+    "last_count": 48,
+    "last_update": "2026-02-25T10:50:43.654511"
   }
 }

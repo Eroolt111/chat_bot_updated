@@ -1,0 +1,106 @@
+{
+  "session_id": "463a2e87",
+  "timestamp": "2025-12-15T18:04:03.925438",
+  "execution_time_seconds": 22.32,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ онд төлөгдсөн нийт зээлийн төлөлтийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     cur_code,     SUM(txn_amount) AS total_repayment_amount,     COUNT(*) AS txn_count FROM     dbm.loan_txn WHERE     txn_code IN ('PAY_PRINC', 'PAY_INT')     AND txn_date >= TRUNC(SYSDATE, 'YYYY') GROUP BY     cur_code ORDER BY     cur_code;",
+  "result_count": 5,
+  "final_answer": "Энэ онд төлөгдсөн нийт зээлийн төлөлтийн мэдээлэл:  - Юань: 20,127,814.65, нийт гүйлгээ: 15 - Евро: 7,963,418.35, нийт гүйлгээ: 17 - Иен: 632,666,287, нийт гүйлгээ: 17 - Төгрөг: 46,872,427,823.6, нийт гүйлгээ: 180 - Ам.доллар: 193,220.59, нийт гүйлгээ: 1"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "463a2e87",
+  "timestamp": "2025-12-15T18:05:10.663776",
+  "execution_time_seconds": 19.27,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Энэ онд төлөгдсөн нийт зээлийн төлөлтийг харуулах талаар асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     cur_code,     SUM(txn_amount) AS total_repayment_amount,     COUNT(*) AS txn_count FROM     dbm.loan_txn WHERE     txn_code IN ('PAY_PRINC', 'PAY_INT')     AND txn_date >= TRUNC(SYSDATE, 'YYYY') GROUP BY     cur_code ORDER BY     cur_code; ```  [Current Question] Энэ онд төлөгдөх ёстой үлдсэн төлбөрийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal_due,     SUM(t.int_amount) AS total_interest_due,     COUNT(*) AS payment_count FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) GROUP BY     t.cur_code ORDER BY     t.cur_code;",
+  "result_count": 1,
+  "final_answer": "Энэ онд төлөгдөх ёстой үлдсэн төлбөрийн мэдээлэл:  - Валют: төгрөг - Үндсэн төлбөрийн нийт дүн: 8,815,777,865.56 төгрөг - Хүүгийн нийт дүн: 3,113,725,089.41 төгрөг - Төлбөрийн тоо: 5"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "463a2e87",
+  "timestamp": "2025-12-15T18:07:24.224031",
+  "execution_time_seconds": 21.6,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Энэ онд төлөгдсөн нийт зээлийн төлөлтийг харуулах болон энэ онд төлөгдөх ёстой үлдсэн төлбөрийг харуулах талаар ярилцсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal_due,     SUM(t.int_amount) AS total_interest_due,     COUNT(*) AS payment_count FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) GROUP BY     t.cur_code ORDER BY     t.cur_code; ```  [Current Question] Зөвхөн үндсэн төлбөрийн төлөлт нь хэд байсан бэ",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal_due FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) GROUP BY     t.cur_code ORDER BY     t.cur_code;",
+  "result_count": 4,
+  "final_answer": "Зөвхөн үндсэн төлбөрийн төлөлтийн дүн (энэ онд):  - Юань: 37,417,391.78 - Евро: 11,750,000 - Иен: 1,042,509,438.81 - Төгрөг: 87,490,429,827.69"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "463a2e87",
+  "timestamp": "2025-12-15T18:12:53.616346",
+  "execution_time_seconds": 45.42,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Энэ онд төлөгдсөн нийт зээлийн төлөлтийг харуулах, энэ онд төлөгдөх ёстой үлдсэн төлбөрийг харуулах, мөн зөвхөн үндсэн төлбөрийн төлөлтийн хэмжээг тодорхойлох талаар ярилцсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal_due FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) GROUP BY     t.cur_code ORDER BY     t.cur_code; ```  [Current Question] Энэ онд төлөгдөхөөр үлдсэн зээлийн төлөлтийн хуваарийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.cur_code,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) ORDER BY     t.schd_date ASC, t.acnt_code ASC;",
+  "result_count": 5,
+  "final_answer": "Энэ онд төлөгдөхөөр үлдсэн зээлийн төлөлтийн хуваарь:  1. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006418      Төлөх огноо: 2025-12-19      Үндсэн төлбөр: 20,668,176.83 төгрөг      Хүүгийн төлбөр: 13,490,356.4 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006435      Төлөх огноо: 2025-12-19      Үндсэн төлбөр: 203,309,663.97 төгрөг      Хүүгийн төлбөр: 132,702,552.74 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006476      Төлөх огноо: 2025-12-19      Үндсэн төлбөр: 122,597,514.47 төгрөг      Хүүгийн төлбөр: 80,020,805.76 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны дугаар: 3600006725      Төлөх огноо: 2025-12-19      Үндсэн төлбөр: 76,971,044.84 төгрөг      Хүүгийн төлбөр: 50,239,885 төгрөг  5. Харилцагч: ДЦС-4 ТӨХК      Дансны дугаар: MN780036003600008686      Төлөх огноо: 2025-12-25      Үндсэн төлбөр: 8,392,231,465.45 төгрөг      Хүүгийн төлбөр: 2,837,271,489.51 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "463a2e87",
+  "timestamp": "2025-12-15T18:14:31.740070",
+  "execution_time_seconds": 37.37,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч энэ онд төлөгдсөн нийт зээлийн төлөлт, төлөгдөх ёстой үлдсэн төлбөр, зөвхөн үндсэн төлбөрийн төлөлт болон энэ онд төлөгдөхөөр үлдсэн зээлийн төлөлтийн хуваарийг харуулах талаар SQL асуулга бичих хүсэлтүүд гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.acnt_code,     t.customer_name,     t.cur_code,     t.schd_date,     t.amount AS principal_due,     t.int_amount AS interest_due FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON         t.acnt_code = lv.acnt_code         AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE)     AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11)) ORDER BY     t.schd_date ASC, t.acnt_code ASC; ```  [Current Question] Энэ онд төлөгдөх ёстой нийт зээлийн үндсэн төлбөрөөс одоогийн байдлаар төлөгдсөн үндсэн төлбөрийг хасч харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  scheduled_principal AS (     SELECT         t.cur_code,         SUM(t.amount) AS total_scheduled_principal     FROM         dbm.bcom_nrs_detail t     INNER JOIN latest_version_cte lv         ON             t.acnt_code = lv.acnt_code             AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')         AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY t.cur_code ),  paid_principal AS (     SELECT         cur_code,         SUM(txn_amount) AS total_paid_principal     FROM         dbm.loan_txn     WHERE         txn_code = 'PAY_PRINC'         AND txn_date >= TRUNC(SYSDATE, 'YYYY')         AND txn_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY cur_code )  SELECT     s.cur_code,     COALESCE(s.total_scheduled_principal, 0) AS total_scheduled_principal,     COALESCE(p.total_paid_principal, 0) AS total_paid_principal,     COALESCE(s.total_scheduled_principal, 0)     - COALESCE(p.total_paid_principal, 0) AS remaining_principal_due FROM     scheduled_principal s LEFT JOIN     paid_principal p     ON s.cur_code = p.cur_code ORDER BY     s.cur_code;",
+  "result_count": 4,
+  "final_answer": "Энэ онд төлөгдөх ёстой нийт зээлийн үндсэн төлбөрөөс одоогийн байдлаар төлөгдсөн үндсэн төлбөрийг хассан дүнг валют тус бүрээр харуулбал:  - Юань:     - Төлөгдөх ёстой нийт үндсэн төлбөр: 37,417,391.78     - Төлөгдсөн үндсэн төлбөр: 8,237,762.84     - Үлдэгдэл үндсэн төлбөр: 29,179,628.94  - Евро:     - Төлөгдөх ёстой нийт үндсэн төлбөр: 11,750,000     - Төлөгдсөн үндсэн төлбөр: 6,799,937.18     - Үлдэгдэл үндсэн төлбөр: 4,950,062.82  - Иен:     - Төлөгдөх ёстой нийт үндсэн төлбөр: 1,042,509,438.81     - Төлөгдсөн үндсэн төлбөр: 578,819,562.34     - Үлдэгдэл үндсэн төлбөр: 463,689,876.47  - Төгрөг:     - Төлөгдөх ёстой нийт үндсэн төлбөр: 87,490,429,827.69     - Төлөгдсөн үндсэн төлбөр: 13,364,728,989.81     - Үлдэгдэл үндсэн төлбөр: 74,125,700,837.88"
+}
+--------------------------------------------------------------------------------
+

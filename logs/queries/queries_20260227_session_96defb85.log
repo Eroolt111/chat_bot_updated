@@ -1,0 +1,40 @@
+{
+  "session_id": "96defb85",
+  "timestamp": "2026-02-27T16:48:23.075281",
+  "execution_time_seconds": 47.85,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Идэвхтэй байгаа зээлүүдээс ойрын 1 сарын хугацаанд төлөгдөх хуваарьтай зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.acnt_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 ORDER BY d.schd_date ASC;",
+  "result_count": 9,
+  "final_answer": "Ойрын 1 сарын хугацаанд төлөгдөх идэвхтэй зээлийн мэдээлэл:  1. Харилцагч: ПРОМОН ТРЕЙД ХХК    - Дансны нэр: Промон Трейд ХХК    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 464,771.33 иен    - Хүүгийн төлбөр: 24,066.24 иен  2. Харилцагч: ПРОМОН ТРЕЙД ХХК    - Дансны нэр: Промон Трейд ХХК    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 100,000,000 төгрөг    - Хүүгийн төлбөр: 9,557,260.27 төгрөг  3. Харилцагч: ПРОМОН ТРЕЙД ХХК    - Дансны нэр: Промон Трейд ХХК    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 6,457,708 иен    - Хүүгийн төлбөр: 334,385.43 иен  4. Харилцагч: ПРОМОН ТРЕЙД ХХК    - Дансны нэр: Промон Трейд ХХК    - Төлөх огноо: 2026-03-01    - Үндсэн төлбөр: 30,148,034.41 иен    - Хүүгийн төлбөр: 1,561,090 иен  5. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 132,828,364.01 төгрөг    - Хүүгийн төлбөр: 69,789,956.22 төгрөг  6. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 22,392,950.85 төгрөг    - Хүүгийн төлбөр: 11,765,582.38 төгрөг  7. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 220,275,999.64 төгрөг    - Хүүгийн төлбөр: 115,736,217.08 төгрөг  8. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ ХХК    - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК    - Төлөх огноо: 2026-03-19    - Үндсэн төлбөр: 83,394,333.12 төгрөг    - Хүүгийн төлбөр: 43,816,596.71 төгрөг  9. Харилцагч: ДУЛААНЫ ДӨРӨВДҮГЭЭР ЦАХИЛГААН СТАНЦ ТӨХК    - Дансны нэр: ДЦС-4 ТӨХК    - Төлөх огноо: 2026-03-25    - Үндсэн төлбөр: 11,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,549,234,278.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "96defb85",
+  "timestamp": "2026-02-27T16:49:23.825766",
+  "execution_time_seconds": 18.78,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Идэвхтэй байгаа зээлүүдээс ойрын 1 сарын хугацаанд төлөгдөх хуваарьтай зээлийг харуулах SQL асуулга боловсруулсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.acnt_name,     d.schd_date,     d.amount,     d.int_amount,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 ORDER BY d.schd_date ASC; ```  [Current Question] бүгдийг нь нэгтгээд нэг дүн харуул, гэхдээ үндсэн төлөлт хүүгийн төлбөрөөр ялгаад",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 40,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.cur_code,     SUM(d.amount) AS total_principal,     SUM(d.int_amount) AS total_interest FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 GROUP BY d.cur_code ORDER BY d.cur_code;",
+  "result_count": 2,
+  "final_answer": "Ойрын 1 сарын хугацаанд төлөгдөх зээлийн нийт дүн (валютаар):  - Иен: Үндсэн төлөлт 37,070,513.74, Хүүгийн төлбөр 1,919,541.67 - Төгрөг: Үндсэн төлөлт 11,951,123,113.07, Хүүгийн төлбөр 2,799,899,891.22"
+}
+--------------------------------------------------------------------------------
+

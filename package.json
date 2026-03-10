@@ -1,0 +1,12 @@
+{
+  "name": "dbm-chatbot",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently --kill-others --names \"FLASK,NEXT\" --prefix-colors \"cyan,magenta\" \"npm run flask\" \"npm run next\"",
+    "flask": "cmd /c \".\\venv_new\\Scripts\\activate && python run_web.py\"",
+    "next": "cd frontend && npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

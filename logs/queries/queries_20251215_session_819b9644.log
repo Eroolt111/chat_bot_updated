@@ -1,0 +1,240 @@
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:33:41.438017",
+  "execution_time_seconds": 2.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "сайн уу?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд хэрхэн туслах вэ? Хөгжлийн банк болон банкны мэдээллийн сан, өгөгдлийн шинжилгээтэй холбоотой асуулт байвал асуугаарай. Би танд тодорхой, мэргэжлийн хариулт өгөхөд бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:34:42.589174",
+  "execution_time_seconds": 18.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр зээлийн хүүтэй зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     int_rate,     principal,     cur_code FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND int_rate IS NOT NULL ORDER BY int_rate DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр зээлийн хүүтэй зээлийн мэдээлэл:  - Дансны дугаар: 3600006418 - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Хүүний хэмжээ: 17.35 - Үлдэгдэл үндсэн зээл: 1,118,203,984.07 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:35:45.814404",
+  "execution_time_seconds": 22.77,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хамгийн өндөр зээлийн хүүтэй зээлийг харуулах SQL асуулга бичих талаар ярилцсан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     int_rate,     principal,     cur_code FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND int_rate IS NOT NULL ORDER BY int_rate DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] хэвийн ангилалтай зээлдэгчдийг харуул хэд байна вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(DISTINCT customer_name) AS normal_borrower_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL;",
+  "result_count": 1,
+  "final_answer": "Хэвийн ангилалтай зээлдэгчдийн тоо: 5 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:36:24.267284",
+  "execution_time_seconds": 19.62,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хамгийн өндөр зээлийн хүүтэй зээлийн мэдээллийг авах SQL асуулга бичих талаар ярилцсан. Дараа нь хэвийн ангилалтай зээлдэгчдийн тоог тоолох SQL асуулга бичих хүсэлт гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT COUNT(DISTINCT customer_name) AS normal_borrower_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL; ```  [Current Question] нэрсийг нь харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT DISTINCT customer_name FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL ORDER BY customer_name;",
+  "result_count": 5,
+  "final_answer": "Хэвийн ангилалтай зээлдэгчдийн нэрс:  - ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК - ДЦС-4 ТӨХК - МОНГОЛ ГАЗРЫН ТОС БОЛОВСРУУЛАХ ҮЙЛДВЭР ТӨХХК - ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК - ЭРЧИМ ХҮЧНИЙ ЯАМ"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:37:12.333958",
+  "execution_time_seconds": 28.07,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хамгийн өндөр зээлийн хүүтэй зээлийн мэдээллийг авах SQL асуулга бичих талаар ярилцсан. Дараа нь хэвийн ангилалтай зээлдэгчдийн тоог тоолох SQL асуулга бичих хүсэлт гаргасан. Эцэст нь хэвийн ангилалтай зээлдэгчдийн нэрсийг харуулах SQL асуулга бичсэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT DISTINCT customer_name FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL ORDER BY customer_name; ```  [Current Question] Эрчим хүчний яам хэдэн зээлтэй вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     COUNT(DISTINCT acnt_code) AS loan_count FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(customer_name) = 'ЭРЧИМ ХҮЧНИЙ ЯАМ'     AND status = 'O'     AND principal > 0     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL GROUP BY     customer_name;",
+  "result_count": 1,
+  "final_answer": "\"Эрчим хүчний яам\" нийт 1 зээлтэй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T09:52:15.402004",
+  "execution_time_seconds": 23.51,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хамгийн өндөр хүүтэй зээлийн мэдээллийг авах SQL асуулга бичих, хэвийн ангилалтай зээлдэгчдийн тоог тоолох, хэвийн ангилалтай зээлдэгчдийн нэрсийг харуулах SQL асуулга бичих талаар ярилцсан. Эцэст нь Эрчим хүчний яамын зээлийн тоог тодруулах хүсэлт гаргасан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     customer_name,     COUNT(DISTINCT acnt_code) AS loan_count FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(customer_name) = 'ЭРЧИМ ХҮЧНИЙ ЯАМ'     AND status = 'O'     AND principal > 0     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL GROUP BY     customer_name; ```  [Current Question] эрчим хчний яамны зээлийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_name,     acnt_code,     adv_date,     adv_amount,     cur_code,     principal,     status FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(customer_name) = 'ЭРЧИМ ХҮЧНИЙ ЯАМ'     AND status = 'O'     AND principal > 0     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY adv_date DESC;",
+  "result_count": 1,
+  "final_answer": "Эрчим хүчний яамны зээлийн мэдээлэл:  - Харилцагчийн нэр: Эрчим хүчний яам - Зээлийн нэр: Тавантолгойн цахилгаан станц төсөл 1 - Дансны дугаар: 3600000760 - Олгосон огноо: 2014-01-30 - Олгосон дүн: 14,816,251 ам.доллар - Үлдэгдэл үндсэн зээл: 14,816,251 ам.доллар - Зээлийн төлөв: O"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:20:36.807490",
+  "execution_time_seconds": 29.4,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "эрчим хчний яамны зээлийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_name,     project_name,     principal,     cur_code,     adv_date,     adv_amount,     status FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND (         UPPER(customer_name) LIKE '%ЭРЧИМ ХҮЧ%'         OR UPPER(project_name) LIKE '%ЭРЧИМ ХҮЧ%'     )     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY (principal * rate) DESC;",
+  "result_count": 7,
+  "final_answer": "Эрчим хүчний яам болон холбогдох байгууллагуудын зээлийн мэдээлэл:  1. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 146,644,843.89 юань      Олгосон огноо: 2024-05-09      Олгосон дүн: 148,878,014.1 юань    2. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 138,224,000.47 юань      Олгосон огноо: 2023-11-10      Олгосон дүн: 145,087,107.9 юань    3. Харилцагч: ЭРЧИМ ХҮЧНИЙ ЯАМ      Дансны нэр: ТАВАНТОЛГОЙН ЦАХИЛГААН СТАНЦ ТӨСӨЛ 1      Төсөл: ТАВАНТОЛГОЙН ТӨСЛИЙН НЭГЖИЙН ҮЙЛ АЖИЛЛАГААНЫ ЗАРДЛЫН САНХҮҮЖИЛТ      Үлдэгдэл үндсэн зээл: 14,816,251 ам.доллар      Олгосон огноо: 2014-01-30      Олгосон дүн: 14,816,251 ам.доллар    4. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 44,525,712.75 юань      Олгосон огноо: 2024-10-22      Олгосон дүн: 44,525,712.75 юань    5. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 38,910,815.68 юань      Олгосон огноо: 2021-10-28      Олгосон дүн: 44,216,836 юань    6. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 22,845,742.35 юань      Олгосон огноо: 2022-05-20      Олгосон дүн: 25,961,070.87 юань    7. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төсөл: ЧОЙБАЛСАНГИЙН ДУЛААНЫ ЦАХИЛГААН СТАНЦЫН ХҮЧИН ЧАДЛЫГ 50МВТ-ААР ӨРГӨТГӨХ ТӨСӨЛ      Үлдэгдэл үндсэн зээл: 9,971,507.36 юань      Олгосон огноо: 2023-03-21      Олгосон дүн: 11,331,258.38 юань"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:22:08.803932",
+  "execution_time_seconds": 19.4,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч эрчим хүчний яамны зээлийн мэдээллийг асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     customer_name,     acnt_name,     project_name,     principal,     cur_code,     adv_date,     adv_amount,     status FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND (         UPPER(customer_name) LIKE '%ЭРЧИМ ХҮЧ%'         OR UPPER(project_name) LIKE '%ЭРЧИМ ХҮЧ%'     )     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY (principal * rate) DESC; ```  [Current Question] эрчим хүчний яам хэдэн зээлтэй вэ?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(DISTINCT acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND (         UPPER(customer_name) LIKE '%ЭРЧИМ ХҮЧ%'         OR UPPER(project_name) LIKE '%ЭРЧИМ ХҮЧ%'     )     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL;",
+  "result_count": 1,
+  "final_answer": "Эрчим хүчний яам нийт 7 зээлтэй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:29:56.774954",
+  "execution_time_seconds": 2.01,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хш",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:30:02.605657",
+  "execution_time_seconds": 1.53,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд Монгол Улсын Хөгжлийн Банк болон банкны өгөгдлийн сан, мэдээллийн шинжилгээтэй холбоотой асуулт байвал туслахад бэлэн байна. Та асуултаа тодорхой бичнэ үү."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:30:36.734323",
+  "execution_time_seconds": 11.59,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Эрчим хүчний яам хэдэн зээлтэй байна?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(DISTINCT acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND customer_name = 'Эрчим хүчний яам';",
+  "result_count": 1,
+  "final_answer": "Эрчим хүчний яам нийт 0 зээлтэй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "819b9644",
+  "timestamp": "2025-12-15T10:35:42.359718",
+  "execution_time_seconds": 15.08,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Эрчим хүчний яам хэдэн зээлтэй байна?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT COUNT(*) AS loan_count FROM (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         customer_name = 'Эрчим хүчний яам'         AND txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     GROUP BY acnt_code );",
+  "result_count": 1,
+  "final_answer": "\"Эрчим хүчний яам\" нийт 0 зээлтэй байна."
+}
+--------------------------------------------------------------------------------
+

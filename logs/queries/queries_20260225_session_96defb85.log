@@ -1,0 +1,17 @@
+{
+  "session_id": "96defb85",
+  "timestamp": "2026-02-25T15:22:33.874641",
+  "execution_time_seconds": 2.36,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hello",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд хэрхэн туслах вэ? Хэрэв та банкны мэдээллийн сан, өгөгдлийн шинжилгээ эсвэл Монгол Улсын Хөгжлийн Банкны үйл ажиллагаатай холбоотой асуулт байвал асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+

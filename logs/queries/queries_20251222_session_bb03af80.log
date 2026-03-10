@@ -1,0 +1,258 @@
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T09:48:36.160424",
+  "execution_time_seconds": 18.68,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ онд төлөгдөх ёстой зээлийн үндсэн үлдэгдлийг харуул.",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_name,     due_princ_date,     principal,     cur_code FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND due_princ_date >= TRUNC(SYSDATE, 'YYYY')     AND due_princ_date < TRUNC(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 12), 'YYYY')     AND principal > 0     AND status = 'O'     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY due_princ_date ASC;",
+  "result_count": 10,
+  "final_answer": "Энэ онд төлөгдөх ёстой зээлийн үндсэн үлдэгдэл:  1. Харилцагч: ПИРАМИД-ОРД ХХК      Дансны нэр: ПИРАМИД-ОРД ХХК      Төлөх огноо: 2025-03-11      Үндсэн үлдэгдэл: 2,000,000,000 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-03-19      Үндсэн үлдэгдэл: 4,164,340,653.01 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-03-19      Үндсэн үлдэгдэл: 10,999,599,922.76 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-03-19      Үндсэн үлдэгдэл: 1,118,203,984.07 төгрөг  5. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ      Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК      Төлөх огноо: 2025-03-19      Үндсэн үлдэгдэл: 6,632,855,440.16 төгрөг  6. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төлөх огноо: 2025-04-28      Үндсэн үлдэгдэл: 22,845,742.35 юань  7. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төлөх огноо: 2025-04-28      Үндсэн үлдэгдэл: 146,644,843.89 юань  8. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төлөх огноо: 2025-04-28      Үндсэн үлдэгдэл: 138,224,000.47 юань  9. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК      Төлөх огноо: 2025-04-28      Үндсэн үлдэгдэл: 9,971,507.36 юань  10. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК       Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК       Төлөх огноо: 2025-04-28       Үндсэн үлдэгдэл: 38,910,815.68 юань"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T09:52:23.126407",
+  "execution_time_seconds": 15.88,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ онд төлөгдөх ёстой зээлийн үндсэн үлдэгдлийг харуул.",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     cur_code,     SUM(principal) AS total_due_principal,     SUM(principal * rate) AS total_due_principal_mnt FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND due_princ_date >= TRUNC(SYSDATE, 'YYYY')     AND due_princ_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     AND status = 'O'     AND principal > 0 GROUP BY     cur_code ORDER BY     cur_code;",
+  "result_count": 2,
+  "final_answer": "Энэ онд төлөгдөх ёстой зээлийн үндсэн үлдэгдэл:  - Юань: 356,596,909.75 юань (төгрөгөөр: 179,917,404,845.265) - Төгрөг: 24,915,000,000 төгрөг (төгрөгөөр: 24,915,000,000)"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T10:56:24.113013",
+  "execution_time_seconds": 2.67,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "САЙН УУ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу? Танд хэрхэн туслах вэ? Хөгжлийн банкны банкны үйлчилгээ, мэдээллийн сан, өгөгдөл боловсруулахтай холбоотой асуулт байвал асуугаарай. Танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T10:56:58.805666",
+  "execution_time_seconds": 14.19,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр үлдэгдэлтэй зээлийн мэдээлэл?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY principal DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр үлдэгдэлтэй зээлийн мэдээлэл:  - Дансны дугаар: MN780036003600008686 - Харилцагчийн нэр: ДЦС-4 ТӨХК - Дансны нэр: ДЦС-4 ТӨХК - Үлдэгдэл дүн: 253,309,397,578.54 төгрөг - Байдал: O - Огноо: 2025-09-12"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T10:59:45.686183",
+  "execution_time_seconds": 18.92,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээлийн мэдээллийг авахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     customer_name,     acnt_name,     principal,     cur_code,     status,     txn_date FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY principal DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүд",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.theor_bal,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 ORDER BY d.schd_date ASC;",
+  "result_count": 5,
+  "final_answer": "Ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл:  1. Харилцагч: ДЦС-4 ТӨХК    - Дансны дугаар: MN780036003600008686    - Төлбөрийн огноо: 2025-12-25    - Үндсэн төлбөр: 8,392,231,465.45 төгрөг    - Хүүгийн төлбөр: 2,837,271,489.51 төгрөг    - Үлдэгдэл: 216,348,240,251.29 төгрөг  2. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006435    - Төлбөрийн огноо: 2026-01-19    - Үндсэн төлбөр: 201,882,138.77 төгрөг    - Хүүгийн төлбөр: 134,130,077.94 төгрөг    - Үлдэгдэл: 8,900,558,773.53 төгрөг  3. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006725    - Төлбөрийн огноо: 2026-01-19    - Үндсэн төлбөр: 76,430,597.8 төгрөг    - Хүүгийн төлбөр: 50,780,332.04 төгрөг    - Үлдэгдэл: 3,369,664,260.08 төгрөг  4. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006418    - Төлбөрийн огноо: 2026-01-19    - Үндсэн төлбөр: 20,523,056.61 төгрөг    - Хүүгийн төлбөр: 13,635,476.62 төгрөг    - Үлдэгдэл: 904,818,388.93 төгрөг  5. Харилцагч: ИЗИНИС-ЭЙР ВЭЙЗ    - Дансны дугаар: 3600006476    - Төлбөрийн огноо: 2026-01-19    - Үндсэн төлбөр: 121,736,704.23 төгрөг    - Хүүгийн төлбөр: 80,881,616 төгрөг    - Үлдэгдэл: 5,367,115,176.56 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:02:56.923916",
+  "execution_time_seconds": 24.09,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээлийн мэдээллийг авсан бөгөөд дараа нь ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     d.acnt_code,     d.customer_name,     d.schd_date,     d.amount,     d.int_amount,     d.theor_bal,     d.cur_code FROM dbm.bcom_nrs_detail d INNER JOIN latest_version_per_account lv     ON d.acnt_code = lv.acnt_code AND d.nrs_version = lv.current_version WHERE     d.status = 'O'     AND d.schd_date BETWEEN SYSDATE AND SYSDATE + 30 ORDER BY d.schd_date ASC; ```  [Current Question] Энэ онд төлөгдөх ёстой үлдсэн төлбөрийг харуул",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  scheduled_principal AS (     SELECT         t.cur_code,         SUM(t.amount) AS total_scheduled_principal     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_version_cte lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')         AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY t.cur_code ),  paid_principal AS (     SELECT         cur_code,         SUM(txn_amount) AS total_paid_principal     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_PRINC'         AND txn_date >= TRUNC(SYSDATE, 'YYYY')         AND txn_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY cur_code )  SELECT     s.cur_code,     COALESCE(s.total_scheduled_principal, 0) AS total_scheduled_principal,     COALESCE(p.total_paid_principal, 0) AS total_paid_principal,     COALESCE(s.total_scheduled_principal, 0)     - COALESCE(p.total_paid_principal, 0) AS remaining_principal_due FROM scheduled_principal s LEFT JOIN paid_principal p ON s.cur_code = p.cur_code ORDER BY s.cur_code;",
+  "result_count": 4,
+  "final_answer": "Энэ онд төлөгдөх ёстой үлдсэн төлбөрийн мэдээлэл:  - Юань:     - Төлөвлөгдсөн үндсэн төлбөр: 37,417,391.78     - Төлсөн үндсэн төлбөр: 8,237,762.84     - Үлдсэн төлбөр: 29,179,628.94  - Евро:     - Төлөвлөгдсөн үндсэн төлбөр: 11,750,000     - Төлсөн үндсэн төлбөр: 6,799,937.18     - Үлдсэн төлбөр: 4,950,062.82  - Иен:     - Төлөвлөгдсөн үндсэн төлбөр: 1,042,509,438.81     - Төлсөн үндсэн төлбөр: 578,819,562.34     - Үлдсэн төлбөр: 463,689,876.47  - Төгрөг:     - Төлөвлөгдсөн үндсэн төлбөр: 87,490,429,827.69     - Төлсөн үндсэн төлбөр: 13,364,728,989.81     - Үлдсэн төлбөр: 74,125,700,837.88"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:07:19.868255",
+  "execution_time_seconds": 15.52,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээлийн мэдээлэл авч, дараа нь ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээллийг хүссэн. Эцэст нь энэ онд төлөгдөх ёстой үлдсэн төлбөрийг харуулахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  scheduled_principal AS (     SELECT         t.cur_code,         SUM(t.amount) AS total_scheduled_principal     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_version_cte lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')         AND t.schd_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY t.cur_code ),  paid_principal AS (     SELECT         cur_code,         SUM(txn_amount) AS total_paid_principal     FROM dbm.loan_txn     WHERE         txn_code = 'PAY_PRINC'         AND txn_date >= TRUNC(SYSDATE, 'YYYY')         AND txn_date <= LAST_DAY(ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 11))     GROUP BY cur_code )  SELECT     s.cur_code,     COALESCE(s.total_scheduled_principal, 0) AS total_scheduled_principal,     COALESCE(p.total_paid_principal, 0) AS total_paid_principal,     COALESCE(s.total_scheduled_principal, 0)     - COALESCE(p.total_paid_principal, 0) AS remaining_principal_due FROM scheduled_principal s LEFT JOIN paid_principal p ON s.cur_code = p.cur_code ORDER BY s.cur_code; ```  [Current Question] Энэ онд төлөгдсөн нийт зээлийн төлөлтийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     cur_code,     SUM(txn_amount) AS total_loan_paid FROM     dbm.loan_txn WHERE     txn_code IN ('PAY_PRINC', 'PAY_INT')     AND txn_date >= TRUNC(SYSDATE, 'YYYY') GROUP BY     cur_code ORDER BY     cur_code;",
+  "result_count": 5,
+  "final_answer": "Энэ онд төлөгдсөн нийт зээлийн төлөлт:  - Юань: 20,127,814.65 - Евро: 7,963,418.35 - Иен: 632,666,287 - Төгрөг: 46,872,427,823.6 - Ам.доллар: 193,220.59"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:14:03.747368",
+  "execution_time_seconds": 28.38,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээлийн мэдээллийг авч, дараа нь ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл хүссэн. Мөн энэ онд төлөгдөх ёстой үлдсэн төлбөр болон энэ онд төлөгдсөн нийт зээлийн төлөлтийн мэдээллийг авахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     cur_code,     SUM(txn_amount) AS total_loan_paid FROM     dbm.loan_txn WHERE     txn_code IN ('PAY_PRINC', 'PAY_INT')     AND txn_date >= TRUNC(SYSDATE, 'YYYY') GROUP BY     cur_code ORDER BY     cur_code; ```  [Current Question] анх гадаад валютаар олгосон боловч зээлийг нь төгрөг рүү шилжүүлсэн зээлийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     link_acnt_codes,     adv_date FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND cur_code = 'MNT'     AND link_acnt_codes IS NOT NULL     AND (         link_acnt_codes LIKE '%USD%'         OR link_acnt_codes LIKE '%EUR%'         OR link_acnt_codes LIKE '%JPY%'         OR link_acnt_codes LIKE '%CNY%'     ) ORDER BY     adv_date DESC;",
+  "result_count": 18,
+  "final_answer": "Анх гадаад валютаар олгогдсон боловч төгрөг рүү шилжүүлсэн зээлийн мэдээлэл:  1. Харилцагч: НВЦ ХХК      Зээлийн дансны нэр: НВЦ ХХК      Үндсэн зээлийн үлдэгдэл: 59,840,550,000 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600002457 USD      Зээл олгосон огноо: 2022-05-11  2. Харилцагч: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ      Зээлийн дансны нэр: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ ТӨҮГ      Үндсэн зээлийн үлдэгдэл: 0 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600001407 USD      Зээл олгосон огноо: 2019-12-30  3. Харилцагч: ЭНСАДА-ИСТЕРН ХХК      Зээлийн дансны нэр: ЭНСАДА-ИСТЕРН ХХК      Үндсэн зээлийн үлдэгдэл: 26,856,932,250 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600005346 USD, 3600005369 USD, 3600005395 USD      Зээл олгосон огноо: 2019-12-30  4. Харилцагч: АЧЛАЛ ТРЕЙД ХХК      Зээлийн дансны нэр: АЧЛАЛ ТРЕЙД ХХК      Үндсэн зээлийн үлдэгдэл: 40,900,000,000 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600002490 USD, 3600002730 USD, 3600004610 USD, 3600004983 USD, 3600005842 USD, 3600006247 USD      Зээл олгосон огноо: 2019-09-07  5. Харилцагч: ЗЭСТ-ӨНДӨР ХХК      Зээлийн дансны нэр: ЗЭСТ-ӨНДӨР ХХК      Үндсэн зээлийн үлдэгдэл: 11,443,040,092.44 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600004760 JPY, 3600005027 JPY      Зээл олгосон огноо: 2018-08-10  6. Харилцагч: ДЦС-4 ТӨХК      Зээлийн дансны нэр: ДЦС-4 ТӨХК      Үндсэн зээлийн үлдэгдэл: 253,309,397,578.54 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600001511 USD, 3600004714 EUR, 3600004715 EUR, 3600004730 EUR, 3600004774 EUR, 3600005550 EUR, 3600005806 EUR, 3600005812 EUR, 3600005839 EUR, 3600005847 EUR, 3600005947 EUR, 3600006108 EUR, 3600006109 EUR, 3600006385 EUR, 3600006459 EUR, 3600006519 EUR, 3600007071 EUR, 3600007148 EUR, 3600007284 EUR, 3600007303 EUR, 3600007315 EUR, 3600007348 EUR, 3600007386 EUR, 3600007470 EUR, 3600007513 EUR, 3600007523 EUR, 3600007655 EUR, MN270036003600007858 EUR      Зээл олгосон огноо: 2018-07-20  7. Харилцагч: СОНГОУЛД ХХК      Зээлийн дансны нэр: СОНГОУЛД ХХК      Үндсэн зээлийн үлдэгдэл: 17,329,757,402.45 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600002592 JPY      Зээл олгосон огноо: 2017-12-28  8. Харилцагч: МОНГЕМА ХХК      Зээлийн дансны нэр: МОНГЕМА ХХК      Үндсэн зээлийн үлдэгдэл: 11,419,463,742.87 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600002515 JPY, 3600004656 JPY      Зээл олгосон огноо: 2017-10-31  9. Харилцагч: БЭРЭН ГРУПП ХХК      Зээлийн дансны нэр: БЭРЭН ГРУПП ХХК      Үндсэн зээлийн үлдэгдэл: 10,708,841,743.64 төгрөг      Холбогдох гадаад валютын дансны дугаар: 3600002507 USD, 3600002722 USD      Зээл олгосон огноо: 2017-10-30  10. Харилцагч: ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ       Зээлийн дансны нэр: ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ       Үндсэн зээлийн үлдэгдэл: 35,783,435,878.49 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600002473 USD, 3600002738 USD, 3600004149 USD, 3600004679 USD, 3600005358 USD, 3600006890 USD       Зээл олгосон огноо: 2017-09-26  11. Харилцагч: БОЛОР ШҮР ХХК       Зээлийн дансны нэр: БОЛОР ШҮР ХХК       Үндсэн зээлийн үлдэгдэл: 1,178,992,776.64 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600002424 JPY       Зээл олгосон огноо: 2017-08-30  12. Харилцагч: ГАН ХҮДЭР ОРД ХХК       Зээлийн дансны нэр: ГАН ХҮДЭР ОРД ХХК       Үндсэн зээлийн үлдэгдэл: 0 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600002312 JPY       Зээл олгосон огноо: 2017-07-06  13. Харилцагч: МОНГОЛ ДРАЙ МИЛК ХХК       Зээлийн дансны нэр: МОНГОЛ ДРАЙ МИЛК ХХК       Үндсэн зээлийн үлдэгдэл: 47,902,858,743.09 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600002173 USD, 3600002232 USD, 3600002576 USD       Зээл олгосон огноо: 2017-05-15  14. Харилцагч: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ       Зээлийн дансны нэр: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ       Үндсэн зээлийн үлдэгдэл: 19,254,778,630.7 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600001686 USD       Зээл олгосон огноо: 2016-02-05  15. Харилцагч: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ       Зээлийн дансны нэр: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ       Үндсэн зээлийн үлдэгдэл: 0 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600001364 USD       Зээл олгосон огноо: 2015-05-28  16. Харилцагч: КЬЮ ЭС СИ ХХК       Зээлийн дансны нэр: КЬЮ ЭС СИ ХХК       Үндсэн зээлийн үлдэгдэл: 0 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600001198 USD       Зээл олгосон огноо: 2014-12-03  17. Харилцагч: БЭРЭН ГРУПП ХХК       Зээлийн дансны нэр: БЭРЭН ГРУПП ХХК       Үндсэн зээлийн үлдэгдэл: 88,322,594,178.03 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600000827 USD, 3600004501 USD       Зээл олгосон огноо: 2014-04-15  18. Харилцагч: ЭРЭЛ ХХК       Зээлийн дансны нэр: ЭРЭЛ ХХК       Үндсэн зээлийн үлдэгдэл: 109,327,707,274.98 төгрөг       Холбогдох гадаад валютын дансны дугаар: 3600000450 USD, 3600000924 EUR, 3600001566 USD, 3600004181 EUR       Зээл олгосон огноо: 2013-08-20"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:15:47.323494",
+  "execution_time_seconds": 26.77,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээлийн мэдээлэл, ойрын 30 хоногт төлөгдөх хуваарьтай зээлүүдийн мэдээлэл, энэ онд төлөгдөх ёстой үлдсэн төлбөр, энэ онд төлөгдсөн нийт зээлийн төлөлтийн мэдээллийг хүссэн. Сүүлийн асуултаар гадаад валютаар олгосон боловч төгрөг рүү шилжүүлсэн зээлийн мэдээллийг авахыг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     link_acnt_codes,     adv_date FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND cur_code = 'MNT'     AND link_acnt_codes IS NOT NULL     AND (         link_acnt_codes LIKE '%USD%'         OR link_acnt_codes LIKE '%EUR%'         OR link_acnt_codes LIKE '%JPY%'         OR link_acnt_codes LIKE '%CNY%'     ) ORDER BY     adv_date DESC; ```  [Current Question] Энэ онд нийт хэдэн төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой вэ",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "WITH latest_ver AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal,     SUM(t.int_amount) AS total_interest FROM     dbm.bcom_nrs_detail t INNER JOIN     latest_ver lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 12) GROUP BY     t.cur_code ORDER BY     t.cur_code;",
+  "result_count": 4,
+  "final_answer": "Энэ онд төлбөрийн хуваарийн дагуу төлөгдөх ёстой нийт зээлийн мэдээлэл:  - Юань: Үндсэн төлбөр 37,417,391.78, Хүүгийн төлбөр 30,204,939.95 - Евро: Үндсэн төлбөр 11,750,000, Хүүгийн төлбөр 1,109,467.67 - Иен: Үндсэн төлбөр 1,042,509,438.81, Хүүгийн төлбөр 80,827,411.29 - Төгрөг: Үндсэн төлбөр 87,490,429,827.69, Хүүгийн төлбөр 42,685,780,829.43"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:21:02.753135",
+  "execution_time_seconds": 34.02,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээл, ойрын 30 хоногт төлөгдөх зээлийн мэдээлэл, энэ онд төлөгдөх ёстой үлдсэн төлбөр, энэ онд төлөгдсөн нийт зээлийн төлөлт, гадаад валюттай зээлийг төгрөг рүү шилжүүлсэн зээлийн мэдээллийг хүссэн. Эцэст нь энэ онд төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой нийт хэмжээг асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_ver AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     t.cur_code,     SUM(t.amount) AS total_principal,     SUM(t.int_amount) AS total_interest FROM     dbm.bcom_nrs_detail t INNER JOIN     latest_ver lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 12) GROUP BY     t.cur_code ORDER BY     t.cur_code; ```  [Current Question] Зээлийн валют нь төгрөг рүү хөрвөсөн мэдээлэл байна уу",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     link_acnt_codes,     adv_date,     adv_amount FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND cur_code = 'MNT'     AND link_acnt_codes IS NOT NULL     AND (         link_acnt_codes LIKE '%USD%'         OR link_acnt_codes LIKE '%EUR%'         OR link_acnt_codes LIKE '%JPY%'         OR link_acnt_codes LIKE '%CNY%'     )     AND status = 'O'     AND principal > 0 ORDER BY     principal DESC;",
+  "result_count": 14,
+  "final_answer": "Гадаад валюттай зээлийг төгрөг рүү хөрвүүлсэн мэдээлэл:  1. Зээлдэгч: ДЦС-4 ТӨХК    - Үндсэн зээлийн үлдэгдэл: 253,309,397,578.54 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600001511 USD, 3600004714 EUR, 3600004715 EUR, 3600004730 EUR, 3600004774 EUR, 3600005550 EUR, 3600005806 EUR, 3600005812 EUR, 3600005839 EUR, 3600005847 EUR, 3600005947 EUR, 3600006108 EUR, 3600006109 EUR, 3600006385 EUR, 3600006459 EUR, 3600006519 EUR, 3600007071 EUR, 3600007148 EUR, 3600007284 EUR, 3600007303 EUR, 3600007315 EUR, 3600007348 EUR, 3600007386 EUR, 3600007470 EUR, 3600007513 EUR, 3600007523 EUR, 3600007655 EUR, MN270036003600007858 EUR    - Зээл олгосон огноо: 2018-07-20    - Олгосон дүн: 260,093,860,509.44 төгрөг  2. Зээлдэгч: ЭРЭЛ ХХК    - Үндсэн зээлийн үлдэгдэл: 109,327,707,274.98 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600000450 USD, 3600000924 EUR, 3600001566 USD, 3600004181 EUR    - Зээл олгосон огноо: 2013-08-20    - Олгосон дүн: 70,383,636,924.93 төгрөг  3. Зээлдэгч: БЭРЭН ГРУПП ХХК    - Үндсэн зээлийн үлдэгдэл: 88,322,594,178.03 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600000827 USD, 3600004501 USD    - Зээл олгосон огноо: 2014-04-15    - Олгосон дүн: 83,773,272,345.69 төгрөг  4. Зээлдэгч: НВЦ ХХК    - Үндсэн зээлийн үлдэгдэл: 59,840,550,000 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600002457 USD    - Зээл олгосон огноо: 2022-05-11    - Олгосон дүн: 59,840,550,000 төгрөг  5. Зээлдэгч: МОНГОЛ ДРАЙ МИЛК ХХК    - Үндсэн зээлийн үлдэгдэл: 47,902,858,743.09 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600002173 USD, 3600002232 USD, 3600002576 USD    - Зээл олгосон огноо: 2017-05-15    - Олгосон дүн: 36,114,656,526.6 төгрөг  6. Зээлдэгч: АЧЛАЛ ТРЕЙД ХХК    - Үндсэн зээлийн үлдэгдэл: 40,900,000,000 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600002490 USD, 3600002730 USD, 3600004610 USD, 3600004983 USD, 3600005842 USD, 3600006247 USD    - Зээл олгосон огноо: 2019-09-07    - Олгосон дүн: 66,913,136,664.02 төгрөг  7. Зээлдэгч: ЭГИЙН ГОЛЫН УСАН ЦАХИЛГААН СТАНЦ    - Үндсэн зээлийн үлдэгдэл: 35,783,435,878.49 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600002473 USD, 3600002738 USD, 3600004149 USD, 3600004679 USD, 3600005358 USD, 3600006890 USD    - Зээл олгосон огноо: 2017-09-26    - Олгосон дүн: 35,783,435,878.57 төгрөг  8. Зээлдэгч: ЭНСАДА-ИСТЕРН ХХК    - Үндсэн зээлийн үлдэгдэл: 26,856,932,250 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600005346 USD, 3600005369 USD, 3600005395 USD    - Зээл олгосон огноо: 2019-12-30    - Олгосон дүн: 26,856,932,250 төгрөг  9. Зээлдэгч: ТӨРИЙН ОРОН СУУЦНЫ КОРПОРАЦИ    - Үндсэн зээлийн үлдэгдэл: 19,254,778,630.7 төгрөг    - Холбогдох валютын зээлийн дугаар: 3600001686 USD    - Зээл олгосон огноо: 2016-02-05    - Олгосон дүн: 19,254,778,630.7 төгрөг  10. Зээлдэгч: СОНГОУЛД ХХК     - Үндсэн зээлийн үлдэгдэл: 17,329,757,402.45 төгрөг     - Холбогдох валютын зээлийн дугаар: 3600002592 JPY     - Зээл олгосон огноо: 2017-12-28     - Олгосон дүн: 17,329,757,402.45 төгрөг  11. Зээлдэгч: ЗЭСТ-ӨНДӨР ХХК     - Үндсэн зээлийн үлдэгдэл: 11,443,040,092.44 төгрөг     - Холбогдох валютын зээлийн дугаар: 3600004760 JPY, 3600005027 JPY     - Зээл олгосон огноо: 2018-08-10     - Олгосон дүн: 11,443,040,092.44 төгрөг  12. Зээлдэгч: МОНГЕМА ХХК     - Үндсэн зээлийн үлдэгдэл: 11,419,463,742.87 төгрөг     - Холбогдох валютын зээлийн дугаар: 3600002515 JPY, 3600004656 JPY     - Зээл олгосон огноо: 2017-10-31     - Олгосон дүн: 11,519,463,742.87 төгрөг  13. Зээлдэгч: БЭРЭН ГРУПП ХХК     - Үндсэн зээлийн үлдэгдэл: 10,708,841,743.64 төгрөг     - Холбогдох валютын зээлийн дугаар: 3600002507 USD, 3600002722 USD     - Зээл олгосон огноо: 2017-10-30     - Олгосон дүн: 32,713,913,724.8 төгрөг  14. Зээлдэгч: БОЛОР ШҮР ХХК     - Үндсэн зээлийн үлдэгдэл: 1,178,992,776.64 төгрөг     - Холбогдох валютын зээлийн дугаар: 3600002424 JPY     - Зээл олгосон огноо: 2017-08-30     - Олгосон дүн: 2,306,135,045.94 төгрөг  Эдгээр зээлүүд нь гадаад валюттай байсан бөгөөд төгрөг рүү хөрвүүлэгдсэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T11:22:37.211210",
+  "execution_time_seconds": 14.66,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээл, ойрын 30 хоногт төлөгдөх зээлийн мэдээлэл, энэ онд төлөгдөх ёстой үлдсэн болон төлөгдсөн зээлийн төлбөр, гадаад валюттай зээлийг төгрөг рүү шилжүүлсэн зээлийн мэдээлэл болон энэ онд төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой нийт хэмжээг асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     principal,     cur_code,     link_acnt_codes,     adv_date,     adv_amount FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND cur_code = 'MNT'     AND link_acnt_codes IS NOT NULL     AND (         link_acnt_codes LIKE '%USD%'         OR link_acnt_codes LIKE '%EUR%'         OR link_acnt_codes LIKE '%JPY%'         OR link_acnt_codes LIKE '%CNY%'     )     AND status = 'O'     AND principal > 0 ORDER BY     principal DESC; ```  [Current Question] Болор шүрийн зээлийг хариуцсан ажилтны нэр?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     customer_name,     adv_date,     adv_amount,     cur_code,     account_manager_name FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND customer_name = 'БОЛОР ШҮР ХХК'     AND adv_date IS NOT NULL ORDER BY     adv_date DESC;",
+  "result_count": 1,
+  "final_answer": "\"БОЛОР ШҮР\" ХХК-ийн зээлийг хариуцсан ажилтан: АНХТУЯА.Д байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T16:51:55.295012",
+  "execution_time_seconds": 41.34,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээл, ойрын 30 хоногт төлөгдөх зээлийн мэдээлэл, энэ онд төлөгдөх ёстой үлдсэн болон төлөгдсөн зээлийн төлбөр, гадаад валюттай зээлийг төгрөг рүү шилжүүлсэн зээлийн мэдээлэл, мөн энэ онд төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой нийт хэмжээг асуусан. Эцэст нь Болор шүрийн зээлийг хариуцсан ажилтны нэрийг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     customer_name,     adv_date,     adv_amount,     cur_code,     account_manager_name FROM     dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND customer_name = 'БОЛОР ШҮР ХХК'     AND adv_date IS NOT NULL ORDER BY     adv_date DESC; ```  [Current Question] Хэвийн ангилалтай зээлдэгчдийн тоог харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT COUNT(DISTINCT customer_name) AS normal_borrower_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL;",
+  "result_count": 1,
+  "final_answer": "Хэвийн ангилалтай зээлдэгчдийн тоо: 5 байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "bb03af80",
+  "timestamp": "2025-12-22T16:56:23.589680",
+  "execution_time_seconds": 27.99,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр үлдэгдэлтэй зээл, ойрын 30 хоногт төлөгдөх зээлийн мэдээлэл, энэ онд төлөгдөх ёстой үлдсэн болон төлөгдсөн зээлийн төлбөр, гадаад валюттай зээлийг төгрөг рүү шилжүүлсэн зээлийн мэдээлэл, Болор шүрийн зээлийг хариуцсан ажилтны нэр, мөн хэвийн ангилалтай зээлдэгчдийн тоог асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT COUNT(DISTINCT customer_name) AS normal_borrower_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND UPPER(class_name) = 'ХЭВИЙН'     AND customer_name IS NOT NULL; ```  [Current Question] Чиний мэдээлэл үнэн үү ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT MAX(txn_date) AS latest_data_date FROM dbm.loan_balance_detail;",
+  "result_count": 1,
+  "final_answer": "Миний мэдээлэл хамгийн сүүлийн үеийн буюу 2025-09-12-ний өдрийн мэдээлэлд үндэслэсэн болно."
+}
+--------------------------------------------------------------------------------
+

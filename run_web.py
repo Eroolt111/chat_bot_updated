@@ -7,6 +7,13 @@ Run this from the project root directory.
 
 import sys
 import os
+import io
+
+# Force UTF-8 stdout/stderr on Windows (prevents charmap errors with Mongolian/Unicode text)
+if sys.stdout and hasattr(sys.stdout, 'buffer'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr and hasattr(sys.stderr, 'buffer'):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Add the project root to Python path
 project_root = os.path.dirname(os.path.abspath(__file__))
@@ -24,7 +31,7 @@ if __name__ == "__main__":
     # Use waitress.serve for production
     # It's a production-ready server that works well on Windows
     # It automatically handles multiple threads for concurrent requests
-    serve(app, host='0.0.0.0', port=8000)
+    serve(app, host='0.0.0.0', port=5000, threads=16)
 
     # The old way (for development only):
     # app.run(host='0.0.0.0', port=8000, debug=True)

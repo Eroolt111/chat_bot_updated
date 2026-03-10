@@ -2,25 +2,51 @@ from app import query_logger
 from flask import Flask, render_template, request, jsonify
 import logging
 import os
-from .pipeline import ChatbotPipeline 
+import time
+import threading
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError
+from .pipeline import ChatbotPipeline
 from .config import config
 import re
-import threading
-#from llama_index.core.memory import ChatMemoryBuffer
-from typing import Optional, Dict
+from typing import Dict, List
 
 logging.basicConfig(level=config.LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
+# ── Pipeline ──────────────────────────────────────────────────────────────────
 pipeline_instance = None
 pipeline_lock = threading.Lock()
 
-#chat_histories: Dict[str, ChatMemoryBuffer] = {}
+# ── Request timeout ───────────────────────────────────────────────────────────
+QUERY_TIMEOUT_SECONDS = 80
+_query_executor = ThreadPoolExecutor(max_workers=16)
+
+# ── Rate limiting ─────────────────────────────────────────────────────────────
+RATE_LIMIT_MAX_QUERIES = 4   # per window
+RATE_LIMIT_WINDOW_SECONDS = 60
+_rate_limit_store: Dict[str, List[float]] = {}
+_rate_limit_lock = threading.Lock()
+
+
+def _check_rate_limit(session_id: str) -> bool:
+    """Returns True if the request is allowed, False if rate-limited."""
+    now = time.time()
+    with _rate_limit_lock:
+        timestamps = _rate_limit_store.get(session_id, [])
+        # Drop timestamps outside the window
+        timestamps = [t for t in timestamps if now - t < RATE_LIMIT_WINDOW_SECONDS]
+        if len(timestamps) >= RATE_LIMIT_MAX_QUERIES:
+            _rate_limit_store[session_id] = timestamps
+            return False
+        timestamps.append(now)
+        _rate_limit_store[session_id] = timestamps
+        return True
+
 
 def initialize_pipeline():
-    """Function to initialize or reinitialize the chatbot pipeline."""
+    """Initialize or reinitialize the chatbot pipeline."""
     global pipeline_instance
     with pipeline_lock:
         try:
@@ -41,71 +67,76 @@ def index():
     """Serve the main chat interface"""
     return render_template('index.html')
 
+
 @app.route('/api/chat', methods=['POST'])
 def chat():
     """Handle chat messages from the frontend"""
-    global pipeline_instance 
+    global pipeline_instance
     if not pipeline_instance:
         return jsonify({
-            'error': 'Chatbot pipeline not initialized',
-            'response': 'Sorry, the chatbot is currently unavailable.'
-        }), 500
-    
+            'response': 'Систем одоогоор боломжгүй байна. Дараа дахин оролдоно уу.'
+        }), 503
+
+    session_id = 'unknown'
     try:
         data = request.get_json()
-        
-        # ✅ Get message and session_id
         question = data.get('message', '').strip()
         session_id = data.get('session_id', 'default_session')
-        
-        # ✅ Validate message (not session_id)
+
         if not question:
+            return jsonify({'response': 'Асуулт хоосон байна.'}), 400
+
+        # ── Rate limit check ──────────────────────────────────────────────────
+        if not _check_rate_limit(session_id):
+            logger.warning(f"[Session {session_id[:8]}...] Rate limit exceeded")
             return jsonify({
-                'error': 'Empty message',
-                'response': 'Please enter a question.'
-            }), 400
-        
-        # ✅ Log once with session info
+                'response': 'Та 1 минутад хамгийн ихдээ 4 асуулт илгээх боломжтой. '
+                            'Түр хүлээгээд дахин оролдоно уу.'
+            }), 429
+
         logger.info(f"[Session {session_id[:8]}...] Processing: {question}")
-        
-        # ✅ Process query
-        result = pipeline_instance.run_query(question, memory=None, session_id=session_id)
-        
-        # ✅ Clean response
+
+        # ── Run pipeline with timeout ─────────────────────────────────────────
+        future = _query_executor.submit(
+            pipeline_instance.run_query, question, None, session_id
+        )
+        try:
+            result = future.result(timeout=QUERY_TIMEOUT_SECONDS)
+        except FuturesTimeoutError:
+            logger.error(f"[Session {session_id[:8]}...] Query timed out after {QUERY_TIMEOUT_SECONDS}s")
+            return jsonify({
+                'response': 'Хүсэлт хэтэрхий удаж байна. Асуултаа хялбарчлаад дахин оролдоно уу.'
+            }), 504
+
+        # ── Clean response ────────────────────────────────────────────────────
         if isinstance(result, str):
-            cleaned_assistant = re.sub(r'^assistant:\s*', '', result, flags=re.IGNORECASE).strip()
-            cleaned = re.sub(r'<think>.*?</think>', '', cleaned_assistant, flags=re.DOTALL).strip()
+            cleaned = re.sub(r'^assistant:\s*', '', result, flags=re.IGNORECASE).strip()
+            cleaned = re.sub(r'<think>.*?</think>', '', cleaned, flags=re.DOTALL).strip()
         else:
             cleaned = str(result)
-        
+
         return jsonify({
             'response': cleaned,
             'status': 'success',
             'session_id': session_id
         })
-        
+
     except Exception as e:
-        error_msg = f"Error processing question: {str(e)}"
-        logger.error(error_msg, exc_info=True)
+        # Log full error server-side only — never expose internals to frontend
+        logger.error(f"[Session {session_id[:8]}...] Unhandled error: {e}", exc_info=True)
         return jsonify({
-            'error': error_msg,
-            'response': 'Sorry, I encountered an error while processing your question.'
+            'response': 'Алдаа гарлаа. Дахин оролдоно уу.'
         }), 500
+
 
 @app.route('/api/reload_pipeline', methods=['POST'])
 def reload_pipeline():
     """Endpoint to trigger a reload of the chatbot pipeline."""
     logger.info("Received request to reload chatbot pipeline.")
     if initialize_pipeline():
-        return jsonify({
-            'status': 'success',
-            'message': 'Chatbot pipeline reloaded successfully.'
-        })
+        return jsonify({'status': 'success', 'message': 'Pipeline reloaded.'})
     else:
-        return jsonify({
-            'status': 'error',
-            'message': 'Failed to reload chatbot pipeline.'
-        }), 500
+        return jsonify({'status': 'error', 'message': 'Failed to reload pipeline.'}), 500
 
 
 @app.route('/api/session_stats/<session_id>', methods=['GET'])
@@ -115,9 +146,10 @@ def get_session_stats(session_id):
         stats = query_logger.get_session_stats(session_id)
         return jsonify(stats)
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
-    
-    
+        logger.error(f"Failed to get session stats: {e}", exc_info=True)
+        return jsonify({'error': 'Could not retrieve stats.'}), 500
+
+
 @app.route('/api/masking_status', methods=['GET'])
 def masking_status():
     """Get current PII masking configuration status"""
@@ -129,6 +161,7 @@ def masking_status():
         'custom_rules': config.CUSTOM_MASKING_RULES
     })
 
+
 @app.route('/health')
 def health():
     """Health check endpoint"""
@@ -139,17 +172,6 @@ def health():
         'masking_enabled': config.ENABLE_PII_MASKING
     })
 
-'''
-if __name__ == '__main__':
-    app.run(
-        host='127.0.0.1',
-        port=5000,
-        debug=True
-    )
-    '''
+
 if __name__ == "__main__":
-    app.run(
-        host='0.0.0.0',
-        port=5000,
-        debug=config.DEBUG
-    )
+    app.run(host='0.0.0.0', port=5000, debug=config.DEBUG)

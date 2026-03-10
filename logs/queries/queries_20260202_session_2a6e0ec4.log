@@ -1,0 +1,74 @@
+{
+  "session_id": "2a6e0ec4",
+  "timestamp": "2026-02-02T10:55:12.443671",
+  "execution_time_seconds": 2.79,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Сайн уу",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу, танд хэрхэн туслах вэ? Хөгжлийн банкны банкны үйл ажиллагаа, өгөгдлийн сан, мэдээллийн шинжилгээтэй холбоотой асуулт байвал асуугаарай. Би танд тодорхой, мэргэжлийн хариулт өгөхөд бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "2a6e0ec4",
+  "timestamp": "2026-02-02T10:55:57.944660",
+  "execution_time_seconds": 8.43,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Чи ямар2 модультай холбоотой асуултад хариулт өгч чадах вэ?",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Баярлалаа, таны асуултыг ойлголоо. Би Монгол Улсын Хөгжлийн Банкны (DBM) банкны үйл ажиллагаа, санхүүгийн бүтээгдэхүүн, зээлийн үйлчилгээ, эрсдэлийн удирдлага, өгөгдлийн шинжилгээ, тайлангийн систем, мэдээллийн сангийн бүтэц, өгөгдлийн аюулгүй байдал зэрэг банкны болон өгөгдлийн шинжилгээтэй холбоотой модулиудын талаар ерөнхий мэдээлэл, ойлголт өгөх боломжтой.  Жишээ нь:  - Зээлийн удирдлагын модуль (Зээлийн бүртгэл, эргэн төлөлт, зээлийн ангилал) - Харилцагчийн мэдээллийн сангийн модуль (Харилцагчийн бүртгэл, мэдээллийн аюулгүй байдал) - Тайлангийн модуль (Санхүүгийн тайлан, эрсдэлийн тайлан) - Өгөгдлийн шинжилгээ, BI модуль (Өгөгдлийн агрегаци, дүн шинжилгээ, BI тайлан) - Эрсдэлийн удирдлагын модуль (Зээлийн эрсдэл, зах зээлийн эрсдэл)  Хэрвээ тодорхой нэг модуль эсвэл үйл ажиллагааны талаар асуух бол дэлгэрэнгүй мэдээлэл өгч, тодорхой хариулт өгөхөд бэлэн байна. Хэрэв банкны дотоод системийн нарийн бүтэц, эсвэл тусгай программ хангамжийн талаар асуувал, зарим мэдээлэлд хязгаарлалт байж болохыг анхаарна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "2a6e0ec4",
+  "timestamp": "2026-02-02T16:33:47.920754",
+  "execution_time_seconds": 33.07,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "хамгийн өндөр дүнтэй зээлсэн эх үүсвэр?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.borrowing_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     cust_name,     principal,     cur_code,     int_rate,     maturity_date FROM dbm.borrowing_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)     AND status = 'O' AND principal > 0 ORDER BY (principal * rate) DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр дүнтэй зээлсэн эх үүсвэрийн мэдээлэл: - Дансны дугаар: 3600007647 - Дансны нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК - Харилцагчийн нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК - Үндсэн дүн: 322,671,583.22 юань - Хүүний хэмжээ: 5.1 - Дуусах огноо: 2031-10-28"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "2a6e0ec4",
+  "timestamp": "2026-02-02T16:55:10.908130",
+  "execution_time_seconds": 30.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч хамгийн өндөр дүнтэй зээлийн эх үүсвэрийн талаар асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     cust_name,     principal,     cur_code,     int_rate,     maturity_date FROM dbm.borrowing_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)     AND status = 'O' AND principal > 0 ORDER BY (principal * rate) DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] мөнгөний зэх зээл дээрх одоо идэвхтэй байгаа татсан болон зээлүүлсэн дансуудыг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.borrowing_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     acnt_code,     acnt_name,     cust_name,     principal,     cur_code,     int_rate,     maturity_date FROM dbm.borrowing_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.borrowing_balance_detail)     AND status = 'O'     AND principal > 0 ORDER BY (principal * rate) DESC;",
+  "result_count": 4,
+  "final_answer": "Мөнгөний зэх зээл дээрх одоо идэвхтэй байгаа татсан болон зээлүүлсэн дансуудын мэдээлэл:  1. Дансны нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК    - Харилцагчийн нэр: ХЯТАДЫН ХӨГЖЛИЙН БАНК    - Үндсэн дүн: 322,671,583.22 юань    - Хүүний хэмжээ: 5.1    - Дуусах огноо: 2031-10-28  2. Дансны нэр: ТӨСЛИЙН ЗЭЭЛИЙН САНХҮҮЖИЛТ-САНГИЙН ЯАМ    - Харилцагчийн нэр: МОНГОЛ УЛСЫН САНГИЙН ЯАМ    - Үндсэн дүн: 44,104,681,400 төгрөг    - Хүүний хэмжээ: 0.75    - Дуусах огноо: 2044-12-31  3. Дансны нэр: БОГД БАНК    - Харилцагчийн нэр: БОГД БАНК    - Үндсэн дүн: 35,850,000,000 төгрөг    - Хүүний хэмжээ: 12    - Дуусах огноо: 2026-02-06  4. Дансны нэр: ГОЛОМТ БАНК    - Харилцагчийн нэр: ГОЛОМТ БАНК    - Үндсэн дүн: 1,000,000,000 иен    - Хүүний хэмжээ: 1    - Дуусах огноо: 2026-03-24"
+}
+--------------------------------------------------------------------------------
+

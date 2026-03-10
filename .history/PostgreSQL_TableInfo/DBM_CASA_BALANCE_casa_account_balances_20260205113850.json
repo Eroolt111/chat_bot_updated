@@ -1,0 +1,71 @@
+{
+  "original_table_name": "DBM.CASA_BALANCE",
+  "table_name": "casa_account_balances",
+  "table_summary": "This table records daily balances and related metadata for CASA (Current Account, Savings Account) products, including account, customer, product, and manager details, as well as currency and status information.",
+  "column_descriptions": [
+    {
+      "column_name": "txn_date",
+      "description": "Date value representing the transaction or balance date for the account snapshot. Used for filtering and tracking balances over time."
+    },
+    {
+      "column_name": "acnt_code",
+      "description": "Text (string) value uniquely identifying the account within the bank's system. Serves as a primary key for account-level data."
+    },
+    {
+      "column_name": "acnt_name",
+      "description": "Text (string) value representing the internal or display name of the account. May be used for reporting or user interface purposes."
+    },
+    {
+      "column_name": "customer_code",
+      "description": "Text (string) value uniquely identifying the customer who owns the account. Used for linking accounts to customers."
+    },
+    {
+      "column_name": "customer_name",
+      "description": "Text (string) value containing the full name of the customer who owns the account. Used for display and reporting."
+    },
+    {
+      "column_name": "prod_code",
+      "description": "Text (string) value representing the product code for the CASA product type (e.g., savings, current). Used for categorizing account types."
+    },
+    {
+      "column_name": "prod_name",
+      "description": "Text (string) value describing the product name associated with the account (e.g., specific savings or current account product)."
+    },
+    {
+      "column_name": "acnt_type",
+      "description": "Text (string) or numeric code representing the type of account (e.g., individual, joint, corporate). Used for classification."
+    },
+    {
+      "column_name": "acnt_type_name",
+      "description": "Text (string) value providing a descriptive label for the account type, corresponding to the 'acnt_type' code."
+    },
+    {
+      "column_name": "acnt_manager",
+      "description": "Numeric value representing the unique identifier of the account manager responsible for the account. Used for internal tracking and reporting."
+    },
+    {
+      "column_name": "acnt_manager_name",
+      "description": "Text (string) value containing the full name of the account manager assigned to the account."
+    },
+    {
+      "column_name": "open_date",
+      "description": "Date value indicating when the account was opened. Useful for account lifecycle analysis."
+    },
+    {
+      "column_name": "closed_date",
+      "description": "Date value indicating when the account was closed, if applicable. Null or missing if the account is still open."
+    },
+    {
+      "column_name": "status",
+      "description": "Text (string) value describing the current status or remarks about the account. May include operational notes or status indicators."
+    },
+    {
+      "column_name": "cur_code",
+      "description": "Text (string) value representing the currency code (e.g., 'MNT' for Mongolian Tugrik, 'USD' for US Dollar, 'JPY' for Japanese Yen, 'CNY' for Chinese Yuan, 'EUR' for Euro) in which the account balance is denominated. This determines the unit for the 'current_bal' column."
+    },
+    {
+      "column_name": "current_bal",
+      "description": "Numeric value representing the current balance of the account as of 'txn_date'. The currency of this amount is specified by the 'cur_code' column (e.g., 'MNT', 'USD', 'JPY', etc.)."
+    }
+  ]
+}

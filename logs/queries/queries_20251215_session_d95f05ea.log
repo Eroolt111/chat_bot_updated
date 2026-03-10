@@ -1,0 +1,126 @@
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T10:51:44.565573",
+  "execution_time_seconds": 11.61,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Эрчим хүчний яам хэдэн зээлтэй байна?",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     COUNT(DISTINCT acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(customer_name) LIKE '%ЭРЧИМ ХҮЧНИЙ ЯАМ%'     AND status = 'O'     AND principal > 0 GROUP BY customer_name;",
+  "result_count": 1,
+  "final_answer": "\"Эрчим хүчний яам\" нийт 1 зээлтэй байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T10:55:46.728897",
+  "execution_time_seconds": 23.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч Эрчим хүчний яам-ны зээлийн тоо хэмжээний талаар асуусан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     customer_name,     COUNT(DISTINCT acnt_code) AS loan_count FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND UPPER(customer_name) LIKE '%ЭРЧИМ ХҮЧНИЙ ЯАМ%'     AND status = 'O'     AND principal > 0 GROUP BY customer_name; ```  [Current Question] Пирамид ордын зээлийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     status,     principal,     cur_code,     project_name FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND (customer_name = 'ПИРАМИД-ОРД ХХК' OR acnt_name = 'ПИРАМИД-ОРД ХХК') ORDER BY status, acnt_code;",
+  "result_count": 5,
+  "final_answer": "Пирамид-Орд ХХК-ийн зээлийн мэдээлэл:  1. Дансны дугаар: 3600002539    - Дансны нэр: ПИРАМИД-ОРД ХХК    - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК    - Зээлийн төлөв: O    - Үлдэгдэл үндсэн зээл: 10,000,000,000 төгрөг    - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  2. Дансны дугаар: 3600002715    - Дансны нэр: ПИРАМИД-ОРД ХХК    - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК    - Зээлийн төлөв: O    - Үлдэгдэл үндсэн зээл: 0 төгрөг    - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  3. Дансны дугаар: 3600004191    - Дансны нэр: ПИРАМИД-ОРД ХХК    - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК    - Зээлийн төлөв: O    - Үлдэгдэл үндсэн зээл: 1,000,000,000 төгрөг    - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  4. Дансны дугаар: 3600004223    - Дансны нэр: ПИРАМИД-ОРД ХХК    - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК    - Зээлийн төлөв: O    - Үлдэгдэл үндсэн зээл: 2,000,000,000 төгрөг    - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ  5. Дансны дугаар: 3600004571    - Дансны нэр: ПИРАМИД-ОРД ХХК    - Харилцагчийн нэр: ПИРАМИД-ОРД ХХК    - Зээлийн төлөв: O    - Үлдэгдэл үндсэн зээл: 2,000,000,000 төгрөг    - Төсөл: БУМАН ЗАЛУУС 296 АЙЛЫН ОРОН СУУЦНЫ ТӨСӨЛ"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T11:53:26.603063",
+  "execution_time_seconds": 16.97,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ онд нийт хэдэн төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой вэ",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT SUM(t.amount + t.int_amount) AS total_payment_due_mnt FROM     dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.cur_code = 'MNT'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 12);",
+  "result_count": 1,
+  "final_answer": "Энэ онд зээл төлбөрийн хуваарийн дагуу нийт 130,176,210,657.12 төгрөг төлөгдөх ёстой байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T14:17:50.045869",
+  "execution_time_seconds": 23.14,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Энэ онд нийт хэдэн төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой вэ",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_per_account AS (     SELECT         acnt_code,         MAX(nrs_version) AS current_version     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     'Энэ онд төлөгдөх нийт үндсэн зээлийн дүн' AS description,     SUM(t.amount) AS total_principal_due_mnt FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_per_account lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.current_version WHERE     t.status = 'O'     AND t.cur_code = 'MNT'     AND t.schd_date >= TRUNC(SYSDATE, 'YYYY')     AND t.schd_date < ADD_MONTHS(TRUNC(SYSDATE, 'YYYY'), 12);",
+  "result_count": 1,
+  "final_answer": "Энэ онд төлөгдөх нийт үндсэн зээлийн дүн: 87,490,429,827.69 төгрөг."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T15:13:21.546746",
+  "execution_time_seconds": 56.22,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "энэ онд төлөгдсөн зээлийн үндсэн төлбөрийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH year_start_date AS (     SELECT MIN(txn_date) AS txn_date     FROM dbm.loan_balance_detail     WHERE EXTRACT(YEAR FROM txn_date) = EXTRACT(YEAR FROM SYSDATE) ),  year_end_date AS (     SELECT MAX(txn_date) AS txn_date     FROM dbm.loan_balance_detail     WHERE EXTRACT(YEAR FROM txn_date) = EXTRACT(YEAR FROM SYSDATE) ),  start_balances AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code,         principal,         rate     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT txn_date FROM year_start_date)         AND status = 'O'         AND principal > 0         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL ),  end_balances AS (     SELECT         acnt_code,         principal,         rate     FROM dbm.loan_balance_detail     WHERE         txn_date = (SELECT txn_date FROM year_end_date)         AND status = 'O'         AND principal >= 0 )  SELECT     s.customer_name,     s.acnt_name,     s.cur_code,     (s.principal * s.rate) AS principal_start_mnt,     (e.principal * e.rate) AS principal_end_mnt,     ((s.principal * s.rate) - (e.principal * e.rate)) AS principal_repaid_mnt FROM start_balances s LEFT JOIN end_balances e ON s.acnt_code = e.acnt_code WHERE (s.principal * s.rate) > (COALESCE(e.principal, 0) * COALESCE(e.rate, 1)) ORDER BY principal_repaid_mnt DESC;",
+  "result_count": 17,
+  "final_answer": "Энэ онд төлөгдсөн зээлийн үндсэн төлбөрийн мэдээлэл:  1. ИНЖИР ХХК (ИНЖИР ХХК) - ам.доллар    - Эхний үлдэгдэл: 2,846,705,198.68    - Эцсийн үлдэгдэл: Мэдээлэл байхгүй    - Төлөгдсөн дүн: Мэдээлэл байхгүй  2. ИНЖИР ХХК (ИНЖИР ХХК) - ам.доллар    - Эхний үлдэгдэл: 3,275,918,201.32    - Эцсийн үлдэгдэл: Мэдээлэл байхгүй    - Төлөгдсөн дүн: Мэдээлэл байхгүй  3. ГАЗ-ИМПОРТ ХХК (ГАЗ-ИМПОРТ ХХК) - иен    - Эхний үлдэгдэл: 480,825,465.7096    - Эцсийн үлдэгдэл: Мэдээлэл байхгүй    - Төлөгдсөн дүн: Мэдээлэл байхгүй  4. ГАЗ-ИМПОРТ ХХК (ГАЗ-ИМПОРТ ХХК) - иен    - Эхний үлдэгдэл: 2,231,639,683.7922    - Эцсийн үлдэгдэл: Мэдээлэл байхгүй    - Төлөгдсөн дүн: Мэдээлэл байхгүй  5. ГАЗ-ИМПОРТ ХХК (ГАЗ-ИМПОРТ ХХК) - иен    - Эхний үлдэгдэл: 2,182,279,770    - Эцсийн үлдэгдэл: Мэдээлэл байхгүй    - Төлөгдсөн дүн: Мэдээлэл байхгүй  6. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК (ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК) - иен    - Эхний үлдэгдэл: 26,728,376,739.4281    - Эцсийн үлдэгдэл: 16,514,548,087.0524    - Төлөгдсөн дүн: 10,213,828,652.3757  7. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК (ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК) - евро    - Эхний үлдэгдэл: 32,329,245,850.1264    - Эцсийн үлдэгдэл: 22,415,520,028.0194    - Төлөгдсөн дүн: 9,913,725,822.107  8. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК (ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК) - евро    - Эхний үлдэгдэл: 27,496,002,302.8992    - Эцсийн үлдэгдэл: 19,613,579,803.8642    - Төлөгдсөн дүн: 7,882,422,499.035  9. ДЦС-4 ТӨХК (ДЦС-4 ТӨХК) - төгрөг    - Эхний үлдэгдэл: 260,093,860,509.44    - Эцсийн үлдэгдэл: 253,309,397,578.54    - Төлөгдсөн дүн: 6,784,462,930.9  10. ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК (ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК) - төгрөг     - Эхний үлдэгдэл: 11,215,514,476.89     - Эцсийн үлдэгдэл: 8,227,471,431.12     - Төлөгдсөн дүн: 2,988,043,045.77  11. БЭРЭН ГРУПП ХХК (БЭРЭН ГРУПП ХХК) - төгрөг     - Эхний үлдэгдэл: 13,441,017,894.64     - Эцсийн үлдэгдэл: 10,708,841,743.64     - Төлөгдсөн дүн: 2,732,176,151  12. ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК (ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК) - иен     - Эхний үлдэгдэл: 1,758,220,350.8749     - Эцсийн үлдэгдэл: 1,086,344,108.9172     - Төлөгдсөн дүн: 671,876,241.9577  13. ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК (ИМПЕРИАЛ ГОУЛД МАЙНИНГ ХХК) - төгрөг     - Эхний үлдэгдэл: 512,971,233.34     - Эцсийн үлдэгдэл: 1,000,000     - Төлөгдсөн дүн: 511,971,233.34  14. ПРОМОН ТРЕЙД ХХК (Промон Трейд ХХК) - төгрөг     - Эхний үлдэгдэл: 699,999,980.81     - Эцсийн үлдэгдэл: 400,000,000     - Төлөгдсөн дүн: 299,999,980.81  15. ШАНХ МАЙНИНГ (ШАНХ МАЙНИНГ ХХК) - төгрөг     - Эхний үлдэгдэл: 679,193,802     - Эцсийн үлдэгдэл: 646,214,154.01     - Төлөгдсөн дүн: 32,979,647.99  16. ДЭД БҮТЭЦ ИНЖЕНЕРИНГ ХХК (ДЭД БҮТЭЦ ИНЖЕНЕРИНГ ХХК) - төгрөг     - Эхний үлдэгдэл: 254,887,218.15     - Эцсийн үлдэгдэл: 244,887,218.15     - Төлөгдсөн дүн: 10,000,000  17. БОЛОР ШҮР ХХК (БОЛОР ШҮР ХХК) - төгрөг     - Эхний үлдэгдэл: 1,182,088,776.64     - Эцсийн үлдэгдэл: 1,178,992,776.64     - Төлөгдсөн дүн: 3,096,000"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "d95f05ea",
+  "timestamp": "2025-12-15T16:58:51.456795",
+  "execution_time_seconds": 69.04,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "энэ онд төлөгдсөн зээлийн үндсэн төлбөрийн мэдээлэл",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_txn"
+  ],
+  "names_extracted_count": 25,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     txn_jrno,     txn_date,     acnt_code,     txn_amount,     cur_code,     currate FROM     dbm.loan_txn WHERE     txn_code = 'PAY_PRINC'     AND txn_date >= TO_DATE('01-01-2024', 'DD-MM-YYYY') ORDER BY     txn_date DESC;",
+  "result_count": 500,
+  "final_answer": "Энэ онд төлөгдсөн зээлийн үндсэн төлбөрийн мэдээлэл:  1. Гүйлгээний дугаар: 938,600,002,067    - Огноо: 2025-09-12    - Дансны дугаар: 3600005523    - Төлсөн дүн: 202,888,227.4 төгрөг    - Валютын ханш: 1  2. Гүйлгээний дугаар: 938,500,002,090    - Огноо: 2025-09-11    - Дансны дугаар: MN290036003600007822    - Төлсөн дүн: 35,250,000 төгрөг    - Валютын ханш: 1  3. Гүйлгээний дугаар: 938,400,002,389    - Огноо: 2025-09-10    - Дансны дугаар: MN290036003600007822    - Төлсөн дүн: 29,500,500 төгрөг    - Валютын ханш: 1  4. Гүйлгээний дугаар: 938,300,002,231    - Огноо: 2025-09-09    - Дансны дугаар: MN290036003600007822    - Төлсөн дүн: 24,750,000 төгрөг    - Валютын ханш: 1  5. Гүйлгээний дугаар: 937,900,002,194    - Огноо: 2025-09-05    - Дансны дугаар: MN290036003600007822    - Төлсөн дүн: 1,000,000 төгрөг    - Валютын ханш: 1  ...  (Нийт 500 гүйлгээний мэдээлэл байна. Хүсвэл тодорхой гүйлгээний дугаар, огноо, эсвэл валютын төрлөөр дэлгэрэнгүй мэдээлэл авч болно.)"
+}
+--------------------------------------------------------------------------------
+

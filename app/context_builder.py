@@ -1,10 +1,15 @@
 import logging
+import threading
 from typing import List, Dict, Set
 from sentence_transformers import CrossEncoder, SentenceTransformer, util
 import numpy as np
 import torch
 
 logger = logging.getLogger(__name__)
+
+# Limits simultaneous GPU operations to prevent OOM when multiple users query concurrently.
+# Value of 2: at most 2 threads run reranker/embedder on GPU at the same time; others wait.
+_gpu_semaphore = threading.Semaphore(2)
 
 class FastContextBuilder:
     """
@@ -50,9 +55,10 @@ class FastContextBuilder:
             return [candidate_tables[0]['name']]
         
         pairs = [(query, table['summary']) for table in candidate_tables]
-        
+
         logger.info(f"Reranking {len(candidate_tables)} candidate tables...")
-        scores = self.reranker.predict(pairs)
+        with _gpu_semaphore:
+            scores = self.reranker.predict(pairs)
         
         top_k = min(top_k, len(candidate_tables))
         top_indices = np.argsort(scores)[-top_k:][::-1]
@@ -136,8 +142,9 @@ class FastContextBuilder:
         pairs = [(query, f"{col}: {desc}") for col, desc in all_columns.items()]
         
         logger.info(f"Reranking {len(all_columns)} columns...")
-        scores = self.reranker.predict(pairs)
-        
+        with _gpu_semaphore:
+            scores = self.reranker.predict(pairs)
+
         # Get top scoring columns
         top_indices = np.argsort(scores)[-max_columns:][::-1]
         
@@ -185,22 +192,24 @@ class FastContextBuilder:
         cache_key = table_name
         if cache_key not in self.column_embedding_cache:
             column_texts = [f"{name}: {desc}" for name, desc in all_columns.items()]
-            embeddings = self.embedder.encode(column_texts, convert_to_tensor=True)
+            with _gpu_semaphore:
+                embeddings = self.embedder.encode(column_texts, convert_to_tensor=True)
             self.column_embedding_cache[cache_key] = {
                 'names': list(all_columns.keys()),
                 'embeddings': embeddings
             }
             logger.info(f"✅ Cached embeddings for {table_name}")
-        
+
         cache = self.column_embedding_cache[cache_key]
-        
+
         # Find indices of remaining columns
         remaining_indices = [i for i, name in enumerate(cache['names']) if name in remaining_cols]
         remaining_embeddings = cache['embeddings'][remaining_indices]
         remaining_names = [cache['names'][i] for i in remaining_indices]
-        
+
         # Compute similarities
-        query_embedding = self.embedder.encode(query, convert_to_tensor=True)
+        with _gpu_semaphore:
+            query_embedding = self.embedder.encode(query, convert_to_tensor=True)
         similarities = util.cos_sim(query_embedding, remaining_embeddings)[0]
         
         # Get top candidates for reranking
@@ -220,7 +229,8 @@ class FastContextBuilder:
         else:
             # Rerank to get best ones
             pairs = [(query, f"{col}: {desc}") for col, desc in candidates.items()]
-            scores = self.reranker.predict(pairs)
+            with _gpu_semaphore:
+                scores = self.reranker.predict(pairs)
             
             top_indices = np.argsort(scores)[-remaining_slots:][::-1]
             
@@ -259,14 +269,16 @@ class FastContextBuilder:
         cache_key = table_name
         if cache_key not in self.column_embedding_cache:
             column_texts = [f"{name}: {desc}" for name, desc in all_columns.items()]
-            embeddings = self.embedder.encode(column_texts, convert_to_tensor=True)
+            with _gpu_semaphore:
+                embeddings = self.embedder.encode(column_texts, convert_to_tensor=True)
             self.column_embedding_cache[cache_key] = {
                 'names': list(all_columns.keys()),
                 'embeddings': embeddings
             }
-        
+
         cache = self.column_embedding_cache[cache_key]
-        query_embedding = self.embedder.encode(query, convert_to_tensor=True)
+        with _gpu_semaphore:
+            query_embedding = self.embedder.encode(query, convert_to_tensor=True)
         similarities = util.cos_sim(query_embedding, cache['embeddings'])[0]
         
         # Get top columns

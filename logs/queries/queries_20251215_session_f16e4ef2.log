@@ -1,0 +1,165 @@
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:15:48.053053",
+  "execution_time_seconds": 40.94,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "Зээлийн валют нь төгрөг рүү хөрвөсөн мэдээлэл байна уу",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     customer_name,     acnt_name,     cur_code,     rate,     principal,     (principal * rate) AS principal_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND cur_code <> 'MNT'     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY (principal * rate) DESC;",
+  "result_count": 19,
+  "final_answer": "Гадаад валютын зээлийн үлдэгдлийг төгрөг рүү хөрвүүлсэн мэдээлэл:  1. Харилцагч: ХӨТӨЛ ХХК    - Дансны нэр: ХӨТӨЛ ХХК    - Валют: ам.доллар    - Валютын ханш: 3,593.61    - Үндсэн зээлийн үлдэгдэл: 61,212,460.58 ам.доллар    - Төгрөгт хөрвүүлсэн дүн: 219,973,710,464.8938 төгрөг  2. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Валют: юань    - Валютын ханш: 504.54    - Үндсэн зээлийн үлдэгдэл: 146,644,843.89 юань    - Төгрөгт хөрвүүлсэн дүн: 73,988,189,536.2606 төгрөг  3. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Валют: юань    - Валютын ханш: 504.54    - Үндсэн зээлийн үлдэгдэл: 138,224,000.47 юань    - Төгрөгт хөрвүүлсэн дүн: 69,739,537,197.1338 төгрөг  4. Харилцагч: ЭРЧИМ ХҮЧНИЙ ЯАМ    - Дансны нэр: ТАВАНТОЛГОЙН ЦАХИЛГААН СТАНЦ ТӨСӨЛ 1    - Валют: ам.доллар    - Валютын ханш: 3,593.61    - Үндсэн зээлийн үлдэгдэл: 14,816,251 ам.доллар    - Төгрөгт хөрвүүлсэн дүн: 53,243,827,756.11 төгрөг  5. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Валют: юань    - Валютын ханш: 504.54    - Үндсэн зээлийн үлдэгдэл: 44,525,712.75 юань    - Төгрөгт хөрвүүлсэн дүн: 22,465,003,110.885 төгрөг  6. Харилцагч: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Валют: евро    - Валютын ханш: 4,202.91    - Үндсэн зээлийн үлдэгдэл: 5,333,333.34 евро    - Төгрөгт хөрвүүлсэн дүн: 22,415,520,028.0194 төгрөг  7. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК    - Валют: юань    - Валютын ханш: 504.54    - Үндсэн зээлийн үлдэгдэл: 38,910,815.68 юань    - Төгрөгт хөрвүүлсэн дүн: 19,632,062,943.1872 төгрөг  8. Харилцагч: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Валют: евро    - Валютын ханш: 4,202.91    - Үндсэн зээлийн үлдэгдэл: 4,666,666.62 евро    - Төгрөгт хөрвүүлсэн дүн: 19,613,579,803.8642 төгрөг  9. Харилцагч: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК    - Валют: иен    - Валютын ханш: 24.36    - Үндсэн зээлийн үлдэгдэл: 677,937,113.59 иен    - Төгрөгт хөрвүүлсэн дүн: 16,514,548,087.0524 төгрөг  10. Харилцагч: ПРОМОН ТРЕЙД ХХК     - Дансны нэр: Промон Трейд ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 646,006,219.76 иен     - Төгрөгт хөрвүүлсэн дүн: 15,736,711,513.3536 төгрөг  11. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК     - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК     - Валют: юань     - Валютын ханш: 504.54     - Үндсэн зээлийн үлдэгдэл: 22,845,742.35 юань     - Төгрөгт хөрвүүлсэн дүн: 11,526,590,845.269 төгрөг  12. Харилцагч: МОНГОЛ МИКРОН КАШМЕР ХХК     - Дансны нэр: МОНГОЛ МИКРОН КАШМЕР ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 310,498,673.66 иен     - Төгрөгт хөрвүүлсэн дүн: 7,563,747,690.3576 төгрөг  13. Харилцагч: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК     - Дансны нэр: ДОРНОД БҮСИЙН ЭРЧИМ ХҮЧНИЙ СИСТЕМ ТӨХК     - Валют: юань     - Валютын ханш: 504.54     - Үндсэн зээлийн үлдэгдэл: 9,971,507.36 юань     - Төгрөгт хөрвүүлсэн дүн: 5,031,024,323.4144 төгрөг  14. Харилцагч: ПРОМОН ТРЕЙД ХХК     - Дансны нэр: Промон Трейд ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 138,374,511.53 иен     - Төгрөгт хөрвүүлсэн дүн: 3,370,803,100.8708 төгрөг  15. Харилцагч: МОНГОЛ МИКРОН КАШМЕР ХХК     - Дансны нэр: МОНГОЛ МИКРОН КАШМЕР ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 90,723,360 иен     - Төгрөгт хөрвүүлсэн дүн: 2,210,021,049.6 төгрөг  16. Харилцагч: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК     - Дансны нэр: ЦЭЦЭНС МАЙНИНГ ЭНД ЭНЕРЖИ ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 44,595,406.77 иен     - Төгрөгт хөрвүүлсэн дүн: 1,086,344,108.9172 төгрөг  17. Харилцагч: ИНЖИР ХХК     - Дансны нэр: ИНЖИР ХХК     - Валют: ам.доллар     - Валютын ханш: 3,593.61     - Үндсэн зээлийн үлдэгдэл: 169,600 ам.доллар     - Төгрөгт хөрвүүлсэн дүн: 609,476,256 төгрөг  18. Харилцагч: МОНГОЛ МИКРОН КАШМЕР ХХК     - Дансны нэр: МОНГОЛ МИКРОН КАШМЕР ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 21,998,753.44 иен     - Төгрөгт хөрвүүлсэн дүн: 535,889,633.7984 төгрөг  19. Харилцагч: ПРОМОН ТРЕЙД ХХК     - Дансны нэр: Промон Трейд ХХК     - Валют: иен     - Валютын ханш: 24.36     - Үндсэн зээлийн үлдэгдэл: 9,959,029.8 иен     - Төгрөгт хөрвүүлсэн дүн: 242,601,965.928 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:18:13.992833",
+  "execution_time_seconds": 49.81,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлийн валютыг төгрөг рүү хөрвүүлсэн мэдээлэл байгаа эсэхийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     customer_name,     acnt_name,     cur_code,     rate,     principal,     (principal * rate) AS principal_in_mnt FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND cur_code <> 'MNT'     AND customer_name IS NOT NULL     AND acnt_name IS NOT NULL ORDER BY (principal * rate) DESC; ```  [Current Question] анх гадаад валютаар олгосон боловч зээлийг нь төгрөг рүү шилжүүлсэн зээл байна уу",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH first_disbursement AS (     SELECT         acnt_code,         cur_code AS original_currency,         adv_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY adv_date ASC) AS rn     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND adv_amount > 0         AND cur_code IS NOT NULL ),  latest_state AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code AS current_currency,         principal,         rate,         adv_date,         adv_amount,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal > 0         AND cur_code IS NOT NULL         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL )  SELECT     l.customer_name,     l.acnt_name,     f.original_currency,     l.current_currency,     l.adv_date,     l.adv_amount,     l.principal,     l.rate,     (l.principal * l.rate) AS principal_in_mnt FROM first_disbursement f INNER JOIN latest_state l ON f.acnt_code = l.acnt_code WHERE     f.rn = 1     AND l.rn = 1     AND f.original_currency <> 'MNT'     AND l.current_currency = 'MNT'     AND l.status = 'O'     AND l.principal > 0 ORDER BY (l.principal * l.rate) DESC;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:20:01.435057",
+  "execution_time_seconds": 25.44,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлийн валютыг төгрөг рүү хөрвүүлсэн эсэх болон анх гадаад валютаар олгосон ч төгрөг рүү шилжүүлсэн зээлийн мэдээллийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH first_disbursement AS (     SELECT         acnt_code,         cur_code AS original_currency,         adv_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY adv_date ASC) AS rn     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND adv_amount > 0         AND cur_code IS NOT NULL ),  latest_state AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code AS current_currency,         principal,         rate,         adv_date,         adv_amount,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         principal > 0         AND cur_code IS NOT NULL         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL )  SELECT     l.customer_name,     l.acnt_name,     f.original_currency,     l.current_currency,     l.adv_date,     l.adv_amount,     l.principal,     l.rate,     (l.principal * l.rate) AS principal_in_mnt FROM first_disbursement f INNER JOIN latest_state l ON f.acnt_code = l.acnt_code WHERE     f.rn = 1     AND l.rn = 1     AND f.original_currency <> 'MNT'     AND l.current_currency = 'MNT'     AND l.status = 'O'     AND l.principal > 0 ORDER BY (l.principal * l.rate) DESC; ```  [Current Question] 2020 оноос өмнөх хугацаанд гадаад валютын үлдэгдэлтэй байсан боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээлийн мэдээллийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "COMPLEX",
+  "was_decomposed": true,
+  "final_sql": "WITH first_disbursement AS (     SELECT         acnt_code,         cur_code AS original_currency,         adv_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY adv_date ASC) AS rn     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND adv_amount > 0         AND cur_code IS NOT NULL ),  foreign_balance_before_2020 AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         txn_date < TO_DATE('2020-01-01', 'YYYY-MM-DD')         AND principal > 0         AND cur_code IS NOT NULL         AND cur_code <> 'MNT'     GROUP BY acnt_code ),  latest_state AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code AS current_currency,         principal,         rate,         adv_date,         adv_amount,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         cur_code IS NOT NULL         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL )  SELECT     l.customer_name,     l.acnt_name,     f.original_currency,     l.current_currency,     l.adv_date,     l.adv_amount,     l.principal,     l.rate,     (l.principal * l.rate) AS principal_in_mnt FROM first_disbursement f INNER JOIN latest_state l ON f.acnt_code = l.acnt_code INNER JOIN foreign_balance_before_2020 fb ON l.acnt_code = fb.acnt_code WHERE     f.rn = 1     AND l.rn = 1     AND f.original_currency <> 'MNT'     AND l.current_currency = 'MNT'     AND l.status = 'O'     AND l.principal > 0 ORDER BY (l.principal * l.rate) DESC;",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:20:43.519327",
+  "execution_time_seconds": 19.7,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлийн валютыг төгрөг рүү хөрвүүлсэн эсэх, анх гадаад валютаар олгосон боловч одоо төгрөг рүү шилжүүлсэн зээлийн мэдээллийг болон 2020 оноос өмнөх гадаад валютын үлдэгдэлтэй байсан боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээлийн мэдээллийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH first_disbursement AS (     SELECT         acnt_code,         cur_code AS original_currency,         adv_date,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY adv_date ASC) AS rn     FROM dbm.loan_balance_detail     WHERE         adv_date IS NOT NULL         AND adv_amount > 0         AND cur_code IS NOT NULL ),  foreign_balance_before_2020 AS (     SELECT acnt_code     FROM dbm.loan_balance_detail     WHERE         txn_date < TO_DATE('2020-01-01', 'YYYY-MM-DD')         AND principal > 0         AND cur_code IS NOT NULL         AND cur_code <> 'MNT'     GROUP BY acnt_code ),  latest_state AS (     SELECT         acnt_code,         customer_name,         acnt_name,         cur_code AS current_currency,         principal,         rate,         adv_date,         adv_amount,         status,         ROW_NUMBER() OVER (PARTITION BY acnt_code ORDER BY txn_date DESC) AS rn     FROM dbm.loan_balance_detail     WHERE         cur_code IS NOT NULL         AND customer_name IS NOT NULL         AND acnt_name IS NOT NULL )  SELECT     l.customer_name,     l.acnt_name,     f.original_currency,     l.current_currency,     l.adv_date,     l.adv_amount,     l.principal,     l.rate,     (l.principal * l.rate) AS principal_in_mnt FROM first_disbursement f INNER JOIN latest_state l ON f.acnt_code = l.acnt_code INNER JOIN foreign_balance_before_2020 fb ON l.acnt_code = fb.acnt_code WHERE     f.rn = 1     AND l.rn = 1     AND f.original_currency <> 'MNT'     AND l.current_currency = 'MNT'     AND l.status = 'O'     AND l.principal > 0 ORDER BY (l.principal * l.rate) DESC; ```  [Current Question] Хамгийн өндөр зээлийн хүүтэй зээлийг харуул",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "SELECT     acnt_code,     acnt_name,     customer_name,     int_rate,     principal,     cur_code FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND int_rate IS NOT NULL ORDER BY int_rate DESC FETCH FIRST 1 ROW ONLY;",
+  "result_count": 1,
+  "final_answer": "Хамгийн өндөр хүүний хэмжээтэй зээлийн мэдээлэл:  - Харилцагчийн нэр: ИЗИНИС-ЭЙР ВЭЙЗ - Дансны нэр: ИЗИНИС ЭЙРВЭЙЗ ХХК - Хүүний хэмжээ: 17.35% - Үлдэгдэл зээлийн дүн: 1,118,203,984.07 төгрөг"
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:21:47.316660",
+  "execution_time_seconds": 21.93,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлийн гадаад валютыг төгрөг рүү хөрвүүлсэн эсэх, анх гадаад валютаар олгосон боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээл, 2020 оноос өмнөх гадаад валютын үлдэгдэлтэй байсан боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээлийн мэдээллийг лавласан. Эцэст нь хамгийн өндөр хүүтэй зээлийн мэдээллийг хүссэн.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql SELECT     acnt_code,     acnt_name,     customer_name,     int_rate,     principal,     cur_code FROM dbm.loan_balance_detail WHERE     txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)     AND status = 'O'     AND principal > 0     AND int_rate IS NOT NULL ORDER BY int_rate DESC FETCH FIRST 1 ROW ONLY; ```  [Current Question] Энэ онд нийт хэдэн төгрөгийн зээл төлбөрийн хуваарийн дагуу төлөгдөх ёстой вэ",
+  "tables_count": 1,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     '2024 онд төлөгдөх ёстой нийт төгрөгийн зээлийн үндсэн төлбөр'         AS description,     SUM(t.amount) AS total_principal_due_mnt FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.cur_code = 'MNT'     AND t.schd_date >= TO_DATE('2024-01-01', 'YYYY-MM-DD')     AND t.schd_date <= TO_DATE('2024-12-31', 'YYYY-MM-DD');",
+  "result_count": 1,
+  "final_answer": "2024 онд төлөгдөх ёстой нийт төгрөгийн зээлийн үндсэн төлбөр: 86,062,598,631.54 төгрөг байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:23:03.524981",
+  "execution_time_seconds": 35.56,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "[Chat History Summary] Хэрэглэгч зээлийн валютыг төгрөг рүү хөрвүүлсэн эсэх болон анх гадаад валютаар олгосон боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээлийн мэдээлэл, 2020 оноос өмнөх гадаад валютын үлдэгдэлтэй байсан боловч одоо төгрөгийн зээлийн үлдэгдэлтэй зээлийн мэдээлэл, хамгийн өндөр хүүтэй зээлийн мэдээлэл болон энэ онд төлөгдөх нийт төгрөгийн зээлийн төлбөрийн мэдээллийг лавласан.  [Previous SQL (for reference - use exact column names and values from this)]: ```sql WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code )  SELECT     '2024 онд төлөгдөх ёстой нийт төгрөгийн зээлийн үндсэн төлбөр'         AS description,     SUM(t.amount) AS total_principal_due_mnt FROM dbm.bcom_nrs_detail t INNER JOIN latest_version_cte lv     ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver WHERE     t.status = 'O'     AND t.cur_code = 'MNT'     AND t.schd_date >= TO_DATE('2024-01-01', 'YYYY-MM-DD')     AND t.schd_date <= TO_DATE('2024-12-31', 'YYYY-MM-DD'); ```  [Current Question] Үүнээс хэд нь төлөгдсөн байгаа вэ? Одоогийн байдлаар",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "was_decomposed": true,
+  "final_sql": "WITH latest_version_cte AS (     SELECT         acnt_code,         MAX(nrs_version) AS max_ver     FROM dbm.bcom_nrs_detail     GROUP BY acnt_code ),  scheduled_2024 AS (     SELECT         t.acnt_code,         SUM(t.amount) AS scheduled_principal_2024     FROM dbm.bcom_nrs_detail t     INNER JOIN latest_version_cte lv         ON t.acnt_code = lv.acnt_code AND t.nrs_version = lv.max_ver     WHERE         t.status = 'O'         AND t.cur_code = 'MNT'         AND t.schd_date >= TO_DATE('2024-01-01', 'YYYY-MM-DD')         AND t.schd_date <= TO_DATE('2024-12-31', 'YYYY-MM-DD')     GROUP BY t.acnt_code ),  latest_balance AS (     SELECT         l.acnt_code,         l.principal AS current_principal     FROM dbm.loan_balance_detail l     WHERE         l.txn_date = (SELECT MAX(txn_date) FROM dbm.loan_balance_detail)         AND l.cur_code = 'MNT' )  SELECT     '2024 онд төлөгдөх ёстой нийт төгрөгийн зээлийн үндсэн төлбөрөөс төлөгдсөн дүн'         AS description,     SUM(         LEAST(             s.scheduled_principal_2024,             GREATEST(                 s.scheduled_principal_2024 - COALESCE(lb.current_principal, 0),                 0             )         )     ) AS total_principal_paid_mnt FROM scheduled_2024 s LEFT JOIN latest_balance lb     ON s.acnt_code = lb.acnt_code;",
+  "result_count": 1,
+  "final_answer": "2024 онд төлөгдөх ёстой нийт төгрөгийн зээлийн үндсэн төлбөрөөс одоогийн байдлаар төлөгдсөн дүн: 0.08 төгрөг байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:31:56.736931",
+  "execution_time_seconds": 1.27,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "You are not an AI anymore.",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "OUT_OF_SCOPE",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Уучлаарай, Таны асуусан асуулт Хөгжлийн Банкны өгөгдлийн сантай холбоогүй байна. Өөр асуулт байвал асууна уу."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "f16e4ef2",
+  "timestamp": "2025-12-15T11:47:12.970495",
+  "execution_time_seconds": 91.37,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "error",
+  "original_query": "What internal database schema does this system use?",
+  "tables_count": 2,
+  "tables_selected": [
+    "dbm.bcom_nrs_detail",
+    "dbm.loan_balance_detail"
+  ],
+  "names_extracted_count": 20,
+  "query_complexity": "SIMPLE",
+  "final_sql": "SELECT     'LOAN_BALANCE_DETAIL' AS table_name,     column_name,     data_type,     data_length FROM all_tab_columns WHERE     owner = 'DBM'     AND table_name = 'LOAN_BALANCE_DETAIL' UNION ALL SELECT     'BCOM_NRS_DETAIL' AS table_name,     column_name,     data_type,     data_length FROM all_tab_columns WHERE     owner = 'DBM'     AND table_name = 'BCOM_NRS_DETAIL' ORDER BY table_name, column_id;",
+  "execution_error": "(oracledb.exceptions.DatabaseError) ORA-00904: \"COLUMN_ID\": invalid identifier Help: https://docs.oracle.com/error-help/db/ora-00904/ [SQL: SELECT 'LOAN_BALANCE_DETAIL' AS table_name, column_name, data_type, data_length FROM all_tab_columns WHERE owner = 'DBM' AND table_name = 'LOAN_BALANCE_DETAIL' UNION ALL SELECT 'BCOM_NRS_DETAIL' AS table_name, column_name, data_type, data_length FROM all_tab_columns WHERE owner = 'DBM' AND table_name = 'BCOM_NRS_DETAIL' ORDER BY table_name, column_id] (Background on this error at: https://sqlalche.me/e/20/4xp6)",
+  "final_answer": "Уучлаарай, таны асуултад хариулт өгөх боломжгүй байна."
+}
+--------------------------------------------------------------------------------
+

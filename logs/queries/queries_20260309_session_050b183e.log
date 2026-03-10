@@ -1,0 +1,34 @@
+{
+  "session_id": "050b183e",
+  "timestamp": "2026-03-09T09:44:00.479161",
+  "execution_time_seconds": 2.72,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "hi",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "GENERAL",
+  "final_sql": "N/A",
+  "result_count": 0,
+  "final_answer": "Сайн байна уу. Танд хэрхэн туслах вэ? Хөгжлийн банкны өгөгдлийн сан, банкны мэдээлэл, эсвэл өгөгдөл шинжилгээтэй холбоотой асуулт байвал асуугаарай. Би танд туслахад бэлэн байна."
+}
+--------------------------------------------------------------------------------
+
+{
+  "session_id": "050b183e",
+  "timestamp": "2026-03-09T09:44:22.130813",
+  "execution_time_seconds": 4.39,
+  "llm_backend": "openai",
+  "embedding_backend": "ollama",
+  "status": "success",
+  "original_query": "энэ долоо хоногт эргэн төлөгдөх хуваарьтай зээлүүд",
+  "tables_count": 0,
+  "tables_selected": [],
+  "query_complexity": "SIMPLE",
+  "final_sql": "",
+  "result_count": 0,
+  "final_answer": "Мэдээлэл олдсонгүй."
+}
+--------------------------------------------------------------------------------
+
