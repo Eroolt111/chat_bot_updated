@@ -1,7 +1,0 @@
-.env
-
-.venv/
-venv/
-
-venv_new/
-.venv_new/
